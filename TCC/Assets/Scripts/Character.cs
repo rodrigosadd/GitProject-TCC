@@ -7,23 +7,18 @@ public class Character : MonoBehaviour
     public Rigidbody rbody;
     public Transform characterGraphic;
     public Transform cam;
+    public Transform targetPush;
     public float speed = 6f;
     public float turnSmoothtime = 0.1f;
     public float jumpForce = 5f;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+    public float rangePush = 10f;
     public int maxJump = 2;
 
     private float horizontal, vertical;
     private float turnSmoothVelocity;
     private int currentJump;
-
-    void Update()
-    {
-        CharacterMovement();
-        CharacterJump();
-        CharacterBetterJump();
-    }
 
     public void CharacterMovement()
     {
@@ -72,5 +67,38 @@ public class Character : MonoBehaviour
     public bool CanJump()
     {
         return currentJump < maxJump;
+    }
+
+    public void PushObject()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(characterGraphic.position, characterGraphic.forward, out hit, rangePush))
+        {
+            if (hit.transform.tag == "Interactable")
+            {
+                hit.transform.position = targetPush.position;
+                hit.transform.parent = targetPush.transform;
+                speed = 3f;
+            }
+        }
+    }
+
+    public void PushingObject()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            PushObject();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            DropObject();
+        }
+    }
+
+    public void DropObject()
+    {
+
+        speed = 6f;
     }
 }
