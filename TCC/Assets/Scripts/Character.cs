@@ -4,33 +4,43 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    public CharacterState stateCharacter;
     public Rigidbody rbody;
     public Transform characterGraphic;
     public Transform cam;
-    public Transform targetPush;
+
+    [Header("Movement variables")]
     public float speed = 6f;
     public float turnSmoothtime = 0.1f;
-    public float jumpForce = 5f;
+
+    [Header("Jump variables")]
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
-    public float rangePush = 10f;
+    public float groundDetectorRange = 1f;
+    public float jumpForce = 5f;
     public int maxJump = 2;
+    public LayerMask groundLayer;
 
-    private float horizontal, vertical;
-    private float turnSmoothVelocity;
-    private int currentJump;
+    [Header("Push variables")]
+    public Transform targetPush;
+    public float rangePush = 10f;
 
-    public void CharacterMovement()
+    private Transform _currentTargetPush = null;
+    private float _horizontal, _vertical;
+    private float _turnSmoothVelocity;
+    private int _currentJump;
+
+    public void CharacterMovement(float horizontal, float vertical)
     {
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+        _horizontal = horizontal;
+        _vertical = vertical;
 
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector3 direction = new Vector3(_horizontal, 0f, _vertical).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothtime);
+            float angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothtime);
 
             characterGraphic.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
@@ -41,20 +51,22 @@ public class Character : MonoBehaviour
 
     public void CharacterJump()
     {
-        if (Input.GetButtonDown("Jump") && CanJump())
+        if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING)
         {
+            stateCharacter = CharacterState.JUMP;
             rbody.velocity = Vector3.up * jumpForce;
-            currentJump++;
+            _currentJump++;
         }
-        if (rbody.velocity.y == 0)
+        if (IsGrounded() && stateCharacter == CharacterState.JUMP && _currentJump >= maxJump)
         {
-            currentJump = 0;
+            _currentJump = 0;
+            stateCharacter = CharacterState.NORMAL;
         }
     }
 
     public void CharacterBetterJump()
     {
-        if (rbody.velocity.y < 0)
+        if (rbody.velocity.y <= 0)
         {
             rbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
@@ -64,9 +76,15 @@ public class Character : MonoBehaviour
         }
     }
 
+    public bool IsGrounded()
+    {
+        Ray ray = new Ray(transform.position, Vector3.up * -1);
+        return Physics.Raycast(ray, groundDetectorRange, groundLayer);
+    }
+
     public bool CanJump()
     {
-        return currentJump < maxJump;
+        return _currentJump < maxJump;
     }
 
     public void PushObject()
@@ -77,28 +95,19 @@ public class Character : MonoBehaviour
         {
             if (hit.transform.tag == "Interactable")
             {
+                stateCharacter = CharacterState.PUSHING;
                 hit.transform.position = targetPush.position;
+                _currentTargetPush = hit.transform;
                 hit.transform.parent = targetPush.transform;
                 speed = 3f;
             }
         }
     }
 
-    public void PushingObject()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            PushObject();
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            DropObject();
-        }
-    }
-
     public void DropObject()
     {
-
+        stateCharacter = CharacterState.NORMAL;
+        _currentTargetPush.parent = null;
         speed = 6f;
     }
 }

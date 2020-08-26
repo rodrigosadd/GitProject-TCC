@@ -14,10 +14,29 @@ public class PlayerController : Character
 
     void Update()
     {
-        CharacterMovement();
+        UpdateMovementPlayer();
         CharacterJump();
         CharacterBetterJump();
         PushingObject();
+    }
+
+    private void UpdateMovementPlayer()
+    {
+        float _horizontal = Input.GetAxis("Horizontal");
+        float _vertical = Input.GetAxis("Vertical");
+        CharacterMovement(_horizontal, _vertical);
+    }
+
+    private void PushingObject()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            PushObject();
+        }
+        else if (Input.GetMouseButtonUp(0))
+        {
+            DropObject();
+        }
     }
 
     void OnDrawGizmos()
