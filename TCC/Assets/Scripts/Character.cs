@@ -24,6 +24,7 @@ public class Character : MonoBehaviour
     [Header("Push variables")]
     public Transform targetPush;
     public float rangePush = 10f;
+    public float rangeDropObject = 2f;
 
     private Transform _currentTargetPush = null;
     private float _horizontal, _vertical;
@@ -91,7 +92,7 @@ public class Character : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(characterGraphic.position, characterGraphic.forward, out hit, rangePush))
+        if (Physics.Raycast(characterGraphic.position, characterGraphic.forward + Vector3.up, out hit, rangePush))
         {
             if (hit.transform.tag == "Interactable")
             {
@@ -106,8 +107,19 @@ public class Character : MonoBehaviour
 
     public void DropObject()
     {
-        stateCharacter = CharacterState.NORMAL;
-        _currentTargetPush.parent = null;
-        speed = 6f;
+        RaycastHit hit;
+
+        if (Physics.Raycast(_currentTargetPush.position, Vector3.up * -1, out hit, rangeDropObject))
+        {
+            if (hit.transform.position != null)
+            {
+                stateCharacter = CharacterState.NORMAL;
+                _currentTargetPush.parent = null;
+                Vector3 pivotCorrection = new Vector3(0f, 0.8f, 0f); // Just to correct the pivot of unity objects
+                _currentTargetPush.position = hit.point + pivotCorrection;
+                speed = 6f;
+            }
+        }
+
     }
 }
