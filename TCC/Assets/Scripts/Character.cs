@@ -10,7 +10,9 @@ public class Character : MonoBehaviour
     public Transform cam;
 
     [Header("Movement variables")]
-    public float speed = 6f;
+    public float maxSpeed = 6f;
+    public float currentSpeed = 0f;
+    public float acceleration = 1f;
     public float turnSmoothtime = 0.1f;
 
     [Header("Jump variables")]
@@ -23,10 +25,13 @@ public class Character : MonoBehaviour
 
     [Header("Push variables")]
     public Transform targetPush;
+    public Transform currentTargetPush;
     public float rangePush = 10f;
     public float rangeDropObject = 2f;
 
-    private Transform _currentTargetPush = null;
+    private float targetAngle;
+    private Vector3 direction;
+    private float angle;
     private float _horizontal, _vertical;
     private float _turnSmoothVelocity;
     private int _currentJump;
@@ -36,18 +41,33 @@ public class Character : MonoBehaviour
         _horizontal = horizontal;
         _vertical = vertical;
 
-        Vector3 direction = new Vector3(_horizontal, 0f, _vertical).normalized;
+        direction = new Vector3(_horizontal, 0f, _vertical).normalized;
 
         if (direction.magnitude >= 0.1f)
         {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothtime);
+            currentSpeed += acceleration * Time.deltaTime;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
 
-            characterGraphic.rotation = Quaternion.Euler(0f, angle, 0f);
             Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            transform.Translate(moveDirection.normalized * speed * Time.deltaTime);
+            transform.Translate(moveDirection.normalized * currentSpeed * Time.deltaTime);
         }
+        else
+        {
+            currentSpeed = 0f;
+        }
+    }
+
+    public void CharacterFace()
+    {
+        if (direction.magnitude >= 0.1f)
+        {
+            targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothtime);
+
+            characterGraphic.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+
     }
 
     public void CharacterJump()
@@ -58,10 +78,13 @@ public class Character : MonoBehaviour
             rbody.velocity = Vector3.up * jumpForce;
             _currentJump++;
         }
-        if (IsGrounded() && stateCharacter == CharacterState.JUMP && _currentJump >= maxJump)
+        if (IsGrounded() && _currentJump >= maxJump)
         {
             _currentJump = 0;
-            stateCharacter = CharacterState.NORMAL;
+            if (stateCharacter != CharacterState.NORMAL)
+            {
+                stateCharacter = CharacterState.NORMAL;
+            }
         }
     }
 
@@ -98,9 +121,9 @@ public class Character : MonoBehaviour
             {
                 stateCharacter = CharacterState.PUSHING;
                 hit.transform.position = targetPush.position;
-                _currentTargetPush = hit.transform;
+                currentTargetPush = hit.transform;
                 hit.transform.parent = targetPush.transform;
-                speed = 3f;
+                maxSpeed = 3f;
             }
         }
     }
@@ -109,15 +132,15 @@ public class Character : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(_currentTargetPush.position, Vector3.up * -1, out hit, rangeDropObject))
+        if (Physics.Raycast(currentTargetPush.position, Vector3.up * -1, out hit, rangeDropObject))
         {
             if (hit.transform.position != null)
             {
                 stateCharacter = CharacterState.NORMAL;
-                _currentTargetPush.parent = null;
+                currentTargetPush.parent = null;
                 Vector3 pivotCorrection = new Vector3(0f, 0.8f, 0f); // Just to correct the pivot of unity objects
-                _currentTargetPush.position = hit.point + pivotCorrection;
-                speed = 6f;
+                currentTargetPush.position = hit.point + pivotCorrection;
+                maxSpeed = 9f;
             }
         }
 

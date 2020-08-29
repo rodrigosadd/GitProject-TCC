@@ -1,4 +1,4 @@
 ﻿public enum CharacterState
 {
-    NORMAL, JUMP, PUSHING, DEAD, DISABLED
+    NORMAL, JUMP, PUSHING, BALANCE, DEAD, DISABLED
 }
