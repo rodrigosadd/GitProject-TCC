@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     [Header("Follow Player variables")]
     public float rangeFind = 2f;
 
-    private float _distanceBetWeen = 0f;
+    private float _distanceBetween = 0f;
     private Vector3 _directionFace;
 
     public void MoveToPatrolPoint()
@@ -46,14 +46,17 @@ public class Enemy : MonoBehaviour
 
     public void EnemyFollowPlayer()
     {
-        _distanceBetWeen = Vector3.Distance(PlayerController.instance.transform.position, transform.position);
+        _distanceBetween = Vector3.Distance(PlayerController.instance.transform.position, transform.position);
 
-        if (_distanceBetWeen <= rangeFind)
+        if (_distanceBetween <= rangeFind)
         {
-            stateEnemy = EnemyState.FOLLOWING_PLAYER;
+            if (stateEnemy != EnemyState.FOLLOWING_PLAYER)
+            {
+                stateEnemy = EnemyState.FOLLOWING_PLAYER;
+            }
             enemyAgent.destination = PlayerController.instance.transform.position;
         }
-        if (_distanceBetWeen <= enemyAgent.stoppingDistance)
+        if (_distanceBetween <= enemyAgent.stoppingDistance)
         {
             FaceTarget();
             if (PlayerController.instance.stateCharacter == CharacterState.DISABLED)

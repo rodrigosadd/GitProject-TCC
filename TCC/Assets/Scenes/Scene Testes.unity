@@ -1345,7 +1345,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248667415}
-  m_LocalRotation: {x: 0.21591501, y: 0.00000000840026, z: -0.0000000018575579, w: 0.9764122}
+  m_LocalRotation: {x: 0.215915, y: -0.000000008400261, z: 0.0000000018575579, w: 0.9764122}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2435,10 +2435,13 @@ MonoBehaviour:
   currentTargetPush: {fileID: 654602818}
   rangePush: 1.18
   rangeDropObject: 2
-  seeRangePush: 0
+  rangeStun: 4
+  timeStun: 2
   cliffDetectorFwrdDist: 0.7
   cliffDetectorHeightDist: 5
   cliffDetectorMaxSpeed: 0.6
+  seeRangePush: 0
+  seeRangeStun: 1
   seeRangeCliff: 0
 --- !u!4 &2051544360
 Transform:

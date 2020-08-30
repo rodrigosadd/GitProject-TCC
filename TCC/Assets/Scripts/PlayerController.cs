@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
-    public bool seeRangePush = false;
 
     [Header("Cliff variables")]
     public float cliffDetectorFwrdDist = 5f;
     public float cliffDetectorHeightDist = 5f;
     public float cliffDetectorMaxSpeed = 0.05f;
+
+#if UNITY_EDITOR
+    [Header("See Range variables")]
+    public bool seeRangePush = false;
+    public bool seeRangeStun = false;
     public bool seeRangeCliff = false;
+#endif
 
     public static PlayerController instance;
 
@@ -29,11 +34,12 @@ public class PlayerController : Character
     void Update()
     {
         UpdateMovementPlayer();
-        CharacterJump();
         CharacterBetterJump();
+        CharacterJump();
         PushingObject();
         CliffDetector();
         CharacterFace();
+        StunningEnemy();
     }
 
     private void UpdateMovementPlayer()
@@ -69,18 +75,18 @@ public class PlayerController : Character
 
     public void CliffDetector()
     {
-        Vector3 origin = transform.position + characterGraphic.forward * cliffDetectorFwrdDist;
+        Vector3 _origin = transform.position + characterGraphic.forward * cliffDetectorFwrdDist;
 
-        Ray ray = new Ray(origin, Vector3.up * -1);
+        Ray _ray = new Ray(_origin, Vector3.up * -1);
 
-        if (!Physics.Raycast(ray, cliffDetectorHeightDist) && IsGrounded() && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliffDetectorMaxSpeed)
+        if (!Physics.Raycast(_ray, cliffDetectorHeightDist) && IsGrounded() && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliffDetectorMaxSpeed)
         {
             if (stateCharacter != CharacterState.BALANCE)
             {
                 stateCharacter = CharacterState.BALANCE;
             }
         }
-        else if (Physics.Raycast(ray, cliffDetectorHeightDist))
+        else if (Physics.Raycast(_ray, cliffDetectorHeightDist))
         {
             _cliffDectorLockPlayer = true;
             if (stateCharacter == CharacterState.BALANCE)
@@ -94,16 +100,26 @@ public class PlayerController : Character
     {
         if (_lastPosition != transform.position)
         {
-            Vector2 lastPositionVec = new Vector2(_lastPosition.x, _lastPosition.z);
-            Vector2 lastPositionPlayer = new Vector2(transform.position.x, transform.position.z);
+            Vector2 _lastPositionVec = new Vector2(_lastPosition.x, _lastPosition.z);
+            Vector2 _lastPositionPlayer = new Vector2(transform.position.x, transform.position.z);
 
             _lastPosition = transform.position;
 
-            return Vector2.Distance(_lastPosition, lastPositionPlayer);
+            return Vector2.Distance(_lastPosition, _lastPositionPlayer);
         }
         return 0;
     }
 
+    public void StunningEnemy()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && canStun == true)
+        {
+            StunEnemy();
+            StartCoroutine("CooldownStun");
+        }
+    }
+
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (seeRangePush)
@@ -119,5 +135,12 @@ public class PlayerController : Character
             Gizmos.color = Color.green;
             Gizmos.DrawRay(transform.position + characterGraphic.forward * cliffDetectorFwrdDist, Vector3.up * -1 * cliffDetectorHeightDist);
         }
+
+        if (seeRangeStun)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, rangeStun);
+        }
     }
+#endif
 }

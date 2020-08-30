@@ -30,8 +30,15 @@ public class Character : MonoBehaviour
     public float rangePush = 10f;
     public float rangeDropObject = 2f;
 
-    private float _targetAngle;
+    [Header("Stun variables")]
+    public float rangeStun = 2f;
+    public float timeStun = 2f;
+    public float cooldownStun = 5f;
+    public bool canStun = true;
+
     private Vector3 _direction;
+    private float _distanceBetwen;
+    private float _targetAngle;
     private float _angle;
     private float _horizontal, _vertical;
     private float _turnSmoothVelocity;
@@ -48,9 +55,9 @@ public class Character : MonoBehaviour
             currentSpeed += acceleration * Time.deltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
 
-            Vector3 moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
+            Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-            transform.Translate(moveDirection.normalized * currentSpeed * Time.deltaTime);
+            transform.Translate(_moveDirection.normalized * currentSpeed * Time.deltaTime);
         }
         else
         {
@@ -102,8 +109,8 @@ public class Character : MonoBehaviour
 
     public bool IsGrounded()
     {
-        Ray ray = new Ray(transform.position, Vector3.up * -1);
-        return Physics.Raycast(ray, groundDetectorRange, groundLayer);
+        Ray _ray = new Ray(transform.position, Vector3.up * -1);
+        return Physics.Raycast(_ray, groundDetectorRange, groundLayer);
     }
 
     public bool CanJump()
@@ -113,16 +120,16 @@ public class Character : MonoBehaviour
 
     public void PushObject()
     {
-        RaycastHit hit;
+        RaycastHit _hit;
 
-        if (Physics.Raycast(characterGraphic.position, characterGraphic.forward + Vector3.up, out hit, rangePush))
+        if (Physics.Raycast(characterGraphic.position, characterGraphic.forward + Vector3.up, out _hit, rangePush))
         {
-            if (hit.transform.tag == "Interactable")
+            if (_hit.transform.tag == "Interactable")
             {
                 stateCharacter = CharacterState.PUSHING;
-                hit.transform.position = targetPush.position;
-                currentTargetPush = hit.transform;
-                hit.transform.parent = targetPush.transform;
+                _hit.transform.position = targetPush.position;
+                currentTargetPush = _hit.transform;
+                _hit.transform.parent = targetPush.transform;
                 maxSpeed = 3f;
             }
         }
@@ -130,19 +137,47 @@ public class Character : MonoBehaviour
 
     public void DropObject()
     {
-        RaycastHit hit;
+        RaycastHit _hit;
 
-        if (Physics.Raycast(currentTargetPush.position, Vector3.up * -1, out hit, rangeDropObject))
+        if (Physics.Raycast(currentTargetPush.position, Vector3.up * -1, out _hit, rangeDropObject))
         {
-            if (hit.transform.position != null)
+            if (_hit.transform.position != null)
             {
                 stateCharacter = CharacterState.WALKING;
                 currentTargetPush.parent = null;
                 Vector3 pivotCorrection = new Vector3(0f, 0.8f, 0f); // Just to correct the pivot of unity objects
-                currentTargetPush.position = hit.point + pivotCorrection;
+                currentTargetPush.position = _hit.point + pivotCorrection;
                 maxSpeed = 9f;
             }
         }
 
+    }
+
+    public void StunEnemy()
+    {
+        _distanceBetwen = Vector3.Distance(transform.position, EnemyController.instance.transform.position);
+
+        if (_distanceBetwen <= rangeStun && EnemyController.instance.stateEnemy != EnemyState.STUNNED)
+        {
+            StartCoroutine("TimeStuned");
+        }
+    }
+
+    public IEnumerator TimeStuned()
+    {
+        EnemyController.instance.enemyAgent.speed = 0;
+        EnemyController.instance.stateEnemy = EnemyState.STUNNED;
+
+        yield return new WaitForSeconds(timeStun);
+
+        EnemyController.instance.enemyAgent.speed = 4;
+        EnemyController.instance.stateEnemy = EnemyState.PATROLLING;
+    }
+
+    public IEnumerator CooldownStun()
+    {
+        canStun = false;
+        yield return new WaitForSeconds(cooldownStun);
+        canStun = true;
     }
 }

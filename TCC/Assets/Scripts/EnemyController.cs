@@ -6,9 +6,11 @@ public class EnemyController : Enemy
 {
     public bool seeRangeFind;
 
+    public static EnemyController instance;
+
     void Start()
     {
-
+        instance = this;
     }
 
     void Update()
@@ -17,6 +19,7 @@ public class EnemyController : Enemy
         EnemyFollowPlayer();
     }
 
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (seeRangeFind)
@@ -25,4 +28,5 @@ public class EnemyController : Enemy
             Gizmos.DrawWireSphere(transform.position, rangeFind);
         }
     }
+#endif
 }
