@@ -20,6 +20,7 @@ public class Character : MonoBehaviour
     public float lowJumpMultiplier = 2f;
     public float groundDetectorRange = 1f;
     public float jumpForce = 5f;
+    public int currentJump = 0;
     public int maxJump = 2;
     public LayerMask groundLayer;
 
@@ -29,26 +30,25 @@ public class Character : MonoBehaviour
     public float rangePush = 10f;
     public float rangeDropObject = 2f;
 
-    private float targetAngle;
-    private Vector3 direction;
-    private float angle;
+    private float _targetAngle;
+    private Vector3 _direction;
+    private float _angle;
     private float _horizontal, _vertical;
     private float _turnSmoothVelocity;
-    private int _currentJump;
 
     public void CharacterMovement(float horizontal, float vertical)
     {
         _horizontal = horizontal;
         _vertical = vertical;
 
-        direction = new Vector3(_horizontal, 0f, _vertical).normalized;
+        _direction = new Vector3(_horizontal, 0f, _vertical).normalized;
 
-        if (direction.magnitude >= 0.1f)
+        if (_direction.magnitude >= 0.1f)
         {
             currentSpeed += acceleration * Time.deltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0, maxSpeed);
 
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            Vector3 moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
             transform.Translate(moveDirection.normalized * currentSpeed * Time.deltaTime);
         }
@@ -60,12 +60,12 @@ public class Character : MonoBehaviour
 
     public void CharacterFace()
     {
-        if (direction.magnitude >= 0.1f)
+        if (_direction.magnitude >= 0.1f)
         {
-            targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothtime);
+            _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+            _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, turnSmoothtime);
 
-            characterGraphic.rotation = Quaternion.Euler(0f, angle, 0f);
+            characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
         }
 
     }
@@ -76,14 +76,14 @@ public class Character : MonoBehaviour
         {
             stateCharacter = CharacterState.JUMP;
             rbody.velocity = Vector3.up * jumpForce;
-            _currentJump++;
+            currentJump++;
         }
-        if (IsGrounded() && _currentJump >= maxJump)
+        if (IsGrounded() && currentJump >= maxJump)
         {
-            _currentJump = 0;
-            if (stateCharacter != CharacterState.NORMAL)
+            currentJump = 0;
+            if (stateCharacter != CharacterState.WALKING)
             {
-                stateCharacter = CharacterState.NORMAL;
+                stateCharacter = CharacterState.WALKING;
             }
         }
     }
@@ -108,7 +108,7 @@ public class Character : MonoBehaviour
 
     public bool CanJump()
     {
-        return _currentJump < maxJump;
+        return currentJump < maxJump;
     }
 
     public void PushObject()
@@ -136,7 +136,7 @@ public class Character : MonoBehaviour
         {
             if (hit.transform.position != null)
             {
-                stateCharacter = CharacterState.NORMAL;
+                stateCharacter = CharacterState.WALKING;
                 currentTargetPush.parent = null;
                 Vector3 pivotCorrection = new Vector3(0f, 0.8f, 0f); // Just to correct the pivot of unity objects
                 currentTargetPush.position = hit.point + pivotCorrection;
