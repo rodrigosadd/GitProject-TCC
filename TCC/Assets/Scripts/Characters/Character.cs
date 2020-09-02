@@ -181,4 +181,21 @@ public class Character : MonoBehaviour
         yield return new WaitForSeconds(cooldownStun);
         canStun = true;
     }
+
+    public void PlatformDetector()
+    {
+        RaycastHit _hit;
+
+        if (Physics.Raycast(characterGraphic.position, Vector3.up * -1, out _hit, groundDetectorRange))
+        {
+            if (_hit.transform.tag == "Platform")
+            {
+                transform.parent = _hit.transform;
+            }
+            else
+            {
+                transform.parent = null;
+            }
+        }
+    }
 }

@@ -40,6 +40,7 @@ public class PlayerController : Character
         CliffDetector();
         CharacterFace();
         StunningEnemy();
+        PlatformDetector();
     }
 
     private void UpdateMovementPlayer()
