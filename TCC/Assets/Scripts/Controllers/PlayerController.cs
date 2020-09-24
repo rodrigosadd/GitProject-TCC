@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
+    [Header("Animations variables")]
+    public Animator animator;
 
     [Header("Cliff variables")]
     public float cliffDetectorFwrdDist = 5f;
@@ -41,6 +43,7 @@ public class PlayerController : Character
         CharacterFace();
         StunningEnemy();
         PlatformDetector();
+        PlayerAnimations();
     }
 
     private void UpdateMovementPlayer()
@@ -57,9 +60,83 @@ public class PlayerController : Character
         }
         else if (stateCharacter == CharacterState.BALANCE)
         {
-            stateCharacter = CharacterState.WALKING;
+            stateCharacter = CharacterState.RUNNNING;
         }
         CharacterMovement(_horizontal, _vertical);
+    }
+
+    public void PlayerAnimations()
+    {
+        animator.SetFloat("Horizontal", _horizontal);
+        animator.SetFloat("Vertical", _vertical);
+        animator.SetBool("IsGrounded", IsGrounded());
+
+        switch (stateCharacter)
+        {
+            case CharacterState.IDLE:
+                animator.SetBool("Idle", true);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", false);
+                break;
+            case CharacterState.RUNNNING:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", true);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", false);
+                break;
+            case CharacterState.SINGLE_JUMP:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", true);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", false);
+                break;
+            case CharacterState.SINGLE_JUMP_RUNNING:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", true);
+                animator.SetBool("Double Jump", false);
+                break;
+            case CharacterState.DOUBLE_JUMP:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", true);
+                break;
+            case CharacterState.PUSHING:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", false);
+                break;
+            case CharacterState.DEAD:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", false);
+                break;
+            case CharacterState.DISABLED:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", false);
+                break;
+            case CharacterState.BALANCE:
+                animator.SetBool("Idle", false);
+                animator.SetBool("Running", false);
+                animator.SetBool("Single Jump", false);
+                animator.SetBool("Single Jump Running", false);
+                animator.SetBool("Double Jump", false);
+                break;
+        }
     }
 
     private void PushingObject()
@@ -92,7 +169,7 @@ public class PlayerController : Character
             _cliffDectorLockPlayer = true;
             if (stateCharacter == CharacterState.BALANCE)
             {
-                stateCharacter = CharacterState.WALKING;
+                stateCharacter = CharacterState.RUNNNING;
             }
         }
     }

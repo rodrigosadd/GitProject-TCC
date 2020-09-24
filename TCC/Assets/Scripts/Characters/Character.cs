@@ -64,6 +64,27 @@ public class Character : MonoBehaviour
         {
             currentSpeed = 0f;
         }
+
+        if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.RUNNNING && IsGrounded() && rbody.velocity.y == 0)
+        {
+            stateCharacter = CharacterState.RUNNNING;
+        }
+        else if (stateCharacter != CharacterState.SINGLE_JUMP_RUNNING)
+        {
+            stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
+        }
+
+        if (_horizontal == 0 && _vertical == 0)
+        {
+            if (rbody.velocity.y > 0)
+            {
+                stateCharacter = CharacterState.SINGLE_JUMP;
+            }
+            else if (stateCharacter != CharacterState.IDLE)
+            {
+                stateCharacter = CharacterState.IDLE;
+            }
+        }
     }
 
     public void CharacterFace()
@@ -82,16 +103,24 @@ public class Character : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING)
         {
-            stateCharacter = CharacterState.JUMP;
             rbody.velocity = Vector3.up * jumpForce;
             currentJump++;
+
+            if (currentJump < 2)
+            {
+                stateCharacter = CharacterState.SINGLE_JUMP;
+            }
+            else if (currentJump == 2)
+            {
+                stateCharacter = CharacterState.DOUBLE_JUMP;
+            }
         }
         if (IsGrounded() && currentJump >= maxJump)
         {
             currentJump = 0;
-            if (stateCharacter != CharacterState.WALKING)
+            if (stateCharacter != CharacterState.RUNNNING)
             {
-                stateCharacter = CharacterState.WALKING;
+                stateCharacter = CharacterState.RUNNNING;
             }
         }
     }
@@ -144,7 +173,7 @@ public class Character : MonoBehaviour
         {
             if (_hit.transform.position != null)
             {
-                stateCharacter = CharacterState.WALKING;
+                stateCharacter = CharacterState.RUNNNING;
                 currentTargetPush.parent = null;
                 Vector3 pivotCorrection = new Vector3(0f, 0.8f, 0f); // Just to correct the pivot of unity objects
                 currentTargetPush.position = _hit.point + pivotCorrection;
