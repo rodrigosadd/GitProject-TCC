@@ -46,6 +46,11 @@ public class PlayerController : Character
         PlayerAnimations();
     }
 
+    void LateUpdate()
+    {
+        JumpShadow();
+    }
+
     private void UpdateMovementPlayer()
     {
         _horizontal = Input.GetAxis("Horizontal");

@@ -17,12 +17,14 @@ public class Character : MonoBehaviour
     public float turnSmoothtime = 0.1f;
 
     [Header("Jump variables")]
+    public Transform jumpShadow;
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
     public float groundDetectorRange = 1f;
     public float jumpForce = 5f;
     public int currentJump = 0;
     public int maxJump = 2;
+    public float maxDistanceShadow = 10f;
     public LayerMask groundLayer;
 
     [Header("Push variables")]
@@ -69,14 +71,14 @@ public class Character : MonoBehaviour
         {
             stateCharacter = CharacterState.RUNNNING;
         }
-        else if (stateCharacter != CharacterState.SINGLE_JUMP_RUNNING)
+        else if ((_horizontal != 0 || _vertical != 0) && rbody.velocity.y > 0 && stateCharacter != CharacterState.SINGLE_JUMP_RUNNING)
         {
             stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
         }
 
         if (_horizontal == 0 && _vertical == 0)
         {
-            if (rbody.velocity.y > 0)
+            if (rbody.velocity.y > 0 && !IsGrounded())
             {
                 stateCharacter = CharacterState.SINGLE_JUMP;
             }
@@ -96,7 +98,6 @@ public class Character : MonoBehaviour
 
             characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
         }
-
     }
 
     public void CharacterJump()
@@ -105,7 +106,6 @@ public class Character : MonoBehaviour
         {
             rbody.velocity = Vector3.up * jumpForce;
             currentJump++;
-
             if (currentJump < 2)
             {
                 stateCharacter = CharacterState.SINGLE_JUMP;
@@ -122,6 +122,35 @@ public class Character : MonoBehaviour
             {
                 stateCharacter = CharacterState.RUNNNING;
             }
+        }
+    }
+
+    public void JumpShadow()
+    {
+        if (!IsGrounded())
+        {
+            RaycastHit _hitInfo;
+            if (Physics.Raycast(transform.position, Vector3.up * -1, out _hitInfo, maxDistanceShadow))
+            {
+                if (_hitInfo.transform.tag != "Player")
+                {
+                    if (!jumpShadow.gameObject.activeSelf)
+                    {
+                        jumpShadow.transform.position = _hitInfo.point + new Vector3(0f, 0.05f, 0f);
+                    }
+                    jumpShadow.gameObject.SetActive(true);
+                    jumpShadow.transform.position = Vector3.MoveTowards(jumpShadow.transform.position, _hitInfo.point + new Vector3(0f, 0.05f, 0f), 10f * Time.deltaTime);
+                    jumpShadow.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hitInfo.normal);
+                }
+            }
+            else
+            {
+                jumpShadow.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            jumpShadow.gameObject.SetActive(false);
         }
     }
 
