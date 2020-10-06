@@ -5,40 +5,44 @@ using UnityEngine;
 public class PlayerAudio : MonoBehaviour
 {
     [Header("Sound events:")]
-    [FMODUnity.EventRef] public string playerFootsteps1;
-    [FMODUnity.EventRef] public string playerFootsteps2;
-    [FMODUnity.EventRef] public string playerJumpSound;
-    [FMODUnity.EventRef] public string playerDoubleJumpSound;
+    [FMODUnity.EventRef] public string[] playerFootsteps;
+    [FMODUnity.EventRef] public string[] playerJumpSounds;
     [FMODUnity.EventRef] public string minningSound;
     [FMODUnity.EventRef] public string deathCry;
 
     //Character Sound System Functions
     public void PlayFootsteps()
     {
-        int rand = Random.Range(1, 2);
+        int rand = Random.Range(1, 4);
 
         switch (rand)
         {
             case 1:
-                FMODUnity.RuntimeManager.PlayOneShot(playerFootsteps1);
+                FMODUnity.RuntimeManager.PlayOneShot(playerFootsteps[0]);
                 break;
             case 2:
-                FMODUnity.RuntimeManager.PlayOneShot(playerFootsteps2);
+                FMODUnity.RuntimeManager.PlayOneShot(playerFootsteps[1]);
+                break;
+            case 3:
+                FMODUnity.RuntimeManager.PlayOneShot(playerFootsteps[2]);
                 break;
         }
     }
 
     public void PlayJumpSound()
     {
-        int rand = Random.Range(1, 2);
+        int rand = Random.Range(1, 4);
 
         switch (rand)
         {
             case 1:
-                FMODUnity.RuntimeManager.PlayOneShot(playerJumpSound);
+                FMODUnity.RuntimeManager.PlayOneShot(playerJumpSounds[0]);
                 break;
             case 2:
-                FMODUnity.RuntimeManager.PlayOneShot(playerDoubleJumpSound);
+                FMODUnity.RuntimeManager.PlayOneShot(playerJumpSounds[1]);
+                break;
+            case 3:
+                FMODUnity.RuntimeManager.PlayOneShot(playerJumpSounds[2]);
                 break;
         }
     }

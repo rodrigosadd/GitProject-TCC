@@ -46606,10 +46606,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1d96bf28ce6df4cb82f3dad5c350d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFootsteps1: event:/Footsteps 1
-  playerFootsteps2: event:/Footsteps 2
-  playerJumpSound: event:/Action Shout 1
-  playerDoubleJumpSound: event:/Action Shout 2
+  playerFootsteps:
+  - event:/Footsteps 1
+  - event:/Footsteps 2
+  - event:/Footsteps3
+  playerJumpSounds:
+  - event:/Jump1
+  - event:/Jump2
+  - event:/Jump3
   minningSound: event:/Pickaxe
   deathCry: event:/Death
 --- !u!1001 &5799212959208139490
