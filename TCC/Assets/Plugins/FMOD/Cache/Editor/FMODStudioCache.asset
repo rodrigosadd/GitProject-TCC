@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Jump3
   guid: 50752331c1a2be46b56171086a936f37
-  Banks: []
+  Banks:
+  - {fileID: -1431080240954918552}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -66,7 +67,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 500
+  Length: 93
 --- !u!114 &-7428311718712940445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 500
+  Length: 93
 --- !u!114 &-2260925104007155765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/SFX.bank
   Name: SFX
-  lastModified: 637372610912923093
+  lastModified: 637375764065174564
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -167,11 +168,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637372610910463487
+  lastModified: 637375764062894544
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1406
+    Value: 1528
   Exists: 1
 --- !u!114 &-953505746430598798
 MonoBehaviour:
@@ -209,7 +210,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Jump2
   guid: bd379bdfc6a4a44ba63ccf55900cd586
-  Banks: []
+  Banks:
+  - {fileID: -1431080240954918552}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -231,7 +233,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Jump1
   guid: 0627646de0a46147b64053dc91c64cf3
-  Banks: []
+  Banks:
+  - {fileID: -1431080240954918552}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -259,6 +262,7 @@ MonoBehaviour:
   EditorEvents:
   - {fileID: -7428311718712940445}
   - {fileID: 611852046535458584}
+  - {fileID: -379887674699330777}
   - {fileID: 2069516112791825742}
   - {fileID: -7615721752228312670}
   - {fileID: 4252398021376377306}
@@ -268,13 +272,15 @@ MonoBehaviour:
   - {fileID: 5453862546950063670}
   - {fileID: 2088991358303160684}
   - {fileID: 1939106233057154998}
-  - {fileID: 6209068112662638435}
+  - {fileID: -8639321829561981708}
+  - {fileID: -746038733914517455}
+  - {fileID: 7540296679019845091}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7006676349103548130}
   StringsBanks:
   - {fileID: -1016732325527981234}
-  stringsBankWriteTime: 637372610910463487
+  stringsBankWriteTime: 637375764062894544
   cacheVersion: 4
 --- !u!114 &220859568941517865
 MonoBehaviour:
@@ -428,7 +434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/OST.bank
   Name: OST
-  lastModified: 637372610911653765
+  lastModified: 637375764063604557
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -522,29 +528,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1000
---- !u!114 &6209068112662638435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Beto - Menu
-  m_EditorClassIdentifier: 
-  Path: event:/Beto - Menu
-  guid: 2bdb6227bbf1cd478908b81e0e5f7029
-  Banks:
-  - {fileID: 2092970573942409637}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 82297
 --- !u!114 &7006676349103548130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,7 +542,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/Master.bank
   Name: Master
-  lastModified: 637372610910373479
+  lastModified: 637375764062814563
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -577,7 +560,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/Footsteps3
   guid: c5f782a8236f144e868bc20d9adc0727
-  Banks: []
+  Banks:
+  - {fileID: -1431080240954918552}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
