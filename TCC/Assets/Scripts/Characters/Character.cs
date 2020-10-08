@@ -30,6 +30,7 @@ public class Character : MonoBehaviour
      [Header("Push variables")]
      public Transform targetPush;
      public Transform currentTargetPush;
+     public Transform middleOfThePlayer;
      public float rangePush = 10f;
      public float rangeDropObject = 2f;
      public bool pushingObj;
@@ -187,16 +188,24 @@ public class Character : MonoBehaviour
      {
           RaycastHit _hit;
 
-          if (Physics.Raycast(characterGraphic.position, characterGraphic.forward + Vector3.up, out _hit, rangePush))
+          if (Physics.Raycast(middleOfThePlayer.position, middleOfThePlayer.forward, out _hit, rangePush))
           {
                if (_hit.transform.tag == "Interactable")
                {
                     pushingObj = true;
-                    stateCharacter = CharacterState.PUSHING;
                     _hit.transform.position = targetPush.position;
                     currentTargetPush = _hit.transform;
                     _hit.transform.parent = targetPush.transform;
-                    maxSpeed = 3f;
+                    maxSpeed = 2f;
+
+               }
+               if ((_horizontal == 0 && _vertical == 0) && stateCharacter != CharacterState.PUSHING_IDLE && pushingObj)
+               {
+                    stateCharacter = CharacterState.PUSHING_IDLE;
+               }
+               else if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.PUSHING && pushingObj)
+               {
+                    stateCharacter = CharacterState.PUSHING;
                }
           }
      }
