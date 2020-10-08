@@ -25,11 +25,13 @@ public class Character : MonoBehaviour
      public int currentJump = 0;
      public int maxJump = 2;
      public float maxDistanceShadow = 10f;
+     public float rangeSlopeDetector = 3f;
      public LayerMask groundLayer;
 
      [Header("Push variables")]
      public Transform targetPush;
      public Transform currentTargetPush;
+     public Transform middleOfThePlayer;
      public float rangePush = 10f;
      public float rangeDropObject = 2f;
      public bool pushingObj;
@@ -46,6 +48,7 @@ public class Character : MonoBehaviour
      private float _angle;
      private float _horizontal, _vertical;
      private float _turnSmoothVelocity;
+     private float _doubleJumpCountdown;
 
      public void CharacterMovement(float horizontal, float vertical)
      {
@@ -72,7 +75,7 @@ public class Character : MonoBehaviour
           {
                stateCharacter = CharacterState.RUNNNING;
           }
-          else if ((_horizontal != 0 || _vertical != 0) && rbody.velocity.y > 0 && !IsGrounded() && stateCharacter != CharacterState.SINGLE_JUMP_RUNNING)
+          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && stateCharacter != CharacterState.SINGLE_JUMP_RUNNING)
           {
                stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
           }
@@ -93,6 +96,22 @@ public class Character : MonoBehaviour
           }
      }
 
+     public void SlopeDetector()
+     {
+          RaycastHit _hitInfo;
+
+          if (Physics.Raycast(middleOfThePlayer.position, middleOfThePlayer.up * -1, out _hitInfo, rangeSlopeDetector))
+          {
+               if (_hitInfo.transform.tag == "Ground")
+               {
+                    if (_hitInfo.normal != new Vector3(0, 1, 0) && rbody.velocity.y <= 0)
+                    {
+                         transform.position = new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z);
+                    }
+               }
+          }
+     }
+
      public void CharacterFace()
      {
           if (_direction.magnitude >= 0.1f)
@@ -106,9 +125,11 @@ public class Character : MonoBehaviour
 
      public void CharacterJump()
      {
-          if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING && pushingObj == false)
+          DoubleJumpCountdown();
+          if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING && pushingObj == false && (_doubleJumpCountdown >= 1 || currentJump == 0))
           {
                rbody.velocity = Vector3.up * jumpForce;
+               _doubleJumpCountdown = 0;
                currentJump++;
 
                if (currentJump < 2)
@@ -120,12 +141,24 @@ public class Character : MonoBehaviour
                     stateCharacter = CharacterState.DOUBLE_JUMP;
                }
           }
-          if (IsGrounded() && currentJump >= maxJump)
+          if (IsGrounded() && rbody.velocity.y < 0)
           {
                currentJump = 0;
-               if (stateCharacter != CharacterState.RUNNNING && pushingObj == false)
+               _doubleJumpCountdown = 0;
+               if ((_vertical != 0 || _horizontal != 0) && stateCharacter != CharacterState.RUNNNING && pushingObj == false)
                {
                     stateCharacter = CharacterState.RUNNNING;
+               }
+          }
+     }
+
+     public void DoubleJumpCountdown()
+     {
+          if (currentJump > 0)
+          {
+               if (_doubleJumpCountdown < 1)
+               {
+                    _doubleJumpCountdown += Time.deltaTime / 0.45f;
                }
           }
      }
@@ -174,7 +207,6 @@ public class Character : MonoBehaviour
      public bool IsGrounded()
      {
           Ray _ray = new Ray(transform.position, Vector3.up * -1 * groundDetectorRange);
-          Debug.DrawRay(transform.position, Vector3.up * -1 * groundDetectorRange, Color.blue);
           return Physics.Raycast(_ray, groundDetectorRange, groundLayer);
      }
 
@@ -187,7 +219,7 @@ public class Character : MonoBehaviour
      {
           RaycastHit _hit;
 
-          if (Physics.Raycast(characterGraphic.position, characterGraphic.forward + Vector3.up, out _hit, rangePush))
+          if (Physics.Raycast(middleOfThePlayer.position, middleOfThePlayer.forward, out _hit, rangePush))
           {
                if (_hit.transform.tag == "Interactable")
                {
@@ -196,7 +228,15 @@ public class Character : MonoBehaviour
                     _hit.transform.position = targetPush.position;
                     currentTargetPush = _hit.transform;
                     _hit.transform.parent = targetPush.transform;
-                    maxSpeed = 3f;
+                    maxSpeed = 2f;
+               }
+               if ((_horizontal == 0 && _vertical == 0) && stateCharacter != CharacterState.PUSHING_IDLE)
+               {
+                    stateCharacter = CharacterState.PUSHING_IDLE;
+               }
+               else if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.PUSHING)
+               {
+                    stateCharacter = CharacterState.PUSHING;
                }
           }
      }
