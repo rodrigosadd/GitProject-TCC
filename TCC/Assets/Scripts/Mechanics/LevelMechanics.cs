@@ -9,10 +9,14 @@ public class LevelMechanics : MonoBehaviour
         SLOW,
         SLIDE,
         KILL,
-        PUSH
+        PUSH,
+        FLOOR,
+        FAN
     }
 
     public MechanicType mechanicType;
+    bool OffFloor = false;
+    float time;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -37,6 +41,45 @@ public class LevelMechanics : MonoBehaviour
         if (mechanicType == MechanicType.SLOW)
         {
             //Slow down character's speed.
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (mechanicType == MechanicType.FLOOR)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                Debug.Log("Colidiu");
+                OffFloor = true;
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if(OffFloor == true)
+        {
+            Debug.Log("Entrou no true");
+            time = time +1 * Time.deltaTime;
+            if (time >= 2)
+            {
+                this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                this.gameObject.GetComponent<BoxCollider>().enabled = false;
+            }
+
+            if (time >= 4)
+            {
+                this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                this.gameObject.GetComponent<BoxCollider>().enabled = true;
+                OffFloor = false;
+                time = 0;
+            }
+        }
+
+        if (mechanicType == MechanicType.FAN)
+        {
+            this.gameObject.transform.Rotate (0,0,3);
         }
     }
 }
