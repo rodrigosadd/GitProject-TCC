@@ -6,3 +6,7 @@ public enum EnemyState
 {
      IDLE, PATROLLING, STUNNED, FOLLOWING_PLAYER, ATTACKING__PLAYER, DEAD, DISABLED
 }
+public enum MechanicType
+{
+     SLOW, SLIDE, KILL, PUSH, FLOOR, FAN
+}

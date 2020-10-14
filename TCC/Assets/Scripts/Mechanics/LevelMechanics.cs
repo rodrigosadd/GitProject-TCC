@@ -4,82 +4,102 @@ using UnityEngine;
 
 public class LevelMechanics : MonoBehaviour
 {
-    public enum MechanicType
-    {
-        SLOW,
-        SLIDE,
-        KILL,
-        PUSH,
-        FLOOR,
-        FAN
-    }
+     public MechanicType mechanicType;
 
-    public MechanicType mechanicType;
-    bool OffFloor = false;
-    float time;
+     [Header("Level Mechanics variables")]
+     public float forceSlide;
+     public float slowValue;
+     public bool slowed = false;
+     public float timeDisableFloor;
+     public float timeEnableFloor;
+     public MeshRenderer meshObj;
+     public BoxCollider boxObj;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (mechanicType == MechanicType.KILL)
-        {
-            //Kill the character.
-        }
-        else if (mechanicType == MechanicType.PUSH)
-        {
-            //Push the character.
-        }
-        else if (mechanicType == MechanicType.SLIDE)
-        {
-            //Slide the character.
-            float rand = Random.Range(0.0f, 10.0f);
-            other.gameObject.GetComponent<Rigidbody>().AddForce(rand, 0, rand, ForceMode.Impulse);
-        }
-    }
+     private float time;
+     private float maxSpeedAux;
+     private bool OffFloor = false;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (mechanicType == MechanicType.SLOW)
-        {
-            //Slow down character's speed.
-        }
-    }
+     private void OnTriggerEnter(Collider other)
+     {
+          if (mechanicType == MechanicType.KILL)
+          {
+               //Kill the character.
+          }
+          else if (mechanicType == MechanicType.PUSH)
+          {
+               //Push the character.
+          }
+          else if (mechanicType == MechanicType.SLIDE)
+          {
+               //Slide the character.
+               PlayerController.instance.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
+          }
+     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (mechanicType == MechanicType.FLOOR)
-        {
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                Debug.Log("Colidiu");
-                OffFloor = true;
-            }
-        }
-    }
+     private void OnTriggerStay(Collider other)
+     {
+          if (mechanicType == MechanicType.SLOW)
+          {
+               if (!slowed && other.transform.tag == "Player")
+               {
+                    maxSpeedAux = PlayerController.instance.maxSpeed;
+                    PlayerController.instance.maxSpeed = slowValue;
+                    slowed = true;
+               }
+          }
+     }
 
-    private void Update()
-    {
-        if(OffFloor == true)
-        {
-            Debug.Log("Entrou no true");
-            time = time +1 * Time.deltaTime;
-            if (time >= 2)
-            {
-                this.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                this.gameObject.GetComponent<BoxCollider>().enabled = false;
-            }
+     private void OnCollisionEnter(Collision collision)
+     {
+          if (mechanicType == MechanicType.FLOOR)
+          {
+               if (collision.transform.tag == "Player")
+               {
+                    OffFloor = true;
+               }
+          }
+     }
 
-            if (time >= 4)
-            {
-                this.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                this.gameObject.GetComponent<BoxCollider>().enabled = true;
-                OffFloor = false;
-                time = 0;
-            }
-        }
+     private void OnTriggerExit(Collider other)
+     {
+          if (mechanicType == MechanicType.SLOW)
+          {
+               if (slowed && other.transform.tag == "Player")
+               {
+                    PlayerController.instance.maxSpeed = maxSpeedAux;
+                    slowed = false;
+               }
+          }
+     }
 
-        if (mechanicType == MechanicType.FAN)
-        {
-            this.gameObject.transform.Rotate (0,0,3);
-        }
-    }
+     public void DesableFloor()
+     {
+          if (OffFloor == true)
+          {
+               time = time + 1 * Time.deltaTime;
+               if (time >= timeDisableFloor)
+               {
+                    meshObj.enabled = false;
+                    boxObj.enabled = false;
+               }
+
+               if (time >= (timeEnableFloor + timeDisableFloor))
+               {
+                    meshObj.enabled = true;
+                    boxObj.enabled = true;
+                    OffFloor = false;
+                    time = 0;
+               }
+          }
+     }
+
+     private void Update()
+     {
+          DesableFloor();
+
+          if (mechanicType == MechanicType.FAN)
+          {
+               this.gameObject.transform.Rotate(0, 0, 3);
+          }
+     }
 }

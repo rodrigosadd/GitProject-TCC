@@ -17,6 +17,7 @@ public class PlayerController : Character
      public bool seeRangePush = false;
      public bool seeRangeStun = false;
      public bool seeRangeCliff = false;
+     public bool seeRangegroundDetector = false;
 #endif
 
      public static PlayerController instance;
@@ -253,7 +254,10 @@ public class PlayerController : Character
                Gizmos.DrawWireSphere(transform.position, rangeStun);
           }
 
-          Debug.DrawRay(transform.position, Vector3.up * -1 * groundDetectorRange, Color.blue);
+          if (seeRangegroundDetector)
+          {
+               Debug.DrawRay(transform.position, Vector3.up * -1 * groundDetectorRange, Color.blue);
+          }
      }
 #endif
 }
