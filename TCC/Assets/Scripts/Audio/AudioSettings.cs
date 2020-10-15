@@ -22,6 +22,7 @@ public class AudioSettings : MonoBehaviour {
         SFX = RuntimeManager.GetBus ("bus:/Master/SFX");
         Master = RuntimeManager.GetBus ("bus:/Master");
         SFXVolumeTestEvent = RuntimeManager.CreateInstance ("event:/Pickaxe");
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame

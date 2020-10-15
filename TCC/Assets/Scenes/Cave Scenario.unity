@@ -81348,6 +81348,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Beto
       objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerFootsteps.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerJumpSounds.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerJumpSounds.Array.data[0]
+      value: event:/Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerJumpSounds.Array.data[1]
+      value: event:/Jump1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerJumpSounds.Array.data[2]
+      value: event:/Jump2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: minningSound
+      value: event:/Menu Confirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: deathCry
+      value: event:/Shout2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerFootsteps.Array.data[0]
+      value: event:/Footsteps
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerFootsteps.Array.data[1]
+      value: event:/Footsteps1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerFootsteps.Array.data[2]
+      value: event:/Footsteps2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6593322409146141108, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: boxPushingSound
+      value: event:/Boulder
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
 --- !u!4 &543450652895921572 stripped
@@ -81398,11 +81442,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4210658609653224686, guid: e214a48a83fa93141936ac6e78c12795, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.000000037741785
       objectReference: {fileID: 0}
     - target: {fileID: 4210658609653224686, guid: e214a48a83fa93141936ac6e78c12795, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 8.881783e-16
+      value: -0.0000000074736235
       objectReference: {fileID: 0}
     - target: {fileID: 4210658610484514964, guid: e214a48a83fa93141936ac6e78c12795, type: 3}
       propertyPath: m_LocalPosition.x

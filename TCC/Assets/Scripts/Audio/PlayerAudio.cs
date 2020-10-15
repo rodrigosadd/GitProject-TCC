@@ -9,6 +9,7 @@ public class PlayerAudio : MonoBehaviour
     [FMODUnity.EventRef] public string[] playerJumpSounds;
     [FMODUnity.EventRef] public string minningSound;
     [FMODUnity.EventRef] public string deathCry;
+    [FMODUnity.EventRef] public string boxPushingSound;
 
     //Character Sound System Functions
     public void PlayFootsteps()
@@ -55,5 +56,10 @@ public class PlayerAudio : MonoBehaviour
     public void PlayDeathSound()
     {
         FMODUnity.RuntimeManager.PlayOneShot(deathCry);
+    }
+
+    public void PlayPushingSound()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot(boxPushingSound);
     }
 }
