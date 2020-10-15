@@ -5,6 +5,9 @@ using FMODUnity;
 using UnityEngine;
 
 public class AudioSettings : MonoBehaviour {
+    [EventRef]public string menuMoveSound;
+    [EventRef]public string menuConfirmSound;
+
     EventInstance SFXVolumeTestEvent;
 
     Bus Music;
@@ -42,5 +45,15 @@ public class AudioSettings : MonoBehaviour {
     }
     public void MasterVolumeLevel (float newVolume) {
         masterVolume = newVolume;
+    }
+
+    public void PlayMoveSound()
+    {
+        RuntimeManager.PlayOneShot(menuMoveSound);
+    }
+
+    public void PlayConfirmSound()
+    {
+        RuntimeManager.PlayOneShot(menuConfirmSound);
     }
 }

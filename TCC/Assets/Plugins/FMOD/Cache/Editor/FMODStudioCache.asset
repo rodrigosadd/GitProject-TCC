@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/SFX.bank
   Name: SFX
-  lastModified: 637382887640860221
+  lastModified: 637383551091804984
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/OST.bank
   Name: OST
-  lastModified: 637382887638950217
+  lastModified: 637383551089894986
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -265,6 +265,30 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 166
+--- !u!114 &-4588822552657766963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Beto - Menu
+  m_EditorClassIdentifier: 
+  Path: event:/Beto - Menu
+  guid: b01a81f941f68b4597b64d200bb0223e
+  Banks:
+  - {fileID: -6713072379052195905}
+  - {fileID: -7797360999695653149}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 82297
 --- !u!114 &-2440734249785653781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,12 +496,13 @@ MonoBehaviour:
   - {fileID: 5188319866481430951}
   - {fileID: -5596560230288518520}
   - {fileID: 2069186352403211435}
+  - {fileID: -4588822552657766963}
   EditorParameters: []
   MasterBanks:
   - {fileID: 4994916142395847156}
   StringsBanks:
   - {fileID: 545247871307427819}
-  stringsBankWriteTime: 637382887638160216
+  stringsBankWriteTime: 637383551088947235
   cacheVersion: 4
 --- !u!114 &220859568941517865
 MonoBehaviour:
@@ -516,11 +541,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637382887638160216
+  lastModified: 637383551088947235
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1496
+    Value: 1532
   Exists: 1
 --- !u!114 &611852046535458584
 MonoBehaviour:
@@ -897,7 +922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/Master.bank
   Name: Master
-  lastModified: 637382887638090306
+  lastModified: 637383551088896749
   LoadResult: 0
   FileSizes: []
   Exists: 1
