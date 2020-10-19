@@ -12,6 +12,8 @@ public class LevelMechanics : MonoBehaviour
      public bool slowed = false;
      public float timeDisableFloor;
      public float timeEnableFloor;
+     [Range(0, 2)]
+     public float fanSpeed;
      public MeshRenderer meshObj;
      public BoxCollider boxObj;
 
@@ -23,16 +25,19 @@ public class LevelMechanics : MonoBehaviour
      {
           if (mechanicType == MechanicType.KILL)
           {
-               //Kill the character.
-          }
-          else if (mechanicType == MechanicType.PUSH)
-          {
-               //Push the character.
+            //Kill the character.
+            Debug.Log("Personagem morreu.");
+            PlayerController.instance.maxSpeed = 0;
           }
           else if (mechanicType == MechanicType.SLIDE)
           {
                //Slide the character.
                PlayerController.instance.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
+          }
+          else if(mechanicType == MechanicType.FAN)
+          {
+               Debug.Log("Personagem morreu.");
+               PlayerController.instance.maxSpeed = 0;
           }
      }
 
@@ -99,7 +104,7 @@ public class LevelMechanics : MonoBehaviour
 
           if (mechanicType == MechanicType.FAN)
           {
-               this.gameObject.transform.Rotate(0, 0, 3);
+               this.gameObject.transform.Rotate(0, 0, fanSpeed);
           }
      }
 }
