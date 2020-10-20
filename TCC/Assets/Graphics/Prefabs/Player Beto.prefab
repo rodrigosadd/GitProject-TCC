@@ -175,6 +175,7 @@ MonoBehaviour:
   rbody: {fileID: 78672544767654958}
   characterGraphic: {fileID: 476600074171542703}
   cam: {fileID: 0}
+  characterCollider: {fileID: 78672544767654957}
   maxSpeed: 9
   currentSpeed: 0
   acceleration: 20
@@ -263,7 +264,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 78672545329120853}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6666667, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0.6666667}
   m_Children: []
   m_Father: {fileID: 476600074171542703}
@@ -985,6 +986,7 @@ MonoBehaviour:
   playerJumpSounds: []
   minningSound: 
   deathCry: 
+  boxPushingSound: 
 --- !u!1 &997998936163484528
 GameObject:
   m_ObjectHideFlags: 0
