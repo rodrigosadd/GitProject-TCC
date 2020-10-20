@@ -8,5 +8,5 @@ public enum EnemyState
 }
 public enum MechanicType
 {
-     SLOW, SLIDE, KILL, PUSH, FLOOR, FAN
+     SLOW, SLIDE, KILL, FLOOR, FAN, PISTON
 }

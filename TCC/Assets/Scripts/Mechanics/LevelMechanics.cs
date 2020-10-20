@@ -12,16 +12,21 @@ public class LevelMechanics : MonoBehaviour
      public bool slowed = false;
      public float timeDisableFloor;
      public float timeEnableFloor;
+     public float pistonSpeed;
+     public float pistonOffset;
      [Range(0, 2)]
      public float fanSpeed;
      public MeshRenderer meshObj;
      public BoxCollider boxObj;
-
+     public float timeToMovePiston;
+     public bool goingDown = true;
      private float time;
      private float maxSpeedAux;
      private bool OffFloor = false;
+     private Vector3 initialPositionPiston;
+     private float currentCountdown;
 
-     private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
      {
           if (mechanicType == MechanicType.KILL)
           {
@@ -35,6 +40,11 @@ public class LevelMechanics : MonoBehaviour
                PlayerController.instance.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
           }
           else if(mechanicType == MechanicType.FAN)
+          {
+               Debug.Log("Personagem morreu.");
+               PlayerController.instance.maxSpeed = 0;              
+          }
+          else if(mechanicType == MechanicType.PISTON)
           {
                Debug.Log("Personagem morreu.");
                PlayerController.instance.maxSpeed = 0;
@@ -97,14 +107,61 @@ public class LevelMechanics : MonoBehaviour
                }
           }
      }
-
+     public void RotateFan()
+     {
+        if (mechanicType == MechanicType.FAN)
+        {
+            this.gameObject.transform.Rotate(0, 0, fanSpeed);
+        }
+     }
+     public void MovePiston()
+     {
+        if(mechanicType == MechanicType.PISTON)
+          {
+            RaycastHit _hitInfo;
+            if(Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 30f))
+            {
+               float distanceUntilPoint = Vector3.Distance(transform.position, _hitInfo.point);
+               float distanceUntilFirstPosition = Vector3.Distance(transform.position, initialPositionPiston);
+               if(goingDown)
+               {
+                    transform.position = Vector3.MoveTowards(transform.position, _hitInfo.point + new Vector3(0f, pistonOffset, 0f), pistonSpeed * Time.deltaTime);
+                    if(distanceUntilPoint <= pistonOffset)
+                    {
+                         if(currentCountdown < 1)
+                         {
+                              currentCountdown += Time.deltaTime / timeToMovePiston;
+                         }
+                         else
+                         {
+                              goingDown = false;
+                              currentCountdown = 0;
+                         }
+                    }
+               }
+               else
+               {
+                    transform.position = Vector3.MoveTowards(transform.position, initialPositionPiston, pistonSpeed * Time.deltaTime);
+                    if(distanceUntilFirstPosition <= 0)
+                    {
+                        goingDown = true;
+                    }
+               }
+            }
+          }
+     }
+     public void GetPistonInitialPosition()
+     {
+          initialPositionPiston = transform.position;
+     }
+     private void Start() 
+     {
+          GetPistonInitialPosition();
+     }
      private void Update()
      {
           DesableFloor();
-
-          if (mechanicType == MechanicType.FAN)
-          {
-               this.gameObject.transform.Rotate(0, 0, fanSpeed);
-          }
+          RotateFan();
+          MovePiston();
      }
 }

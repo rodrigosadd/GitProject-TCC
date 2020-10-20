@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
      public Rigidbody rbody;
      public Transform characterGraphic;
      public Transform cam;
+     public Collider characterCollider;
 
      [Header("Movement variables")]
      public float maxSpeed = 6f;
