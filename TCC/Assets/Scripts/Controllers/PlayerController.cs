@@ -12,12 +12,22 @@ public class PlayerController : Character
      public float cliffDetectorHeightDist = 5f;
      public float cliffDetectorMaxSpeed = 0.05f;
 
+     [Header("Missed Jumps variables")]
+     public Transform targetMissedJump;
+     public float rangeRayMissedJump;
+     public float offsetPlayerPos;
+     public float timeDetectMissedJump;
+     public float countdownMissedJump;
+     public float smootnessMissedJump;
+     public bool canMiss = true;
+
 #if UNITY_EDITOR
      [Header("See Range variables")]
      public bool seeRangePush = false;
      public bool seeRangeStun = false;
      public bool seeRangeCliff = false;
      public bool seeRangegroundDetector = false;
+     public bool seeRangeMissedJump = false;
 #endif
 
      public static PlayerController instance;
@@ -43,9 +53,10 @@ public class PlayerController : Character
           CliffDetector();
           CharacterFace();
           StunningEnemy();
+          SlopeDetector();
           PlatformDetector();
           PlayerAnimations();
-          SlopeDetector();
+          CatchMissedJumps();
      }
 
      void LateUpdate()
@@ -231,6 +242,36 @@ public class PlayerController : Character
           }
      }
 
+     public void CatchMissedJumps()
+     {
+          RaycastHit _hitInfo;
+
+          if (Physics.Raycast(targetMissedJump.position, Vector3.down, out _hitInfo, rangeRayMissedJump))
+          {
+               if (_hitInfo.transform.tag == "Ground" || _hitInfo.transform.tag == "Interactable")
+               {
+                    if (canMiss)
+                    {
+                         transform.position = Vector3.MoveTowards(transform.position, _hitInfo.point + new Vector3(0f, offsetPlayerPos, 0f), smootnessMissedJump * Time.deltaTime);
+                         canMiss = false;
+                    }
+               }
+          }
+
+          if (!canMiss)
+          {
+               if (countdownMissedJump < 1)
+               {
+                    countdownMissedJump += Time.deltaTime / timeDetectMissedJump;
+               }
+               else
+               {
+                    countdownMissedJump = 0;
+                    canMiss = true;
+               }
+          }
+     }
+
 #if UNITY_EDITOR
      void OnDrawGizmos()
      {
@@ -257,6 +298,11 @@ public class PlayerController : Character
           if (seeRangegroundDetector)
           {
                Debug.DrawRay(transform.position, Vector3.up * -1 * groundDetectorRange, Color.blue);
+          }
+
+          if (seeRangeMissedJump)
+          {
+               Debug.DrawRay(targetMissedJump.position, Vector3.down * rangeRayMissedJump, Color.red);
           }
      }
 #endif
