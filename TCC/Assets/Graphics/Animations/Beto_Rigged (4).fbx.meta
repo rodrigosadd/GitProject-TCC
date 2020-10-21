@@ -4,6 +4,9 @@ ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
+      74: 2493098847013930233
+    second: Beto_A_Pose
+  - first:
       74: -8176977376005070302
     second: Beto_Atacking
   - first:
@@ -31,9 +34,6 @@ ModelImporter:
       74: -2504301592108313997
     second: Beto_Idle_Caution
   - first:
-      74: -3334595825009039826
-    second: Beto_Idle
-  - first:
       74: -2553834655166733166
     second: Beto_Caution_Idle_To_Idle
   - first:
@@ -52,8 +52,8 @@ ModelImporter:
       74: 7984302958824197608
     second: Beto_Pushing_Idle
   - first:
-      74: 2493098847013930233
-    second: Beto_A_Pose
+      74: -3334595825009039826
+    second: Beto_Idle
   - first:
       74: 7565054986033332823
     second: Armature_Beto_Blender|Beto_1st_Jump
@@ -133,6 +133,35 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations:
+    - serializedVersion: 16
+      name: Beto_A_Pose
+      takeName: Beto_A_Pose
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 4
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Beto_Atacking
       takeName: Beto_Atacking
@@ -395,35 +424,6 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Beto_Idle
-      takeName: Beto_Idle
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 40
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
       name: Beto_Caution_Idle_To_Idle
       takeName: Beto_Caution_Idle_To_Idle
       internalID: 0
@@ -551,8 +551,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -580,8 +580,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -598,11 +598,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Beto_A_Pose
-      takeName: Beto_A_Pose
+      name: Beto_Idle
+      takeName: Beto_Idle
       internalID: 0
       firstFrame: 0
-      lastFrame: 4
+      lastFrame: 40
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
