@@ -27,6 +27,7 @@ public class Character : MonoBehaviour
      public int maxJump = 2;
      public float maxDistanceShadow = 10f;
      public float rangeSlopeDetector = 3f;
+     public float doubleJumpTime = 0.45f;
      public LayerMask groundLayer;
 
      [Header("Push variables")]
@@ -159,7 +160,7 @@ public class Character : MonoBehaviour
           {
                if (_doubleJumpCountdown < 1)
                {
-                    _doubleJumpCountdown += Time.deltaTime / 0.45f;
+                    _doubleJumpCountdown += Time.deltaTime / doubleJumpTime;
                }
           }
      }
