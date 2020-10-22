@@ -155,22 +155,24 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     break;
                case CharacterState.DEAD:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
+                    // animator.SetBool("Idle", false);
+                    // animator.SetBool("Running", false);
+                    // animator.SetBool("Single Jump", false);
+                    // animator.SetBool("Single Jump Running", false);
+                    // animator.SetBool("Double Jump", false);
+                    // animator.SetBool("Pushing", false);
+                    // animator.SetBool("Pushing Idle", false);
+                    // animator.SetBool("Dying", true);
                     break;
                case CharacterState.DISABLED:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
+                    // animator.SetBool("Idle", false);
+                    // animator.SetBool("Running", false);
+                    // animator.SetBool("Single Jump", false);
+                    // animator.SetBool("Single Jump Running", false);
+                    // animator.SetBool("Double Jump", false);
+                    // animator.SetBool("Pushing", false);
+                    // animator.SetBool("Pushing Idle", false);
+                    // animator.SetBool("Dying", true);
                     break;
                case CharacterState.BALANCE:
                     animator.SetBool("Idle", false);

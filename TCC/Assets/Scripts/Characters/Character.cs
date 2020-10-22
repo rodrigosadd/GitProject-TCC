@@ -98,6 +98,17 @@ public class Character : MonoBehaviour
           }
      }
 
+     public void CharacterFace()
+     {
+          if (_direction.magnitude >= 0.1f)
+          {
+               _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+               _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, turnSmoothtime);
+
+               characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
+          }
+     }
+
      public void SlopeDetector()
      {
           RaycastHit _hitInfo;
@@ -111,17 +122,6 @@ public class Character : MonoBehaviour
                          transform.position = new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z);
                     }
                }
-          }
-     }
-
-     public void CharacterFace()
-     {
-          if (_direction.magnitude >= 0.1f)
-          {
-               _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-               _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, turnSmoothtime);
-
-               characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
           }
      }
 
