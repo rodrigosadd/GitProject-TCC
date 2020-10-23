@@ -166,49 +166,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce3d5f18603f9740b55778a4abf7da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateCharacter: 0
   rbody: {fileID: 78672544767654958}
   characterGraphic: {fileID: 1217916988625593018}
-  cam: {fileID: 0}
   characterCollider: {fileID: 78672544767654957}
-  maxSpeed: 9
-  currentSpeed: 0
-  acceleration: 20
-  turnSmoothtime: 0.1
-  jumpShadow: {fileID: 0}
-  fallMultiplier: 1
-  lowJumpMultiplier: 2.5
-  groundDetectorRange: 1.13
-  jumpForce: 7
-  currentJump: 0
-  maxJump: 2
-  maxDistanceShadow: 10
-  rangeSlopeDetector: 1.13
-  doubleJumpTime: 0.41
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 768
-  targetPush: {fileID: 2082815065}
-  currentTargetPush: {fileID: 0}
-  middleOfThePlayer: {fileID: 1688605803}
-  rangePush: 1.18
-  rangeDropObject: 2
-  pushingObj: 0
-  rangeStun: 5
-  timeStun: 2
-  cooldownStun: 3
-  canStun: 1
   animator: {fileID: 4661693089356209894}
-  cliffDetectorFwrdDist: 0.7
-  cliffDetectorHeightDist: 5
-  cliffDetectorMaxSpeed: 0.5
-  targetMissedJump: {fileID: 673492186}
-  rangeRayMissedJump: 0.4
-  offsetPlayerPos: 1
-  timeDetectMissedJump: 1
-  countdownMissedJump: 0
-  smootnessMissedJump: 90
-  canMiss: 1
+  stateCharacter: 0
+  movement:
+    cam: {fileID: 0}
+    maxSpeed: 9
+    currentSpeed: 0
+    acceleration: 20
+    turnSmoothtime: 0.1
+  jump:
+    groundLayer:
+      serializedVersion: 2
+      m_Bits: 768
+    jumpShadow: {fileID: 0}
+    fallMultiplier: 1
+    lowJumpMultiplier: 2.5
+    groundDetectorRange: 1.13
+    jumpForce: 7
+    maxDistanceShadow: 10
+    rangeSlopeDetector: 1.13
+    doubleJumpTime: 0.41
+    currentJump: 0
+    maxJump: 2
+  push:
+    targetPush: {fileID: 2082815065}
+    currentTargetPush: {fileID: 0}
+    middleOfThePlayer: {fileID: 1688605803}
+    rangePush: 1.18
+    rangeDropObject: 2
+    pushingObj: 0
+  stun:
+    rangeStun: 5
+    timeStun: 2
+    cooldownStun: 2
+    canStun: 1
+  cliff:
+    cliffDetectorFwrdDist: 0.7
+    cliffDetectorHeightDist: 5
+    cliffDetectorMaxSpeed: 0.5
+  missedJump:
+    targetMissedJump: {fileID: 673492186}
+    rangeRayMissedJump: 0.4
+    offsetPlayerPos: 1
+    timeDetectMissedJump: 1
+    countdownMissedJump: 0
+    smootnessMissedJump: 90
+    canMiss: 1
   seeRangePush: 0
   seeRangeStun: 0
   seeRangeCliff: 0

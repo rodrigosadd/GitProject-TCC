@@ -4,37 +4,53 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    [Header("Platform movement variables")]
-    public Transform[] spotsToMovePlatform;
-    public int spotToMove = 0;
-    public float speed = 2f;
-    public float startWaitTime = 2f;
-    public float waitTimeToMove = 2f;
+     public Transform[] spotsToMovePlatform;
+     public Transform playerEmpty;
+     public int spotToMove = 0;
+     public float speed = 2f;
+     public float startWaitTime = 2f;
+     public float waitTimeToMove = 2f;
 
-    void Update()
-    {
-        MovementBetweenSpots();
-    }
+     void Update()
+     {
+          MovementBetweenSpots();
+     }
 
-    public void MovementBetweenSpots()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime);
+     public void MovementBetweenSpots()
+     {
+          transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, spotsToMovePlatform[spotToMove].position) < 1.8f)
-        {
-            if (waitTimeToMove <= 0)
-            {
-                spotToMove++;
-                waitTimeToMove = startWaitTime;
-            }
-            else
-            {
-                waitTimeToMove -= Time.deltaTime;
-            }
-            if (spotToMove >= spotsToMovePlatform.Length)
-            {
-                spotToMove = 0;
-            }
-        }
-    }
+          if (Vector3.Distance(transform.position, spotsToMovePlatform[spotToMove].position) < 1.8f)
+          {
+               if (waitTimeToMove <= 0)
+               {
+                    spotToMove++;
+                    waitTimeToMove = startWaitTime;
+               }
+               else
+               {
+                    waitTimeToMove -= Time.deltaTime;
+               }
+               if (spotToMove >= spotsToMovePlatform.Length)
+               {
+                    spotToMove = 0;
+               }
+          }
+     }
+
+     void OnTriggerEnter(Collider other)
+     {
+          if (other.tag == "Player")
+          {
+               PlayerController.instance.transform.parent = transform;
+          }
+     }
+
+     void OnTriggerExit(Collider other)
+     {
+          if (other.tag == "Player")
+          {
+               PlayerController.instance.transform.parent = playerEmpty.transform;
+          }
+     }
 }

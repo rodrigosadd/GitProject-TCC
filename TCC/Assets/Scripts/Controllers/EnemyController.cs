@@ -5,7 +5,11 @@ using UnityEngine;
 public class EnemyController : Enemy
 {
      public static EnemyController instance;
+
+#if UNITY_EDITOR
+     [Header("See Range variables")]
      public bool seeRangeFind;
+#endif
 
      void Start()
      {
@@ -19,48 +23,50 @@ public class EnemyController : Enemy
           EnemyAnimations();
      }
 
+     #region Enemy Animations
      void EnemyAnimations()
      {
           switch (stateEnemy)
           {
                case EnemyState.IDLE:
-                    animatorEnemy.SetBool("Idle", true);
-                    animatorEnemy.SetBool("Walking", false);
-                    animatorEnemy.SetBool("Atacking", false);
-                    animatorEnemy.SetBool("Spoted", false);
+                    animator.SetBool("Idle", true);
+                    animator.SetBool("Walking", false);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
                     break;
                case EnemyState.PATROLLING:
-                    animatorEnemy.SetBool("Idle", false);
-                    animatorEnemy.SetBool("Walking", true);
-                    animatorEnemy.SetBool("Atacking", false);
-                    animatorEnemy.SetBool("Spoted", false);
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
                     break;
                case EnemyState.SPOTED:
-                    animatorEnemy.SetBool("Idle", false);
-                    animatorEnemy.SetBool("Walking", true);
-                    animatorEnemy.SetBool("Atacking", false);
-                    animatorEnemy.SetBool("Spoted", true);
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", true);
                     break;
                case EnemyState.FOLLOWING_PLAYER:
-                    animatorEnemy.SetBool("Idle", false);
-                    animatorEnemy.SetBool("Walking", true);
-                    animatorEnemy.SetBool("Atacking", false);
-                    animatorEnemy.SetBool("Spoted", false);
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
                     break;
                case EnemyState.ATTACKING__PLAYER:
-                    animatorEnemy.SetBool("Idle", false);
-                    animatorEnemy.SetBool("Walking", false);
-                    animatorEnemy.SetBool("Atacking", true);
-                    animatorEnemy.SetBool("Spoted", false);
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", false);
+                    animator.SetBool("Atacking", true);
+                    animator.SetBool("Spoted", false);
                     break;
                case EnemyState.STUNNED:
-                    animatorEnemy.SetBool("Idle", true);
-                    animatorEnemy.SetBool("Walking", false);
-                    animatorEnemy.SetBool("Atacking", false);
-                    animatorEnemy.SetBool("Spoted", false);
+                    animator.SetBool("Idle", true);
+                    animator.SetBool("Walking", false);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
                     break;
           }
      }
+     #endregion
 
 #if UNITY_EDITOR
      void OnDrawGizmos()
@@ -68,7 +74,7 @@ public class EnemyController : Enemy
           if (seeRangeFind)
           {
                Gizmos.color = Color.red;
-               Gizmos.DrawWireSphere(transform.position, rangeFind);
+               Gizmos.DrawWireSphere(transform.position, followPlayer.rangeFind);
           }
      }
 #endif

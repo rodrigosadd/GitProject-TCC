@@ -3,44 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
      public EnemyState stateEnemy;
-     public Animator animatorEnemy;
 
      [Header("Patrol variables")]
-     public NavMeshAgent enemyAgent;
-     public Transform[] patrolPoints;
-     public int patrolSpot = 0;
-     public float waitTime = 2f;
-     public float startWaitTime = 2f;
+     public Patrol patrol;
+
+     [System.Serializable]
+     public struct Patrol
+     {
+          public NavMeshAgent enemyAgent;
+          public Transform[] patrolPoints;
+          public int patrolSpot;
+          public float waitTime;
+          public float startWaitTime;
+     }
 
      [Header("Follow Player variables")]
-     public float rangeFind = 2f;
-
-     private float _distanceBetween = 0f;
+     public FollowPlayer followPlayer;
      private Vector3 _directionFace;
+     private float _distanceBetween = 0f;
+
+     [System.Serializable]
+     public struct FollowPlayer
+     {
+          public float rangeFind;
+     }
 
      public void MoveToPatrolPoint()
      {
-          enemyAgent.destination = patrolPoints[patrolSpot].position;
+          patrol.enemyAgent.destination = patrol.patrolPoints[patrol.patrolSpot].position;
 
-          if (Vector3.Distance(transform.position, patrolPoints[patrolSpot].position) < enemyAgent.stoppingDistance + 1)
+          if (Vector3.Distance(transform.position, patrol.patrolPoints[patrol.patrolSpot].position) < patrol.enemyAgent.stoppingDistance + 1)
           {
-               if (waitTime <= 0)
+               if (patrol.waitTime <= 0)
                {
                     stateEnemy = EnemyState.PATROLLING;
-                    patrolSpot++;
-                    waitTime = startWaitTime;
+                    patrol.patrolSpot++;
+                    patrol.waitTime = patrol.startWaitTime;
                }
                else
                {
                     stateEnemy = EnemyState.IDLE;
-                    waitTime -= Time.deltaTime;
+                    patrol.waitTime -= Time.deltaTime;
                }
-               if (patrolSpot >= patrolPoints.Length)
+               if (patrol.patrolSpot >= patrol.patrolPoints.Length)
                {
-                    patrolSpot = 0;
+                    patrol.patrolSpot = 0;
                }
           }
      }
@@ -49,15 +59,15 @@ public class Enemy : MonoBehaviour
      {
           _distanceBetween = Vector3.Distance(PlayerController.instance.transform.position, transform.position);
 
-          if (_distanceBetween <= rangeFind)
+          if (_distanceBetween <= followPlayer.rangeFind)
           {
                if (stateEnemy != EnemyState.FOLLOWING_PLAYER)
                {
                     stateEnemy = EnemyState.FOLLOWING_PLAYER;
                }
-               enemyAgent.destination = PlayerController.instance.transform.position;
+               patrol.enemyAgent.destination = PlayerController.instance.transform.position;
           }
-          if (_distanceBetween <= enemyAgent.stoppingDistance)
+          if (_distanceBetween <= patrol.enemyAgent.stoppingDistance)
           {
                FaceTarget();
                if (PlayerController.instance.stateCharacter == CharacterState.DISABLED)

@@ -23,8 +23,8 @@ public class Kill : MonoBehaviour
                     PlayerController.instance.animator.SetBool("Dying", true);
                     PlayerController.instance.rbody.useGravity = false;
                     PlayerController.instance.characterCollider.enabled = false;
-                    currentMaxSpeed = PlayerController.instance.maxSpeed;
-                    PlayerController.instance.maxSpeed = 0;
+                    currentMaxSpeed = PlayerController.instance.movement.maxSpeed;
+                    PlayerController.instance.movement.maxSpeed = 0;
                     alive = false;
                }
           }
@@ -44,7 +44,7 @@ public class Kill : MonoBehaviour
                     PlayerController.instance.transform.position = currentPoint.position;
                     PlayerController.instance.rbody.useGravity = true;
                     PlayerController.instance.characterCollider.enabled = true;
-                    PlayerController.instance.maxSpeed = currentMaxSpeed;
+                    PlayerController.instance.movement.maxSpeed = currentMaxSpeed;
                     countdownKill = 0;
                     alive = true;
                }
