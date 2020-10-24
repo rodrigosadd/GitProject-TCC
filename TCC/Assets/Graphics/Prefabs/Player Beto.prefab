@@ -192,11 +192,13 @@ MonoBehaviour:
     currentJump: 0
     maxJump: 2
   push:
+    slowReference: {fileID: 0}
     targetPush: {fileID: 2082815065}
     currentTargetPush: {fileID: 0}
     middleOfThePlayer: {fileID: 1688605803}
     rangePush: 1.18
     rangeDropObject: 2
+    currentMaxSpeed: 0
     pushingObj: 0
   stun:
     rangeStun: 5

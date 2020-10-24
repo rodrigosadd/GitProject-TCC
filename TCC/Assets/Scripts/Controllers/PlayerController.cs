@@ -17,7 +17,7 @@ public class PlayerController : Character
      private float _horizontal, _vertical;
 
      [System.Serializable]
-     public struct Movement
+     public class Movement
      {
           public Transform cam;
           public float maxSpeed;
@@ -31,7 +31,7 @@ public class PlayerController : Character
      private float _doubleJumpCountdown;
 
      [System.Serializable]
-     public struct Jump
+     public class Jump
      {
           public LayerMask groundLayer;
           public Transform jumpShadow;
@@ -51,7 +51,7 @@ public class PlayerController : Character
      public Push push;
 
      [System.Serializable]
-     public struct Push
+     public class Push
      {
           public Slow slowReference;
           public Transform targetPush;
@@ -68,7 +68,7 @@ public class PlayerController : Character
      private float _distanceBetwen;
 
      [System.Serializable]
-     public struct Stun
+     public class Stun
      {
           public float rangeStun;
           public float timeStun;
@@ -81,7 +81,7 @@ public class PlayerController : Character
      private bool _cliffDectorLockPlayer;
 
      [System.Serializable]
-     public struct Cliff
+     public class Cliff
      {
           public float cliffDetectorFwrdDist;
           public float cliffDetectorHeightDist;
@@ -92,7 +92,7 @@ public class PlayerController : Character
      public MissedJump missedJump;
 
      [System.Serializable]
-     public struct MissedJump
+     public class MissedJump
      {
           public Transform targetMissedJump;
           public float rangeRayMissedJump;
@@ -411,7 +411,7 @@ public class PlayerController : Character
      }
      #endregion
 
-     #region  Stunning Enemy
+     #region Stunning Enemy
      public void StunningEnemy()
      {
           if (Input.GetKeyDown(KeyCode.E) && stun.canStun == true)

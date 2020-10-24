@@ -11,7 +11,7 @@ public class Enemy : Character
      public Patrol patrol;
 
      [System.Serializable]
-     public struct Patrol
+     public class Patrol
      {
           public NavMeshAgent enemyAgent;
           public Transform[] patrolPoints;
@@ -26,7 +26,7 @@ public class Enemy : Character
      private float _distanceBetween = 0f;
 
      [System.Serializable]
-     public struct FollowPlayer
+     public class FollowPlayer
      {
           public float rangeFind;
      }
