@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Beto Body
-  m_Shader: {fileID: -6465566751694194690, guid: 4359edd73905d4e4391496a2e5910c84, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 66d5df8eba1f7794eaffc75a1dfe399f, type: 3}
   m_ShaderKeywords: _NORMALMAP _OCCLUSIONMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -40,7 +40,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_F70AEBE4:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 8e267f19477f2ee4fa16658653949364, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -67,12 +67,17 @@ Material:
         m_Texture: {fileID: 2800000, guid: 0ad07d3408248b44382effa7348d45e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_A3207CAC_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 8e267f19477f2ee4fa16658653949364, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_17B7F888: 0.942
+    - Vector1_217FBB34: 0
     - Vector1_D1D691EA: 2
     - Vector1_FE4E9587: 1
     - _AlphaClip: 0
@@ -97,8 +102,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - Color_61DFBE7E: {r: 0.9647059, g: 0, b: 0.7016735, a: 0}
     - Color_984070BD: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0}
-    - Color_E6EB87B: {r: 0, g: 0, b: 0, a: 0}
+    - Color_E6EB87B: {r: 1, g: 0, b: 0.5697689, a: 0}
     - Vector2_CEC31D06: {r: 0, g: 0.67, b: 0, a: 0}
     - Vector2_D4C569B2: {r: 1, g: 1, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
