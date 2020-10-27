@@ -1799,6 +1799,38 @@ PrefabInstance:
       propertyPath: jump.jumpShadow
       value: 
       objectReference: {fileID: 1063870689}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: seeRangeMissedJump
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: seeRangeCliff
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: seeRangegroundDetector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: seeRangeStun
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: seeRangePush
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: jump.handMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: attack.maxCombo
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: attack.delayNextAttack
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 78672544767654959, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_Name
       value: Player Beto
@@ -3206,6 +3238,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1750167522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1994313573551142912, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+  m_PrefabInstance: {fileID: 676370865}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1750167526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750167522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae5aa1e274ff76458109b13d416453e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxCombo: 3
+  currentAttack: 0
+  delayNextAttack: 2
+  attaking: 0
 --- !u!1 &1796805734
 GameObject:
   m_ObjectHideFlags: 0
@@ -3978,6 +4031,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7034108910208619203, guid: 92487f03691830149bf2584dc3623668, type: 3}
       propertyPath: m_Name
+      value: Slow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7034108910208619203, guid: 92487f03691830149bf2584dc3623668, type: 3}
+      propertyPath: m_TagString
       value: Slow
       objectReference: {fileID: 0}
     - target: {fileID: 7034108910208619214, guid: 92487f03691830149bf2584dc3623668, type: 3}

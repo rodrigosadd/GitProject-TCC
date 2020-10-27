@@ -20,10 +20,12 @@ public class PlayerController : Character
      public class Movement
      {
           public Transform cam;
+          public bool slowed;
           public float maxSpeed;
           public float currentSpeed;
           public float acceleration;
           public float turnSmoothtime;
+          public float fixedMaxSpeed;
      }
 
      [Header("Jump variables")]
@@ -35,6 +37,7 @@ public class PlayerController : Character
      {
           public LayerMask groundLayer;
           public Transform jumpShadow;
+          public Material handMaterial;
           public float fallMultiplier;
           public float lowJumpMultiplier;
           public float groundDetectorRange;
@@ -42,10 +45,10 @@ public class PlayerController : Character
           public float maxDistanceShadow;
           public float rangeSlopeDetector;
           public float doubleJumpTime;
+          public float handShaderStrength;
           public int currentJump;
           public int maxJump;
      }
-
 
      [Header("Push variables")]
      public Push push;
@@ -118,6 +121,7 @@ public class PlayerController : Character
 
           Cursor.visible = false;
           Cursor.lockState = CursorLockMode.Locked;
+          movement.fixedMaxSpeed = movement.maxSpeed;
      }
 
      void Update()
@@ -130,9 +134,11 @@ public class PlayerController : Character
           CharacterFace();
           StunningEnemy();
           SlopeDetector();
+          SetHandShader();
           PlayerAnimations();
           CatchMissedJumps();
           JumpShadow();
+          //Slow();
      }
 
      #region Movement Player
@@ -224,6 +230,20 @@ public class PlayerController : Character
                return Vector2.Distance(_lastPosition, _lastPositionPlayer);
           }
           return 0;
+     }
+
+     public void Slow()
+     {
+          RaycastHit _hitInfo;
+
+          if (Physics.Raycast(push.middleOfThePlayer.position, Vector3.down, out _hitInfo, jump.groundDetectorRange))
+          {
+               if (_hitInfo.transform.tag == "Slow")
+               {
+                    movement.maxSpeed = 2f;
+                    movement.slowed = true;
+               }
+          }
      }
      #endregion
 
@@ -335,16 +355,37 @@ public class PlayerController : Character
      {
           return jump.currentJump < jump.maxJump;
      }
-     #endregion 
+
+     public void SetHandShader()
+     {
+          if (jump.currentJump == 2)
+          {
+               if (jump.handShaderStrength > 0)
+               {
+                    jump.handShaderStrength -= Time.deltaTime * 2f;
+               }
+               jump.handMaterial.SetFloat("Hand_Emission", jump.handShaderStrength);
+          }
+          else
+          {
+               if (jump.handShaderStrength < 1)
+               {
+                    jump.handShaderStrength += Time.deltaTime / 3f;
+               }
+               jump.handMaterial.SetFloat("Hand_Emission", jump.handShaderStrength);
+          }
+     }
+
+     #endregion
 
      #region Pushing Object
      private void PushingObject()
      {
-          if (Input.GetMouseButton(0))
+          if (Input.GetButton("Fire2"))
           {
                PushObject();
           }
-          else if (Input.GetMouseButtonUp(0))
+          else if (Input.GetButtonUp("Fire2"))
           {
                DropObject();
           }
@@ -366,15 +407,15 @@ public class PlayerController : Character
 
                     if (push.slowReference == null)
                     {
-                         push.currentMaxSpeed = movement.maxSpeed;
+                         push.currentMaxSpeed = movement.fixedMaxSpeed;
                          movement.maxSpeed = 2f;
                     }
                     else
                     {
-                         if (push.slowReference.slowed == false)
+                         if (movement.slowed == false)
                          {
                               push.slowReference = null;
-                              push.currentMaxSpeed = movement.maxSpeed;
+                              push.currentMaxSpeed = movement.fixedMaxSpeed;
                               movement.maxSpeed = 2f;
                          }
                     }

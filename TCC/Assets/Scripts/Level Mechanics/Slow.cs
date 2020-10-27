@@ -5,28 +5,25 @@ using UnityEngine;
 public class Slow : MonoBehaviour
 {
      public float slowValue;
-     public bool slowed = false;
-
      private float _currentMaxSpeed;
 
      void OnTriggerStay(Collider collider)
      {
-          if (!slowed && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
+          if (!PlayerController.instance.movement.slowed && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
           {
-               _currentMaxSpeed = PlayerController.instance.movement.maxSpeed;
+               _currentMaxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                PlayerController.instance.movement.maxSpeed = slowValue;
                PlayerController.instance.push.slowReference = this;
-               slowed = true;
+               PlayerController.instance.movement.slowed = true;
           }
      }
 
      void OnTriggerExit(Collider collider)
      {
-          if (slowed && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
+          if (PlayerController.instance.movement.slowed && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
           {
-               Debug.Log("Trigou");
                PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
-               slowed = false;
+               PlayerController.instance.movement.slowed = false;
           }
      }
 }
