@@ -639,7 +639,9 @@ public class PlayerController : Character
 
           if (seeRangeMissedJump)
           {
-               Debug.DrawRay(missedJump.targetMissedJump.position, Vector3.down * missedJump.rangeRayMissedJump, Color.red);
+               Gizmos.color = Color.red;
+               Gizmos.DrawSphere(missedJump.targetMissedJump.position, 0.1f);
+               Debug.DrawRay(missedJump.targetMissedJump.position, Vector3.down * missedJump.rangeRayMissedJump, Color.green);
           }
      }
 #endif
