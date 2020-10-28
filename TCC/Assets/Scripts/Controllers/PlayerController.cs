@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : Character
 {
      public CharacterState stateCharacter;
+     public Rigidbody rbody;
      public static PlayerController instance;
 
      [Header("Movement variables")]

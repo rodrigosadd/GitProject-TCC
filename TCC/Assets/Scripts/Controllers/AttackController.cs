@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class AttackController : MonoBehaviour
 {
+     public Transform targetAttack;
+     public LayerMask layerEnemy;
      public int maxCombo;
      public int currentAttack;
      public float delayNextAttack;
+     public float maxDistanceAttack;
+     public float attackImpulse;
      public bool attaking;
      private float _currentMaxSpeed;
      private float _lastAttackTime;
@@ -19,7 +23,7 @@ public class AttackController : MonoBehaviour
 
      public void InputsAttack()
      {
-          if (Input.GetButtonDown("Fire1") && PlayerController.instance.movement.slowed == false)
+          if (Input.GetButtonDown("Fire1") && PlayerController.instance.movement.slowed == false && (PlayerController.instance.stateCharacter == CharacterState.RUNNNING || PlayerController.instance.stateCharacter == CharacterState.IDLE))
           {
                if (!attaking)
                {
@@ -84,7 +88,19 @@ public class AttackController : MonoBehaviour
           attaking = true;
           if (PlayerController.instance.movement.slowed == false)
           {
-               PlayerController.instance.movement.maxSpeed = 2f;
+               PlayerController.instance.movement.maxSpeed = 0f;
+               PlayerController.instance.rbody.AddForce(PlayerController.instance.characterGraphic.forward * attackImpulse, ForceMode.Impulse);
+          }
+     }
+
+     public void AttackDetection()
+     {
+          Collider[] _hitEnemy = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerEnemy);
+
+          foreach (Collider hit in _hitEnemy)
+          {
+               Debug.Log("Attack Detection");
+               hit.transform.GetComponent<EnemyController>().TakeDamage();
           }
      }
 
@@ -95,4 +111,12 @@ public class AttackController : MonoBehaviour
                currentAttack = 0;
           }
      }
+
+#if UNITY_EDITOR
+     void OnDrawGizmos()
+     {
+          Gizmos.color = Color.blue;
+          Gizmos.DrawWireSphere(targetAttack.position, maxDistanceAttack);
+     }
+#endif
 }

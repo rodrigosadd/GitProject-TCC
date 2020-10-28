@@ -60,6 +60,36 @@ Transform:
   m_Father: {fileID: 1217916988625593018}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1202165552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1202165553}
+  m_Layer: 0
+  m_Name: Target Attack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1202165553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202165552}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.8, z: 1.26}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1217916988625593018}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1688605802
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,22 +196,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ce3d5f18603f9740b55778a4abf7da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rbody: {fileID: 78672544767654958}
   characterGraphic: {fileID: 1217916988625593018}
   characterCollider: {fileID: 78672544767654957}
   animator: {fileID: 4661693089356209894}
+  stunCount: 0
   stateCharacter: 0
+  rbody: {fileID: 78672544767654958}
   movement:
     cam: {fileID: 0}
+    slowed: 0
     maxSpeed: 9
     currentSpeed: 0
     acceleration: 20
     turnSmoothtime: 0.1
+    fixedMaxSpeed: 0
   jump:
     groundLayer:
       serializedVersion: 2
       m_Bits: 768
     jumpShadow: {fileID: 0}
+    handMaterial: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     fallMultiplier: 1
     lowJumpMultiplier: 2.5
     groundDetectorRange: 1.13
@@ -189,6 +223,7 @@ MonoBehaviour:
     maxDistanceShadow: 10
     rangeSlopeDetector: 1.13
     doubleJumpTime: 0.41
+    handShaderStrength: 0
     currentJump: 0
     maxJump: 2
   push:
@@ -271,6 +306,28 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1750167526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1994313573551142912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae5aa1e274ff76458109b13d416453e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetAttack: {fileID: 1202165553}
+  layerEnemy:
+    serializedVersion: 2
+    m_Bits: 1024
+  maxCombo: 3
+  currentAttack: 0
+  delayNextAttack: 2
+  maxDistanceAttack: 1.5
+  attackImpulse: 4
+  attaking: 0
 --- !u!114 &7753743742199015379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +342,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerFootsteps: []
   playerJumpSounds: []
+  playerAttackSounds: []
   minningSound: 
   deathCry: 
   boxPushingSound: 
