@@ -94,7 +94,7 @@ public class AttackController : MonoBehaviour
           if (PlayerController.instance.movement.slowed == false)
           {
                PlayerController.instance.movement.maxSpeed = 0f;
-               PlayerController.instance.rbody.AddForce(PlayerController.instance.characterGraphic.forward * attackImpulse, ForceMode.Impulse);
+               PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.forward * attackImpulse, ForceMode.Impulse);
           }
      }
 
@@ -102,10 +102,9 @@ public class AttackController : MonoBehaviour
      {
           Collider[] _hitEnemy = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerEnemy);
 
-          foreach (Collider hit in _hitEnemy)
+          foreach (Collider _hit in _hitEnemy)
           {
-               Debug.Log("Attack Detection");
-               hit.transform.GetComponent<EnemyController>().TakeDamage();
+               _hit.transform.GetComponent<EnemyController>().TakeDamage();
           }
      }
 

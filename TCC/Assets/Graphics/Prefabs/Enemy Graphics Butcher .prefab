@@ -71,7 +71,6 @@ MonoBehaviour:
   stunCount: 0
   stateEnemy: 0
   patrol:
-    enemyAgent: {fileID: 4116490434590808235}
     patrolPoints:
     - {fileID: 0}
     - {fileID: 0}
@@ -79,6 +78,10 @@ MonoBehaviour:
     patrolSpot: 0
     waitTime: 0
     startWaitTime: 2
+  movement:
+    enemyAgent: {fileID: 4116490434590808235}
+    stunnedTime: 5
+    stunned: 0
   followPlayer:
     rangeFind: 15
   seeRangeFind: 1

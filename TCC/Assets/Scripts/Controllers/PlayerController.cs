@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : Character
 {
      public CharacterState stateCharacter;
-     public Rigidbody rbody;
      public static PlayerController instance;
 
      [Header("Movement variables")]
@@ -20,6 +19,7 @@ public class PlayerController : Character
      [System.Serializable]
      public class Movement
      {
+          public Rigidbody rbody;
           public Transform cam;
           public bool slowed;
           public float maxSpeed;
@@ -139,6 +139,7 @@ public class PlayerController : Character
           PlayerAnimations();
           CatchMissedJumps();
           JumpShadow();
+          CheckDeath();
           //Slow();
      }
 
@@ -183,7 +184,7 @@ public class PlayerController : Character
                movement.currentSpeed = 0f;
           }
 
-          if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.RUNNNING && IsGrounded() && rbody.velocity.y <= 0 && push.pushingObj == false)
+          if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.RUNNNING && IsGrounded() && movement.rbody.velocity.y <= 0 && push.pushingObj == false)
           {
                stateCharacter = CharacterState.RUNNNING;
           }
@@ -194,7 +195,7 @@ public class PlayerController : Character
 
           if (_horizontal == 0 && _vertical == 0)
           {
-               if (rbody.velocity.y > 0 && !IsGrounded())
+               if (movement.rbody.velocity.y > 0 && !IsGrounded())
                {
                     if (stateCharacter != CharacterState.SINGLE_JUMP)
                     {
@@ -257,7 +258,7 @@ public class PlayerController : Character
           {
                if (_hitInfo.transform.tag == "Ground")
                {
-                    if (_hitInfo.normal != new Vector3(0, 1, 0) && rbody.velocity.y <= 0)
+                    if (_hitInfo.normal != new Vector3(0, 1, 0) && movement.rbody.velocity.y <= 0)
                     {
                          transform.position = new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z);
                     }
@@ -270,7 +271,7 @@ public class PlayerController : Character
           DoubleJumpCountdown();
           if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (_doubleJumpCountdown >= 1 || jump.currentJump == 0))
           {
-               rbody.velocity = Vector3.up * jump.jumpForce;
+               movement.rbody.velocity = Vector3.up * jump.jumpForce;
                _doubleJumpCountdown = 0;
                jump.currentJump++;
 
@@ -283,7 +284,7 @@ public class PlayerController : Character
                     stateCharacter = CharacterState.DOUBLE_JUMP;
                }
           }
-          if (IsGrounded() && rbody.velocity.y < 0)
+          if (IsGrounded() && movement.rbody.velocity.y < 0)
           {
                jump.currentJump = 0;
                _doubleJumpCountdown = 0;
@@ -336,13 +337,13 @@ public class PlayerController : Character
 
      public void CharacterBetterJump()
      {
-          if (rbody.velocity.y <= 0)
+          if (movement.rbody.velocity.y <= 0)
           {
-               rbody.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
+               movement.rbody.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
           }
-          else if (rbody.velocity.y > 0 && !Input.GetButton("Jump"))
+          else if (movement.rbody.velocity.y > 0 && !Input.GetButton("Jump"))
           {
-               rbody.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
+               movement.rbody.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
           }
      }
 
@@ -474,12 +475,12 @@ public class PlayerController : Character
 
      public IEnumerator TimeStuned()
      {
-          EnemyController.instance.patrol.enemyAgent.speed = 0;
+          EnemyController.instance.movement.enemyAgent.speed = 0;
           EnemyController.instance.stateEnemy = EnemyState.STUNNED;
 
           yield return new WaitForSeconds(stun.timeStun);
 
-          EnemyController.instance.patrol.enemyAgent.speed = 4;
+          EnemyController.instance.movement.enemyAgent.speed = 4;
           EnemyController.instance.stateEnemy = EnemyState.PATROLLING;
      }
 
@@ -542,6 +543,17 @@ public class PlayerController : Character
                     missedJump.countdownMissedJump = 0;
                     missedJump.canMiss = true;
                }
+          }
+     }
+     #endregion
+
+     #region Death
+     public void CheckDeath()
+     {
+          if (stunCount >= 3)
+          {
+               Debug.Log("Died");
+               stateCharacter = CharacterState.DEAD;
           }
      }
      #endregion

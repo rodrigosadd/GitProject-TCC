@@ -13,6 +13,5 @@ public class Character : MonoBehaviour
      public void TakeDamage()
      {
           stunCount++;
-          Debug.Log("Take Damage");
      }
 }
