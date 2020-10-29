@@ -65,7 +65,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dec0199c05a2f448887ae7ad12c3c1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rbody: {fileID: 900497695, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
   characterGraphic: {fileID: 4515438344544889425}
   characterCollider: {fileID: 4116490434590808232}
   animator: {fileID: 4116490434094288317}
@@ -320,6 +319,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 600936185742172871, guid: f944c04941d3dc34abe9c83c1b123bf9, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90945e71a5e9a624ab7ab4729e340eea, type: 2}
     - target: {fileID: 789080215132018844, guid: f944c04941d3dc34abe9c83c1b123bf9, type: 3}
       propertyPath: m_Layer
       value: 10

@@ -12,6 +12,11 @@ public class AttackController : MonoBehaviour
      public float maxDistanceAttack;
      public float attackImpulse;
      public bool attaking;
+
+#if UNITY_EDITOR
+     public bool seeAttackRange;
+#endif
+
      private float _currentMaxSpeed;
      private float _lastAttackTime;
 
@@ -115,8 +120,11 @@ public class AttackController : MonoBehaviour
 #if UNITY_EDITOR
      void OnDrawGizmos()
      {
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireSphere(targetAttack.position, maxDistanceAttack);
+          if (seeAttackRange)
+          {
+               Gizmos.color = Color.blue;
+               Gizmos.DrawWireSphere(targetAttack.position, maxDistanceAttack);
+          }
      }
 #endif
 }
