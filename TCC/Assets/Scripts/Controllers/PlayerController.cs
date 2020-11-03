@@ -107,6 +107,18 @@ public class PlayerController : Character
           public bool canMiss;
      }
 
+     [Header("Death variables")]
+     public Death death;
+     private float _currentMaxSpeed;
+
+     [System.Serializable]
+     public class Death
+     {
+          public Transform currentPoint;
+          public float countdownDeath;
+          public bool dead;
+     }
+
 #if UNITY_EDITOR
      [Header("See Range variables")]
      public bool seeRangePush = false;
@@ -140,6 +152,7 @@ public class PlayerController : Character
           CatchMissedJumps();
           JumpShadow();
           CheckDeath();
+          CountdownAfterDeath();
           //Slow();
      }
 
@@ -170,7 +183,7 @@ public class PlayerController : Character
 
           _direction = new Vector3(_horizontal, 0f, _vertical).normalized;
 
-          if (_direction.magnitude >= 0.1f)
+          if (_direction.magnitude >= 0.1f && stateCharacter != CharacterState.DEAD)
           {
                movement.currentSpeed += movement.acceleration * Time.deltaTime;
                movement.currentSpeed = Mathf.Clamp(movement.currentSpeed, 0, movement.maxSpeed);
@@ -184,25 +197,25 @@ public class PlayerController : Character
                movement.currentSpeed = 0f;
           }
 
-          if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.RUNNNING && IsGrounded() && movement.rbody.velocity.y <= 0 && push.pushingObj == false)
+          if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.RUNNNING && IsGrounded() && movement.rbody.velocity.y <= 0 && push.pushingObj == false && stateCharacter != CharacterState.DEAD)
           {
                stateCharacter = CharacterState.RUNNNING;
           }
-          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && stateCharacter != CharacterState.SINGLE_JUMP_RUNNING)
+          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && stateCharacter != CharacterState.DEAD)
           {
                stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
           }
 
           if (_horizontal == 0 && _vertical == 0)
           {
-               if (movement.rbody.velocity.y > 0 && !IsGrounded())
+               if (movement.rbody.velocity.y > 0 && !IsGrounded() && stateCharacter != CharacterState.DEAD)
                {
                     if (stateCharacter != CharacterState.SINGLE_JUMP)
                     {
                          stateCharacter = CharacterState.SINGLE_JUMP;
                     }
                }
-               else if (stateCharacter != CharacterState.IDLE && IsGrounded() && push.pushingObj == false)
+               else if (stateCharacter != CharacterState.IDLE && IsGrounded() && push.pushingObj == false && stateCharacter != CharacterState.DEAD)
                {
                     stateCharacter = CharacterState.IDLE;
                }
@@ -211,7 +224,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (_direction.magnitude >= 0.1f)
+          if (_direction.magnitude >= 0.1f && stateCharacter != CharacterState.DEAD)
           {
                _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + movement.cam.eulerAngles.y;
                _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, movement.turnSmoothtime);
@@ -269,7 +282,7 @@ public class PlayerController : Character
      public void CharacterJump()
      {
           DoubleJumpCountdown();
-          if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (_doubleJumpCountdown >= 1 || jump.currentJump == 0))
+          if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (_doubleJumpCountdown >= 1 || jump.currentJump == 0) && stateCharacter != CharacterState.DEAD)
           {
                movement.rbody.velocity = Vector3.up * jump.jumpForce;
                _doubleJumpCountdown = 0;
@@ -288,7 +301,7 @@ public class PlayerController : Character
           {
                jump.currentJump = 0;
                _doubleJumpCountdown = 0;
-               if ((_vertical != 0 || _horizontal != 0) && stateCharacter != CharacterState.RUNNNING && push.pushingObj == false)
+               if ((_vertical != 0 || _horizontal != 0) && stateCharacter != CharacterState.RUNNNING && push.pushingObj == false && stateCharacter != CharacterState.DEAD)
                {
                     stateCharacter = CharacterState.RUNNNING;
                }
@@ -423,11 +436,11 @@ public class PlayerController : Character
                     }
 
                }
-               if ((_horizontal == 0 && _vertical == 0) && stateCharacter != CharacterState.PUSHING_IDLE)
+               if ((_horizontal == 0 && _vertical == 0) && stateCharacter != CharacterState.PUSHING_IDLE && stateCharacter != CharacterState.DEAD)
                {
                     stateCharacter = CharacterState.PUSHING_IDLE;
                }
-               else if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.PUSHING)
+               else if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.PUSHING && stateCharacter != CharacterState.DEAD)
                {
                     stateCharacter = CharacterState.PUSHING;
                }
@@ -552,8 +565,37 @@ public class PlayerController : Character
      {
           if (stunCount >= 3)
           {
-               Debug.Log("Died");
-               stateCharacter = CharacterState.DEAD;
+               if (!death.dead)
+               {
+                    stateCharacter = CharacterState.DEAD;
+                    movement.rbody.useGravity = false;
+                    characterCollider.enabled = false;
+                    _currentMaxSpeed = movement.fixedMaxSpeed;
+                    movement.maxSpeed = 0;
+                    death.dead = true;
+               }
+          }
+     }
+
+     void CountdownAfterDeath()
+     {
+          if (death.dead)
+          {
+               if (death.countdownDeath < 1)
+               {
+                    death.countdownDeath += Time.deltaTime / 2f;
+               }
+               else
+               {
+                    stunCount = 0;
+                    stateCharacter = CharacterState.IDLE;
+                    transform.position = death.currentPoint.position;
+                    movement.rbody.useGravity = true;
+                    characterCollider.enabled = true;
+                    movement.maxSpeed = _currentMaxSpeed;
+                    death.countdownDeath = 0;
+                    death.dead = false;
+               }
           }
      }
      #endregion
@@ -575,6 +617,7 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.RUNNNING:
                     animator.SetBool("Idle", false);
@@ -584,6 +627,7 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.SINGLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -593,6 +637,7 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.SINGLE_JUMP_RUNNING:
                     animator.SetBool("Idle", false);
@@ -602,6 +647,7 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.DOUBLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -611,6 +657,7 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", true);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.PUSHING_IDLE:
                     animator.SetBool("Idle", false);
@@ -620,6 +667,7 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", true);
+                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.PUSHING:
                     animator.SetBool("Idle", false);
@@ -629,16 +677,17 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", true);
                     animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.DEAD:
-                    // animator.SetBool("Idle", false);
-                    // animator.SetBool("Running", false);
-                    // animator.SetBool("Single Jump", false);
-                    // animator.SetBool("Single Jump Running", false);
-                    // animator.SetBool("Double Jump", false);
-                    // animator.SetBool("Pushing", false);
-                    // animator.SetBool("Pushing Idle", false);
-                    // animator.SetBool("Dying", true);
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Running", false);
+                    animator.SetBool("Single Jump", false);
+                    animator.SetBool("Single Jump Running", false);
+                    animator.SetBool("Double Jump", false);
+                    animator.SetBool("Pushing", false);
+                    animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", true);
                     break;
                case CharacterState.DISABLED:
                     // animator.SetBool("Idle", false);
@@ -658,6 +707,7 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
                     break;
           }
      }

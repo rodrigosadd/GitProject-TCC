@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackController : MonoBehaviour
+public class PlayerAttackController : MonoBehaviour
 {
      public Transform targetAttack;
      public LayerMask layerEnemy;
