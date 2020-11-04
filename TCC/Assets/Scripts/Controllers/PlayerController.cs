@@ -39,6 +39,8 @@ public class PlayerController : Character
           public LayerMask groundLayer;
           public Transform jumpShadow;
           public Material handMaterial;
+          public GameObject jumpEffect;
+          public Transform boneHand;
           public float fallMultiplier;
           public float lowJumpMultiplier;
           public float groundDetectorRange;
@@ -138,6 +140,7 @@ public class PlayerController : Character
           JumpShadow();
           CheckDeath();
           CountdownAfterDeath();
+          SetJumpEffect();
      }
 
      #region Movement Player
@@ -375,6 +378,17 @@ public class PlayerController : Character
           }
      }
 
+     public void SetJumpEffect()
+     {
+          if (jump.currentJump == 2)
+          {
+               jump.jumpEffect.SetActive(true);
+          }
+          else
+          {
+               jump.jumpEffect.SetActive(false);
+          }
+     }
      #endregion
 
      #region Pushing Object

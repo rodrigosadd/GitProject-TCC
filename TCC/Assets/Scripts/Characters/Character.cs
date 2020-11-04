@@ -17,6 +17,7 @@ public class Character : MonoBehaviour
      [System.Serializable]
      public class Hit
      {
+          public Coroutine reset;
           public Transform currentPoint;
           public int hitCount;
           public int maxHitCount;
@@ -26,18 +27,18 @@ public class Character : MonoBehaviour
      public void TakeHit()
      {
           hit.hitCount++;
+
+          if (hit.reset != null)
+          {
+               StopCoroutine(ResetHitCount());
+          }
+          hit.reset = StartCoroutine(ResetHitCount());
      }
 
-     public void ResetHitCount()
+     public IEnumerator ResetHitCount()
      {
-          if (_countdownResetHitCount < 1)
-          {
-               _countdownResetHitCount += Time.deltaTime / hit.timeResetHitCount;
-          }
-          else
-          {
-               _countdownResetHitCount = 0;
-               hit.hitCount = 0;
-          }
+          yield return new WaitForSeconds(hit.timeResetHitCount);
+          hit.hitCount = 0;
+          hit.reset = null;
      }
 }
