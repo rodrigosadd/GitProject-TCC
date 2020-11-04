@@ -20,7 +20,7 @@ public class PlayerAttackController : MonoBehaviour
      private float _currentMaxSpeed;
      private float _lastAttackTime;
 
-     void Update()
+     void LateUpdate()
      {
           InputsAttack();
           CanAttack();
@@ -28,7 +28,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void InputsAttack()
      {
-          if (Input.GetButtonDown("Fire1") && PlayerController.instance.movement.slowed == false && (PlayerController.instance.stateCharacter == CharacterState.RUNNNING || PlayerController.instance.stateCharacter == CharacterState.IDLE))
+          if (Input.GetButtonDown("Fire1") && PlayerController.instance.movement.slowed == false && (PlayerController.instance.movement.stateCharacter == CharacterState.RUNNNING || PlayerController.instance.movement.stateCharacter == CharacterState.IDLE) && !PlayerController.instance.death.dead)
           {
                if (!attaking)
                {
@@ -40,41 +40,50 @@ public class PlayerAttackController : MonoBehaviour
 
      public void FirstAttack()
      {
-          _lastAttackTime = Time.time;
-          currentAttack++;
-
-          if (currentAttack == 1)
+          if (!PlayerController.instance.death.dead)
           {
-               PlayerController.instance.animator.SetBool("First Attack", true);
+               _lastAttackTime = Time.time;
+               currentAttack++;
+
+               if (currentAttack == 1)
+               {
+                    PlayerController.instance.animator.SetBool("First Attack", true);
+               }
+               currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
           }
-          currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
      }
 
      public void SecondAttack()
      {
-          if (currentAttack >= 2)
+          if (!PlayerController.instance.death.dead)
           {
-               PlayerController.instance.animator.SetBool("Second Attack", true);
-          }
-          else
-          {
-               PlayerController.instance.animator.SetBool("First Attack", false);
-               PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
-               attaking = false;
-               currentAttack = 0;
+               if (currentAttack >= 2)
+               {
+                    PlayerController.instance.animator.SetBool("Second Attack", true);
+               }
+               else
+               {
+                    PlayerController.instance.animator.SetBool("First Attack", false);
+                    PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
+                    attaking = false;
+                    currentAttack = 0;
+               }
           }
      }
 
      public void FinalAttack()
      {
-          if (currentAttack >= 3)
+          if (!PlayerController.instance.death.dead)
           {
-               PlayerController.instance.animator.SetBool("Final Attack", true);
-          }
-          else
-          {
-               PlayerController.instance.animator.SetBool("Second Attack", false);
-               currentAttack = 0;
+               if (currentAttack >= 3)
+               {
+                    PlayerController.instance.animator.SetBool("Final Attack", true);
+               }
+               else
+               {
+                    PlayerController.instance.animator.SetBool("Second Attack", false);
+                    currentAttack = 0;
+               }
           }
      }
 
@@ -90,11 +99,14 @@ public class PlayerAttackController : MonoBehaviour
 
      public void Attaking()
      {
-          attaking = true;
-          if (PlayerController.instance.movement.slowed == false)
+          if (!PlayerController.instance.death.dead)
           {
-               PlayerController.instance.movement.maxSpeed = 0f;
-               PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.forward * attackImpulse, ForceMode.Impulse);
+               attaking = true;
+               if (PlayerController.instance.movement.slowed == false)
+               {
+                    PlayerController.instance.movement.maxSpeed = 0f;
+                    PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.forward * attackImpulse, ForceMode.Impulse);
+               }
           }
      }
 
@@ -104,7 +116,7 @@ public class PlayerAttackController : MonoBehaviour
 
           foreach (Collider _hit in _hitEnemy)
           {
-               _hit.transform.GetComponent<EnemyController>().TakeDamage();
+               _hit.transform.GetComponent<EnemyController>().TakeHit();
           }
      }
 

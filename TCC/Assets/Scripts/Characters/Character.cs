@@ -8,10 +8,36 @@ public class Character : MonoBehaviour
      public Transform characterGraphic;
      public Collider characterCollider;
      public Animator animator;
-     public int stunCount;
 
-     public void TakeDamage()
+
+     [Header("Hit variables")]
+     public Hit hit;
+     private float _countdownResetHitCount;
+
+     [System.Serializable]
+     public class Hit
      {
-          stunCount++;
+          public Transform currentPoint;
+          public int hitCount;
+          public int maxHitCount;
+          public float timeResetHitCount;
+     }
+
+     public void TakeHit()
+     {
+          hit.hitCount++;
+     }
+
+     public void ResetHitCount()
+     {
+          if (_countdownResetHitCount < 1)
+          {
+               _countdownResetHitCount += Time.deltaTime / hit.timeResetHitCount;
+          }
+          else
+          {
+               _countdownResetHitCount = 0;
+               hit.hitCount = 0;
+          }
      }
 }

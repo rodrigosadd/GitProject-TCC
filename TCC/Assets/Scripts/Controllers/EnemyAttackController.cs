@@ -17,7 +17,7 @@ public class EnemyAttackController : MonoBehaviour
           {
                if (_hit.transform.tag == "Player")
                {
-                    PlayerController.instance.TakeDamage();
+                    PlayerController.instance.TakeHit();
                }
           }
      }

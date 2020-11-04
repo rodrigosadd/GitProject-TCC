@@ -116,8 +116,11 @@ MonoBehaviour:
   characterGraphic: {fileID: 4515438344544889425}
   characterCollider: {fileID: 4116490434590808232}
   animator: {fileID: 4116490434094288317}
-  stunCount: 0
-  stateEnemy: 0
+  hit:
+    currentPoint: {fileID: 0}
+    hitCount: 0
+    maxHitCount: 3
+    timeResetHitCount: 0
   patrol:
     patrolPoints:
     - {fileID: 0}
@@ -128,6 +131,7 @@ MonoBehaviour:
     startWaitTime: 2
   movement:
     enemyAgent: {fileID: 4116490434590808235}
+    stateEnemy: 0
     stunnedTime: 5
     stunned: 0
   followPlayer:

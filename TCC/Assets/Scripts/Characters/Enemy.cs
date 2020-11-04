@@ -5,8 +5,6 @@ using UnityEngine.AI;
 
 public class Enemy : Character
 {
-     public EnemyState stateEnemy;
-
      [Header("Patrol variables")]
      public Patrol patrol;
 
@@ -28,6 +26,7 @@ public class Enemy : Character
      public class Movement
      {
           public NavMeshAgent enemyAgent;
+          public EnemyState stateEnemy;
           public float stunnedTime;
           public bool stunned;
      }
@@ -51,18 +50,18 @@ public class Enemy : Character
           {
                if (patrol.waitTime <= 0)
                {
-                    if (stateEnemy != EnemyState.PATROLLING)
+                    if (movement.stateEnemy != EnemyState.PATROLLING)
                     {
-                         stateEnemy = EnemyState.PATROLLING;
+                         movement.stateEnemy = EnemyState.PATROLLING;
                     }
                     patrol.patrolSpot++;
                     patrol.waitTime = patrol.startWaitTime;
                }
                else
                {
-                    if (stateEnemy != EnemyState.IDLE)
+                    if (movement.stateEnemy != EnemyState.IDLE)
                     {
-                         stateEnemy = EnemyState.IDLE;
+                         movement.stateEnemy = EnemyState.IDLE;
                     }
                     patrol.waitTime -= Time.deltaTime;
                }
@@ -79,33 +78,40 @@ public class Enemy : Character
 
           if (_distanceBetween <= followPlayer.rangeFind)
           {
-               if (stateEnemy != EnemyState.FOLLOWING_PLAYER)
+               if (movement.stateEnemy != EnemyState.FOLLOWING_PLAYER)
                {
-                    stateEnemy = EnemyState.FOLLOWING_PLAYER;
+                    movement.stateEnemy = EnemyState.FOLLOWING_PLAYER;
                }
                movement.enemyAgent.destination = PlayerController.instance.transform.position;
           }
           if (_distanceBetween <= movement.enemyAgent.stoppingDistance)
           {
                FaceTarget();
-               if (stateEnemy != EnemyState.ATTACKING__PLAYER)
+               if (!PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.ATTACKING__PLAYER)
                {
-                    stateEnemy = EnemyState.ATTACKING__PLAYER;
+                    movement.stateEnemy = EnemyState.ATTACKING__PLAYER;
+               }
+               if (PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.IDLE)
+               {
+                    movement.stateEnemy = EnemyState.IDLE;
                }
           }
      }
 
      public void FaceTarget()
      {
-          _directionFace = (PlayerController.instance.transform.position - transform.position).normalized;
+          if (!movement.stunned)
+          {
+               _directionFace = (PlayerController.instance.transform.position - transform.position).normalized;
 
-          Quaternion _lookRotation = Quaternion.LookRotation(new Vector3(_directionFace.x, 0f, _directionFace.z));
-          transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 5f);
+               Quaternion _lookRotation = Quaternion.LookRotation(new Vector3(_directionFace.x, 0f, _directionFace.z));
+               transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 5f);
+          }
      }
 
      public void CheckStunning()
      {
-          if (stunCount >= 3)
+          if (hit.hitCount >= hit.maxHitCount)
           {
                if (!movement.stunned)
                {
@@ -119,18 +125,22 @@ public class Enemy : Character
           {
                if (_countdownStunning < 1)
                {
-                    if (stateEnemy != EnemyState.STUNNED)
+                    if (movement.stateEnemy != EnemyState.STUNNED)
                     {
-                         stateEnemy = EnemyState.STUNNED;
+                         movement.stateEnemy = EnemyState.STUNNED;
                     }
                     _countdownStunning += Time.deltaTime / movement.stunnedTime;
                }
                else
                {
+                    if (movement.stateEnemy != EnemyState.PATROLLING)
+                    {
+                         movement.stateEnemy = EnemyState.PATROLLING;
+                    }
                     _countdownStunning = 0;
                     movement.enemyAgent.speed = _currentMaxSpeed;
                     movement.stunned = false;
-                    stunCount = 0;
+                    hit.hitCount = 0;
                }
           }
      }

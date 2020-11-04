@@ -20,7 +20,7 @@ public class Kill : MonoBehaviour
           {
                if (alive)
                {
-                    PlayerController.instance.stateCharacter = CharacterState.DEAD;
+                    PlayerController.instance.movement.stateCharacter = CharacterState.DEAD;
                     PlayerController.instance.movement.rbody.useGravity = false;
                     PlayerController.instance.characterCollider.enabled = false;
                     currentMaxSpeed = PlayerController.instance.movement.maxSpeed;
@@ -40,7 +40,7 @@ public class Kill : MonoBehaviour
                }
                else
                {
-                    PlayerController.instance.stateCharacter = CharacterState.IDLE;
+                    PlayerController.instance.movement.stateCharacter = CharacterState.IDLE;
                     PlayerController.instance.transform.position = currentPoint.position;
                     PlayerController.instance.movement.rbody.useGravity = true;
                     PlayerController.instance.characterCollider.enabled = true;

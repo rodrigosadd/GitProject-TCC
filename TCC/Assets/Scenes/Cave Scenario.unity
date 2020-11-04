@@ -508,6 +508,10 @@ PrefabInstance:
       propertyPath: seeRangeMissedJump
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: death.currentPoint
+      value: 
+      objectReference: {fileID: 287054149}
     - target: {fileID: 78672544767654959, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_Name
       value: Player Beto
@@ -4041,11 +4045,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 287054148}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.97, y: 29.85, z: 83.86}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 60.550003, y: 30.85, z: 78.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 845476468}
+  m_Father: {fileID: 300451767}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &300451766
@@ -4077,6 +4081,7 @@ Transform:
   m_Children:
   - {fileID: 33806285}
   - {fileID: 556428598}
+  - {fileID: 287054149}
   m_Father: {fileID: 744841691}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15485,7 +15490,6 @@ Transform:
   m_Children:
   - {fileID: 1421758927}
   - {fileID: 259968617}
-  - {fileID: 287054149}
   m_Father: {fileID: 744841691}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

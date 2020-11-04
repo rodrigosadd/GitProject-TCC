@@ -27,7 +27,7 @@ public class EnemyController : Enemy
      #region Enemy Animations
      void EnemyAnimations()
      {
-          switch (stateEnemy)
+          switch (movement.stateEnemy)
           {
                case EnemyState.IDLE:
                     animator.SetBool("Idle", true);
