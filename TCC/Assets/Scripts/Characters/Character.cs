@@ -8,11 +8,37 @@ public class Character : MonoBehaviour
      public Transform characterGraphic;
      public Collider characterCollider;
      public Animator animator;
-     public int stunCount;
 
-     public void TakeDamage()
+
+     [Header("Hit variables")]
+     public Hit hit;
+     private float _countdownResetHitCount;
+
+     [System.Serializable]
+     public class Hit
      {
-          stunCount++;
-          Debug.Log("Take Damage");
+          public Coroutine reset;
+          public Transform currentPoint;
+          public int hitCount;
+          public int maxHitCount;
+          public float timeResetHitCount;
+     }
+
+     public void TakeHit()
+     {
+          hit.hitCount++;
+
+          if (hit.reset != null)
+          {
+               StopCoroutine(ResetHitCount());
+          }
+          hit.reset = StartCoroutine(ResetHitCount());
+     }
+
+     public IEnumerator ResetHitCount()
+     {
+          yield return new WaitForSeconds(hit.timeResetHitCount);
+          hit.hitCount = 0;
+          hit.reset = null;
      }
 }

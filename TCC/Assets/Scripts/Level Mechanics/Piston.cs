@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Piston : MonoBehaviour
 {
+     public Collider deathCollider;
      public float timeToMovePiston;
-     public float pistonSpeed;
+     public float pistonSpeedDown;
+     public float pistonSpeedUp;
      public float pistonOffset;
      public bool goingDown = true;
 
-     private float currentCountdown;
-     private Vector3 initialPositionPiston;
+     private float _currentCountdown;
+     private Vector3 _initialPositionPiston;
 
      void Start()
      {
@@ -24,7 +26,7 @@ public class Piston : MonoBehaviour
 
      public void GetPistonInitialPosition()
      {
-          initialPositionPiston = transform.position;
+          _initialPositionPiston = transform.position;
      }
 
      public void MovePiston()
@@ -33,26 +35,28 @@ public class Piston : MonoBehaviour
           if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 30f))
           {
                float distanceUntilPoint = Vector3.Distance(transform.position, _hitInfo.point);
-               float distanceUntilFirstPosition = Vector3.Distance(transform.position, initialPositionPiston);
+               float distanceUntilFirstPosition = Vector3.Distance(transform.position, _initialPositionPiston);
                if (goingDown)
                {
-                    transform.position = Vector3.MoveTowards(transform.position, _hitInfo.point + new Vector3(0f, pistonOffset, 0f), pistonSpeed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, _hitInfo.point + new Vector3(0f, pistonOffset, 0f), pistonSpeedDown * Time.deltaTime);
+                    deathCollider.enabled = true;
                     if (distanceUntilPoint <= pistonOffset)
                     {
-                         if (currentCountdown < 1)
+                         if (_currentCountdown < 1)
                          {
-                              currentCountdown += Time.deltaTime / timeToMovePiston;
+                              _currentCountdown += Time.deltaTime / timeToMovePiston;
                          }
                          else
                          {
                               goingDown = false;
-                              currentCountdown = 0;
+                              _currentCountdown = 0;
                          }
                     }
                }
                else
                {
-                    transform.position = Vector3.MoveTowards(transform.position, initialPositionPiston, pistonSpeed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, _initialPositionPiston, pistonSpeedUp * Time.deltaTime);
+                    deathCollider.enabled = false;
                     if (distanceUntilFirstPosition <= 0)
                     {
                          goingDown = true;

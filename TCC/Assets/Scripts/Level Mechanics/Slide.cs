@@ -8,6 +8,6 @@ public class Slide : MonoBehaviour
 
      void OnTriggerEnter(Collider collider)
      {
-          PlayerController.instance.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
+          PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
      }
 }
