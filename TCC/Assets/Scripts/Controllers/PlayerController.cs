@@ -233,20 +233,6 @@ public class PlayerController : Character
           }
           return 0;
      }
-
-     public void Slow()
-     {
-          RaycastHit _hitInfo;
-
-          if (Physics.Raycast(push.middleOfThePlayer.position, Vector3.down, out _hitInfo, jump.groundDetectorRange))
-          {
-               if (_hitInfo.transform.tag == "Slow")
-               {
-                    movement.maxSpeed = 2f;
-                    movement.slowed = true;
-               }
-          }
-     }
      #endregion
 
      #region Jump
