@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 3207642145293459796}
   - component: {fileID: 1957955451602005745}
   - component: {fileID: 4380024784857471547}
-  m_Layer: 0
+  - component: {fileID: 2055961685}
+  m_Layer: 8
   m_Name: VigaTorta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,13 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2866546822891551726}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+  m_LocalRotation: {x: -0.7069834, y: 0, z: 0, w: 0.7072302}
   m_LocalPosition: {x: -13.41497, y: 0.9999999, z: 86.18276}
   m_LocalScale: {x: 100, y: 100, z: 100}
-  m_Children: []
+  m_Children:
+  - {fileID: 8537496244508735341}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
 --- !u!33 &1957955451602005745
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -81,3 +83,79 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2055961685
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2866546822891551726}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5198267681279241171, guid: 00653dea4f69c224baa8bdd34d21b885, type: 3}
+--- !u!1001 &1144161024
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3207642145293459796}
+    m_Modifications:
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.2479
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.2163052
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.027077146
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.006786202
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9759267
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -24.997
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 3.157
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0.097
+      objectReference: {fileID: 0}
+    - target: {fileID: 9020876307842363095, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+      propertyPath: m_Name
+      value: PedacoViga (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+--- !u!4 &8537496244508735341 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8537496243366933613, guid: 5ca5d945845160f4b8a1c933adc71994, type: 3}
+  m_PrefabInstance: {fileID: 1144161024}
+  m_PrefabAsset: {fileID: 0}

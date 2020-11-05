@@ -20,8 +20,8 @@ public class Kill : MonoBehaviour
           {
                if (alive)
                {
-                    PlayerController.instance.animator.SetBool("Dying", true);
-                    PlayerController.instance.rbody.useGravity = false;
+                    PlayerController.instance.movement.stateCharacter = CharacterState.DEAD;
+                    PlayerController.instance.movement.rbody.useGravity = false;
                     PlayerController.instance.characterCollider.enabled = false;
                     currentMaxSpeed = PlayerController.instance.movement.maxSpeed;
                     PlayerController.instance.movement.maxSpeed = 0;
@@ -40,9 +40,9 @@ public class Kill : MonoBehaviour
                }
                else
                {
-                    PlayerController.instance.animator.SetBool("Dying", false);
+                    PlayerController.instance.movement.stateCharacter = CharacterState.IDLE;
                     PlayerController.instance.transform.position = currentPoint.position;
-                    PlayerController.instance.rbody.useGravity = true;
+                    PlayerController.instance.movement.rbody.useGravity = true;
                     PlayerController.instance.characterCollider.enabled = true;
                     PlayerController.instance.movement.maxSpeed = currentMaxSpeed;
                     countdownKill = 0;
