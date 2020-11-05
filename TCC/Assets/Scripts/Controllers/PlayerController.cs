@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : Character
 {
+     public CharacterState stateCharacter;
+     public Rigidbody rbody;
      public static PlayerController instance;
 
      [Header("Movement variables")]
@@ -18,15 +20,13 @@ public class PlayerController : Character
      [System.Serializable]
      public class Movement
      {
-          public CharacterState stateCharacter;
-          public Rigidbody rbody;
           public Transform cam;
+          public bool slowed;
           public float maxSpeed;
           public float currentSpeed;
           public float acceleration;
           public float turnSmoothtime;
           public float fixedMaxSpeed;
-          public bool slowed;
      }
 
      [Header("Jump variables")]
@@ -39,8 +39,6 @@ public class PlayerController : Character
           public LayerMask groundLayer;
           public Transform jumpShadow;
           public Material handMaterial;
-          public GameObject jumpEffect;
-          public Transform boneHand;
           public float fallMultiplier;
           public float lowJumpMultiplier;
           public float groundDetectorRange;
@@ -67,6 +65,19 @@ public class PlayerController : Character
           public float rangeDropObject;
           public float currentMaxSpeed;
           public bool pushingObj;
+     }
+
+     [Header("Stun variables")]
+     public Stun stun;
+     private float _distanceBetwen;
+
+     [System.Serializable]
+     public class Stun
+     {
+          public float rangeStun;
+          public float timeStun;
+          public float cooldownStun;
+          public bool canStun;
      }
 
      [Header("Cliff variables")]
@@ -96,21 +107,10 @@ public class PlayerController : Character
           public bool canMiss;
      }
 
-     [Header("Death variables")]
-     public Death death;
-     private float _countdownDeath;
-     private float _currentMaxSpeed;
-
-     [System.Serializable]
-     public class Death
-     {
-          public Transform currentPoint;
-          public bool dead;
-     }
-
 #if UNITY_EDITOR
      [Header("See Range variables")]
      public bool seeRangePush = false;
+     public bool seeRangeStun = false;
      public bool seeRangeCliff = false;
      public bool seeRangegroundDetector = false;
      public bool seeRangeMissedJump = false;
@@ -133,14 +133,13 @@ public class PlayerController : Character
           PushingObject();
           CliffDetector();
           CharacterFace();
+          StunningEnemy();
           SlopeDetector();
           SetHandShader();
           PlayerAnimations();
           CatchMissedJumps();
           JumpShadow();
-          CheckDeath();
-          CountdownAfterDeath();
-          SetJumpEffect();
+          //Slow();
      }
 
      #region Movement Player
@@ -149,16 +148,16 @@ public class PlayerController : Character
           _horizontal = Input.GetAxis("Horizontal");
           _vertical = Input.GetAxis("Vertical");
 
-          if (movement.stateCharacter == CharacterState.BALANCE && (_horizontal != 0 || _vertical != 0))
+          if (stateCharacter == CharacterState.BALANCE && (_horizontal != 0 || _vertical != 0))
           {
                _cliffDectorLockPlayer = false;
                _horizontal = 0;
                _vertical = 0;
                return;
           }
-          else if (movement.stateCharacter == CharacterState.BALANCE)
+          else if (stateCharacter == CharacterState.BALANCE)
           {
-               movement.stateCharacter = CharacterState.RUNNNING;
+               stateCharacter = CharacterState.RUNNNING;
           }
           CharacterMovement(_horizontal, _vertical);
      }
@@ -170,7 +169,7 @@ public class PlayerController : Character
 
           _direction = new Vector3(_horizontal, 0f, _vertical).normalized;
 
-          if (_direction.magnitude >= 0.1f && movement.stateCharacter != CharacterState.DEAD)
+          if (_direction.magnitude >= 0.1f)
           {
                movement.currentSpeed += movement.acceleration * Time.deltaTime;
                movement.currentSpeed = Mathf.Clamp(movement.currentSpeed, 0, movement.maxSpeed);
@@ -184,34 +183,34 @@ public class PlayerController : Character
                movement.currentSpeed = 0f;
           }
 
-          if ((_horizontal != 0 || _vertical != 0) && movement.stateCharacter != CharacterState.RUNNNING && IsGrounded() && movement.rbody.velocity.y <= 0 && push.pushingObj == false && movement.stateCharacter != CharacterState.DEAD)
+          if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.RUNNNING && IsGrounded() && rbody.velocity.y <= 0 && push.pushingObj == false)
           {
-               movement.stateCharacter = CharacterState.RUNNNING;
+               stateCharacter = CharacterState.RUNNNING;
           }
-          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter != CharacterState.DEAD)
+          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && stateCharacter != CharacterState.SINGLE_JUMP_RUNNING)
           {
-               movement.stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
+               stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
           }
 
           if (_horizontal == 0 && _vertical == 0)
           {
-               if (movement.rbody.velocity.y > 0 && !IsGrounded() && movement.stateCharacter != CharacterState.DEAD)
+               if (rbody.velocity.y > 0 && !IsGrounded())
                {
-                    if (movement.stateCharacter != CharacterState.SINGLE_JUMP)
+                    if (stateCharacter != CharacterState.SINGLE_JUMP)
                     {
-                         movement.stateCharacter = CharacterState.SINGLE_JUMP;
+                         stateCharacter = CharacterState.SINGLE_JUMP;
                     }
                }
-               else if (movement.stateCharacter != CharacterState.IDLE && IsGrounded() && push.pushingObj == false && movement.stateCharacter != CharacterState.DEAD)
+               else if (stateCharacter != CharacterState.IDLE && IsGrounded() && push.pushingObj == false)
                {
-                    movement.stateCharacter = CharacterState.IDLE;
+                    stateCharacter = CharacterState.IDLE;
                }
           }
      }
 
      public void CharacterFace()
      {
-          if (_direction.magnitude >= 0.1f && movement.stateCharacter != CharacterState.DEAD)
+          if (_direction.magnitude >= 0.1f)
           {
                _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + movement.cam.eulerAngles.y;
                _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, movement.turnSmoothtime);
@@ -258,7 +257,7 @@ public class PlayerController : Character
           {
                if (_hitInfo.transform.tag == "Ground")
                {
-                    if (_hitInfo.normal != new Vector3(0, 1, 0) && movement.rbody.velocity.y <= 0)
+                    if (_hitInfo.normal != new Vector3(0, 1, 0) && rbody.velocity.y <= 0)
                     {
                          transform.position = new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z);
                     }
@@ -269,28 +268,28 @@ public class PlayerController : Character
      public void CharacterJump()
      {
           DoubleJumpCountdown();
-          if (Input.GetButtonDown("Jump") && CanJump() && movement.stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (_doubleJumpCountdown >= 1 || jump.currentJump == 0) && movement.stateCharacter != CharacterState.DEAD)
+          if (Input.GetButtonDown("Jump") && CanJump() && stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (_doubleJumpCountdown >= 1 || jump.currentJump == 0))
           {
-               movement.rbody.velocity = Vector3.up * jump.jumpForce;
+               rbody.velocity = Vector3.up * jump.jumpForce;
                _doubleJumpCountdown = 0;
                jump.currentJump++;
 
                if (jump.currentJump < 2)
                {
-                    movement.stateCharacter = CharacterState.SINGLE_JUMP;
+                    stateCharacter = CharacterState.SINGLE_JUMP;
                }
                else if (jump.currentJump >= 2)
                {
-                    movement.stateCharacter = CharacterState.DOUBLE_JUMP;
+                    stateCharacter = CharacterState.DOUBLE_JUMP;
                }
           }
-          if (IsGrounded() && movement.rbody.velocity.y < 0)
+          if (IsGrounded() && rbody.velocity.y < 0)
           {
                jump.currentJump = 0;
                _doubleJumpCountdown = 0;
-               if ((_vertical != 0 || _horizontal != 0) && movement.stateCharacter != CharacterState.RUNNNING && push.pushingObj == false && movement.stateCharacter != CharacterState.DEAD)
+               if ((_vertical != 0 || _horizontal != 0) && stateCharacter != CharacterState.RUNNNING && push.pushingObj == false)
                {
-                    movement.stateCharacter = CharacterState.RUNNNING;
+                    stateCharacter = CharacterState.RUNNNING;
                }
           }
      }
@@ -337,13 +336,13 @@ public class PlayerController : Character
 
      public void CharacterBetterJump()
      {
-          if (movement.rbody.velocity.y <= 0)
+          if (rbody.velocity.y <= 0)
           {
-               movement.rbody.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
+               rbody.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
           }
-          else if (movement.rbody.velocity.y > 0 && !Input.GetButton("Jump"))
+          else if (rbody.velocity.y > 0 && !Input.GetButton("Jump"))
           {
-               movement.rbody.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
+               rbody.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
           }
      }
 
@@ -378,17 +377,6 @@ public class PlayerController : Character
           }
      }
 
-     public void SetJumpEffect()
-     {
-          if (jump.currentJump == 2)
-          {
-               jump.jumpEffect.SetActive(true);
-          }
-          else
-          {
-               jump.jumpEffect.SetActive(false);
-          }
-     }
      #endregion
 
      #region Pushing Object
@@ -413,7 +401,7 @@ public class PlayerController : Character
                if (_hit.transform.tag == "Interactable")
                {
                     push.pushingObj = true;
-                    movement.stateCharacter = CharacterState.PUSHING;
+                    stateCharacter = CharacterState.PUSHING;
                     _hit.transform.position = push.targetPush.position;
                     push.currentTargetPush = _hit.transform;
                     _hit.transform.parent = push.targetPush.transform;
@@ -434,13 +422,13 @@ public class PlayerController : Character
                     }
 
                }
-               if ((_horizontal == 0 && _vertical == 0) && movement.stateCharacter != CharacterState.PUSHING_IDLE && movement.stateCharacter != CharacterState.DEAD)
+               if ((_horizontal == 0 && _vertical == 0) && stateCharacter != CharacterState.PUSHING_IDLE)
                {
-                    movement.stateCharacter = CharacterState.PUSHING_IDLE;
+                    stateCharacter = CharacterState.PUSHING_IDLE;
                }
-               else if ((_horizontal != 0 || _vertical != 0) && movement.stateCharacter != CharacterState.PUSHING && movement.stateCharacter != CharacterState.DEAD)
+               else if ((_horizontal != 0 || _vertical != 0) && stateCharacter != CharacterState.PUSHING)
                {
-                    movement.stateCharacter = CharacterState.PUSHING;
+                    stateCharacter = CharacterState.PUSHING;
                }
           }
      }
@@ -465,6 +453,44 @@ public class PlayerController : Character
      }
      #endregion
 
+     #region Stunning Enemy
+     public void StunningEnemy()
+     {
+          if (Input.GetKeyDown(KeyCode.E) && stun.canStun == true)
+          {
+               StunEnemy();
+               StartCoroutine("CooldownStun");
+          }
+     }
+     public void StunEnemy()
+     {
+          _distanceBetwen = Vector3.Distance(transform.position, EnemyController.instance.transform.position);
+
+          if (_distanceBetwen <= stun.rangeStun && EnemyController.instance.stateEnemy != EnemyState.STUNNED)
+          {
+               StartCoroutine("TimeStuned");
+          }
+     }
+
+     public IEnumerator TimeStuned()
+     {
+          EnemyController.instance.patrol.enemyAgent.speed = 0;
+          EnemyController.instance.stateEnemy = EnemyState.STUNNED;
+
+          yield return new WaitForSeconds(stun.timeStun);
+
+          EnemyController.instance.patrol.enemyAgent.speed = 4;
+          EnemyController.instance.stateEnemy = EnemyState.PATROLLING;
+     }
+
+     public IEnumerator CooldownStun()
+     {
+          stun.canStun = false;
+          yield return new WaitForSeconds(stun.cooldownStun);
+          stun.canStun = true;
+     }
+     #endregion
+
      #region Movement Assistance
      public void CliffDetector()
      {
@@ -474,17 +500,17 @@ public class PlayerController : Character
 
           if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && IsGrounded() && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed)
           {
-               if (movement.stateCharacter != CharacterState.BALANCE)
+               if (stateCharacter != CharacterState.BALANCE)
                {
-                    movement.stateCharacter = CharacterState.BALANCE;
+                    stateCharacter = CharacterState.BALANCE;
                }
           }
           else if (Physics.Raycast(_ray, cliff.cliffDetectorHeightDist))
           {
                _cliffDectorLockPlayer = true;
-               if (movement.stateCharacter == CharacterState.BALANCE)
+               if (stateCharacter == CharacterState.BALANCE)
                {
-                    movement.stateCharacter = CharacterState.RUNNNING;
+                    stateCharacter = CharacterState.RUNNNING;
                }
           }
      }
@@ -520,46 +546,6 @@ public class PlayerController : Character
      }
      #endregion
 
-     #region Death
-     public void CheckDeath()
-     {
-          if (hit.hitCount >= hit.maxHitCount)
-          {
-               if (!death.dead)
-               {
-                    movement.stateCharacter = CharacterState.DEAD;
-                    movement.rbody.useGravity = false;
-                    characterCollider.enabled = false;
-                    _currentMaxSpeed = movement.fixedMaxSpeed;
-                    movement.maxSpeed = 0;
-                    death.dead = true;
-               }
-          }
-     }
-
-     void CountdownAfterDeath()
-     {
-          if (death.dead)
-          {
-               if (_countdownDeath < 1)
-               {
-                    _countdownDeath += Time.deltaTime / 2f;
-               }
-               else
-               {
-                    hit.hitCount = 0;
-                    movement.stateCharacter = CharacterState.IDLE;
-                    transform.position = death.currentPoint.position;
-                    movement.rbody.useGravity = true;
-                    characterCollider.enabled = true;
-                    movement.maxSpeed = _currentMaxSpeed;
-                    _countdownDeath = 0;
-                    death.dead = false;
-               }
-          }
-     }
-     #endregion
-
      #region Animations
      public void PlayerAnimations()
      {
@@ -567,7 +553,7 @@ public class PlayerController : Character
           animator.SetFloat("Vertical", _vertical);
           animator.SetBool("IsGrounded", IsGrounded());
 
-          switch (movement.stateCharacter)
+          switch (stateCharacter)
           {
                case CharacterState.IDLE:
                     animator.SetBool("Idle", true);
@@ -577,7 +563,6 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.RUNNNING:
                     animator.SetBool("Idle", false);
@@ -587,7 +572,6 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.SINGLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -597,7 +581,6 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.SINGLE_JUMP_RUNNING:
                     animator.SetBool("Idle", false);
@@ -607,7 +590,6 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.DOUBLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -617,7 +599,6 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", true);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.PUSHING_IDLE:
                     animator.SetBool("Idle", false);
@@ -627,7 +608,6 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", true);
-                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.PUSHING:
                     animator.SetBool("Idle", false);
@@ -637,17 +617,16 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", true);
                     animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
                     break;
                case CharacterState.DEAD:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", true);
+                    // animator.SetBool("Idle", false);
+                    // animator.SetBool("Running", false);
+                    // animator.SetBool("Single Jump", false);
+                    // animator.SetBool("Single Jump Running", false);
+                    // animator.SetBool("Double Jump", false);
+                    // animator.SetBool("Pushing", false);
+                    // animator.SetBool("Pushing Idle", false);
+                    // animator.SetBool("Dying", true);
                     break;
                case CharacterState.DISABLED:
                     // animator.SetBool("Idle", false);
@@ -667,7 +646,6 @@ public class PlayerController : Character
                     animator.SetBool("Double Jump", false);
                     animator.SetBool("Pushing", false);
                     animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
                     break;
           }
      }
@@ -688,6 +666,12 @@ public class PlayerController : Character
                Gizmos.DrawSphere(transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist, 0.3f);
                Gizmos.color = Color.green;
                Gizmos.DrawRay(transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist, Vector3.up * -1 * cliff.cliffDetectorHeightDist);
+          }
+
+          if (seeRangeStun)
+          {
+               Gizmos.color = Color.yellow;
+               Gizmos.DrawWireSphere(transform.position, stun.rangeStun);
           }
 
           if (seeRangegroundDetector)

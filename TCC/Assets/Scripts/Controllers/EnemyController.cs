@@ -20,56 +20,49 @@ public class EnemyController : Enemy
      {
           MoveToPatrolPoint();
           EnemyFollowPlayer();
-          CheckStunning();
           EnemyAnimations();
      }
 
      #region Enemy Animations
      void EnemyAnimations()
      {
-          switch (movement.stateEnemy)
+          switch (stateEnemy)
           {
                case EnemyState.IDLE:
                     animator.SetBool("Idle", true);
                     animator.SetBool("Walking", false);
                     animator.SetBool("Atacking", false);
                     animator.SetBool("Spoted", false);
-                    animator.SetBool("Stunned", false);
                     break;
                case EnemyState.PATROLLING:
                     animator.SetBool("Idle", false);
                     animator.SetBool("Walking", true);
                     animator.SetBool("Atacking", false);
                     animator.SetBool("Spoted", false);
-                    animator.SetBool("Stunned", false);
                     break;
                case EnemyState.SPOTED:
                     animator.SetBool("Idle", false);
                     animator.SetBool("Walking", true);
                     animator.SetBool("Atacking", false);
                     animator.SetBool("Spoted", true);
-                    animator.SetBool("Stunned", false);
                     break;
                case EnemyState.FOLLOWING_PLAYER:
                     animator.SetBool("Idle", false);
                     animator.SetBool("Walking", true);
                     animator.SetBool("Atacking", false);
                     animator.SetBool("Spoted", false);
-                    animator.SetBool("Stunned", false);
                     break;
                case EnemyState.ATTACKING__PLAYER:
                     animator.SetBool("Idle", false);
                     animator.SetBool("Walking", false);
                     animator.SetBool("Atacking", true);
                     animator.SetBool("Spoted", false);
-                    animator.SetBool("Stunned", false);
                     break;
                case EnemyState.STUNNED:
-                    animator.SetBool("Idle", false);
+                    animator.SetBool("Idle", true);
                     animator.SetBool("Walking", false);
                     animator.SetBool("Atacking", false);
                     animator.SetBool("Spoted", false);
-                    animator.SetBool("Stunned", true);
                     break;
           }
      }
