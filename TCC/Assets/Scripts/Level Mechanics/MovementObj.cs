@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public class MovementObj : MonoBehaviour
 {
      public Transform[] spotsToMovePlatform;
-     public Transform playerEmpty;
      public int spotToMove = 0;
      public float speed = 2f;
      public float startWaitTime = 2f;
@@ -40,22 +39,6 @@ public class Platform : MonoBehaviour
                {
                     spotToMove = 0;
                }
-          }
-     }
-
-     void OnTriggerEnter(Collider other)
-     {
-          if (other.tag == "Player")
-          {
-               PlayerController.instance.transform.parent = transform;
-          }
-     }
-
-     void OnTriggerExit(Collider other)
-     {
-          if (other.tag == "Player")
-          {
-               PlayerController.instance.transform.parent = playerEmpty.transform;
           }
      }
 }

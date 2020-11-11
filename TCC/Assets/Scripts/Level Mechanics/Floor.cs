@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
-     public float timeDisableFloor;
-     public float timeEnableFloor;
      public MeshRenderer meshObj;
      public BoxCollider boxObj;
+     public GameObject obj;
+     public float timeDisableFloor;
+     public float timeEnableFloor;
 
      private bool OffFloor = false;
      private float time;
@@ -26,12 +27,14 @@ public class Floor : MonoBehaviour
                {
                     meshObj.enabled = false;
                     boxObj.enabled = false;
+                    obj.SetActive(false);
                }
 
                if (time >= (timeEnableFloor + timeDisableFloor))
                {
                     meshObj.enabled = true;
                     boxObj.enabled = true;
+                    obj.SetActive(true);
                     OffFloor = false;
                     time = 0;
                }
