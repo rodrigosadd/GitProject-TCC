@@ -28,13 +28,13 @@ public class Enemy : Character
           public NavMeshAgent enemyAgent;
           public EnemyState stateEnemy;
           public float stunnedTime;
+          public float maxPlayerDistante;
           public bool stunned;
      }
 
      [Header("Follow Player variables")]
      public FollowPlayer followPlayer;
      private Vector3 _directionFace;
-     private float _distanceBetween = 0f;
 
      [System.Serializable]
      public class FollowPlayer
@@ -45,8 +45,10 @@ public class Enemy : Character
      public void MoveToPatrolPoint()
      {
           movement.enemyAgent.destination = patrol.patrolPoints[patrol.patrolSpot].position;
+          float _distanceBetween = Vector3.Distance(transform.position, patrol.patrolPoints[patrol.patrolSpot].position);
+          Debug.Log(_distanceBetween);
 
-          if (Vector3.Distance(transform.position, patrol.patrolPoints[patrol.patrolSpot].position) < movement.enemyAgent.stoppingDistance + 1)
+          if (_distanceBetween < 2f)
           {
                if (patrol.waitTime <= 0)
                {
@@ -68,32 +70,6 @@ public class Enemy : Character
                if (patrol.patrolSpot >= patrol.patrolPoints.Length)
                {
                     patrol.patrolSpot = 0;
-               }
-          }
-     }
-
-     public void EnemyFollowPlayer()
-     {
-          _distanceBetween = Vector3.Distance(PlayerController.instance.transform.position, transform.position);
-
-          if (_distanceBetween <= followPlayer.rangeFind)
-          {
-               if (movement.stateEnemy != EnemyState.FOLLOWING_PLAYER)
-               {
-                    movement.stateEnemy = EnemyState.FOLLOWING_PLAYER;
-               }
-               movement.enemyAgent.destination = PlayerController.instance.transform.position;
-          }
-          if (_distanceBetween <= movement.enemyAgent.stoppingDistance)
-          {
-               FaceTarget();
-               if (!PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.ATTACKING__PLAYER)
-               {
-                    movement.stateEnemy = EnemyState.ATTACKING__PLAYER;
-               }
-               if (PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.IDLE)
-               {
-                    movement.stateEnemy = EnemyState.IDLE;
                }
           }
      }
@@ -144,4 +120,55 @@ public class Enemy : Character
                }
           }
      }
+
+     #region Enemy Animations
+     public void EnemyAnimations()
+     {
+          switch (movement.stateEnemy)
+          {
+               case EnemyState.IDLE:
+                    animator.SetBool("Idle", true);
+                    animator.SetBool("Walking", false);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
+                    animator.SetBool("Stunned", false);
+                    break;
+               case EnemyState.PATROLLING:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
+                    animator.SetBool("Stunned", false);
+                    break;
+               case EnemyState.SPOTED:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", true);
+                    animator.SetBool("Stunned", false);
+                    break;
+               case EnemyState.FOLLOWING_PLAYER:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
+                    animator.SetBool("Stunned", false);
+                    break;
+               case EnemyState.ATTACKING__PLAYER:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", false);
+                    animator.SetBool("Atacking", true);
+                    animator.SetBool("Spoted", false);
+                    animator.SetBool("Stunned", false);
+                    break;
+               case EnemyState.STUNNED:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Walking", false);
+                    animator.SetBool("Atacking", false);
+                    animator.SetBool("Spoted", false);
+                    animator.SetBool("Stunned", true);
+                    break;
+          }
+     }
+     #endregion
 }

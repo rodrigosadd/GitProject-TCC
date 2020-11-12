@@ -116,7 +116,7 @@ public class PlayerAttackController : MonoBehaviour
 
           foreach (Collider _hit in _hitEnemy)
           {
-               _hit.transform.GetComponent<EnemyController>().TakeHit();
+               _hit.transform.GetComponent<MeleeEnemy>().TakeHit();
           }
      }
 
