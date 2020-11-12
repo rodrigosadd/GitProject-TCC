@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
-     public float distanceBetween;
+     public int indexScene;
+     private float _distanceBetween;
 
      void Update()
      {
@@ -14,11 +15,11 @@ public class LoadScene : MonoBehaviour
 
      void Load()
      {
-          distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+          _distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
-          if (distanceBetween < 4)
+          if (_distanceBetween < 2)
           {
-               SceneManager.LoadScene(2);
+               SceneManager.LoadScene(indexScene);
           }
      }
 

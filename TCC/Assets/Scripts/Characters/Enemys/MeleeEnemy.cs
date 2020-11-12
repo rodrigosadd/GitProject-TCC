@@ -33,7 +33,7 @@ public class MeleeEnemy : Enemy
 
           if (_distanceBetween <= followPlayer.rangeFind)
           {
-               if (movement.stateEnemy != EnemyState.FOLLOWING_PLAYER)
+               if (movement.stateEnemy != EnemyState.FOLLOWING_PLAYER && movement.stateEnemy != EnemyState.STUNNED)
                {
                     movement.stateEnemy = EnemyState.FOLLOWING_PLAYER;
                }
@@ -53,7 +53,7 @@ public class MeleeEnemy : Enemy
 
      public void Attack()
      {
-          if (!PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.ATTACKING__PLAYER)
+          if (!PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.ATTACKING__PLAYER && movement.stateEnemy != EnemyState.STUNNED)
           {
                movement.stateEnemy = EnemyState.ATTACKING__PLAYER;
           }

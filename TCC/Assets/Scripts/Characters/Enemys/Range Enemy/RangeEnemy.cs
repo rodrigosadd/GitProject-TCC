@@ -46,7 +46,7 @@ public class RangeEnemy : Enemy
 
           if (_distanceBetween <= followPlayer.rangeFind)
           {
-               if (movement.stateEnemy != EnemyState.FOLLOWING_PLAYER)
+               if (movement.stateEnemy != EnemyState.FOLLOWING_PLAYER && movement.stateEnemy != EnemyState.STUNNED)
                {
                     movement.stateEnemy = EnemyState.FOLLOWING_PLAYER;
                }
@@ -66,11 +66,14 @@ public class RangeEnemy : Enemy
 
      public void AttackRange()
      {
-          if (!PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.ATTACKING__PLAYER)
+          if (!PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.ATTACKING__PLAYER && movement.stateEnemy != EnemyState.STUNNED)
           {
-               movement.stateEnemy = EnemyState.ATTACKING__PLAYER;
                if (attack.timeBtwAttack <= 0f)
                {
+                    if (movement.stateEnemy != EnemyState.ATTACKING__PLAYER)
+                    {
+                         movement.stateEnemy = EnemyState.ATTACKING__PLAYER;
+                    }
                     Instantiate(attack.spellObj, attack.targetSpell.position, Quaternion.identity);
                     attack.timeBtwAttack = attack.startTimeBtwAttack;
                }
