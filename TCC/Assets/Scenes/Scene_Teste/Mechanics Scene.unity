@@ -3448,10 +3448,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 201927438}
     m_Modifications:
-    - target: {fileID: 1994922055, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3512,14 +3508,6 @@ PrefabInstance:
       propertyPath: death.currentPoint
       value: 
       objectReference: {fileID: 1912633650}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: rbody
-      value: 
-      objectReference: {fileID: 1061424896}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: hit.maxHitCount
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 78672544767654959, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_Name
       value: Player Beto
@@ -4553,11 +4541,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048720083}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1061424896 stripped
-Rigidbody:
-  m_CorrespondingSourceObject: {fileID: 78672544767654958, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-  m_PrefabInstance: {fileID: 676370865}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1063126937
 GameObject:
   m_ObjectHideFlags: 0

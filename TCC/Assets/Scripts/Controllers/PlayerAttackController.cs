@@ -6,6 +6,7 @@ public class PlayerAttackController : MonoBehaviour
 {
      public Transform targetAttack;
      public LayerMask layerEnemy;
+     public GameObject[] trails;
      public int maxCombo;
      public int currentAttack;
      public float delayNextAttack;
@@ -48,6 +49,9 @@ public class PlayerAttackController : MonoBehaviour
                if (currentAttack == 1)
                {
                     PlayerController.instance.animator.SetBool("First Attack", true);
+                    trails[0].SetActive(true);
+                    trails[1].SetActive(true);
+                    trails[2].SetActive(true);
                }
                currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
           }
@@ -60,10 +64,16 @@ public class PlayerAttackController : MonoBehaviour
                if (currentAttack >= 2)
                {
                     PlayerController.instance.animator.SetBool("Second Attack", true);
+                    trails[0].SetActive(true);
+                    trails[1].SetActive(true);
+                    trails[2].SetActive(true);
                }
                else
                {
                     PlayerController.instance.animator.SetBool("First Attack", false);
+                    trails[0].SetActive(false);
+                    trails[1].SetActive(false);
+                    trails[2].SetActive(false);
                     PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
                     attaking = false;
                     currentAttack = 0;
@@ -78,6 +88,9 @@ public class PlayerAttackController : MonoBehaviour
                if (currentAttack >= 3)
                {
                     PlayerController.instance.animator.SetBool("Final Attack", true);
+                    trails[0].SetActive(true);
+                    trails[1].SetActive(true);
+                    trails[2].SetActive(true);
                }
                else
                {
@@ -92,6 +105,9 @@ public class PlayerAttackController : MonoBehaviour
           PlayerController.instance.animator.SetBool("First Attack", false);
           PlayerController.instance.animator.SetBool("Second Attack", false);
           PlayerController.instance.animator.SetBool("Final Attack", false);
+          trails[0].SetActive(false);
+          trails[1].SetActive(false);
+          trails[2].SetActive(false);
           PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
           attaking = false;
           currentAttack = 0;
