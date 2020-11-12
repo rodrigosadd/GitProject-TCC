@@ -46,7 +46,6 @@ public class Enemy : Character
      {
           movement.enemyAgent.destination = patrol.patrolPoints[patrol.patrolSpot].position;
           float _distanceBetween = Vector3.Distance(transform.position, patrol.patrolPoints[patrol.patrolSpot].position);
-          Debug.Log(_distanceBetween);
 
           if (_distanceBetween < 2f)
           {

@@ -14,7 +14,7 @@ public class RangeEnemy : Enemy
      [System.Serializable]
      public class Attack
      {
-          public GameObject spellObj;
+          public Spell spellObj;
           public Transform targetSpell;
           public float timeBtwAttack;
           public float startTimeBtwAttack;
@@ -71,7 +71,7 @@ public class RangeEnemy : Enemy
                movement.stateEnemy = EnemyState.ATTACKING__PLAYER;
                if (attack.timeBtwAttack <= 0f)
                {
-                    Instantiate(attack.spellObj, attack.targetSpell);
+                    Instantiate(attack.spellObj, attack.targetSpell.position, Quaternion.identity);
                     attack.timeBtwAttack = attack.startTimeBtwAttack;
                }
                else
