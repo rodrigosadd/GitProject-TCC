@@ -5,7 +5,6 @@ using UnityEngine;
 public class Spell : MonoBehaviour
 {
      public Vector3 targetPlayer;
-     public Rigidbody rbody;
      public float speed;
 
      void Start()
@@ -20,7 +19,7 @@ public class Spell : MonoBehaviour
 
      public void GetPositionPlayer()
      {
-          targetPlayer = new Vector3(PlayerController.instance.transform.position.x, PlayerController.instance.transform.position.y, PlayerController.instance.transform.position.z);
+          targetPlayer = new Vector3(PlayerController.instance.transform.position.x, PlayerController.instance.transform.position.y, PlayerController.instance.transform.position.z + 5f);
      }
 
      public void MoveToPlayerPosition()

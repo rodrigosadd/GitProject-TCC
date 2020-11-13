@@ -74,7 +74,7 @@ public class RangeEnemy : Enemy
                     {
                          movement.stateEnemy = EnemyState.ATTACKING__PLAYER;
                     }
-                    Instantiate(attack.spellObj, attack.targetSpell.position, Quaternion.identity);
+                    Instantiate(attack.spellObj, attack.targetSpell.position, transform.rotation);
                     attack.timeBtwAttack = attack.startTimeBtwAttack;
                }
                else
