@@ -302,17 +302,19 @@ public class PlayerController : Character
                               jump.jumpShadow.transform.position = _hitInfo.point + new Vector3(0f, 0.05f, 0f);
                          }
                          jump.jumpShadow.gameObject.SetActive(true);
-                         jump.jumpShadow.transform.position = Vector3.MoveTowards(jump.jumpShadow.transform.position, _hitInfo.point + new Vector3(0f, 0.05f, 0f), 10f * Time.deltaTime);
+                         jump.jumpShadow.transform.position = Vector3.MoveTowards(jump.jumpShadow.transform.position, _hitInfo.point + new Vector3(0f, 0.05f, 0f), 50f * Time.deltaTime);
                          jump.jumpShadow.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hitInfo.normal);
                     }
                }
                else
                {
+                    jump.jumpShadow.transform.position = characterGraphic.transform.position;
                     jump.jumpShadow.gameObject.SetActive(false);
                }
           }
           else
           {
+               jump.jumpShadow.transform.position = characterGraphic.transform.position;
                jump.jumpShadow.gameObject.SetActive(false);
           }
      }
@@ -347,6 +349,7 @@ public class PlayerController : Character
                if (jump.handShaderStrength > 0)
                {
                     jump.handShaderStrength -= Time.deltaTime * 2f;
+                    jump.handShaderStrength = Mathf.Clamp(jump.handShaderStrength, 0f, 1f);
                }
                jump.handMaterial.SetFloat("Hand_Emission", jump.handShaderStrength);
           }
@@ -355,6 +358,7 @@ public class PlayerController : Character
                if (jump.handShaderStrength < 1)
                {
                     jump.handShaderStrength += Time.deltaTime / 3f;
+                    jump.handShaderStrength = Mathf.Clamp(jump.handShaderStrength, 0f, 1f);
                }
                jump.handMaterial.SetFloat("Hand_Emission", jump.handShaderStrength);
           }
