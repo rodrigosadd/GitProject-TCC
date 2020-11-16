@@ -19,7 +19,7 @@ public class Spell : MonoBehaviour
 
      public void GetPositionPlayer()
      {
-          targetPlayer = new Vector3(PlayerController.instance.transform.position.x, PlayerController.instance.transform.position.y, PlayerController.instance.transform.position.z + 5f);
+          targetPlayer = PlayerController.instance.transform.position;
      }
 
      public void MoveToPlayerPosition()
