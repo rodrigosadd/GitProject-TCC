@@ -446,11 +446,13 @@ MonoBehaviour:
     handMaterial: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     jumpEffect: {fileID: 1994922055}
     boneHand: {fileID: 4698741610229858696}
+    doubleJumpCountdown: 0
     fallMultiplier: 1
     lowJumpMultiplier: 2.5
     groundDetectorRange: 1.13
     jumpForce: 7
-    maxDistanceShadow: 10
+    maxDistanceShadow: 7
+    speedShadow: 30
     rangeSlopeDetector: 1.13
     doubleJumpTime: 0.41
     handShaderStrength: 0

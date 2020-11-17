@@ -6,6 +6,9 @@ public class MeleeEnemy : Enemy
 {
      public static MeleeEnemy instance;
 
+     [Header("Trail variable")]
+     public GameObject[] trails;
+
      private float _distanceBetween = 0f;
 
 #if UNITY_EDITOR
@@ -25,6 +28,7 @@ public class MeleeEnemy : Enemy
           CheckStunning();
           EnemyFollowPlayer();
           EnemyAnimations();
+          ResetTrails();
      }
 
      public void EnemyFollowPlayer()
@@ -60,6 +64,38 @@ public class MeleeEnemy : Enemy
           if (PlayerController.instance.death.dead && movement.stateEnemy != EnemyState.IDLE)
           {
                movement.stateEnemy = EnemyState.IDLE;
+          }
+     }
+
+     public void ResetTrails()
+     {
+          switch (movement.stateEnemy)
+          {
+               case EnemyState.PATROLLING:
+                    trails[0].SetActive(false);
+                    trails[1].SetActive(false);
+                    trails[2].SetActive(false);
+                    break;
+               case EnemyState.IDLE:
+                    trails[0].SetActive(false);
+                    trails[1].SetActive(false);
+                    trails[2].SetActive(false);
+                    break;
+               case EnemyState.ATTACKING__PLAYER:
+                    trails[0].SetActive(true);
+                    trails[1].SetActive(true);
+                    trails[2].SetActive(true);
+                    break;
+               case EnemyState.FOLLOWING_PLAYER:
+                    trails[0].SetActive(false);
+                    trails[1].SetActive(false);
+                    trails[2].SetActive(false);
+                    break;
+               case EnemyState.STUNNED:
+                    trails[0].SetActive(false);
+                    trails[1].SetActive(false);
+                    trails[2].SetActive(false);
+                    break;
           }
      }
 

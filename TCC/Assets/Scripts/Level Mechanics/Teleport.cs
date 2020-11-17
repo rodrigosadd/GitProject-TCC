@@ -24,6 +24,7 @@ public class Teleport : MonoBehaviour
           {
                PlayerController.instance.transform.position = portalExit.position + portalExit.forward;
                PlayerController.instance.jump.currentJump = 0;
+               PlayerController.instance.jump.doubleJumpCountdown = 0;
           }
      }
 

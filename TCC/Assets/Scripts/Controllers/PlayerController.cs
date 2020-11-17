@@ -31,7 +31,6 @@ public class PlayerController : Character
 
      [Header("Jump variables")]
      public Jump jump;
-     private float _doubleJumpCountdown;
 
      [System.Serializable]
      public class Jump
@@ -41,11 +40,13 @@ public class PlayerController : Character
           public Material handMaterial;
           public GameObject jumpEffect;
           public Transform boneHand;
+          public float doubleJumpCountdown;
           public float fallMultiplier;
           public float lowJumpMultiplier;
           public float groundDetectorRange;
           public float jumpForce;
           public float maxDistanceShadow;
+          public float speedShadow;
           public float rangeSlopeDetector;
           public float doubleJumpTime;
           public float handShaderStrength;
@@ -188,7 +189,7 @@ public class PlayerController : Character
           {
                movement.stateCharacter = CharacterState.RUNNNING;
           }
-          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter != CharacterState.DEAD)
+          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter != CharacterState.DEAD && movement.stateCharacter != CharacterState.DOUBLE_JUMP)
           {
                movement.stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
           }
@@ -255,10 +256,10 @@ public class PlayerController : Character
      public void CharacterJump()
      {
           DoubleJumpCountdown();
-          if (Input.GetButtonDown("Jump") && CanJump() && movement.stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (_doubleJumpCountdown >= 1 || jump.currentJump == 0) && movement.stateCharacter != CharacterState.DEAD)
+          if (Input.GetButtonDown("Jump") && CanJump() && movement.stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0) && movement.stateCharacter != CharacterState.DEAD)
           {
                movement.rbody.velocity = Vector3.up * jump.jumpForce;
-               _doubleJumpCountdown = 0;
+               jump.doubleJumpCountdown = 0;
                jump.currentJump++;
 
                if (jump.currentJump < 2 && movement.stateCharacter != CharacterState.SINGLE_JUMP)
@@ -273,7 +274,7 @@ public class PlayerController : Character
           if (IsGrounded() && movement.rbody.velocity.y < 0)
           {
                jump.currentJump = 0;
-               _doubleJumpCountdown = 0;
+               jump.doubleJumpCountdown = 0;
           }
      }
 
@@ -281,41 +282,10 @@ public class PlayerController : Character
      {
           if (jump.currentJump > 0)
           {
-               if (_doubleJumpCountdown < 1)
+               if (jump.doubleJumpCountdown < 1)
                {
-                    _doubleJumpCountdown += Time.deltaTime / jump.doubleJumpTime;
+                    jump.doubleJumpCountdown += Time.deltaTime / jump.doubleJumpTime;
                }
-          }
-     }
-
-     public void JumpShadow()
-     {
-          if (!IsGrounded())
-          {
-               RaycastHit _hitInfo;
-               if (Physics.Raycast(transform.position, Vector3.up * -1, out _hitInfo, jump.maxDistanceShadow))
-               {
-                    if (_hitInfo.transform.tag != "Player")
-                    {
-                         if (!jump.jumpShadow.gameObject.activeSelf)
-                         {
-                              jump.jumpShadow.transform.position = _hitInfo.point + new Vector3(0f, 0.05f, 0f);
-                         }
-                         jump.jumpShadow.gameObject.SetActive(true);
-                         jump.jumpShadow.transform.position = Vector3.MoveTowards(jump.jumpShadow.transform.position, _hitInfo.point + new Vector3(0f, 0.05f, 0f), 50f * Time.deltaTime);
-                         jump.jumpShadow.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hitInfo.normal);
-                    }
-               }
-               else
-               {
-                    jump.jumpShadow.transform.position = characterGraphic.transform.position;
-                    jump.jumpShadow.gameObject.SetActive(false);
-               }
-          }
-          else
-          {
-               jump.jumpShadow.transform.position = characterGraphic.transform.position;
-               jump.jumpShadow.gameObject.SetActive(false);
           }
      }
 
@@ -340,6 +310,37 @@ public class PlayerController : Character
      public bool CanJump()
      {
           return jump.currentJump < jump.maxJump;
+     }
+
+     public void JumpShadow()
+     {
+          if (!IsGrounded())
+          {
+               RaycastHit _hitInfo;
+               if (Physics.Raycast(transform.position, Vector3.up * -1, out _hitInfo, jump.maxDistanceShadow))
+               {
+                    if (_hitInfo.transform.tag != "Player")
+                    {
+                         if (!jump.jumpShadow.gameObject.activeSelf)
+                         {
+                              jump.jumpShadow.transform.position = _hitInfo.point + new Vector3(0f, 0.05f, 0f);
+                         }
+                         jump.jumpShadow.gameObject.SetActive(true);
+                         jump.jumpShadow.transform.position = Vector3.MoveTowards(jump.jumpShadow.transform.position, _hitInfo.point + new Vector3(0f, 0.05f, 0f), jump.speedShadow * Time.deltaTime);
+                         jump.jumpShadow.transform.rotation = Quaternion.FromToRotation(Vector3.up, _hitInfo.normal);
+                    }
+               }
+               else
+               {
+                    jump.jumpShadow.transform.position = characterGraphic.transform.position;
+                    jump.jumpShadow.gameObject.SetActive(false);
+               }
+          }
+          else
+          {
+               jump.jumpShadow.transform.position = characterGraphic.transform.position;
+               jump.jumpShadow.gameObject.SetActive(false);
+          }
      }
 
      public void SetHandShader()
