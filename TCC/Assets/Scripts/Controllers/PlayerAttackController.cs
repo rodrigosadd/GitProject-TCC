@@ -12,6 +12,7 @@ public class PlayerAttackController : MonoBehaviour
      public float delayNextAttack;
      public float maxDistanceAttack;
      public float attackImpulse;
+     public float distanceImpulse;
      public bool attaking;
 
 #if UNITY_EDITOR
@@ -20,11 +21,13 @@ public class PlayerAttackController : MonoBehaviour
 
      private float _currentMaxSpeed;
      private float _lastAttackTime;
+     private Vector3 _finalImpulse;
 
      void LateUpdate()
      {
           InputsAttack();
           CanAttack();
+          Dash();
      }
 
      public void InputsAttack()
@@ -117,11 +120,31 @@ public class PlayerAttackController : MonoBehaviour
      {
           if (!PlayerController.instance.death.dead)
           {
-               attaking = true;
                if (PlayerController.instance.movement.slowed == false)
                {
                     PlayerController.instance.movement.maxSpeed = 0f;
-                    PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.forward * attackImpulse, ForceMode.Impulse);
+                    attaking = true;
+               }
+          }
+     }
+
+     public void Dash()
+     {
+          if (attaking)
+          {
+               if (_finalImpulse == Vector3.zero)
+               {
+                    _finalImpulse = PlayerController.instance.transform.position + (PlayerController.instance.characterGraphic.forward * distanceImpulse);
+               }
+               else
+               {
+                    PlayerController.instance.transform.position = Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, attackImpulse * Time.deltaTime);
+
+                    if (_finalImpulse == PlayerController.instance.transform.position)
+                    {
+                         _finalImpulse = Vector3.zero;
+                         attaking = false;
+                    }
                }
           }
      }
