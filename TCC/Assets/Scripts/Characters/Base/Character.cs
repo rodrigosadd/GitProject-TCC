@@ -18,7 +18,6 @@ public class Character : MonoBehaviour
      public class Hit
      {
           public Coroutine reset;
-          public Transform currentPoint;
           public int hitCount;
           public int maxHitCount;
           public float timeResetHitCount;

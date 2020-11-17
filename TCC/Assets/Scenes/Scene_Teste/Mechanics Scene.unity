@@ -3493,10 +3493,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: hit.currentPoint
-      value: 
-      objectReference: {fileID: 1912633650}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: movement.cam
       value: 
       objectReference: {fileID: 83500369}
@@ -6365,7 +6361,6 @@ MonoBehaviour:
   characterCollider: {fileID: 1378582732}
   animator: {fileID: 0}
   hit:
-    currentPoint: {fileID: 1912633650}
     hitCount: 0
     maxHitCount: 3
     timeResetHitCount: 5
@@ -7738,10 +7733,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1737095429}
     m_Modifications:
-    - target: {fileID: 4116490434590808234, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: hit.currentPoint
-      value: 
-      objectReference: {fileID: 1912633650}
     - target: {fileID: 4116490434590808234, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
       propertyPath: patrol.patrolPoints.Array.data[0]
       value: 

@@ -198,7 +198,7 @@ public class PlayerController : Character
           {
                if (movement.rbody.velocity.y > 0 && !IsGrounded() && movement.stateCharacter != CharacterState.DEAD)
                {
-                    if (movement.stateCharacter != CharacterState.SINGLE_JUMP)
+                    if (movement.stateCharacter != CharacterState.SINGLE_JUMP && movement.stateCharacter != CharacterState.DOUBLE_JUMP)
                     {
                          movement.stateCharacter = CharacterState.SINGLE_JUMP;
                     }
