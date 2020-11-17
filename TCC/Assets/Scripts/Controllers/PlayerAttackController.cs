@@ -27,7 +27,7 @@ public class PlayerAttackController : MonoBehaviour
      {
           InputsAttack();
           CanAttack();
-          Dash();
+          Impulse();
      }
 
      public void InputsAttack()
@@ -98,6 +98,7 @@ public class PlayerAttackController : MonoBehaviour
                else
                {
                     PlayerController.instance.animator.SetBool("Second Attack", false);
+                    PlayerController.instance.animator.SetBool("First Attack", false);
                     currentAttack = 0;
                }
           }
@@ -114,6 +115,7 @@ public class PlayerAttackController : MonoBehaviour
           PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
           attaking = false;
           currentAttack = 0;
+          _finalImpulse = Vector3.zero;
      }
 
      public void Attaking()
@@ -128,7 +130,7 @@ public class PlayerAttackController : MonoBehaviour
           }
      }
 
-     public void Dash()
+     public void Impulse()
      {
           if (attaking)
           {
