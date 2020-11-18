@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttackController : MonoBehaviour
 {
+     public static PlayerAttackController instance;
+
      public Transform targetAttack;
      public LayerMask layerEnemy;
      public GameObject[] trails;
@@ -22,6 +24,11 @@ public class PlayerAttackController : MonoBehaviour
      private float _currentMaxSpeed;
      private float _lastAttackTime;
      private Vector3 _finalImpulse;
+
+     void Start()
+     {
+          instance = this;
+     }
 
      void LateUpdate()
      {
