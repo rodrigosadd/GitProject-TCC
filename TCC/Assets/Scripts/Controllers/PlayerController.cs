@@ -261,7 +261,7 @@ public class PlayerController : Character
      public void CharacterJump()
      {
           DoubleJumpCountdown();
-          if (Input.GetButtonDown("Jump") && CanJump() && movement.stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0) && movement.stateCharacter != CharacterState.DEAD)
+          if (Input.GetButtonDown("Jump") && !PlayerAttackController.instance.attaking && PlayerAttackController.instance.currentAttack == 0 && CanJump() && movement.stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0) && movement.stateCharacter != CharacterState.DEAD)
           {
                movement.rbody.velocity = Vector3.up * jump.jumpForce;
                jump.doubleJumpCountdown = 0;
@@ -350,7 +350,7 @@ public class PlayerController : Character
 
      public void FallingIdle()
      {
-          if (movement.rbody.velocity.y < 0f && !IsGrounded() && jump.currentJump >= jump.maxJump && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter == CharacterState.DOUBLE_JUMP && movement.stateCharacter != CharacterState.FALLING_GROUND)
+          if (movement.rbody.velocity.y < 0f && jump.currentJump == 2 && movement.stateCharacter == CharacterState.DOUBLE_JUMP && !IsGrounded() && jump.currentJump >= jump.maxJump && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.SINGLE_JUMP && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter != CharacterState.FALLING_RUNNING)
           {
                movement.stateCharacter = CharacterState.FALLING_IDLE;
           }
@@ -364,9 +364,13 @@ public class PlayerController : Character
 
                if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, jump.rangeFallingGround))
                {
-                    if (movement.stateCharacter != CharacterState.FALLING_GROUND)
+                    if (_horizontal == 0 && _vertical == 0 && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_RUNNING)
                     {
                          movement.stateCharacter = CharacterState.FALLING_GROUND;
+                    }
+                    else if (movement.stateCharacter != CharacterState.FALLING_RUNNING && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter != CharacterState.FALLING_RUNNING)
+                    {
+                         movement.stateCharacter = CharacterState.FALLING_RUNNING;
                     }
                }
           }
@@ -573,6 +577,7 @@ public class PlayerController : Character
                }
                else
                {
+                    PlayerAttackController.instance.ResetAttack();
                     hit.hitCount = 0;
                     movement.stateCharacter = CharacterState.IDLE;
                     transform.position = death.currentPoint.position;
@@ -607,6 +612,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.RUNNNING:
                     animator.SetBool("Idle", false);
@@ -620,6 +626,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.SINGLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -633,6 +640,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.SINGLE_JUMP_RUNNING:
                     animator.SetBool("Idle", false);
@@ -646,6 +654,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.DOUBLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -659,6 +668,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.PUSHING_IDLE:
                     animator.SetBool("Idle", false);
@@ -672,6 +682,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.PUSHING:
                     animator.SetBool("Idle", false);
@@ -685,6 +696,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.DEAD:
                     animator.SetBool("Idle", false);
@@ -698,6 +710,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.BALANCE:
                     animator.SetBool("Idle", false);
@@ -711,6 +724,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", true);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.FALLING_IDLE:
                     animator.SetBool("Idle", false);
@@ -724,6 +738,7 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", true);
                     animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", false);
                     break;
                case CharacterState.FALLING_GROUND:
                     animator.SetBool("Idle", false);
@@ -737,6 +752,21 @@ public class PlayerController : Character
                     animator.SetBool("Balance", false);
                     animator.SetBool("Falling Idle", false);
                     animator.SetBool("Falling Ground", true);
+                    animator.SetBool("Falling Running", false);
+                    break;
+               case CharacterState.FALLING_RUNNING:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Running", false);
+                    animator.SetBool("Single Jump", false);
+                    animator.SetBool("Single Jump Running", false);
+                    animator.SetBool("Double Jump", false);
+                    animator.SetBool("Pushing", false);
+                    animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
+                    animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
+                    animator.SetBool("Falling Running", true);
                     break;
           }
      }
