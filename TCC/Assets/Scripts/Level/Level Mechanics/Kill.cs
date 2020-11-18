@@ -20,12 +20,18 @@ public class Kill : MonoBehaviour
           {
                if (alive)
                {
-                    PlayerController.instance.movement.stateCharacter = CharacterState.DEAD;
-                    PlayerController.instance.movement.rbody.useGravity = false;
-                    PlayerController.instance.characterCollider.enabled = false;
-                    currentMaxSpeed = PlayerController.instance.movement.maxSpeed;
-                    PlayerController.instance.movement.maxSpeed = 0;
-                    alive = false;
+                    RaycastHit _hitInfo;
+
+                    if (Physics.Raycast(PlayerController.instance.transform.position, Vector3.down, out _hitInfo, 10f))
+                    {
+                         PlayerController.instance.transform.position = _hitInfo.point + new Vector3(0f, PlayerController.instance.death.offsetDead, 0f);
+                         PlayerController.instance.movement.stateCharacter = CharacterState.DEAD;
+                         PlayerController.instance.movement.rbody.constraints = RigidbodyConstraints.FreezePosition;
+                         PlayerController.instance.characterCollider.enabled = false;
+                         currentMaxSpeed = PlayerController.instance.movement.maxSpeed;
+                         PlayerController.instance.movement.maxSpeed = 0;
+                         alive = false;
+                    }
                }
           }
      }
@@ -42,7 +48,7 @@ public class Kill : MonoBehaviour
                {
                     PlayerController.instance.movement.stateCharacter = CharacterState.IDLE;
                     PlayerController.instance.transform.position = currentPoint.position;
-                    PlayerController.instance.movement.rbody.useGravity = true;
+                    PlayerController.instance.movement.rbody.constraints = RigidbodyConstraints.FreezeRotation;
                     PlayerController.instance.characterCollider.enabled = true;
                     PlayerController.instance.movement.maxSpeed = currentMaxSpeed;
                     countdownKill = 0;

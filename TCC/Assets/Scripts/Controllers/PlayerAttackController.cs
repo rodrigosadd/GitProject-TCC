@@ -38,7 +38,11 @@ public class PlayerAttackController : MonoBehaviour
                {
                     _currentMaxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                }
-               FirstAttack();
+
+               if (PlayerController.instance.IsGrounded())
+               {
+                    FirstAttack();
+               }
           }
      }
 
@@ -80,6 +84,7 @@ public class PlayerAttackController : MonoBehaviour
                     PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
                     attaking = false;
                     currentAttack = 0;
+                    _finalImpulse = Vector3.zero;
                }
           }
      }
@@ -99,7 +104,13 @@ public class PlayerAttackController : MonoBehaviour
                {
                     PlayerController.instance.animator.SetBool("Second Attack", false);
                     PlayerController.instance.animator.SetBool("First Attack", false);
+                    trails[0].SetActive(false);
+                    trails[1].SetActive(false);
+                    trails[2].SetActive(false);
+                    PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
+                    attaking = false;
                     currentAttack = 0;
+                    _finalImpulse = Vector3.zero;
                }
           }
      }

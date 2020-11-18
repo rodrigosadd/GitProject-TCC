@@ -480,11 +480,13 @@ MonoBehaviour:
     canMiss: 1
   death:
     currentPoint: {fileID: 0}
+    offsetDead: 1
     dead: 0
   seeRangePush: 0
   seeRangeCliff: 0
   seeRangegroundDetector: 0
   seeRangeMissedJump: 0
+  seeRangePositionDead: 0
 --- !u!54 &78672544767654958
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -559,7 +561,7 @@ MonoBehaviour:
   delayNextAttack: 2
   maxDistanceAttack: 1.5
   attackImpulse: 10
-  distanceImpulse: 1.5
+  distanceImpulse: 2
   attaking: 0
   seeAttackRange: 0
 --- !u!114 &7753743742199015379

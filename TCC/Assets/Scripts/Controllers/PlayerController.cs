@@ -50,6 +50,7 @@ public class PlayerController : Character
           public float rangeSlopeDetector;
           public float doubleJumpTime;
           public float handShaderStrength;
+          public float rangeFallingGround;
           public int currentJump;
           public int maxJump;
      }
@@ -106,6 +107,7 @@ public class PlayerController : Character
      public class Death
      {
           public Transform currentPoint;
+          public float offsetDead;
           public bool dead;
      }
 
@@ -115,6 +117,7 @@ public class PlayerController : Character
      public bool seeRangeCliff = false;
      public bool seeRangegroundDetector = false;
      public bool seeRangeMissedJump = false;
+     public bool seeRangePositionDead = false;
 #endif
 
      void Start()
@@ -141,6 +144,8 @@ public class PlayerController : Character
           JumpShadow();
           CheckDeath();
           CountdownAfterDeath();
+          FallingIdle();
+          FallingGround();
           //SetJumpEffect();
      }
 
@@ -157,7 +162,7 @@ public class PlayerController : Character
                _vertical = 0;
                return;
           }
-          else if (movement.stateCharacter == CharacterState.BALANCE)
+          else if (movement.stateCharacter == CharacterState.BALANCE && movement.stateCharacter != CharacterState.FALLING_IDLE)
           {
                movement.stateCharacter = CharacterState.RUNNNING;
           }
@@ -189,7 +194,7 @@ public class PlayerController : Character
           {
                movement.stateCharacter = CharacterState.RUNNNING;
           }
-          else if ((_horizontal != 0 || _vertical != 0) && !IsGrounded() && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter != CharacterState.DEAD && movement.stateCharacter != CharacterState.DOUBLE_JUMP)
+          else if ((_horizontal != 0 || _vertical != 0) && jump.currentJump == 1 && !IsGrounded() && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter != CharacterState.DEAD && movement.stateCharacter != CharacterState.DOUBLE_JUMP && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND)
           {
                movement.stateCharacter = CharacterState.SINGLE_JUMP_RUNNING;
           }
@@ -198,12 +203,12 @@ public class PlayerController : Character
           {
                if (movement.rbody.velocity.y > 0 && !IsGrounded() && movement.stateCharacter != CharacterState.DEAD)
                {
-                    if (movement.stateCharacter != CharacterState.SINGLE_JUMP && movement.stateCharacter != CharacterState.DOUBLE_JUMP)
+                    if (movement.stateCharacter != CharacterState.SINGLE_JUMP && movement.stateCharacter != CharacterState.DOUBLE_JUMP && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND)
                     {
                          movement.stateCharacter = CharacterState.SINGLE_JUMP;
                     }
                }
-               else if (movement.stateCharacter != CharacterState.IDLE && IsGrounded() && push.pushingObj == false && movement.stateCharacter != CharacterState.DEAD)
+               else if (movement.stateCharacter != CharacterState.IDLE && IsGrounded() && push.pushingObj == false && movement.stateCharacter != CharacterState.DEAD && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND)
                {
                     movement.stateCharacter = CharacterState.IDLE;
                }
@@ -340,6 +345,30 @@ public class PlayerController : Character
           {
                jump.jumpShadow.transform.position = characterGraphic.transform.position;
                jump.jumpShadow.gameObject.SetActive(false);
+          }
+     }
+
+     public void FallingIdle()
+     {
+          if (movement.rbody.velocity.y < 0f && !IsGrounded() && jump.currentJump >= jump.maxJump && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter == CharacterState.DOUBLE_JUMP && movement.stateCharacter != CharacterState.FALLING_GROUND)
+          {
+               movement.stateCharacter = CharacterState.FALLING_IDLE;
+          }
+     }
+
+     public void FallingGround()
+     {
+          if (movement.stateCharacter == CharacterState.FALLING_IDLE)
+          {
+               RaycastHit _hitInfo;
+
+               if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, jump.rangeFallingGround))
+               {
+                    if (movement.stateCharacter != CharacterState.FALLING_GROUND)
+                    {
+                         movement.stateCharacter = CharacterState.FALLING_GROUND;
+                    }
+               }
           }
      }
 
@@ -514,12 +543,22 @@ public class PlayerController : Character
           {
                if (!death.dead)
                {
-                    movement.stateCharacter = CharacterState.DEAD;
-                    movement.rbody.useGravity = false;
-                    characterCollider.enabled = false;
-                    _currentMaxSpeed = movement.fixedMaxSpeed;
-                    movement.maxSpeed = 0;
-                    death.dead = true;
+                    RaycastHit _hitInfo;
+
+                    if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 10f))
+                    {
+                         if (_hitInfo.transform.tag == "Interactable" || _hitInfo.transform.tag == "Ground")
+                         {
+                              transform.position = _hitInfo.point + new Vector3(0f, death.offsetDead, 0f);
+                              movement.stateCharacter = CharacterState.DEAD;
+                              movement.rbody.constraints = RigidbodyConstraints.FreezePosition;
+                              characterCollider.enabled = false;
+                              _currentMaxSpeed = movement.fixedMaxSpeed;
+                              movement.maxSpeed = 0;
+                              death.dead = true;
+                              Debug.Log("Entrou no ray");
+                         }
+                    }
                }
           }
      }
@@ -537,7 +576,7 @@ public class PlayerController : Character
                     hit.hitCount = 0;
                     movement.stateCharacter = CharacterState.IDLE;
                     transform.position = death.currentPoint.position;
-                    movement.rbody.useGravity = true;
+                    movement.rbody.constraints = RigidbodyConstraints.FreezeRotation;
                     characterCollider.enabled = true;
                     movement.maxSpeed = _currentMaxSpeed;
                     _countdownDeath = 0;
@@ -566,6 +605,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.RUNNNING:
                     animator.SetBool("Idle", false);
@@ -577,6 +618,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.SINGLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -588,6 +631,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.SINGLE_JUMP_RUNNING:
                     animator.SetBool("Idle", false);
@@ -599,6 +644,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.DOUBLE_JUMP:
                     animator.SetBool("Idle", false);
@@ -610,6 +657,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.PUSHING_IDLE:
                     animator.SetBool("Idle", false);
@@ -621,6 +670,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", true);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.PUSHING:
                     animator.SetBool("Idle", false);
@@ -632,6 +683,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.DEAD:
                     animator.SetBool("Idle", false);
@@ -643,6 +696,8 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", true);
                     animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
                     break;
                case CharacterState.BALANCE:
                     animator.SetBool("Idle", false);
@@ -654,6 +709,34 @@ public class PlayerController : Character
                     animator.SetBool("Pushing Idle", false);
                     animator.SetBool("Dying", false);
                     animator.SetBool("Balance", true);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", false);
+                    break;
+               case CharacterState.FALLING_IDLE:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Running", false);
+                    animator.SetBool("Single Jump", false);
+                    animator.SetBool("Single Jump Running", false);
+                    animator.SetBool("Double Jump", false);
+                    animator.SetBool("Pushing", false);
+                    animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
+                    animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", true);
+                    animator.SetBool("Falling Ground", false);
+                    break;
+               case CharacterState.FALLING_GROUND:
+                    animator.SetBool("Idle", false);
+                    animator.SetBool("Running", false);
+                    animator.SetBool("Single Jump", false);
+                    animator.SetBool("Single Jump Running", false);
+                    animator.SetBool("Double Jump", false);
+                    animator.SetBool("Pushing", false);
+                    animator.SetBool("Pushing Idle", false);
+                    animator.SetBool("Dying", false);
+                    animator.SetBool("Balance", false);
+                    animator.SetBool("Falling Idle", false);
+                    animator.SetBool("Falling Ground", true);
                     break;
           }
      }
@@ -687,6 +770,13 @@ public class PlayerController : Character
                Gizmos.DrawSphere(missedJump.targetMissedJump.position, 0.1f);
                Debug.DrawRay(missedJump.targetMissedJump.position, Vector3.down * missedJump.rangeRayMissedJump, Color.green);
           }
+          if (seeRangePositionDead)
+          {
+               Gizmos.color = Color.cyan;
+               Gizmos.DrawRay(transform.position, Vector3.down * 10f);
+          }
+          Gizmos.color = Color.magenta;
+          Gizmos.DrawRay(transform.position, Vector3.down * jump.rangeFallingGround);
      }
 #endif
 }
