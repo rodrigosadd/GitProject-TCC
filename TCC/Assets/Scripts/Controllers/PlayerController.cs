@@ -118,6 +118,7 @@ public class PlayerController : Character
      public bool seeRangegroundDetector = false;
      public bool seeRangeMissedJump = false;
      public bool seeRangePositionDead = false;
+     public bool seeRangeFalling = false;
 #endif
 
      void Start()
@@ -560,7 +561,6 @@ public class PlayerController : Character
                               _currentMaxSpeed = movement.fixedMaxSpeed;
                               movement.maxSpeed = 0;
                               death.dead = true;
-                              Debug.Log("Entrou no ray");
                          }
                     }
                }
@@ -800,13 +800,18 @@ public class PlayerController : Character
                Gizmos.DrawSphere(missedJump.targetMissedJump.position, 0.1f);
                Debug.DrawRay(missedJump.targetMissedJump.position, Vector3.down * missedJump.rangeRayMissedJump, Color.green);
           }
+
           if (seeRangePositionDead)
           {
                Gizmos.color = Color.cyan;
                Gizmos.DrawRay(transform.position, Vector3.down * 10f);
           }
-          Gizmos.color = Color.magenta;
-          Gizmos.DrawRay(transform.position, Vector3.down * jump.rangeFallingGround);
+
+          if (seeRangeFalling)
+          {
+               Gizmos.color = Color.magenta;
+               Gizmos.DrawRay(transform.position, Vector3.down * jump.rangeFallingGround);
+          }
      }
 #endif
 }
