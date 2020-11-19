@@ -6543,12 +6543,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1d96bf28ce6df4cb82f3dad5c350d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFootsteps: []
-  playerJumpSounds: []
-  playerAttackSounds: []
-  minningSound: 
-  deathCry: 
-  boxPushingSound: 
+  playerFootsteps:
+  - event:/Footsteps
+  - event:/Footsteps1
+  - event:/Footsteps2
+  playerJumpSounds:
+  - event:/Jump
+  - event:/Jump1
+  - event:/Jump2
+  playerAttackSounds:
+  - event:/MeleeMove
+  - event:/Shout1
+  - event:/Shout2
+  minningSound: event:/Pickaxe
+  deathCry: event:/Shout
+  boxPushingSound: event:/Boulder
 --- !u!1 &4507179826497727707
 GameObject:
   m_ObjectHideFlags: 0
