@@ -369,6 +369,104 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4763050167971395785, guid: b479987b89006ed4d82b23ae25a4d4fd, type: 3}
   m_PrefabInstance: {fileID: 10498235}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &12999384
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 300451767}
+    m_Modifications:
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: movement.cam
+      value: 
+      objectReference: {fileID: 1687258585}
+    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: death.currentPoint
+      value: 
+      objectReference: {fileID: 287054149}
+    - target: {fileID: 78672544767654959, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_Name
+      value: Player Beto
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.098
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: movement.cam
+      value: 
+      objectReference: {fileID: 1687258585}
+    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: death.currentPoint
+      value: 
+      objectReference: {fileID: 287054149}
+    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: jump.jumpShadow
+      value: 
+      objectReference: {fileID: 556428598}
+    - target: {fileID: 4492273609177044784, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+--- !u!4 &12999385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+  m_PrefabInstance: {fileID: 12999384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &13110884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -427,6 +525,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (60)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -511,6 +617,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -888,6 +1002,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &25221164 stripped
@@ -1091,93 +1213,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8725093263477734655, guid: 56db6383c84bc7843836049109eaf5ec, type: 3}
   m_PrefabInstance: {fileID: 30403462}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &33806284
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 300451767}
-    m_Modifications:
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.065
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: movement.cam
-      value: 
-      objectReference: {fileID: 1687258585}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: jump.jumpShadow
-      value: 
-      objectReference: {fileID: 556428598}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangeMissedJump
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: death.currentPoint
-      value: 
-      objectReference: {fileID: 287054149}
-    - target: {fileID: 78672544767654956, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: hit.currentPoint
-      value: 
-      objectReference: {fileID: 287054149}
-    - target: {fileID: 78672544767654959, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_Name
-      value: Player Beto
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
---- !u!4 &33806285 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 78672544767654947, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-  m_PrefabInstance: {fileID: 33806284}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &33806286 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 664119543, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-  m_PrefabInstance: {fileID: 33806284}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &36327606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1236,6 +1271,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (34)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -1329,7 +1372,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20232
+  m_Name: pb_Mesh195308
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2171,6 +2214,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (43)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &72328244 stripped
@@ -2610,6 +2661,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &96878908 stripped
@@ -2696,6 +2755,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2967,7 +3034,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18744
+  m_Name: pb_Mesh193834
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5240,6 +5307,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &143589049 stripped
@@ -5257,6 +5332,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5371,6 +5454,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -5511,6 +5602,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (39)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -5665,6 +5764,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5914,6 +6021,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -6727,6 +6842,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.880005
@@ -6976,6 +7099,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -7541,6 +7672,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.629997
@@ -7654,6 +7793,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -7875,6 +8022,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &283829871 stripped
@@ -7940,6 +8095,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -8111,6 +8274,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (46)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &292245743 stripped
@@ -8202,6 +8373,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8317,6 +8496,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (50)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &296778689 stripped
@@ -8351,7 +8538,7 @@ Transform:
   m_LocalPosition: {x: 2.42, y: 0, z: 5.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 33806285}
+  - {fileID: 12999385}
   - {fileID: 556428598}
   - {fileID: 287054149}
   m_Father: {fileID: 744841691}
@@ -8416,6 +8603,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (52)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &301328436 stripped
@@ -8433,6 +8628,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8791,6 +8994,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &323239100 stripped
@@ -9040,6 +9251,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &330471298 stripped
@@ -9211,7 +9430,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18170
+  m_Name: pb_Mesh193226
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -9835,6 +10054,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (58)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &350235247 stripped
@@ -9847,6 +10074,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6265530406686271348, guid: 3b38a958f9ee1b34dba8d2556cd88db3, type: 3}
   m_PrefabInstance: {fileID: 1233113354}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &359002043
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 845476468}
+    m_Modifications:
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 76.24529
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 29.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24.353386
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3931051630031824530, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: patrol.patrolPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3931051630031824530, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: patrol.patrolPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1759866481}
+    - target: {fileID: 3931051630031824530, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: patrol.patrolPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 62113381}
+    - target: {fileID: 3931051630031824530, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: patrol.patrolPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 277481953}
+    - target: {fileID: 5965186701817831910, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+      propertyPath: m_Name
+      value: Enemy Butcher
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
 --- !u!1 &359454741
 GameObject:
   m_ObjectHideFlags: 0
@@ -10254,6 +10554,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.629997
@@ -10515,6 +10823,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (28)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -10881,6 +11197,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &411438662 stripped
@@ -10946,6 +11270,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (63)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -11074,6 +11406,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (61)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -11398,6 +11738,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &425559573 stripped
@@ -11414,31 +11762,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.38
+      value: 17.649446
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27.68
+      value: 27.679996
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 74.93
+      value: 74.94561
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.7069834
+      value: 0.00000010936452
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.70698345
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0.70723015
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7072302
+      value: -0.000000119209275
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_RootOrder
@@ -11446,7 +11794,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -89.98
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -11454,7 +11802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5155879974681719943, guid: 7d0ef9ea9ff388c4d96aa207ca30b483, type: 3}
       propertyPath: m_LocalScale.x
@@ -11606,6 +11954,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -12013,7 +12369,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh17766
+  m_Name: pb_Mesh192796
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -12230,6 +12586,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &463117970 stripped
@@ -12247,6 +12611,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (33)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12571,7 +12943,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f7f5b48ca52e2424084009ece163e7ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12674,6 +13046,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &465963129 stripped
@@ -12766,6 +13146,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (37)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.870003
@@ -12831,6 +13219,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13333,7 +13729,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f7f5b48ca52e2424084009ece163e7ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13583,6 +13979,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (36)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13953,6 +14357,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 8615297793961303152, guid: 368dc314f59773b4d9efa551a7fd99c0, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f7f5b48ca52e2424084009ece163e7ff, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 368dc314f59773b4d9efa551a7fd99c0, type: 3}
 --- !u!4 &529674701 stripped
@@ -14418,6 +14826,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &542000174 stripped
@@ -14790,7 +15206,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18206
+  m_Name: pb_Mesh193262
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -15145,6 +15561,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -15776,6 +16200,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0400009
@@ -15894,6 +16326,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (40)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -16109,6 +16549,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (36)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &602912130 stripped
@@ -16174,6 +16622,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -17122,6 +17578,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &648193363 stripped
@@ -17139,6 +17603,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20714,6 +21186,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (39)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.870003
@@ -20902,6 +21382,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &697665507 stripped
@@ -20991,6 +21479,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &708393426 stripped
@@ -21078,6 +21574,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (43)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21290,6 +21794,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.629997
@@ -21355,6 +21867,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21469,6 +21989,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -21747,6 +22275,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &747223306 stripped
@@ -21844,6 +22380,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -21958,6 +22502,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -22173,6 +22725,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (41)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &768924031 stripped
@@ -22238,6 +22798,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -22443,6 +23011,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23597,6 +24173,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (19)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &799259061 stripped
@@ -23874,6 +24458,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (41)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24492,7 +25084,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1421758927}
+  - {fileID: 1502028113}
   - {fileID: 259968617}
   m_Father: {fileID: 744841691}
   m_RootOrder: 1
@@ -24793,6 +25385,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &858024222 stripped
@@ -24928,6 +25528,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (56)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &862249459 stripped
@@ -24945,6 +25553,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25892,6 +26508,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -29233,6 +29857,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &981666106 stripped
@@ -30345,6 +30977,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (57)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1028756244 stripped
@@ -30713,6 +31353,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (47)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1046720421 stripped
@@ -30800,7 +31448,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19374
+  m_Name: pb_Mesh194464
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -31107,6 +31755,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1055954072 stripped
@@ -31251,7 +31907,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18042
+  m_Name: pb_Mesh37988
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -31472,6 +32128,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (59)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -32167,6 +32831,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32871,6 +33543,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1137928898 stripped
@@ -33178,6 +33858,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &1159040463 stripped
@@ -33195,6 +33883,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -33450,6 +34146,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1168229275 stripped
@@ -33651,6 +34355,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34238,6 +34950,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &1205706445 stripped
@@ -34373,6 +35093,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -34864,6 +35592,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.0400009
@@ -35029,6 +35765,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -35517,7 +36261,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f7f5b48ca52e2424084009ece163e7ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -36330,6 +37074,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6561196856158435179, guid: 03b95d40f7c208f46a369e4f56579339, type: 3}
   m_PrefabInstance: {fileID: 1299478187}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1302557675 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3298514136003075760, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+  m_PrefabInstance: {fileID: 12999384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1316479702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36541,6 +37290,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.0400009
@@ -36654,6 +37411,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -38807,6 +39572,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &1369629373 stripped
@@ -38873,6 +39646,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &1372098131 stripped
@@ -38890,6 +39671,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39136,6 +39925,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &1376177970 stripped
@@ -39326,6 +40123,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39588,6 +40393,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -39892,6 +40705,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -40266,11 +41087,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4590690678371319652, guid: 67732b1fca177b34889a0c3de140a6a1, type: 3}
   m_PrefabInstance: {fileID: 197505813}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1421758927 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-  m_PrefabInstance: {fileID: 4116490433325582712}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1425630781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40329,6 +41145,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (38)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -41324,6 +42148,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (24)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.629997
@@ -41875,7 +42707,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: f7f5b48ca52e2424084009ece163e7ff, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -41977,6 +42809,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (49)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -42346,6 +43186,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7848244397640938841, guid: b727a61671b95ba40819a2f4340f04e2, type: 3}
   m_PrefabInstance: {fileID: 1500502997}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1502028113 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1760815821548676160, guid: 8b9e14efe3c80f14993a95947b45fec0, type: 3}
+  m_PrefabInstance: {fileID: 359002043}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1506575359 stripped
 Transform:
@@ -42850,6 +43695,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -43508,6 +44361,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1566466995 stripped
@@ -43772,6 +44633,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1578882411 stripped
@@ -43851,6 +44720,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -45582,7 +46459,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18922
+  m_Name: pb_Mesh194014
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -45874,6 +46751,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1613147850 stripped
@@ -45939,6 +46824,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (51)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -46304,6 +47197,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (44)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.889999
@@ -46369,6 +47270,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -46483,6 +47392,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -46953,7 +47870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.28, y: 3.94, z: -1.73}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1004331451}
@@ -47030,7 +47947,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20124
+  m_Name: pb_Mesh195200
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -47198,6 +48115,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53378,6 +54303,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (55)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1720226305 stripped
@@ -53395,6 +54328,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (35)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -53676,6 +54617,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1741329705 stripped
@@ -53820,6 +54769,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -54113,6 +55070,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1747455689 stripped
@@ -54252,6 +55217,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (45)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -54596,6 +55569,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59459,6 +60440,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (53)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1803375996 stripped
@@ -59838,6 +60827,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (23)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1828658434 stripped
@@ -59988,6 +60985,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -60358,6 +61363,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.629997
@@ -60614,6 +61627,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (54)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &1882453486 stripped
@@ -60633,7 +61654,7 @@ GameObject:
   - component: {fileID: 1888563065}
   m_Layer: 8
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60930,6 +61951,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -61238,6 +62267,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
 --- !u!4 &1899938690 stripped
@@ -61308,6 +62345,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -61788,6 +62833,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -62379,6 +63432,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -64481,6 +65542,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.880005
@@ -64668,6 +65737,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1 (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -65145,7 +66222,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19594
+  m_Name: pb_Mesh194688
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -65580,6 +66657,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (62)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -67134,6 +68219,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &2052072351 stripped
@@ -67288,7 +68381,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh20140
+  m_Name: pb_Mesh195216
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -70783,6 +71876,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2 (32)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74994,6 +76095,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3 (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!4 &2096910587 stripped
@@ -75133,6 +76242,14 @@ PrefabInstance:
     - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_3 (37)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
@@ -75306,6 +76423,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (42)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.889999
@@ -75372,6 +76497,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_2 (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.880005
@@ -75433,7 +76566,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19082
+  m_Name: pb_Mesh194166
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -76776,6 +77909,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tabua_Chao_3
       objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 4237330188071712146, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 310abe47ab3ef26488cbd4901073ff4e, type: 3}
 --- !u!1 &3948963147783241704 stripped
@@ -76802,83 +77943,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5689563536769115483, guid: 3cb6f24cfbc2e134e96dc0d747a5df9e, type: 3}
   m_PrefabInstance: {fileID: 8774338970609801906}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4116490433325582712
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 845476468}
-    m_Modifications:
-    - target: {fileID: 1815479776060510945, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: currentPoint
-      value: 
-      objectReference: {fileID: 287054149}
-    - target: {fileID: 4116490434590808234, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: patrol.patrolPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1759866481}
-    - target: {fileID: 4116490434590808234, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: patrol.patrolPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 62113381}
-    - target: {fileID: 4116490434590808234, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: patrol.patrolPoints.Array.data[2]
-      value: 
-      objectReference: {fileID: 277481953}
-    - target: {fileID: 4116490434590808234, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: hit.currentPoint
-      value: 
-      objectReference: {fileID: 287054149}
-    - target: {fileID: 4116490434590808246, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_Name
-      value: 'Enemy Graphics Butcher '
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 76.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 29
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 24.69
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4116490434590808247, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bfeb4b0dee0b02e4dab2db44c3422422, type: 3}
 --- !u!1001 &4205216180913162858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -77002,11 +78066,11 @@ PrefabInstance:
     - target: {fileID: 4210658610484514965, guid: e214a48a83fa93141936ac6e78c12795, type: 3}
       propertyPath: m_LookAt
       value: 
-      objectReference: {fileID: 33806286}
+      objectReference: {fileID: 1302557675}
     - target: {fileID: 4210658610484514965, guid: e214a48a83fa93141936ac6e78c12795, type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 33806285}
+      objectReference: {fileID: 12999385}
     - target: {fileID: 4210658610484514966, guid: e214a48a83fa93141936ac6e78c12795, type: 3}
       propertyPath: m_Name
       value: Third person Cam
@@ -77145,6 +78209,14 @@ PrefabInstance:
     - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1985653568898809175, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0987ce8e0d0370f43a09e1daf179a348, type: 3}
@@ -77559,6 +78631,14 @@ PrefabInstance:
     - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_Name
       value: Tabua_Chao_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5903895242081834541, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6531637683085134999, guid: 26b7c280c958d9442a08f5810148890c, type: 3}
       propertyPath: m_LocalPosition.x
