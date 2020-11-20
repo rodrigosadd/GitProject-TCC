@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 using UnityEngine.UI;
 
-public class MenuController : MonoBehaviour
+public class Settings : MonoBehaviour
 {
      public Dropdown resolutionDropdown;
 

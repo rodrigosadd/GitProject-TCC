@@ -13,7 +13,7 @@ public class Checkpoint : MonoBehaviour
                if (collider.tag == "Player")
                {
                     PlayerController.instance.death.currentPoint = spot;
-                    Debug.Log("entrou");
+                    Debug.Log("Checkpoint");
                }
           }
      }
