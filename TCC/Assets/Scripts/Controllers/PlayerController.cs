@@ -40,6 +40,7 @@ public class PlayerController : Character
           public Material handMaterial;
           public GameObject jumpEffect;
           public Transform boneHand;
+          public ParticleSystem fallingDust;
           public float doubleJumpCountdown;
           public float fallMultiplier;
           public float lowJumpMultiplier;
@@ -368,10 +369,12 @@ public class PlayerController : Character
                     if (_horizontal == 0 && _vertical == 0 && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_RUNNING)
                     {
                          movement.stateCharacter = CharacterState.FALLING_GROUND;
+                         jump.fallingDust.Play();
                     }
                     else if (movement.stateCharacter != CharacterState.FALLING_RUNNING && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter != CharacterState.FALLING_RUNNING)
                     {
                          movement.stateCharacter = CharacterState.FALLING_RUNNING;
+                         jump.fallingDust.Play();
                     }
                }
           }
@@ -567,7 +570,7 @@ public class PlayerController : Character
           }
      }
 
-     void CountdownAfterDeath()
+     public void CountdownAfterDeath()
      {
           if (death.dead)
           {

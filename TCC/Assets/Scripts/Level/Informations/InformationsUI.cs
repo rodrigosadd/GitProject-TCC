@@ -45,4 +45,14 @@ public class InformationsUI : MonoBehaviour
                trigged = true;
           }
      }
+
+     void OnTriggerExit(Collider collider)
+     {
+          if (collider.transform.tag == "Player")
+          {
+               informationsObj.SetActive(false);
+               gameObject.SetActive(false);
+               trigged = false;
+          }
+     }
 }
