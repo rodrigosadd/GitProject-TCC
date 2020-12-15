@@ -8,7 +8,6 @@ public class Camera3rdPerson : MonoBehaviour
      public Transform targetCamera;
      public float minDistance = 1.0f;
      public float maxDistance = 4.0f;
-     public float smoothnessToMoveCam = 0f;
      public float clampAngleUp = 80.0f;
      public float clampAngleDown = 50.0f;
      public float inputSensitivityX = 150.0f;

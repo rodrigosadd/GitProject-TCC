@@ -7,13 +7,53 @@ using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
 {
+     public GameObject settings;
      public Dropdown resolutionDropdown;
+     public Slider xSensitivitySlider;
+     public Slider ySensitivitySlider;
+     public Toggle invertXToggle;
+     public Toggle invertYToggle;
+     private bool _menuOpen = true;
 
      private Resolution[] _resolutions;
 
      void Start()
      {
           GetResolutions();
+     }
+
+     void Update()
+     {
+          Inputs();
+     }
+
+     public void Inputs()
+     {
+          if (Input.GetKeyDown(KeyCode.Escape) && _menuOpen)
+          {
+               Time.timeScale = 0;
+               settings.gameObject.SetActive(true);
+               Cursor.lockState = CursorLockMode.Confined;
+               Cursor.visible = true;
+               _menuOpen = false;
+          }
+          else if (Input.GetKeyDown(KeyCode.Escape) && !_menuOpen)
+          {
+               Time.timeScale = 1;
+               settings.gameObject.SetActive(false);
+               Cursor.lockState = CursorLockMode.Locked;
+               Cursor.visible = false;
+               _menuOpen = true;
+          }
+     }
+
+     public void Back()
+     {
+          Time.timeScale = 1;
+          settings.gameObject.SetActive(false);
+          Cursor.lockState = CursorLockMode.Locked;
+          Cursor.visible = false;
+          _menuOpen = true;
      }
 
      public void LoadScene(int IndexScene)
@@ -31,7 +71,7 @@ public class Settings : MonoBehaviour
           Screen.fullScreen = isFullscreen;
      }
 
-     void GetResolutions()
+     private void GetResolutions()
      {
           _resolutions = Screen.resolutions;
 
@@ -66,5 +106,25 @@ public class Settings : MonoBehaviour
      public void SetQuality(int qualityIndex)
      {
           QualitySettings.SetQualityLevel(qualityIndex);
+     }
+
+     public void SetXSensitivity(float sensitivity)
+     {
+          xSensitivitySlider.value = sensitivity;
+          Camera3rdPerson.instance.inputSensitivityX = sensitivity;
+     }
+     public void SetYSensitivity(float sensitivity)
+     {
+          ySensitivitySlider.value = sensitivity;
+          Camera3rdPerson.instance.inputSensitivityY = sensitivity;
+     }
+
+     public void SetInvertX(bool invert)
+     {
+          Camera3rdPerson.instance.invertAxisX = invert;
+     }
+     public void SetInvertY(bool invert)
+     {
+          Camera3rdPerson.instance.invertAxisY = invert;
      }
 }
