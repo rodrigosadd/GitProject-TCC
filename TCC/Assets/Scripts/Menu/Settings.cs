@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class Settings : MonoBehaviour
@@ -29,7 +27,7 @@ public class Settings : MonoBehaviour
 
      public void Inputs()
      {
-          if (Input.GetKeyDown(KeyCode.Escape) && _menuOpen)
+          if (Input.GetButtonDown("Cancel") && _menuOpen)
           {
                Time.timeScale = 0;
                settings.gameObject.SetActive(true);
@@ -37,7 +35,7 @@ public class Settings : MonoBehaviour
                Cursor.visible = true;
                _menuOpen = false;
           }
-          else if (Input.GetKeyDown(KeyCode.Escape) && !_menuOpen)
+          else if (Input.GetButtonDown("Cancel") && !_menuOpen)
           {
                Time.timeScale = 1;
                settings.gameObject.SetActive(false);
@@ -56,6 +54,11 @@ public class Settings : MonoBehaviour
           _menuOpen = true;
      }
 
+     public void SetFullscrenn(bool isFullscreen)
+     {
+          Screen.fullScreen = isFullscreen;
+     }
+
      public void LoadScene(int IndexScene)
      {
           SceneManager.LoadScene(IndexScene);
@@ -64,11 +67,6 @@ public class Settings : MonoBehaviour
      public void QuitGame()
      {
           Application.Quit();
-     }
-
-     public void SetFullscrenn(bool isFullscreen)
-     {
-          Screen.fullScreen = isFullscreen;
      }
 
      private void GetResolutions()
