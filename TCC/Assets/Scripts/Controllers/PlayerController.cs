@@ -352,7 +352,7 @@ public class PlayerController : Character
 
      public void FallingIdle()
      {
-          if (movement.rbody.velocity.y < 0f && jump.currentJump == 2 && movement.stateCharacter == CharacterState.DOUBLE_JUMP && !IsGrounded() && jump.currentJump >= jump.maxJump && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.SINGLE_JUMP && movement.stateCharacter != CharacterState.SINGLE_JUMP_RUNNING && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter != CharacterState.FALLING_RUNNING)
+          if (movement.rbody.velocity.y < 0f && jump.currentJump != 0 && !IsGrounded() && movement.stateCharacter != CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter != CharacterState.FALLING_RUNNING)
           {
                movement.stateCharacter = CharacterState.FALLING_IDLE;
           }
@@ -366,12 +366,12 @@ public class PlayerController : Character
 
                if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, jump.rangeFallingGround))
                {
-                    if (_horizontal == 0 && _vertical == 0 && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_RUNNING)
+                    if (_horizontal == 0 && _vertical == 0 && jump.currentJump != 1 && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_RUNNING)
                     {
                          movement.stateCharacter = CharacterState.FALLING_GROUND;
                          jump.fallingDust.Play();
                     }
-                    else if (movement.stateCharacter != CharacterState.FALLING_RUNNING && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter != CharacterState.FALLING_RUNNING)
+                    else if (jump.currentJump != 1 && movement.stateCharacter != CharacterState.FALLING_RUNNING && movement.stateCharacter == CharacterState.FALLING_IDLE && movement.stateCharacter != CharacterState.FALLING_GROUND && movement.stateCharacter != CharacterState.FALLING_RUNNING)
                     {
                          movement.stateCharacter = CharacterState.FALLING_RUNNING;
                          jump.fallingDust.Play();

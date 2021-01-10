@@ -17,6 +17,7 @@ public class Settings : MonoBehaviour
 
      void Start()
      {
+          //DontDestroyOnLoad(gameObject);
           GetResolutions();
      }
 
