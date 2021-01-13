@@ -12,12 +12,14 @@ public class SettingsData : MonoBehaviour
      public int invertX;
      public int invertY;
      public int isFullscreen;
+     public bool settingsOpen;
      private Resolution[] _resolutions;
 
      void Start()
      {
           DontDestroyOnLoad(gameObject);
           GetResolutions();
+          GameManager.instance.instanceSettingsData.ApplySettings();
      }
 
      public void GetResolutions()
@@ -38,7 +40,6 @@ public class SettingsData : MonoBehaviour
                     currentResolutionIndex = i;
                }
           }
-
           resolutionsString = options.ToArray();
      }
 

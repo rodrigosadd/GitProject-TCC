@@ -13,12 +13,13 @@ public class Settings : MonoBehaviour
      public Toggle invertXToggle;
      public Toggle invertYToggle;
      public Toggle isFullscreen;
-     public bool menuOpen = false;
+     public bool settingsOpen = false;
 
      void Start()
      {
           SetDropdownValues();
           InitializeUI();
+          GameManager.instance.instanceSettingsData.ApplySettings();
      }
 
      void Update()
@@ -28,21 +29,53 @@ public class Settings : MonoBehaviour
 
      public void Inputs()
      {
-          if (Input.GetButtonDown("Cancel") && menuOpen)
+          if (!IsMenuScene())
           {
-               Time.timeScale = 0;
-               settings.gameObject.SetActive(true);
-               Cursor.lockState = CursorLockMode.Confined;
-               Cursor.visible = true;
-               menuOpen = false;
+               if (Input.GetButtonDown("Cancel") && !settingsOpen)
+               {
+                    Time.timeScale = 0;
+                    settings.gameObject.SetActive(true);
+                    Cursor.lockState = CursorLockMode.Confined;
+                    Cursor.visible = true;
+                    settingsOpen = true;
+                    GetSettingsOpen();
+               }
+               else if (Input.GetButtonDown("Cancel") && settingsOpen)
+               {
+                    Time.timeScale = 1;
+                    settings.gameObject.SetActive(false);
+                    Cursor.lockState = CursorLockMode.Locked;
+                    Cursor.visible = false;
+                    settingsOpen = false;
+                    GetSettingsOpen();
+               }
           }
-          else if (Input.GetButtonDown("Cancel") && !menuOpen)
+     }
+
+     public void Back()
+     {
+          Time.timeScale = 1;
+          settings.gameObject.SetActive(false);
+          Cursor.lockState = CursorLockMode.Locked;
+          Cursor.visible = false;
+          settingsOpen = false;
+          GetSettingsOpen();
+     }
+
+     public void GetSettingsOpen()
+     {
+          GameManager.instance.instanceSettingsData.settingsOpen = settingsOpen;
+     }
+
+     public bool IsMenuScene()
+     {
+          if (SceneManager.GetActiveScene().name == "Menu")
           {
-               Time.timeScale = 1;
-               settings.gameObject.SetActive(false);
-               Cursor.lockState = CursorLockMode.Locked;
-               Cursor.visible = false;
-               menuOpen = true;
+               return true;
+          }
+          else
+          {
+               return false;
           }
      }
 
@@ -54,16 +87,8 @@ public class Settings : MonoBehaviour
           {
                _options.Add(GameManager.instance.instanceSettingsData.resolutionsString[i]);
           }
-          resolutionDropdown.AddOptions(_options);
-     }
 
-     public void Back()
-     {
-          Time.timeScale = 1;
-          settings.gameObject.SetActive(false);
-          Cursor.lockState = CursorLockMode.Locked;
-          Cursor.visible = false;
-          menuOpen = true;
+          resolutionDropdown.AddOptions(_options);
      }
 
      public void InitializeUI()
@@ -91,9 +116,9 @@ public class Settings : MonoBehaviour
           GameManager.instance.instanceSettingsData.ApplySettings();
      }
 
-     public void LoadScene(int IndexScene)
+     public void LoadScene(int indexScene)
      {
-          SceneManager.LoadScene(IndexScene);
+          SceneManager.LoadScene(indexScene);
      }
 
      public void QuitGame()

@@ -263,7 +263,7 @@ public class PlayerController : Character
      public void CharacterJump()
      {
           DoubleJumpCountdown();
-          if (Input.GetButtonDown("Jump") && !PlayerAttackController.instance.attaking && PlayerAttackController.instance.currentAttack == 0 && CanJump() && movement.stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0) && movement.stateCharacter != CharacterState.DEAD)
+          if (Input.GetButtonDown("Jump") && !PlayerAttackController.instance.attaking && PlayerAttackController.instance.currentAttack == 0 && CanJump() && !GameManager.instance.instanceSettingsData.settingsOpen && movement.stateCharacter != CharacterState.PUSHING && push.pushingObj == false && (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0) && movement.stateCharacter != CharacterState.DEAD)
           {
                movement.rbody.velocity = Vector3.up * jump.jumpForce;
                jump.doubleJumpCountdown = 0;
