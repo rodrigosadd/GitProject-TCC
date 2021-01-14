@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
      public static GameManager instance;
 
-     public SettingsData instanceSettingsData;
+     public SettingsData settingsData;
+     public SaveSettings saveSettings;
 
      void Awake()
      {

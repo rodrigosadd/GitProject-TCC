@@ -13,18 +13,21 @@ public class Settings : MonoBehaviour
      public Toggle invertXToggle;
      public Toggle invertYToggle;
      public Toggle isFullscreen;
+     public Button backButton;
      public bool settingsOpen = false;
 
      void Start()
      {
-          SetDropdownValues();
-          InitializeUI();
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          InitializeListerners();
+          SetupUIValues();
+          GameManager.instance.settingsData.ApplySettings();
      }
 
      void Update()
      {
           Inputs();
+          SetDropdownValues();
+          CheckUIValues();
      }
 
      public void Inputs()
@@ -48,23 +51,27 @@ public class Settings : MonoBehaviour
                     Cursor.visible = false;
                     settingsOpen = false;
                     GetSettingsOpen();
+                    GameManager.instance.saveSettings.Save();
                }
           }
      }
 
      public void Back()
      {
-          Time.timeScale = 1;
-          settings.gameObject.SetActive(false);
-          Cursor.lockState = CursorLockMode.Locked;
-          Cursor.visible = false;
-          settingsOpen = false;
-          GetSettingsOpen();
+          if (!IsMenuScene())
+          {
+               Time.timeScale = 1;
+               settings.gameObject.SetActive(false);
+               Cursor.lockState = CursorLockMode.Locked;
+               Cursor.visible = false;
+               settingsOpen = false;
+               GetSettingsOpen();
+          }
      }
 
      public void GetSettingsOpen()
      {
-          GameManager.instance.instanceSettingsData.settingsOpen = settingsOpen;
+          GameManager.instance.settingsData.settingsOpen = settingsOpen;
      }
 
      public bool IsMenuScene()
@@ -81,26 +88,21 @@ public class Settings : MonoBehaviour
 
      public void SetDropdownValues()
      {
-          resolutionDropdown.ClearOptions();
-          List<string> _options = new List<string>();
-          for (int i = 0; i < GameManager.instance.instanceSettingsData.resolutionsString.Length; i++)
+          if (resolutionDropdown.options.Count != GameManager.instance.settingsData.resolutionsString.Length)
           {
-               _options.Add(GameManager.instance.instanceSettingsData.resolutionsString[i]);
-          }
+               resolutionDropdown.ClearOptions();
+               List<string> _options = new List<string>();
+               for (int i = 0; i < GameManager.instance.settingsData.resolutionsString.Length; i++)
+               {
+                    _options.Add(GameManager.instance.settingsData.resolutionsString[i]);
+               }
 
-          resolutionDropdown.AddOptions(_options);
+               resolutionDropdown.AddOptions(_options);
+          }
      }
 
-     public void InitializeUI()
+     public void InitializeListerners()
      {
-          resolutionDropdown.value = GameManager.instance.instanceSettingsData.indexResolution;
-          qualityDropdown.value = GameManager.instance.instanceSettingsData.indexQuality;
-          xSensitivitySlider.value = GameManager.instance.instanceSettingsData.xSensitivity;
-          ySensitivitySlider.value = GameManager.instance.instanceSettingsData.ySensitivity;
-          invertXToggle.isOn = GameManager.instance.instanceSettingsData.invertX == 1;
-          invertYToggle.isOn = GameManager.instance.instanceSettingsData.invertY == 1;
-          isFullscreen.isOn = GameManager.instance.instanceSettingsData.isFullscreen == 1;
-
           resolutionDropdown.onValueChanged.AddListener(SetResolutions);
           qualityDropdown.onValueChanged.AddListener(SetQuality);
           xSensitivitySlider.onValueChanged.AddListener(SetXSensitivity);
@@ -108,12 +110,42 @@ public class Settings : MonoBehaviour
           invertXToggle.onValueChanged.AddListener(SetInvertX);
           invertYToggle.onValueChanged.AddListener(SetInvertY);
           isFullscreen.onValueChanged.AddListener(SetFullscreen);
+          backButton.onClick.AddListener(GameManager.instance.saveSettings.Save);
+     }
+
+     public void SetupUIValues()
+     {
+          resolutionDropdown.value = GameManager.instance.settingsData.indexResolution;
+          qualityDropdown.value = GameManager.instance.settingsData.indexQuality;
+          xSensitivitySlider.value = GameManager.instance.settingsData.xSensitivity;
+          ySensitivitySlider.value = GameManager.instance.settingsData.ySensitivity;
+          invertXToggle.isOn = GameManager.instance.settingsData.invertX == 1;
+          invertYToggle.isOn = GameManager.instance.settingsData.invertY == 1;
+          isFullscreen.isOn = GameManager.instance.settingsData.isFullscreen == 1;
+     }
+
+     public void CheckUIValues()
+     {
+          bool invertXtoggle = GameManager.instance.settingsData.invertX == 1;
+          bool invertYtoggle = GameManager.instance.settingsData.invertY == 1;
+          bool isFullScreenToggle = GameManager.instance.settingsData.isFullscreen == 1;
+
+          if (resolutionDropdown.value != GameManager.instance.settingsData.indexResolution ||
+             qualityDropdown.value != GameManager.instance.settingsData.indexQuality ||
+             xSensitivitySlider.value != GameManager.instance.settingsData.xSensitivity ||
+             ySensitivitySlider.value != GameManager.instance.settingsData.ySensitivity ||
+             invertXToggle.isOn != invertXtoggle ||
+             invertYToggle.isOn != invertYtoggle ||
+             isFullscreen.isOn != isFullScreenToggle)
+          {
+               SetupUIValues();
+          }
      }
 
      public void SetFullscreen(bool isFullscreen)
      {
-          GameManager.instance.instanceSettingsData.isFullscreen = (isFullscreen) ? 1 : 0;
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.settingsData.isFullscreen = (isFullscreen) ? 1 : 0;
+          GameManager.instance.settingsData.ApplySettings();
      }
 
      public void LoadScene(int indexScene)
@@ -128,37 +160,37 @@ public class Settings : MonoBehaviour
 
      public void SetResolutions(int resolutionIndex)
      {
-          GameManager.instance.instanceSettingsData.indexResolution = resolutionIndex;
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.settingsData.indexResolution = resolutionIndex;
+          GameManager.instance.settingsData.ApplySettings();
      }
 
      public void SetQuality(int qualityIndex)
      {
-          GameManager.instance.instanceSettingsData.indexQuality = qualityIndex;
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.settingsData.indexQuality = qualityIndex;
+          GameManager.instance.settingsData.ApplySettings();
      }
 
      public void SetXSensitivity(float sensitivity)
      {
           xSensitivitySlider.value = sensitivity;
-          GameManager.instance.instanceSettingsData.xSensitivity = sensitivity;
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.settingsData.xSensitivity = sensitivity;
+          GameManager.instance.settingsData.ApplySettings();
      }
      public void SetYSensitivity(float sensitivity)
      {
           ySensitivitySlider.value = sensitivity;
-          GameManager.instance.instanceSettingsData.ySensitivity = sensitivity;
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.settingsData.ySensitivity = sensitivity;
+          GameManager.instance.settingsData.ApplySettings();
      }
 
      public void SetInvertX(bool invert)
      {
-          GameManager.instance.instanceSettingsData.invertX = (invert) ? 1 : 0;
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.settingsData.invertX = (invert) ? 1 : 0;
+          GameManager.instance.settingsData.ApplySettings();
      }
      public void SetInvertY(bool invert)
      {
-          GameManager.instance.instanceSettingsData.invertY = (invert) ? 1 : 0;
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.settingsData.invertY = (invert) ? 1 : 0;
+          GameManager.instance.settingsData.ApplySettings();
      }
 }

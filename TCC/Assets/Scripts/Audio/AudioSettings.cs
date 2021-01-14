@@ -4,57 +4,63 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 
-public class AudioSettings : MonoBehaviour {
-    [EventRef]public string menuMoveSound;
-    [EventRef]public string menuConfirmSound;
+public class AudioSettings : MonoBehaviour
+{
+     [EventRef] public string menuMoveSound;
+     [EventRef] public string menuConfirmSound;
 
-    EventInstance SFXVolumeTestEvent;
+     EventInstance SFXVolumeTestEvent;
 
-    Bus Music;
-    Bus SFX;
-    Bus Master;
-    float musicVolume = 1.0f;
-    float SFXVolume = 1.0f;
-    float masterVolume = 1.0f;
-    // Start is called before the first frame update
-    void Awake () {
-        Music = RuntimeManager.GetBus ("bus:/Master/Music");
-        SFX = RuntimeManager.GetBus ("bus:/Master/SFX");
-        Master = RuntimeManager.GetBus ("bus:/Master");
-        SFXVolumeTestEvent = RuntimeManager.CreateInstance ("event:/Pickaxe");
-        DontDestroyOnLoad(gameObject);
-    }
+     Bus Music;
+     Bus SFX;
+     Bus Master;
+     float musicVolume = 1.0f;
+     float SFXVolume = 1.0f;
+     float masterVolume = 1.0f;
 
-    // Update is called once per frame
-    void Update () {
-        Music.setVolume (musicVolume);
-        SFX.setVolume (SFXVolume);
-        Master.setVolume (masterVolume);
-    }
+     void Awake()
+     {
+          Music = RuntimeManager.GetBus("bus:/Master/Music");
+          SFX = RuntimeManager.GetBus("bus:/Master/SFX");
+          Master = RuntimeManager.GetBus("bus:/Master");
+          SFXVolumeTestEvent = RuntimeManager.CreateInstance("event:/Pickaxe");
+          DontDestroyOnLoad(gameObject);
+     }
 
-    public void MusicVolumeLevel (float newVolume) {
-        musicVolume = newVolume;
-    }
-    public void SFXVolumeLevel (float newVolume) {
-        SFXVolume = newVolume;
+     void Update()
+     {
+          Music.setVolume(musicVolume);
+          SFX.setVolume(SFXVolume);
+          Master.setVolume(masterVolume);
+     }
 
-        //Toca o som durante o ajuste de volume.
-        PLAYBACK_STATE pbState;
-        SFXVolumeTestEvent.getPlaybackState (out pbState);
-        if (pbState != PLAYBACK_STATE.PLAYING)
-            SFXVolumeTestEvent.start ();
-    }
-    public void MasterVolumeLevel (float newVolume) {
-        masterVolume = newVolume;
-    }
+     public void MusicVolumeLevel(float newVolume)
+     {
+          musicVolume = newVolume;
+     }
+     public void SFXVolumeLevel(float newVolume)
+     {
+          SFXVolume = newVolume;
 
-    public void PlayMoveSound()
-    {
-        RuntimeManager.PlayOneShot(menuMoveSound);
-    }
+          //Toca o som durante o ajuste de volume.
+          PLAYBACK_STATE pbState;
+          SFXVolumeTestEvent.getPlaybackState(out pbState);
+          if (pbState != PLAYBACK_STATE.PLAYING)
+               SFXVolumeTestEvent.start();
+     }
 
-    public void PlayConfirmSound()
-    {
-        RuntimeManager.PlayOneShot(menuConfirmSound);
-    }
+     public void MasterVolumeLevel(float newVolume)
+     {
+          masterVolume = newVolume;
+     }
+
+     public void PlayMoveSound()
+     {
+          RuntimeManager.PlayOneShot(menuMoveSound);
+     }
+
+     public void PlayConfirmSound()
+     {
+          RuntimeManager.PlayOneShot(menuConfirmSound);
+     }
 }

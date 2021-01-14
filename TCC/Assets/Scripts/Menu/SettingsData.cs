@@ -19,7 +19,8 @@ public class SettingsData : MonoBehaviour
      {
           DontDestroyOnLoad(gameObject);
           GetResolutions();
-          GameManager.instance.instanceSettingsData.ApplySettings();
+          GameManager.instance.saveSettings.Load();
+          GameManager.instance.settingsData.ApplySettings();
      }
 
      public void GetResolutions()
@@ -46,6 +47,10 @@ public class SettingsData : MonoBehaviour
      public void ApplySettings()
      {
           //Set Resolution
+          if (_resolutions == null)
+          {
+               GetResolutions();
+          }
           Resolution resolution = _resolutions[indexResolution];
           Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
 
