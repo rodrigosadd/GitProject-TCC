@@ -2,10 +2,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Settings : MonoBehaviour
 {
-     public GameObject settings;
+     public GameObject settings, confirmQuitPanel, quitButton, menuButton;
+     public GameObject[] firstButtons;
      public Dropdown resolutionDropdown;
      public Dropdown qualityDropdown;
      public Slider xSensitivitySlider;
@@ -28,6 +30,18 @@ public class Settings : MonoBehaviour
           Inputs();
           SetDropdownValues();
           CheckUIValues();
+          ActiveButtons();
+     }
+
+     public void LoadScene(int indexScene)
+     {
+          SceneManager.LoadScene(indexScene);
+     }
+
+     public void QuitGame()
+     {
+          Debug.Log("Quit!");
+          Application.Quit();
      }
 
      public void Inputs()
@@ -36,22 +50,24 @@ public class Settings : MonoBehaviour
           {
                if (Input.GetButtonDown("Cancel") && !settingsOpen)
                {
-                    Time.timeScale = 0;
+                    SetPauseTimeScale();
                     settings.gameObject.SetActive(true);
                     Cursor.lockState = CursorLockMode.Confined;
                     Cursor.visible = true;
                     settingsOpen = true;
                     GetSettingsOpen();
+                    OpenSettings();
                }
                else if (Input.GetButtonDown("Cancel") && settingsOpen)
                {
-                    Time.timeScale = 1;
+                    SetNormalTimeScale();
                     settings.gameObject.SetActive(false);
                     Cursor.lockState = CursorLockMode.Locked;
                     Cursor.visible = false;
                     settingsOpen = false;
                     GetSettingsOpen();
                     GameManager.instance.saveSettings.Save();
+                    CloseSettings();
                }
           }
      }
@@ -60,12 +76,13 @@ public class Settings : MonoBehaviour
      {
           if (!IsMenuScene())
           {
-               Time.timeScale = 1;
+               SetNormalTimeScale();
                settings.gameObject.SetActive(false);
                Cursor.lockState = CursorLockMode.Locked;
                Cursor.visible = false;
                settingsOpen = false;
                GetSettingsOpen();
+               CloseSettings();
           }
      }
 
@@ -86,6 +103,59 @@ public class Settings : MonoBehaviour
           }
      }
 
+     public void SetNormalTimeScale()
+     {
+          Time.timeScale = 1;
+     }
+
+     public void SetPauseTimeScale()
+     {
+          Time.timeScale = 0;
+     }
+
+     public void OpenSettings()
+     {
+          if (settings.activeSelf)
+          {
+               EventSystem.current.SetSelectedGameObject(null);
+               EventSystem.current.SetSelectedGameObject(firstButtons[0]);
+          }
+     }
+
+     public void CloseSettings()
+     {
+          EventSystem.current.SetSelectedGameObject(null);
+     }
+
+     public void OpenConfirmQuit()
+     {
+          if (confirmQuitPanel.activeSelf)
+          {
+               EventSystem.current.SetSelectedGameObject(null);
+               EventSystem.current.SetSelectedGameObject(firstButtons[1]);
+          }
+     }
+
+     public void CloseConfirmQuit()
+     {
+          EventSystem.current.SetSelectedGameObject(null);
+          EventSystem.current.SetSelectedGameObject(firstButtons[0]);
+     }
+
+     public void ActiveButtons()
+     {
+          if (!IsMenuScene())
+          {
+               quitButton.SetActive(true);
+               menuButton.SetActive(true);
+          }
+          else
+          {
+               quitButton.SetActive(false);
+               menuButton.SetActive(false);
+          }
+     }
+
      public void SetDropdownValues()
      {
           if (resolutionDropdown.options.Count != GameManager.instance.settingsData.resolutionsString.Length)
@@ -98,6 +168,8 @@ public class Settings : MonoBehaviour
                }
 
                resolutionDropdown.AddOptions(_options);
+               resolutionDropdown.value = GameManager.instance.settingsData.currentResolutionIndex;
+               resolutionDropdown.RefreshShownValue();
           }
      }
 
@@ -146,16 +218,6 @@ public class Settings : MonoBehaviour
      {
           GameManager.instance.settingsData.isFullscreen = (isFullscreen) ? 1 : 0;
           GameManager.instance.settingsData.ApplySettings();
-     }
-
-     public void LoadScene(int indexScene)
-     {
-          SceneManager.LoadScene(indexScene);
-     }
-
-     public void QuitGame()
-     {
-          Application.Quit();
      }
 
      public void SetResolutions(int resolutionIndex)

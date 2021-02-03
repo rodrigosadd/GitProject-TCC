@@ -7,16 +7,6 @@ public class Menu : MonoBehaviour
      public GameObject[] firstButtons;
      public GameObject settingsPanel, creditsPanel, quitPanel;
 
-     public void LoadScene(int IndexScene)
-     {
-          SceneManager.LoadScene(IndexScene);
-     }
-
-     public void QuitGame()
-     {
-          Application.Quit();
-     }
-
      public void OpenSettings()
      {
           if (settingsPanel.activeSelf)

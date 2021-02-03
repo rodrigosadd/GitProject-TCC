@@ -6,6 +6,7 @@ public class SettingsData : MonoBehaviour
 {
      public string[] resolutionsString;
      public int indexResolution;
+     public int currentResolutionIndex = 0;
      public int indexQuality;
      public float xSensitivity;
      public float ySensitivity;
@@ -29,7 +30,6 @@ public class SettingsData : MonoBehaviour
 
           List<string> options = new List<string>();
 
-          int currentResolutionIndex = 0;
           for (int i = 0; i < _resolutions.Length; i++)
           {
                string option = _resolutions[i].width + "x" + _resolutions[i].height;

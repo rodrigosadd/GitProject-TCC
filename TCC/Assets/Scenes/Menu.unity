@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resolutionsString: []
   indexResolution: 12
+  currentResolutionIndex: 0
   indexQuality: 2
   xSensitivity: 100
   ySensitivity: 100
@@ -4802,34 +4803,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 153264546}
     m_Modifications:
-    - target: {fileID: 2381321958493133859, guid: af70988d273ac124795d0b6396f5e324, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2381321958493133859, guid: af70988d273ac124795d0b6396f5e324, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 2381321958493133859, guid: af70988d273ac124795d0b6396f5e324, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 2381321958493133859, guid: af70988d273ac124795d0b6396f5e324, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2381321958493133859, guid: af70988d273ac124795d0b6396f5e324, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+    - target: {fileID: 2381321957393720726, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1286912418}
+      objectReference: {fileID: 2017179810}
+    - target: {fileID: 2381321957899258746, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2017179810}
     - target: {fileID: 2381321958493133859, guid: af70988d273ac124795d0b6396f5e324, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 2381321958493133859, guid: af70988d273ac124795d0b6396f5e324, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 934681646}
+    - target: {fileID: 2381321958752358274, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2017179810}
     - target: {fileID: 7686950024654964190, guid: af70988d273ac124795d0b6396f5e324, type: 3}
       propertyPath: m_Name
       value: 'Panel_Settings '
