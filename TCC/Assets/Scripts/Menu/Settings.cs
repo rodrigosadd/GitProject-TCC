@@ -8,6 +8,9 @@ public class Settings : MonoBehaviour
 {
      public GameObject settings, confirmQuitPanel, quitButton, menuButton;
      public GameObject[] firstButtons;
+     public Slider masterSlider;
+     public Slider musicSlider;
+     public Slider sfxSlider;
      public Dropdown resolutionDropdown;
      public Dropdown qualityDropdown;
      public Slider xSensitivitySlider;
@@ -35,6 +38,7 @@ public class Settings : MonoBehaviour
 
      public void LoadScene(int indexScene)
      {
+          GameManager.instance.saveSettings.Save();
           SceneManager.LoadScene(indexScene);
      }
 
@@ -82,7 +86,15 @@ public class Settings : MonoBehaviour
                Cursor.visible = false;
                settingsOpen = false;
                GetSettingsOpen();
+               GameManager.instance.saveSettings.Save();
                CloseSettings();
+          }
+          else
+          {
+               settings.gameObject.SetActive(false);
+               settingsOpen = false;
+               GetSettingsOpen();
+               GameManager.instance.saveSettings.Save();
           }
      }
 
@@ -125,6 +137,7 @@ public class Settings : MonoBehaviour
      public void CloseSettings()
      {
           EventSystem.current.SetSelectedGameObject(null);
+          EventSystem.current.SetSelectedGameObject(firstButtons[1]);
      }
 
      public void OpenConfirmQuit()
@@ -132,7 +145,7 @@ public class Settings : MonoBehaviour
           if (confirmQuitPanel.activeSelf)
           {
                EventSystem.current.SetSelectedGameObject(null);
-               EventSystem.current.SetSelectedGameObject(firstButtons[1]);
+               EventSystem.current.SetSelectedGameObject(firstButtons[2]);
           }
      }
 
@@ -175,6 +188,9 @@ public class Settings : MonoBehaviour
 
      public void InitializeListerners()
      {
+          masterSlider.onValueChanged.AddListener(GameManager.instance.audioSettings.MasterVolumeLevel);
+          musicSlider.onValueChanged.AddListener(GameManager.instance.audioSettings.MusicVolumeLevel);
+          sfxSlider.onValueChanged.AddListener(GameManager.instance.audioSettings.SFXVolumeLevel);
           resolutionDropdown.onValueChanged.AddListener(SetResolutions);
           qualityDropdown.onValueChanged.AddListener(SetQuality);
           xSensitivitySlider.onValueChanged.AddListener(SetXSensitivity);
@@ -187,6 +203,9 @@ public class Settings : MonoBehaviour
 
      public void SetupUIValues()
      {
+          masterSlider.value = GameManager.instance.settingsData.masterVolume;
+          musicSlider.value = GameManager.instance.settingsData.musicVolume;
+          sfxSlider.value = GameManager.instance.settingsData.SFXVolume;
           resolutionDropdown.value = GameManager.instance.settingsData.indexResolution;
           qualityDropdown.value = GameManager.instance.settingsData.indexQuality;
           xSensitivitySlider.value = GameManager.instance.settingsData.xSensitivity;
@@ -202,13 +221,16 @@ public class Settings : MonoBehaviour
           bool invertYtoggle = GameManager.instance.settingsData.invertY == 1;
           bool isFullScreenToggle = GameManager.instance.settingsData.isFullscreen == 1;
 
-          if (resolutionDropdown.value != GameManager.instance.settingsData.indexResolution ||
-             qualityDropdown.value != GameManager.instance.settingsData.indexQuality ||
-             xSensitivitySlider.value != GameManager.instance.settingsData.xSensitivity ||
-             ySensitivitySlider.value != GameManager.instance.settingsData.ySensitivity ||
-             invertXToggle.isOn != invertXtoggle ||
-             invertYToggle.isOn != invertYtoggle ||
-             isFullscreen.isOn != isFullScreenToggle)
+          if (masterSlider.value != GameManager.instance.settingsData.masterVolume ||
+              musicSlider.value != GameManager.instance.settingsData.musicVolume ||
+              sfxSlider.value != GameManager.instance.settingsData.SFXVolume ||
+              resolutionDropdown.value != GameManager.instance.settingsData.indexResolution ||
+              qualityDropdown.value != GameManager.instance.settingsData.indexQuality ||
+              xSensitivitySlider.value != GameManager.instance.settingsData.xSensitivity ||
+              ySensitivitySlider.value != GameManager.instance.settingsData.ySensitivity ||
+              invertXToggle.isOn != invertXtoggle ||
+              invertYToggle.isOn != invertYtoggle ||
+              isFullscreen.isOn != isFullScreenToggle)
           {
                SetupUIValues();
           }

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SettingsData : MonoBehaviour
 {
+     public float masterVolume;
+     public float musicVolume;
+     public float SFXVolume;
      public string[] resolutionsString;
      public int indexResolution;
      public int currentResolutionIndex = 0;
@@ -46,6 +49,7 @@ public class SettingsData : MonoBehaviour
 
      public void ApplySettings()
      {
+
           //Set Resolution
           if (_resolutions == null)
           {

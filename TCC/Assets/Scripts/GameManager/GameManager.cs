@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
      public SettingsData settingsData;
      public SaveSettings saveSettings;
+     public AudioSettings audioSettings;
 
      void Awake()
      {
