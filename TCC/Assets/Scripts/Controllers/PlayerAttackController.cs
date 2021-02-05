@@ -39,7 +39,12 @@ public class PlayerAttackController : MonoBehaviour
 
      public void InputsAttack()
      {
-          if (Input.GetButtonDown("Fire1") && !GameManager.instance.settingsData.settingsOpen && PlayerController.instance.movement.slowed == false && (PlayerController.instance.movement.stateCharacter == CharacterState.RUNNNING || PlayerController.instance.movement.stateCharacter == CharacterState.IDLE) && !PlayerController.instance.death.dead)
+          if (Input.GetButtonDown("Fire1") &&
+              !GameManager.instance.settingsData.settingsOpen &&
+              PlayerController.instance.movement.slowed == false &&
+              (PlayerController.instance.movement.stateCharacter == CharacterState.RUNNNING ||
+              PlayerController.instance.movement.stateCharacter == CharacterState.IDLE) &&
+              !PlayerController.instance.death.dead)
           {
                if (!attaking)
                {
