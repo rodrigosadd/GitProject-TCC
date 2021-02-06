@@ -353,7 +353,8 @@ public class PlayerController : Character
      #region Pushing Object
      private void PushingObject()
      {
-          if (Input.GetButton("Fire2") && PlayerAttackController.instance.currentAttack == 0)
+          if (Input.GetButton("Fire2") &&
+              PlayerAttackController.instance.currentAttack == 0)
           {
                PushObject();
           }

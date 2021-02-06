@@ -22,8 +22,7 @@ public class PlayerStateController : MonoBehaviour
                         PlayerController.instance.IsGrounded() &&
                         PlayerController.instance.push.pushingObj == false &&
                         PlayerController.instance.movement.stateCharacter != CharacterState.DEAD &&
-                        PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_IDLE &&
-                        PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_GROUND)
+                        PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_IDLE)
                {
                     PlayerController.instance.movement.stateCharacter = CharacterState.IDLE;
                }
@@ -94,9 +93,10 @@ public class PlayerStateController : MonoBehaviour
                PlayerController.instance.movement.stateCharacter = CharacterState.PUSHING_IDLE;
           }
           else if ((PlayerController.instance.horizontal != 0 || PlayerController.instance.vertical != 0) &&
+                    PlayerController.instance.push.pushingObj == true &&
                     PlayerController.instance.movement.stateCharacter != CharacterState.PUSHING &&
                     PlayerController.instance.movement.stateCharacter != CharacterState.DEAD &&
-                    PlayerController.instance.push.pushingObj == true)
+                    PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_IDLE)
           {
                PlayerController.instance.movement.stateCharacter = CharacterState.PUSHING;
           }
@@ -109,7 +109,8 @@ public class PlayerStateController : MonoBehaviour
               !PlayerController.instance.IsGrounded() &&
               PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_IDLE &&
               PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_GROUND &&
-              PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_RUNNING)
+              PlayerController.instance.movement.stateCharacter != CharacterState.FALLING_RUNNING &&
+              PlayerController.instance.movement.stateCharacter != CharacterState.PUSHING)
           {
                PlayerController.instance.movement.stateCharacter = CharacterState.FALLING_IDLE;
           }

@@ -15,7 +15,9 @@ public class PlayerAttackController : MonoBehaviour
      public float maxDistanceAttack;
      public float attackImpulse;
      public float distanceImpulse;
+     public float timeToResetAttack;
      public bool attaking;
+     private float _countdownReset;
 
 #if UNITY_EDITOR
      public bool seeAttackRange;
@@ -35,6 +37,7 @@ public class PlayerAttackController : MonoBehaviour
           InputsAttack();
           CanAttack();
           Impulse();
+          CheckAttaking();
      }
 
      public void InputsAttack()
@@ -60,7 +63,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void FirstAttack()
      {
-          if (!PlayerController.instance.death.dead)
+          if (!PlayerController.instance.death.dead && currentAttack != 3)
           {
                _lastAttackTime = Time.time;
                currentAttack++;
@@ -139,6 +142,26 @@ public class PlayerAttackController : MonoBehaviour
           attaking = false;
           currentAttack = 0;
           _finalImpulse = Vector3.zero;
+     }
+
+     public void CheckAttaking()
+     {
+          if (currentAttack != 0)
+          {
+               if (_countdownReset < 1)
+               {
+                    _countdownReset += Time.deltaTime / timeToResetAttack;
+               }
+               else
+               {
+                    _countdownReset = 0;
+                    ResetAttack();
+               }
+          }
+          else
+          {
+               _countdownReset = 0;
+          }
      }
 
      public void Attaking()
