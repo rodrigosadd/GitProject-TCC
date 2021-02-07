@@ -141,7 +141,6 @@ public class PlayerController : Character
           CharacterFace();
           SlopeDetector();
           SetHandShader();
-          PlayerAnimations();
           CatchMissedJumps();
           JumpShadow();
           CheckDeath();
@@ -151,18 +150,20 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          vertical = Input.GetAxis("Vertical");
-          horizontal = Input.GetAxis("Horizontal");
-
-          if (movement.stateCharacter == CharacterState.BALANCE && (horizontal != 0 || vertical != 0))
+          if (!death.dead)
           {
-               _cliffDectorLockPlayer = false;
-               horizontal = 0;
-               vertical = 0;
-               return;
-          }
+               vertical = Input.GetAxis("Vertical");
+               horizontal = Input.GetAxis("Horizontal");
 
-          CharacterMovement();
+               if (movement.stateCharacter == CharacterState.BALANCE && (horizontal != 0 || vertical != 0))
+               {
+                    _cliffDectorLockPlayer = false;
+                    horizontal = 0;
+                    vertical = 0;
+                    return;
+               }
+               CharacterMovement();
+          }
      }
 
      public void CharacterMovement()
@@ -235,8 +236,7 @@ public class PlayerController : Character
               !PlayerAttackController.instance.attaking &&
               PlayerAttackController.instance.currentAttack == 0 &&
               !GameManager.instance.settingsData.settingsOpen &&
-              movement.stateCharacter != CharacterState.PUSHING &&
-              movement.stateCharacter != CharacterState.DEAD &&
+              !PlayerAnimationController.instance.afterFalling &&
               (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0))
           {
                movement.rbody.velocity = Vector3.up * jump.jumpForce;
@@ -425,18 +425,11 @@ public class PlayerController : Character
 
           if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && IsGrounded() && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed)
           {
-               if (movement.stateCharacter != CharacterState.BALANCE)
-               {
-                    movement.stateCharacter = CharacterState.BALANCE;
-               }
+               PlayerAnimationController.instance.SetBalance();
           }
           else if (Physics.Raycast(_ray, cliff.cliffDetectorHeightDist))
           {
                _cliffDectorLockPlayer = true;
-               if (movement.stateCharacter == CharacterState.BALANCE)
-               {
-                    movement.stateCharacter = CharacterState.RUNNNING;
-               }
           }
      }
 
@@ -488,7 +481,6 @@ public class PlayerController : Character
                              _hitInfo.transform.tag == "Ground")
                          {
                               transform.position = _hitInfo.point + new Vector3(0f, death.offsetDead, 0f);
-                              movement.stateCharacter = CharacterState.DEAD;
                               movement.rbody.constraints = RigidbodyConstraints.FreezePosition;
                               characterCollider.enabled = false;
                               _currentMaxSpeed = movement.fixedMaxSpeed;
@@ -512,195 +504,15 @@ public class PlayerController : Character
                {
                     PlayerAttackController.instance.ResetAttack();
                     hit.hitCount = 0;
-                    movement.stateCharacter = CharacterState.IDLE;
                     transform.position = death.currentPoint.position;
                     movement.rbody.constraints = RigidbodyConstraints.FreezeRotation;
                     characterCollider.enabled = true;
                     movement.maxSpeed = _currentMaxSpeed;
                     _countdownDeath = 0;
                     death.dead = false;
+                    PlayerController.instance.animator.SetBool("Idle", true);
+                    PlayerController.instance.animator.SetBool("Dying", false);
                }
-          }
-     }
-     #endregion
-
-     #region Animations
-     public void PlayerAnimations()
-     {
-          animator.SetFloat("Horizontal", horizontal);
-          animator.SetFloat("Vertical", vertical);
-          animator.SetBool("IsGrounded", IsGrounded());
-
-          switch (movement.stateCharacter)
-          {
-               case CharacterState.IDLE:
-                    animator.SetBool("Idle", true);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.RUNNNING:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", true);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.SINGLE_JUMP:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", true);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.SINGLE_JUMP_RUNNING:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", true);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.DOUBLE_JUMP:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", true);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.PUSHING_IDLE:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", true);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.PUSHING:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", true);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.DEAD:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", true);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.BALANCE:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", true);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.FALLING_IDLE:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", true);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.FALLING_GROUND:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", true);
-                    animator.SetBool("Falling Running", false);
-                    break;
-               case CharacterState.FALLING_RUNNING:
-                    animator.SetBool("Idle", false);
-                    animator.SetBool("Running", false);
-                    animator.SetBool("Single Jump", false);
-                    animator.SetBool("Single Jump Running", false);
-                    animator.SetBool("Double Jump", false);
-                    animator.SetBool("Pushing", false);
-                    animator.SetBool("Pushing Idle", false);
-                    animator.SetBool("Dying", false);
-                    animator.SetBool("Balance", false);
-                    animator.SetBool("Falling Idle", false);
-                    animator.SetBool("Falling Ground", false);
-                    animator.SetBool("Falling Running", true);
-                    break;
           }
      }
      #endregion

@@ -45,8 +45,6 @@ public class PlayerAttackController : MonoBehaviour
           if (Input.GetButtonDown("Fire1") &&
               !GameManager.instance.settingsData.settingsOpen &&
               PlayerController.instance.movement.slowed == false &&
-              (PlayerController.instance.movement.stateCharacter == CharacterState.RUNNNING ||
-              PlayerController.instance.movement.stateCharacter == CharacterState.IDLE) &&
               !PlayerController.instance.death.dead)
           {
                if (!attaking)
@@ -70,7 +68,7 @@ public class PlayerAttackController : MonoBehaviour
 
                if (currentAttack == 1)
                {
-                    PlayerController.instance.animator.SetBool("First Attack", true);
+                    PlayerAnimationController.instance.SetFirstAttack();
                     trails[0].SetActive(true);
                     trails[1].SetActive(true);
                     trails[2].SetActive(true);
@@ -85,14 +83,14 @@ public class PlayerAttackController : MonoBehaviour
           {
                if (currentAttack >= 2)
                {
-                    PlayerController.instance.animator.SetBool("Second Attack", true);
+                    PlayerAnimationController.instance.SetSecondAttack();
                     trails[0].SetActive(true);
                     trails[1].SetActive(true);
                     trails[2].SetActive(true);
                }
                else
                {
-                    PlayerController.instance.animator.SetBool("First Attack", false);
+                    PlayerAnimationController.instance.ResetFirstAttack();
                     trails[0].SetActive(false);
                     trails[1].SetActive(false);
                     trails[2].SetActive(false);
@@ -110,15 +108,15 @@ public class PlayerAttackController : MonoBehaviour
           {
                if (currentAttack >= 3)
                {
-                    PlayerController.instance.animator.SetBool("Final Attack", true);
+                    PlayerAnimationController.instance.SetFinalAttack();
                     trails[0].SetActive(true);
                     trails[1].SetActive(true);
                     trails[2].SetActive(true);
                }
                else
                {
-                    PlayerController.instance.animator.SetBool("Second Attack", false);
-                    PlayerController.instance.animator.SetBool("First Attack", false);
+                    PlayerAnimationController.instance.ResetFirstAttack();
+                    PlayerAnimationController.instance.ResetSecondAttack();
                     trails[0].SetActive(false);
                     trails[1].SetActive(false);
                     trails[2].SetActive(false);
@@ -132,9 +130,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void ResetAttack()
      {
-          PlayerController.instance.animator.SetBool("First Attack", false);
-          PlayerController.instance.animator.SetBool("Second Attack", false);
-          PlayerController.instance.animator.SetBool("Final Attack", false);
+          PlayerAnimationController.instance.ResetAttacks();
           trails[0].SetActive(false);
           trails[1].SetActive(false);
           trails[2].SetActive(false);

@@ -5965,6 +5965,8 @@ MonoBehaviour:
     turnSmoothtime: 0.1
     fixedMaxSpeed: 0
     slowed: 0
+  horizontal: 0
+  vertical: 0
   jump:
     groundLayer:
       serializedVersion: 2
@@ -16077,10 +16079,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8340338824846291260}
-  - component: {fileID: 6995068270813550338}
+  - component: {fileID: 2807682781122924960}
   - component: {fileID: 6982425783301506864}
   - component: {fileID: 7024965970814197559}
   - component: {fileID: 2202987477871483687}
+  - component: {fileID: 6995068270813550338}
   m_Layer: 11
   m_Name: Graphics Beto
   m_TagString: Player
@@ -16112,25 +16115,20 @@ Transform:
   m_Father: {fileID: 3298514136166854644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &6995068270813550338
-Animator:
-  serializedVersion: 3
+--- !u!114 &2807682781122924960
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4492273609177044784}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c112a2a796fb4b44f8fd6469cb812bf8, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b3c4c8f5a4ffc4f8dd8549ed83b861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToJump: 0.25
+  afterFalling: 0
 --- !u!114 &6982425783301506864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16153,10 +16151,11 @@ MonoBehaviour:
   - {fileID: 7559357366843285174}
   maxCombo: 3
   currentAttack: 0
-  delayNextAttack: 2
+  delayNextAttack: 1.5
   maxDistanceAttack: 1.5
   attackImpulse: 10
   distanceImpulse: 2
+  timeToResetAttack: 1.5
   attaking: 0
   seeAttackRange: 0
 --- !u!114 &7024965970814197559
@@ -16199,6 +16198,25 @@ MonoBehaviour:
   minningSound: event:/Pickaxe
   deathCry: event:/Shout
   boxPushingSound: event:/Boulder
+--- !u!95 &6995068270813550338
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492273609177044784}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c112a2a796fb4b44f8fd6469cb812bf8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4507179826497727707
 GameObject:
   m_ObjectHideFlags: 0
