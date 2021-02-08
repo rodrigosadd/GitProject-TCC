@@ -13,12 +13,10 @@ public class PlayerController : Character
      private float _targetAngle;
      private float _angle;
      private float _turnSmoothVelocity;
-     public float horizontal, vertical;
 
      [System.Serializable]
      public class Movement
      {
-          public CharacterState stateCharacter;
           public Rigidbody rbody;
           public Transform cam;
           public float maxSpeed;
@@ -27,6 +25,7 @@ public class PlayerController : Character
           public float turnSmoothtime;
           public float fixedMaxSpeed;
           public bool slowed;
+          public float horizontal, vertical;
      }
 
      [Header("Jump variables")]
@@ -38,8 +37,6 @@ public class PlayerController : Character
           public LayerMask groundLayer;
           public Transform jumpShadow;
           public Material handMaterial;
-          public GameObject jumpEffect;
-          public Transform boneHand;
           public ParticleSystem fallingDust;
           public float doubleJumpCountdown;
           public float fallMultiplier;
@@ -63,7 +60,8 @@ public class PlayerController : Character
      public class Push
      {
           public Slow slowReference;
-          public Transform targetPush;
+          public Transform targetPushLight;
+          public Transform targetPushHeavy;
           public Transform currentTargetPush;
           public Transform middleOfThePlayer;
           public float rangePush;
@@ -152,25 +150,18 @@ public class PlayerController : Character
      {
           if (!death.dead)
           {
-               vertical = Input.GetAxis("Vertical");
-               horizontal = Input.GetAxis("Horizontal");
+               movement.vertical = Input.GetAxis("Vertical");
+               movement.horizontal = Input.GetAxis("Horizontal");
 
-               if (movement.stateCharacter == CharacterState.BALANCE && (horizontal != 0 || vertical != 0))
-               {
-                    _cliffDectorLockPlayer = false;
-                    horizontal = 0;
-                    vertical = 0;
-                    return;
-               }
                CharacterMovement();
           }
      }
 
      public void CharacterMovement()
      {
-          _direction = new Vector3(horizontal, 0f, vertical).normalized;
+          _direction = new Vector3(movement.horizontal, 0f, movement.vertical).normalized;
 
-          if (_direction.magnitude >= 0.1f && movement.stateCharacter != CharacterState.DEAD)
+          if (_direction.magnitude >= 0.1f)
           {
                movement.currentSpeed += movement.acceleration * Time.deltaTime;
                movement.currentSpeed = Mathf.Clamp(movement.currentSpeed, 0, movement.maxSpeed);
@@ -187,7 +178,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (_direction.magnitude >= 0.1f && movement.stateCharacter != CharacterState.DEAD)
+          if (_direction.magnitude >= 0.1f)
           {
                _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + movement.cam.eulerAngles.y;
                _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, movement.turnSmoothtime);
@@ -212,22 +203,6 @@ public class PlayerController : Character
      #endregion
 
      #region Jump
-     public void SlopeDetector()
-     {
-          RaycastHit _hitInfo;
-
-          if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.up * -1, out _hitInfo, jump.rangeSlopeDetector))
-          {
-               if (_hitInfo.transform.tag == "Ground")
-               {
-                    if (_hitInfo.normal != new Vector3(0, 1, 0) && movement.rbody.velocity.y <= 0)
-                    {
-                         transform.position = new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z);
-                    }
-               }
-          }
-     }
-
      public void CharacterJump()
      {
           DoubleJumpCountdown();
@@ -315,6 +290,22 @@ public class PlayerController : Character
           }
      }
 
+     public void SlopeDetector()
+     {
+          RaycastHit _hitInfo;
+
+          if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.up * -1, out _hitInfo, jump.rangeSlopeDetector))
+          {
+               if (_hitInfo.transform.tag == "Ground")
+               {
+                    if (_hitInfo.normal != new Vector3(0, 1, 0) && movement.rbody.velocity.y <= 0)
+                    {
+                         transform.position = new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z);
+                    }
+               }
+          }
+     }
+
      public void SetHandShader()
      {
           if (jump.currentJump == 2)
@@ -334,18 +325,6 @@ public class PlayerController : Character
                     jump.handShaderStrength = Mathf.Clamp(jump.handShaderStrength, 0f, 1f);
                }
                jump.handMaterial.SetFloat("Hand_Emission", jump.handShaderStrength);
-          }
-     }
-
-     public void SetJumpEffect()
-     {
-          if (jump.currentJump == 2)
-          {
-               jump.jumpEffect.SetActive(true);
-          }
-          else
-          {
-               jump.jumpEffect.SetActive(false);
           }
      }
      #endregion
@@ -370,28 +349,21 @@ public class PlayerController : Character
 
           if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
           {
-               if (_hit.transform.tag == "Light" || _hit.transform.tag == "Heavy")
+               if (_hit.transform.tag == "Light")
                {
                     push.pushingObj = true;
-                    movement.stateCharacter = CharacterState.PUSHING;
-                    _hit.transform.position = push.targetPush.position;
+                    _hit.transform.position = push.targetPushLight.position;
                     push.currentTargetPush = _hit.transform;
-                    _hit.transform.parent = push.targetPush.transform;
-
-                    if (push.slowReference == null)
-                    {
-                         push.currentMaxSpeed = movement.fixedMaxSpeed;
-                         movement.maxSpeed = 2f;
-                    }
-                    else
-                    {
-                         if (movement.slowed == false)
-                         {
-                              push.slowReference = null;
-                              push.currentMaxSpeed = movement.fixedMaxSpeed;
-                              movement.maxSpeed = 2f;
-                         }
-                    }
+                    _hit.transform.parent = push.targetPushLight.transform;
+                    SetPushSpeed();
+               }
+               else if (_hit.transform.tag == "Heavy")
+               {
+                    push.pushingObj = true;
+                    _hit.transform.position = push.targetPushHeavy.position;
+                    push.currentTargetPush = _hit.transform;
+                    _hit.transform.parent = push.targetPushHeavy.transform;
+                    SetPushSpeed();
                }
           }
      }
@@ -404,15 +376,43 @@ public class PlayerController : Character
           {
                if (_hit.transform.position != null)
                {
-                    push.pushingObj = false;
-                    push.currentTargetPush.parent = null;
-                    Vector3 pivotCorrection = new Vector3(0f, 0.8f, 0f); // Just to correct the pivot of unity objects
-                    push.currentTargetPush.position = _hit.point + pivotCorrection;
-                    movement.maxSpeed = push.currentMaxSpeed;
-                    push.slowReference = null;
+                    if (push.currentTargetPush.tag == "Light")
+                    {
+                         push.pushingObj = false;
+                         push.currentTargetPush.parent = null;
+                         push.currentTargetPush.position = _hit.point + new Vector3(0f, 0.8f, 0f);
+                         movement.maxSpeed = push.currentMaxSpeed;
+                         push.slowReference = null;
+                    }
+                    else if (push.currentTargetPush.tag == "Heavy")
+                    {
+                         push.pushingObj = false;
+                         push.currentTargetPush.parent = null;
+                         push.currentTargetPush.position = _hit.point + new Vector3(0f, 1.3f, 0f);
+                         movement.maxSpeed = push.currentMaxSpeed;
+                         push.slowReference = null;
+                    }
                }
           }
 
+     }
+
+     public void SetPushSpeed()
+     {
+          if (push.slowReference == null)
+          {
+               push.currentMaxSpeed = movement.fixedMaxSpeed;
+               movement.maxSpeed = 2f;
+          }
+          else
+          {
+               if (movement.slowed == false)
+               {
+                    push.slowReference = null;
+                    push.currentMaxSpeed = movement.fixedMaxSpeed;
+                    movement.maxSpeed = 2f;
+               }
+          }
      }
      #endregion
 

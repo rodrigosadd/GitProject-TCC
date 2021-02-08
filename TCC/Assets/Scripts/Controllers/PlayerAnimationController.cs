@@ -131,8 +131,8 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetIdle()
      {
-          if ((PlayerController.instance.horizontal == 0 &&
-               PlayerController.instance.vertical == 0) &&
+          if ((PlayerController.instance.movement.horizontal == 0 &&
+               PlayerController.instance.movement.vertical == 0) &&
                PlayerController.instance.IsGrounded() &&
                PlayerController.instance.push.pushingObj == false &&
                PlayerAttackController.instance.currentAttack == 0)
@@ -154,7 +154,8 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetRunning()
      {
-          if ((PlayerController.instance.horizontal != 0 || PlayerController.instance.vertical != 0) &&
+          if ((PlayerController.instance.movement.horizontal != 0 ||
+               PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.IsGrounded() &&
                PlayerController.instance.movement.rbody.velocity.y <= 0 &&
                PlayerController.instance.push.pushingObj == false &&
@@ -178,8 +179,8 @@ public class PlayerAnimationController : MonoBehaviour
      public void SetSingleJump()
      {
           if (PlayerController.instance.movement.rbody.velocity.y > 0 &&
-               (PlayerController.instance.horizontal != 0 ||
-               PlayerController.instance.vertical != 0) &&
+               (PlayerController.instance.movement.horizontal != 0 ||
+               PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.jump.currentJump == 1 &&
                !PlayerController.instance.IsGrounded() &&
                !PlayerAttackController.instance.attaking)
@@ -202,8 +203,8 @@ public class PlayerAnimationController : MonoBehaviour
      public void SetSingleJumpRunning()
      {
           if (PlayerController.instance.movement.rbody.velocity.y > 0 &&
-              (PlayerController.instance.horizontal == 0 &&
-              PlayerController.instance.vertical == 0) &&
+              (PlayerController.instance.movement.horizontal == 0 &&
+              PlayerController.instance.movement.vertical == 0) &&
               PlayerController.instance.jump.currentJump == 1 &&
               !PlayerController.instance.IsGrounded() &&
               !PlayerAttackController.instance.attaking)
@@ -247,7 +248,8 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetPush()
      {
-          if ((PlayerController.instance.horizontal != 0 || PlayerController.instance.vertical != 0) &&
+          if ((PlayerController.instance.movement.horizontal != 0 ||
+               PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.push.pushingObj == true &&
                !PlayerAttackController.instance.attaking)
           {
@@ -268,7 +270,8 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetPushIdle()
      {
-          if ((PlayerController.instance.horizontal == 0 && PlayerController.instance.vertical == 0) &&
+          if ((PlayerController.instance.movement.horizontal == 0 &&
+               PlayerController.instance.movement.vertical == 0) &&
                PlayerController.instance.push.pushingObj == true &&
                !PlayerAttackController.instance.attaking)
           {
@@ -310,8 +313,8 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetFallingGround()
      {
-          if ((PlayerController.instance.horizontal == 0 &&
-              PlayerController.instance.vertical == 0) &&
+          if ((PlayerController.instance.movement.horizontal == 0 &&
+              PlayerController.instance.movement.vertical == 0) &&
               PlayerController.instance.IsGrounded() &&
               !PlayerAttackController.instance.attaking &&
               PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
@@ -336,8 +339,8 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetFallingRunning()
      {
-          if ((PlayerController.instance.horizontal != 0 ||
-               PlayerController.instance.vertical != 0) &&
+          if ((PlayerController.instance.movement.horizontal != 0 ||
+               PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.IsGrounded() &&
                !PlayerAttackController.instance.attaking &&
                PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
