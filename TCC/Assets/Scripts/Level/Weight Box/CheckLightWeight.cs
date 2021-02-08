@@ -6,15 +6,15 @@ public class CheckLightWeight : MonoBehaviour
 {
      public bool enoughWeight;
 
-     void OnTriggerEnter(Collision other)
-     {
-          if (other.transform.tag == "Light")
-          {
-               enoughWeight = true;
-          }
-          else if (other.transform.tag == "Heavy")
-          {
-               enoughWeight = false;
-          }
-     }
+     // void OnTriggerEnter(Collision other)
+     // {
+     //      if (other.transform.tag == "Light")
+     //      {
+     //           enoughWeight = true;
+     //      }
+     //      else if (other.transform.tag == "Heavy")
+     //      {
+     //           enoughWeight = false;
+     //      }
+     // }
 }

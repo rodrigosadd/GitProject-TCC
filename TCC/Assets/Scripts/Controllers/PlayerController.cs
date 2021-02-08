@@ -34,6 +34,7 @@ public class PlayerController : Character
      [System.Serializable]
      public class Jump
      {
+          public Transform[] groundDetectors;
           public LayerMask groundLayer;
           public Transform jumpShadow;
           public Material handMaterial;
@@ -250,8 +251,36 @@ public class PlayerController : Character
 
      public bool IsGrounded()
      {
-          Ray _ray = new Ray(transform.position, Vector3.up * -1 * jump.groundDetectorRange);
-          return Physics.Raycast(_ray, jump.groundDetectorRange, jump.groundLayer);
+          Ray _rayMiddle = new Ray(transform.position, Vector3.up * -1 * jump.groundDetectorRange);
+          Ray _rayFront = new Ray(jump.groundDetectors[0].position, Vector3.up * -1 * jump.groundDetectorRange);
+          Ray _rayBack = new Ray(jump.groundDetectors[1].position, Vector3.up * -1 * jump.groundDetectorRange);
+          Ray _rayLeft = new Ray(jump.groundDetectors[2].position, Vector3.up * -1 * jump.groundDetectorRange);
+          Ray _rayRight = new Ray(jump.groundDetectors[3].position, Vector3.up * -1 * jump.groundDetectorRange);
+
+          if (Physics.Raycast(_rayMiddle, jump.groundDetectorRange, jump.groundLayer))
+          {
+               return true;
+          }
+          else if (Physics.Raycast(_rayFront, jump.groundDetectorRange, jump.groundLayer))
+          {
+               return true;
+          }
+          else if (Physics.Raycast(_rayBack, jump.groundDetectorRange, jump.groundLayer))
+          {
+               return true;
+          }
+          else if (Physics.Raycast(_rayLeft, jump.groundDetectorRange, jump.groundLayer))
+          {
+               return true;
+          }
+          else if (Physics.Raycast(_rayRight, jump.groundDetectorRange, jump.groundLayer))
+          {
+               return true;
+          }
+          else
+          {
+               return false;
+          }
      }
 
      public bool CanJump()
@@ -537,6 +566,10 @@ public class PlayerController : Character
           if (seeRangegroundDetector)
           {
                Debug.DrawRay(transform.position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
+               Debug.DrawRay(jump.groundDetectors[0].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
+               Debug.DrawRay(jump.groundDetectors[1].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
+               Debug.DrawRay(jump.groundDetectors[2].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
+               Debug.DrawRay(jump.groundDetectors[3].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
           }
 
           if (seeRangeMissedJump)
