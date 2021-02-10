@@ -77,8 +77,8 @@ public class PuzzleNineButtons : MonoBehaviour
           }
           else
           {
-               if (distanceBetweenLeft > 0.5f &&
-                    distanceBetweenRight > 0.5f)
+               if (distanceBetweenLeft > 0.4f &&
+                    distanceBetweenRight > 0.4f)
                {
                     Vector3 directionDoorLeft = targetInitialLPos.position - doorLeft.position;
                     Vector3 directionDoorRight = targetInitialRPos.position - doorRight.position;
