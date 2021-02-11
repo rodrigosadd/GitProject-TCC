@@ -21,9 +21,9 @@ public class PlayerController : Character
           public Transform cam;
           public float maxSpeed;
           public float currentSpeed;
+          public float fixedMaxSpeed;
           public float acceleration;
           public float turnSmoothtime;
-          public float fixedMaxSpeed;
           public bool slowed;
           public float horizontal, vertical;
      }
@@ -361,12 +361,12 @@ public class PlayerController : Character
      #region Pushing Object
      private void PushingObject()
      {
-          if (Input.GetButton("Fire2") &&
+          if (Input.GetButton("Push") &&
               PlayerAttackController.instance.currentAttack == 0)
           {
                PushObject();
           }
-          else if (Input.GetButtonUp("Fire2"))
+          else if (Input.GetButtonUp("Push"))
           {
                DropObject();
           }
@@ -384,7 +384,7 @@ public class PlayerController : Character
                     _hit.transform.position = push.targetPushLight.position;
                     push.currentTargetPush = _hit.transform;
                     _hit.transform.parent = push.targetPushLight.transform;
-                    SetPushSpeed();
+                    SetLightPushSpeed();
                }
                else if (_hit.transform.tag == "Heavy")
                {
@@ -392,7 +392,7 @@ public class PlayerController : Character
                     _hit.transform.position = push.targetPushHeavy.position;
                     push.currentTargetPush = _hit.transform;
                     _hit.transform.parent = push.targetPushHeavy.transform;
-                    SetPushSpeed();
+                    SetHeavyPushSpeed();
                }
           }
      }
@@ -412,6 +412,7 @@ public class PlayerController : Character
                          push.currentTargetPush.position = _hit.point + new Vector3(0f, 0.8f, 0f);
                          movement.maxSpeed = push.currentMaxSpeed;
                          push.slowReference = null;
+                         movement.turnSmoothtime = 0.15f;
                     }
                     else if (push.currentTargetPush.tag == "Heavy")
                     {
@@ -420,18 +421,20 @@ public class PlayerController : Character
                          push.currentTargetPush.position = _hit.point + new Vector3(0f, 1.3f, 0f);
                          movement.maxSpeed = push.currentMaxSpeed;
                          push.slowReference = null;
+                         movement.turnSmoothtime = 0.15f;
                     }
                }
           }
 
      }
 
-     public void SetPushSpeed()
+     public void SetLightPushSpeed()
      {
           if (push.slowReference == null)
           {
                push.currentMaxSpeed = movement.fixedMaxSpeed;
                movement.maxSpeed = 2f;
+               movement.turnSmoothtime = 0.25f;
           }
           else
           {
@@ -440,6 +443,27 @@ public class PlayerController : Character
                     push.slowReference = null;
                     push.currentMaxSpeed = movement.fixedMaxSpeed;
                     movement.maxSpeed = 2f;
+                    movement.turnSmoothtime = 0.25f;
+               }
+          }
+     }
+
+     public void SetHeavyPushSpeed()
+     {
+          if (push.slowReference == null)
+          {
+               push.currentMaxSpeed = movement.fixedMaxSpeed;
+               movement.maxSpeed = 2f;
+               movement.turnSmoothtime = 0.4f;
+          }
+          else
+          {
+               if (movement.slowed == false)
+               {
+                    push.slowReference = null;
+                    push.currentMaxSpeed = movement.fixedMaxSpeed;
+                    movement.maxSpeed = 2f;
+                    movement.turnSmoothtime = 0.4f;
                }
           }
      }

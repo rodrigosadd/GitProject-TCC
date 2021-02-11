@@ -42,7 +42,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void InputsAttack()
      {
-          if (Input.GetButtonDown("Fire1") &&
+          if (Input.GetButtonDown("Attack") &&
               !GameManager.instance.settingsData.settingsOpen &&
               PlayerController.instance.movement.slowed == false &&
               !PlayerController.instance.death.dead)
@@ -61,7 +61,9 @@ public class PlayerAttackController : MonoBehaviour
 
      public void FirstAttack()
      {
-          if (!PlayerController.instance.death.dead && currentAttack != 3)
+          if (!PlayerController.instance.death.dead &&
+               currentAttack != 3 &&
+               PlayerController.instance.IsGrounded())
           {
                _lastAttackTime = Time.time;
                currentAttack++;
