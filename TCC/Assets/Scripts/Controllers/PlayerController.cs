@@ -492,7 +492,10 @@ public class PlayerController : Character
 
           if (Physics.Raycast(missedJump.targetMissedJump.position, Vector3.down, out _hitInfo, missedJump.rangeRayMissedJump))
           {
-               if (_hitInfo.transform.tag == "Ground" || _hitInfo.transform.tag == "Interactable")
+               if (_hitInfo.transform.tag == "Ground" ||
+                   _hitInfo.transform.tag == "Interactable" ||
+                   _hitInfo.transform.tag == "Light" ||
+                   _hitInfo.transform.tag == "Heavy")
                {
                     if (missedJump.canMiss)
                     {

@@ -7,7 +7,7 @@ public class PlayerAttackController : MonoBehaviour
      public static PlayerAttackController instance;
 
      public Transform targetAttack;
-     public LayerMask layerEnemy;
+     public LayerMask layerObjs;
      public GameObject[] trails;
      public int maxCombo;
      public int currentAttack;
@@ -197,11 +197,18 @@ public class PlayerAttackController : MonoBehaviour
 
      public void AttackDetection()
      {
-          Collider[] _hitEnemy = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerEnemy);
+          Collider[] _hitObject = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerObjs);
 
-          foreach (Collider _hit in _hitEnemy)
+          foreach (Collider _hit in _hitObject)
           {
-               _hit.transform.GetComponent<Enemy>().TakeHit();
+               if (_hit.tag == "Enemy")
+               {
+                    _hit.transform.GetComponent<Enemy>().TakeHit();
+               }
+               if (_hit.tag == "Breakable")
+               {
+                    _hit.transform.GetComponent<BreakableObject>().TakeHit();
+               }
           }
      }
 

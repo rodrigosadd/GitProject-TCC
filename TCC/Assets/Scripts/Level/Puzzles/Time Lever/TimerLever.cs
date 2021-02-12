@@ -4,55 +4,68 @@ using UnityEngine;
 
 public class TimerLever : MonoBehaviour
 {
+     public Lever[] levers;
      public Transform doorLeft;
-     public Transform targetInitialLPos;
      public Transform targetMoveLeft;
      public Transform doorRight;
-     public Transform targetInitialRPos;
      public Transform targetMoveRight;
-     public Transform lever;
-     public float maxDistancePushLever;
      public float speedMoveDoor;
      public float timeToCloseDoor;
-     public float rotationLever;
-     private bool _startTimeToClose;
+     private Vector3 _targetInitialLPos;
+     private Vector3 _targetInitialRPos;
      private float _countdownToCloseDoor;
-     private bool _canCloseDoor;
+     private bool _canCloseTheDoor;
+
+     void Start()
+     {
+          _targetInitialLPos = new Vector3(doorLeft.position.x, doorLeft.position.y, doorLeft.position.z);
+          _targetInitialRPos = new Vector3(doorRight.position.x, doorRight.position.y, doorRight.position.z);
+     }
 
      void Update()
      {
-          PushLever();
-          CountdownCloseDoor();
+          CheckLevers();
           CloseDoor();
      }
 
-     public void PushLever()
+     public void CheckLevers()
      {
-          float distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+          bool _isComplete = true;
 
-          if (Input.GetKey(KeyCode.E) && distanceBetween < maxDistancePushLever)
+          for (int i = 0; i < levers.Length; i++)
           {
-               _startTimeToClose = true;
-               _canCloseDoor = false;
-               SetLeverRotOpenDoor();
+               if (!levers[i].triggerLever)
+               {
+                    _isComplete = false;
+                    break;
+               }
+          }
+
+          if (_isComplete)
+          {
+               _canCloseTheDoor = false;
+               OpenDoor();
+               CountdownCloseDoor();
           }
      }
 
      public void CountdownCloseDoor()
      {
-          if (_startTimeToClose)
+          if (!_canCloseTheDoor)
           {
                if (_countdownToCloseDoor < 1)
                {
-                    OpenDoor();
                     _countdownToCloseDoor += Time.deltaTime / timeToCloseDoor;
                }
                else
                {
                     _countdownToCloseDoor = 0;
-                    _startTimeToClose = false;
-                    _canCloseDoor = true;
-                    SetLeverRotCloseDoor();
+                    _canCloseTheDoor = true;
+
+                    for (int i = 0; i < levers.Length; i++)
+                    {
+                         levers[i].triggerLever = false;
+                    }
                }
           }
      }
@@ -65,28 +78,10 @@ public class TimerLever : MonoBehaviour
 
      public void CloseDoor()
      {
-          if (_canCloseDoor)
+          if (_canCloseTheDoor)
           {
-               doorLeft.position = Vector3.MoveTowards(doorLeft.position, targetInitialLPos.position, speedMoveDoor * Time.deltaTime);
-               doorRight.position = Vector3.MoveTowards(doorRight.position, targetInitialRPos.position, speedMoveDoor * Time.deltaTime);
+               doorLeft.position = Vector3.MoveTowards(doorLeft.position, _targetInitialLPos, speedMoveDoor * Time.deltaTime);
+               doorRight.position = Vector3.MoveTowards(doorRight.position, _targetInitialRPos, speedMoveDoor * Time.deltaTime);
           }
      }
-
-     public void SetLeverRotOpenDoor()
-     {
-          lever.rotation = Quaternion.AngleAxis(rotationLever, Vector3.right);
-     }
-
-     public void SetLeverRotCloseDoor()
-     {
-          lever.rotation = Quaternion.AngleAxis(rotationLever * -1, Vector3.right);
-     }
-
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireSphere(transform.position, maxDistancePushLever);
-     }
-#endif
 }

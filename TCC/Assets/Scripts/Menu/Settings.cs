@@ -18,7 +18,7 @@ public class Settings : MonoBehaviour
      public Toggle invertXToggle;
      public Toggle invertYToggle;
      public Toggle isFullscreen;
-     public Button backButton;
+     public UnityEngine.UI.Button backButton;
      public bool settingsOpen = false;
 
      void Start()

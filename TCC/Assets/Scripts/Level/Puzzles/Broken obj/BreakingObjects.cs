@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleButtons : MonoBehaviour
+public class BreakingObjects : MonoBehaviour
 {
+     public BreakableObject[] breakableObjects;
      public Transform doorLeft;
      public Transform targetMoveLeft;
      public Transform doorRight;
      public Transform targetMoveRight;
-     public WeightButton[] weightButtons;
-     public WeightButton[] fakeWeightButtons;
-     public GameObject[] objAnswer;
-     public GameObject[] objCorrectAnswer;
      public float speedMoveDoor;
      private Vector3 _targetInitialLPos;
      private Vector3 _targetInitialRPos;
@@ -24,57 +21,29 @@ public class PuzzleButtons : MonoBehaviour
 
      void Update()
      {
-          CheckPressButtons();
-          ShowAnswer();
-          ShowButtonPressed();
+          CheckObjectsBroken();
      }
 
-     public void CheckPressButtons()
+     public void CheckObjectsBroken()
      {
-          bool isComplete = true;
+          bool _isComplete = true;
 
-          for (int i = 0; i < weightButtons.Length; i++)
+          for (int i = 0; i < breakableObjects.Length; i++)
           {
-               if (!weightButtons[i].rightWeight)
+               if (!breakableObjects[i].triggerBroken)
                {
-                    isComplete = false;
+                    _isComplete = false;
                     break;
                }
           }
 
-          for (int i = 0; i < fakeWeightButtons.Length; i++)
-          {
-               if (fakeWeightButtons[i].rightWeight)
-               {
-                    isComplete = false;
-                    break;
-               }
-          }
-
-          if (isComplete)
+          if (_isComplete)
           {
                OpenDoor();
           }
           else
           {
                CloseDoor();
-          }
-     }
-
-     public void ShowAnswer()
-     {
-          for (int i = 0; i < weightButtons.Length; i++)
-          {
-               objAnswer[i].SetActive(true);
-          }
-     }
-
-     public void ShowButtonPressed()
-     {
-          for (int i = 0; i < weightButtons.Length; i++)
-          {
-               objAnswer[i].SetActive(!weightButtons[i].rightWeight);
-               objCorrectAnswer[i].SetActive(weightButtons[i].rightWeight);
           }
      }
 

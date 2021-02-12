@@ -6014,9 +6014,9 @@ MonoBehaviour:
     cam: {fileID: 0}
     maxSpeed: 9
     currentSpeed: 0
-    acceleration: 20
-    turnSmoothtime: 0.1
     fixedMaxSpeed: 0
+    acceleration: 20
+    turnSmoothtime: 0.15
     slowed: 0
     horizontal: 0
     vertical: 0
@@ -16076,9 +16076,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetAttack: {fileID: 4925743234915172221}
-  layerEnemy:
+  layerObjs:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 17408
   trails:
   - {fileID: 2432572767439872910}
   - {fileID: 6462945160509493410}
