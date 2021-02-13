@@ -5,6 +5,7 @@ using UnityEngine;
 public class BreakableObject : MonoBehaviour
 {
      public GameObject[] brokenParts;
+     public Collider col;
      public int maxHit;
      public int hit;
      public bool triggerBroken;
@@ -23,25 +24,31 @@ public class BreakableObject : MonoBehaviour
      {
           hit++;
 
-          if (hit >= maxHit)
+          if (hit >= maxHit && !triggerBroken)
           {
                triggerBroken = true;
-               gameObject.SetActive(false);
+               col.enabled = false;
           }
      }
 
      public void CheckLife()
      {
-          if (hit == 0)
+          if (hit != 0)
           {
-               return;
+               for (int i = 0; i < brokenParts.Length; i++)
+               {
+                    brokenParts[i].SetActive(false);
+               }
           }
 
-          if (brokenParts[hit - 1] != null)
+          if (!triggerBroken)
           {
-               brokenParts[hit - 1].SetActive(false);
-          }
+               if (hit == 0)
+               {
+                    return;
+               }
 
-          brokenParts[hit].SetActive(true);
+               brokenParts[hit].SetActive(true);
+          }
      }
 }
