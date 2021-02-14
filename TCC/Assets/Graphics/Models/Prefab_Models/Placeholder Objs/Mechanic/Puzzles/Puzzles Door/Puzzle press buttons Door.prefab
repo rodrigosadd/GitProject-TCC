@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5404463939253331781}
-  - component: {fileID: 5404463939253331778}
+  - component: {fileID: 8869054988031860876}
   m_Layer: 0
-  m_Name: Puzzle press button
+  m_Name: Puzzle press buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5404463939253331778
+--- !u!114 &8869054988031860876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,16 +43,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 5404463939253331780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14496c94ed0e01f46b179788504be5a2, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dc61bc726e363c42b5a503342c503eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 5702663564539042806}
   doorLeft: {fileID: 5404463940815554224}
   targetMoveLeft: {fileID: 5404463939532159095}
   doorRight: {fileID: 5404463940510111847}
   targetMoveRight: {fileID: 5404463940828891241}
+  targetInitialLPos: {x: 0, y: 0, z: 0}
+  targetInitialRPos: {x: 0, y: 0, z: 0}
   speedMoveDoor: 5
+  buttons:
+  - {fileID: 5702663564539042806}
 --- !u!1 &5404463939300034810
 GameObject:
   m_ObjectHideFlags: 0

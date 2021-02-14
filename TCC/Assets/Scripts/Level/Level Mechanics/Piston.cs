@@ -26,7 +26,7 @@ public class Piston : MonoBehaviour
 
      public void GetPistonInitialPosition()
      {
-          _initialPositionPiston = transform.position;
+          _initialPositionPiston = new Vector3(transform.position.x, transform.position.y, transform.position.z);
      }
 
      public void MovePiston()

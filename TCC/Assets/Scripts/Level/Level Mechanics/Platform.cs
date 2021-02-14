@@ -13,7 +13,7 @@ public class Platform : MonoBehaviour
 
      void Start()
      {
-          waitTimeToMove = startWaitTime;
+          StartWaitTime();
      }
 
      void Update()
@@ -21,7 +21,12 @@ public class Platform : MonoBehaviour
           MovementBetweenSpots();
      }
 
-     public void MovementBetweenSpots()
+     public void StartWaitTime()
+     {
+          waitTimeToMove = startWaitTime;
+     }
+
+     public virtual void MovementBetweenSpots()
      {
           transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime);
 

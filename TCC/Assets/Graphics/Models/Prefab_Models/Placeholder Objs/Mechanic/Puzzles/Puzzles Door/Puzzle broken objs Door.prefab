@@ -356,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2542613300904030728}
-  - component: {fileID: 2542613300904030729}
+  - component: {fileID: 1614920456094288501}
   m_Layer: 0
   m_Name: Puzzle broken objs
   m_TagString: Untagged
@@ -381,7 +381,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2542613300904030729
+--- !u!114 &1614920456094288501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -390,18 +390,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2542613300904030731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade4107a10ae6004cbca6aa91084d028, type: 3}
+  m_Script: {fileID: 11500000, guid: 52f7b5d38972f8a4198bde78bf44907e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  breakableObjects:
-  - {fileID: 5566457042340191123}
-  - {fileID: 5028637628477142468}
-  - {fileID: 7718041495564325084}
   doorLeft: {fileID: 2542613300493873631}
   targetMoveLeft: {fileID: 2542613300034557438}
   doorRight: {fileID: 2542613299346382108}
   targetMoveRight: {fileID: 2542613299338424583}
+  targetInitialLPos: {x: 0, y: 0, z: 0}
+  targetInitialRPos: {x: 0, y: 0, z: 0}
   speedMoveDoor: 5
+  breakableObjects:
+  - {fileID: 5566457042340191123}
+  - {fileID: 5028637628477142468}
+  - {fileID: 7718041495564325084}
 --- !u!1001 &980553050256984407
 PrefabInstance:
   m_ObjectHideFlags: 0

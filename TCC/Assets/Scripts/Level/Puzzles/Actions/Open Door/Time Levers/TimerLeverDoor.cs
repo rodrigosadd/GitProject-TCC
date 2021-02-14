@@ -2,30 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerLever : MonoBehaviour
+public class TimerLeverDoor : OpenDoor
 {
      public Lever[] levers;
-     public Transform doorLeft;
-     public Transform targetMoveLeft;
-     public Transform doorRight;
-     public Transform targetMoveRight;
-     public float speedMoveDoor;
      public float timeToCloseDoor;
-     private Vector3 _targetInitialLPos;
-     private Vector3 _targetInitialRPos;
      private float _countdownToCloseDoor;
      private bool _canCloseTheDoor;
 
      void Start()
      {
-          _targetInitialLPos = new Vector3(doorLeft.position.x, doorLeft.position.y, doorLeft.position.z);
-          _targetInitialRPos = new Vector3(doorRight.position.x, doorRight.position.y, doorRight.position.z);
+          StartPositionTargets();
      }
 
      void Update()
      {
           CheckLevers();
-          CloseDoor();
+          CanCloseDoor();
      }
 
      public void CheckLevers()
@@ -44,7 +36,7 @@ public class TimerLever : MonoBehaviour
           if (_isComplete)
           {
                _canCloseTheDoor = false;
-               OpenDoor();
+               CanOpenDoor();
                CountdownCloseDoor();
           }
      }
@@ -70,18 +62,12 @@ public class TimerLever : MonoBehaviour
           }
      }
 
-     public void OpenDoor()
-     {
-          doorLeft.position = Vector3.MoveTowards(doorLeft.position, targetMoveLeft.position, speedMoveDoor * Time.deltaTime);
-          doorRight.position = Vector3.MoveTowards(doorRight.position, targetMoveRight.position, speedMoveDoor * Time.deltaTime);
-     }
-
-     public void CloseDoor()
+     public override void CanCloseDoor()
      {
           if (_canCloseTheDoor)
           {
-               doorLeft.position = Vector3.MoveTowards(doorLeft.position, _targetInitialLPos, speedMoveDoor * Time.deltaTime);
-               doorRight.position = Vector3.MoveTowards(doorRight.position, _targetInitialRPos, speedMoveDoor * Time.deltaTime);
+               doorLeft.position = Vector3.MoveTowards(doorLeft.position, targetInitialLPos, speedMoveDoor * Time.deltaTime);
+               doorRight.position = Vector3.MoveTowards(doorRight.position, targetInitialRPos, speedMoveDoor * Time.deltaTime);
           }
      }
 }
