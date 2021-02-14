@@ -32,6 +32,7 @@ public class StayButton : MonoBehaviour
           else
           {
                PressedButtonAnimation();
+               triggerButton = false;
           }
      }
 
