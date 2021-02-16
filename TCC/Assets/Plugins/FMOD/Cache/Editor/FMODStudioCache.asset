@@ -61,7 +61,7 @@ MonoBehaviour:
   Path: event:/Menu Confirm
   guid: 68be8dd589f9e244890882b43463da0f
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -115,6 +115,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 343
+--- !u!114 &-8435088635796787226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/SFX.bank
+  Name: SFX
+  lastModified: 637413825219492807
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-8408431674904143726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,7 +148,7 @@ MonoBehaviour:
   Path: event:/Shout1
   guid: d5b802443f21ba4e94d7d60c1102d476
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -289,6 +307,24 @@ MonoBehaviour:
   Path: Assets/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/SFX.bank
   Name: SFX
   lastModified: 637372610912923093
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-7691439081714322021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/OST.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/OST.bank
+  Name: OST
+  lastModified: 637413825209012024
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -549,7 +585,7 @@ MonoBehaviour:
   Path: event:/Beto - Action Theme
   guid: 989dd19dec49ff439db24efdf6f274a1
   Banks:
-  - {fileID: -5076655041393742387}
+  - {fileID: -7691439081714322021}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -686,7 +722,7 @@ MonoBehaviour:
   Path: event:/MeleeMove
   guid: cf13e785baf59a4295919e08f900f23c
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -709,7 +745,7 @@ MonoBehaviour:
   Path: event:/Shout
   guid: 440a50d5fc0a824ea6100848806799ce
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -717,6 +753,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 394
+--- !u!114 &-3195773493600677511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Master.bank
+  Name: Master
+  lastModified: 637413825205089213
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2937322994013859348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,7 +1070,7 @@ MonoBehaviour:
   Path: event:/Pick1
   guid: 6574a65bd8a04e4f8b70845c7bca2cd9
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1062,8 +1116,8 @@ MonoBehaviour:
   Path: event:/Beto - Menu
   guid: b01a81f941f68b4597b64d200bb0223e
   Banks:
-  - {fileID: -5076655041393742387}
-  - {fileID: -2636306756071808651}
+  - {fileID: -7691439081714322021}
+  - {fileID: -8435088635796787226}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1086,7 +1140,7 @@ MonoBehaviour:
   Path: event:/Beto - Calm Theme
   guid: 123dd22a1cf03f489c0beebc03b90382
   Banks:
-  - {fileID: -5076655041393742387}
+  - {fileID: -7691439081714322021}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -1109,7 +1163,7 @@ MonoBehaviour:
   Path: event:/Pick2
   guid: deced3b3eca9784cb75f404dc4792b41
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1130,10 +1184,10 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 4843833793395691536}
-  - {fileID: 2962432029900947154}
-  - {fileID: -5076655041393742387}
-  - {fileID: -2636306756071808651}
+  - {fileID: 221983177864793182}
+  - {fileID: -3195773493600677511}
+  - {fileID: -7691439081714322021}
+  - {fileID: -8435088635796787226}
   EditorEvents:
   - {fileID: -172560602818519615}
   - {fileID: -4850317500386073840}
@@ -1157,10 +1211,10 @@ MonoBehaviour:
   - {fileID: 4816980428841609070}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 2962432029900947154}
+  - {fileID: -3195773493600677511}
   StringsBanks:
-  - {fileID: 4843833793395691536}
-  stringsBankWriteTime: 637413774587255336
+  - {fileID: 221983177864793182}
+  stringsBankWriteTime: 637413825205630971
   cacheVersion: 4
 --- !u!114 &165741775923557032
 MonoBehaviour:
@@ -1208,6 +1262,26 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 250
+--- !u!114 &221983177864793182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/StreamingAssets/Master.strings.bank
+  Name: Master.strings
+  lastModified: 637413825205630971
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1690
+  Exists: 1
 --- !u!114 &467776538597865415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,7 +1297,7 @@ MonoBehaviour:
   Path: event:/Boulder
   guid: 47745c61fa1c8d438894ac5ace0fffab
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1266,7 +1340,7 @@ MonoBehaviour:
   Path: event:/Jump
   guid: a7395448e7ffb04f8422c78304485dba
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1335,7 +1409,7 @@ MonoBehaviour:
   Path: event:/Pick3
   guid: 1b40d8e102ec8c44903c962a021d8489
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1514,7 +1588,7 @@ MonoBehaviour:
   Path: event:/Menu Move
   guid: 585f41a554455c4184c798d8cb525d33
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1715,7 +1789,7 @@ MonoBehaviour:
   Path: event:/Shout2
   guid: 4f59f1fa0a96c64d98d372ce17b10843
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1851,7 +1925,7 @@ MonoBehaviour:
   Path: event:/Jump1
   guid: fa4eb8ad1998da428f9293dfdb850c3e
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2026,7 +2100,7 @@ MonoBehaviour:
   Path: event:/Footsteps1
   guid: b12c6d7b210dea41a7aa340eb11eaacc
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2366,7 +2440,7 @@ MonoBehaviour:
   Path: event:/Pickaxe
   guid: e13b7ebd870a3f4cbcf14acd1a57b277
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2389,7 +2463,7 @@ MonoBehaviour:
   Path: event:/Footsteps
   guid: 1056fc9eb71f0f4a870cd3efd3bf3b8f
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2412,7 +2486,7 @@ MonoBehaviour:
   Path: event:/Footsteps2
   guid: 62bbbc5ed0c2a549bfe8d2df1632f73a
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2481,7 +2555,7 @@ MonoBehaviour:
   Path: event:/Jump2
   guid: 8c585af0007f0846a29b75cdbac911d6
   Banks:
-  - {fileID: -2636306756071808651}
+  - {fileID: -8435088635796787226}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1

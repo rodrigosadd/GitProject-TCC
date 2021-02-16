@@ -373,6 +373,11 @@ public class PlayerController : Character
               PlayerAttackController.instance.currentAttack == 0)
           {
                PushObject();
+
+               if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
+               {
+                    DropObject();
+               }
           }
           else if (Input.GetButtonUp("Push"))
           {
@@ -407,33 +412,37 @@ public class PlayerController : Character
 
      public void DropObject()
      {
-          RaycastHit _hit;
-
-          if (Physics.Raycast(push.currentTargetPush.position, Vector3.up * -1, out _hit, push.rangeDropObject))
+          if (push.currentTargetPush != null)
           {
-               if (_hit.transform.position != null)
+               RaycastHit _hit;
+
+               if (Physics.Raycast(push.currentTargetPush.position, Vector3.up * -1, out _hit, push.rangeDropObject))
                {
-                    if (push.currentTargetPush.tag == "Light")
+                    if (_hit.transform.position != null)
                     {
-                         push.pushingObj = false;
-                         push.currentTargetPush.parent = null;
-                         push.currentTargetPush.position = _hit.point + new Vector3(0f, 0.8f, 0f);
-                         movement.maxSpeed = push.currentMaxSpeed;
-                         push.slowReference = null;
-                         movement.turnSmoothtime = 0.15f;
-                    }
-                    else if (push.currentTargetPush.tag == "Heavy")
-                    {
-                         push.pushingObj = false;
-                         push.currentTargetPush.parent = null;
-                         push.currentTargetPush.position = _hit.point + new Vector3(0f, 1.3f, 0f);
-                         movement.maxSpeed = push.currentMaxSpeed;
-                         push.slowReference = null;
-                         movement.turnSmoothtime = 0.15f;
+                         if (push.currentTargetPush.tag == "Light")
+                         {
+                              push.pushingObj = false;
+                              push.currentTargetPush.parent = null;
+                              push.currentTargetPush.position = _hit.point + new Vector3(0f, 0.8f, 0f);
+                              movement.maxSpeed = push.currentMaxSpeed;
+                              push.slowReference = null;
+                              movement.turnSmoothtime = 0.15f;
+                              push.currentTargetPush = null;
+                         }
+                         else if (push.currentTargetPush.tag == "Heavy")
+                         {
+                              push.pushingObj = false;
+                              push.currentTargetPush.parent = null;
+                              push.currentTargetPush.position = _hit.point + new Vector3(0f, 1.3f, 0f);
+                              movement.maxSpeed = push.currentMaxSpeed;
+                              push.slowReference = null;
+                              movement.turnSmoothtime = 0.15f;
+                              push.currentTargetPush = null;
+                         }
                     }
                }
           }
-
      }
 
      public void SetLightPushSpeed()

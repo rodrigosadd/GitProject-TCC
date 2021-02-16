@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BreakableObject : MonoBehaviour
 {
+     public BreakableObjectType type;
+     public GameObject[] objects;
+     public Transform[] targets;
      public GameObject[] brokenParts;
      public Collider col;
      public int maxHit;
@@ -28,6 +31,7 @@ public class BreakableObject : MonoBehaviour
           {
                triggerBroken = true;
                col.enabled = false;
+               DropObject();
           }
      }
 
@@ -49,6 +53,18 @@ public class BreakableObject : MonoBehaviour
                }
 
                brokenParts[hit].SetActive(true);
+          }
+     }
+
+     public void DropObject()
+     {
+          if (type == BreakableObjectType.DROP_OBJECT)
+          {
+               for (int i = 0; i < objects.Length; i++)
+               {
+                    objects[i].SetActive(true);
+                    objects[i].transform.position = targets[i].position;
+               }
           }
      }
 }

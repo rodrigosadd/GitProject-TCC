@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
+     public ButtonType type;
      public Transform button;
      public Transform targetMoveButton;
      public float maxDistancePressButton;
@@ -27,9 +28,27 @@ public class Button : MonoBehaviour
           float _distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
           if (_distanceBetween < maxDistancePressButton &&
+              !triggerButton &&
               Input.GetButtonDown("Interact"))
           {
                triggerButton = true;
+          }
+     }
+
+     public void ResetButton()
+     {
+          if (type == ButtonType.PRESS_ONCE)
+          {
+               return;
+          }
+
+          if (type == ButtonType.ALWAYS_PRESS)
+          {
+               if (button.position == _startPositionButton)
+               {
+                    triggerButton = false;
+                    _countdownAnimationButton = 0;
+               }
           }
      }
 
@@ -41,6 +60,7 @@ public class Button : MonoBehaviour
      public void EndButtonAnimation()
      {
           button.position = Vector3.MoveTowards(button.position, _startPositionButton, 1f * Time.deltaTime);
+          ResetButton();
      }
 
      public void CountdownButtonAnimation()

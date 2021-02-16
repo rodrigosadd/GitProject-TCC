@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour
 {
+     public LeverType type;
      public Transform lever;
      public float maxDistancePushLever;
-     public float timeToCloseDoor;
+     public float time;
      public float rotationLever;
      public bool triggerLever;
+     private float _countdown;
 
      void Update()
      {
           PushLever();
           SetLeverRotCloseDoor();
+          CountdownCloseDoor();
      }
 
      public void PushLever()
@@ -37,6 +40,22 @@ public class Lever : MonoBehaviour
           if (!triggerLever)
           {
                lever.rotation = Quaternion.AngleAxis(rotationLever * -1, Vector3.right);
+          }
+     }
+
+     public void CountdownCloseDoor()
+     {
+          if (type == LeverType.TIMER && triggerLever)
+          {
+               if (_countdown < 1)
+               {
+                    _countdown += Time.deltaTime / time;
+               }
+               else
+               {
+                    _countdown = 0;
+                    triggerLever = false;
+               }
           }
      }
 
