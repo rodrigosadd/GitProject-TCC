@@ -44,7 +44,7 @@ public class PlayerAttackController : MonoBehaviour
      {
           if (Input.GetButtonDown("Attack") &&
               !GameManager.instance.settingsData.settingsOpen &&
-              PlayerController.instance.movement.slowed == false &&
+              PlayerController.instance.movement.slowing == false &&
               !PlayerController.instance.death.dead)
           {
                if (!attaking)
@@ -166,7 +166,7 @@ public class PlayerAttackController : MonoBehaviour
      {
           if (!PlayerController.instance.death.dead)
           {
-               if (PlayerController.instance.movement.slowed == false)
+               if (PlayerController.instance.movement.slowing == false)
                {
                     PlayerController.instance.movement.maxSpeed = 0f;
                     attaking = true;

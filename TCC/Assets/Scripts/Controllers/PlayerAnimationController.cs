@@ -7,6 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
      public static PlayerAnimationController instance;
      public float timeToJump;
      public bool afterFalling;
+     public bool balance;
      private bool _canJumpAfterFalling;
      private float _countdownAfterFalling;
 
@@ -292,7 +293,7 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetFallingIdle()
      {
-          if (PlayerController.instance.movement.rbody.velocity.y <= 0f &&
+          if (PlayerController.instance.movement.rbody.velocity.y <= -2f &&
               !PlayerController.instance.IsGrounded() &&
               !PlayerAttackController.instance.attaking)
           {
@@ -319,7 +320,6 @@ public class PlayerAnimationController : MonoBehaviour
               !PlayerAttackController.instance.attaking &&
               PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
           {
-               Debug.Log("SetFallingGround");
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
                PlayerController.instance.animator.SetBool("Single Jump", false);
@@ -345,7 +345,6 @@ public class PlayerAnimationController : MonoBehaviour
                !PlayerAttackController.instance.attaking &&
                PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
           {
-               Debug.Log("SetFallingRunning");
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
                PlayerController.instance.animator.SetBool("Single Jump", false);

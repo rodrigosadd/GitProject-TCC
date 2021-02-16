@@ -299,7 +299,7 @@ MonoBehaviour:
   maxHit: 0
   hit: 0
   triggerBroken: 0
-  oil: {fileID: 8803259198714012795}
+  oil: {fileID: 2784249975013346186}
 --- !u!65 &8803259197167733150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -328,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8803259198714012794
 Transform:
   m_ObjectHideFlags: 0
@@ -353,7 +353,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2242701728922504506, guid: 86134afda880a244d8658d49890b76de, type: 3}
       propertyPath: forceSlide
-      value: 15
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2242701728922504506, guid: 86134afda880a244d8658d49890b76de, type: 3}
+      propertyPath: timeToMoveAgaing
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6667809049301346240, guid: 86134afda880a244d8658d49890b76de, type: 3}
       propertyPath: m_Name
@@ -361,7 +365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6667809049301346240, guid: 86134afda880a244d8658d49890b76de, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6667809049301346240, guid: 86134afda880a244d8658d49890b76de, type: 3}
       propertyPath: m_Layer
@@ -425,6 +429,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86134afda880a244d8658d49890b76de, type: 3}
+--- !u!1 &2784249975013346186 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6667809049301346240, guid: 86134afda880a244d8658d49890b76de, type: 3}
+  m_PrefabInstance: {fileID: 8803259198548896842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2784249975013346231 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6667809049301346301, guid: 86134afda880a244d8658d49890b76de, type: 3}

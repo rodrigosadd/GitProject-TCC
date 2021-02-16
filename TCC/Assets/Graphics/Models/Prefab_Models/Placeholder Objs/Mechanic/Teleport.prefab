@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &43021484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43021485}
+  m_Layer: 0
+  m_Name: Target Cam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &43021485
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 43021484}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2917996903903764943}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &866269357
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,14 +299,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2917996903903764942}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
+  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0.29, y: 11.24, z: 18.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1703351436}
+  - {fileID: 43021485}
   m_Father: {fileID: 2917996904128405874}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &2917996903903764938
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -371,7 +402,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f07b71b94042124a815cf0a595dd297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalEntrance: {fileID: 2917996903762619697}
-  portalExit: {fileID: 2917996903903764943}
+  camera3RdPerson: {fileID: 0}
+  targetCameraPlayer: {fileID: 0}
+  targetCameraExitPortal: {fileID: 43021485}
+  entrancePortal: {fileID: 2917996903762619697}
+  exitPortal: {fileID: 2917996903903764943}
   rangeTeleport: 2
+  timeEntryTeleport: 1
+  timeExitTeleport: 1
+  cameraVelocity: 20
   seeRangeTeleport: 1
+  _CanTeleport: 0
+  _CanMove: 1

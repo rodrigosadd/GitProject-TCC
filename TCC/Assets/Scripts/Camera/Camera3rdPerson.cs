@@ -14,6 +14,7 @@ public class Camera3rdPerson : MonoBehaviour
      public float inputSensitivityY = 150.0f;
      public bool invertAxisX;
      public bool invertAxisY;
+     public bool canMove;
      private float _mouseX;
      private float _mouseY;
      private float _inputX;
@@ -45,37 +46,40 @@ public class Camera3rdPerson : MonoBehaviour
 
      public void SetCamRotation()
      {
-          // We setup the rotation of the sticks here
-          _inputX = Input.GetAxis("RightStickHorizontal");
-          _inputZ = Input.GetAxis("RightStickVertical");
-
-          _mouseX = Input.GetAxis("Mouse X");
-          _mouseY = Input.GetAxis("Mouse Y");
-
-          _finalInputX = _inputX + _mouseX;
-          _finalInputZ = _inputZ + _mouseY;
-
-          if (!invertAxisX)
+          if (canMove)
           {
-               _rotX += _finalInputZ * inputSensitivityX * Time.deltaTime;
-          }
-          else
-          {
-               _rotX -= _finalInputZ * inputSensitivityX * Time.deltaTime;
-          }
+               // We setup the rotation of the sticks here
+               _inputX = Input.GetAxis("RightStickHorizontal");
+               _inputZ = Input.GetAxis("RightStickVertical");
 
-          if (!invertAxisY)
-          {
-               _rotY += _finalInputX * inputSensitivityY * Time.deltaTime;
-          }
-          else
-          {
-               _rotY -= _finalInputX * inputSensitivityY * Time.deltaTime;
-          }
+               _mouseX = Input.GetAxis("Mouse X");
+               _mouseY = Input.GetAxis("Mouse Y");
 
-          _rotX = Mathf.Clamp(_rotX, -clampAngleDown, clampAngleUp);
+               _finalInputX = _inputX + _mouseX;
+               _finalInputZ = _inputZ + _mouseY;
 
-          transform.rotation = Quaternion.Euler(_rotX, _rotY, 0f);
+               if (!invertAxisX)
+               {
+                    _rotX += _finalInputZ * inputSensitivityX * Time.deltaTime;
+               }
+               else
+               {
+                    _rotX -= _finalInputZ * inputSensitivityX * Time.deltaTime;
+               }
+
+               if (!invertAxisY)
+               {
+                    _rotY += _finalInputX * inputSensitivityY * Time.deltaTime;
+               }
+               else
+               {
+                    _rotY -= _finalInputX * inputSensitivityY * Time.deltaTime;
+               }
+
+               _rotX = Mathf.Clamp(_rotX, -clampAngleDown, clampAngleUp);
+
+               transform.rotation = Quaternion.Euler(_rotX, _rotY, 0f);
+          }
      }
 
      public void CameraUpdater()

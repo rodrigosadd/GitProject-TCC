@@ -24,7 +24,9 @@ public class PlayerController : Character
           public float fixedMaxSpeed;
           public float acceleration;
           public float turnSmoothtime;
-          public bool slowed;
+          public bool slowing;
+          public bool sliding;
+          public bool teleporting;
           public float horizontal, vertical;
      }
 
@@ -149,7 +151,7 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (!death.dead)
+          if (!death.dead && !movement.sliding)
           {
                movement.vertical = Input.GetAxis("Vertical");
                movement.horizontal = Input.GetAxis("Horizontal");
@@ -179,12 +181,15 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (_direction.magnitude >= 0.1f)
+          if (!death.dead && !movement.teleporting)
           {
-               _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + movement.cam.eulerAngles.y;
-               _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, movement.turnSmoothtime);
+               if (_direction.magnitude >= 0.1f)
+               {
+                    _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + movement.cam.eulerAngles.y;
+                    _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, movement.turnSmoothtime);
 
-               characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
+                    characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
+               }
           }
      }
 
@@ -208,7 +213,9 @@ public class PlayerController : Character
      {
           DoubleJumpCountdown();
 
-          if (Input.GetButtonDown("Jump") && CanJump() && push.pushingObj == false &&
+          if (Input.GetButtonDown("Jump") && CanJump() &&
+              push.pushingObj == false &&
+              !movement.sliding &&
               !PlayerAttackController.instance.attaking &&
               PlayerAttackController.instance.currentAttack == 0 &&
               !GameManager.instance.settingsData.settingsOpen &&
@@ -362,6 +369,7 @@ public class PlayerController : Character
      private void PushingObject()
      {
           if (Input.GetButton("Push") &&
+              IsGrounded() &&
               PlayerAttackController.instance.currentAttack == 0)
           {
                PushObject();
@@ -438,7 +446,7 @@ public class PlayerController : Character
           }
           else
           {
-               if (movement.slowed == false)
+               if (movement.slowing == false)
                {
                     push.slowReference = null;
                     push.currentMaxSpeed = movement.fixedMaxSpeed;
@@ -458,7 +466,7 @@ public class PlayerController : Character
           }
           else
           {
-               if (movement.slowed == false)
+               if (movement.slowing == false)
                {
                     push.slowReference = null;
                     push.currentMaxSpeed = movement.fixedMaxSpeed;
