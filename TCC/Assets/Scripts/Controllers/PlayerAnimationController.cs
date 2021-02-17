@@ -7,6 +7,7 @@ public class PlayerAnimationController : MonoBehaviour
      public static PlayerAnimationController instance;
      public float timeToJump;
      public bool afterFalling;
+     public bool fallingIdle;
      public bool balance;
      private bool _canJumpAfterFalling;
      private float _countdownAfterFalling;
@@ -48,6 +49,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Idle", false);
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
      }
 
      public void ResetFirstAttack()
@@ -65,6 +67,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Idle", false);
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
      }
 
      public void SetSecondAttack()
@@ -82,6 +85,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Idle", false);
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
      }
 
      public void ResetSecondAttack()
@@ -99,6 +103,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Idle", false);
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
      }
 
      public void SetFinalAttack()
@@ -116,6 +121,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Idle", false);
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
      }
 
      public void ResetAttacks()
@@ -123,6 +129,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Final Attack", false);
           PlayerController.instance.animator.SetBool("Second Attack", false);
           PlayerController.instance.animator.SetBool("First Attack", false);
+          fallingIdle = false;
      }
 
      public void SetIsGrounded()
@@ -134,7 +141,9 @@ public class PlayerAnimationController : MonoBehaviour
      {
           if ((PlayerController.instance.movement.horizontal == 0 &&
                PlayerController.instance.movement.vertical == 0) &&
+               PlayerController.instance.movement.currentSpeed == 0f &&
                PlayerController.instance.IsGrounded() &&
+               !balance &&
                PlayerController.instance.push.pushingObj == false &&
                PlayerAttackController.instance.currentAttack == 0)
           {
@@ -150,6 +159,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -157,7 +167,9 @@ public class PlayerAnimationController : MonoBehaviour
      {
           if ((PlayerController.instance.movement.horizontal != 0 ||
                PlayerController.instance.movement.vertical != 0) &&
+               PlayerController.instance.movement.currentSpeed > 0f &&
                PlayerController.instance.IsGrounded() &&
+               !balance &&
                PlayerController.instance.movement.rbody.velocity.y <= 0 &&
                PlayerController.instance.push.pushingObj == false &&
                PlayerAttackController.instance.currentAttack == 0)
@@ -174,6 +186,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -198,6 +211,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -222,6 +236,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -244,6 +259,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -266,6 +282,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -288,6 +305,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -309,6 +327,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", true);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = true;
           }
      }
 
@@ -333,6 +352,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Ground", true);
                PlayerController.instance.animator.SetBool("Falling Running", false);
                _canJumpAfterFalling = false;
+               fallingIdle = false;
                PlayerController.instance.jump.fallingDust.Play();
           }
      }
@@ -358,6 +378,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", true);
                _canJumpAfterFalling = false;
+               fallingIdle = false;
                PlayerController.instance.jump.fallingDust.Play();
           }
      }
@@ -396,6 +417,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", false);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
           }
      }
 
@@ -413,5 +435,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Idle", false);
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
+          balance = true;
      }
 }

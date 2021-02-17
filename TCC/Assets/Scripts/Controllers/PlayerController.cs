@@ -146,6 +146,7 @@ public class PlayerController : Character
           JumpShadow();
           CheckDeath();
           CountdownAfterDeath();
+          ResetCurrentJump();
      }
 
      #region Movement Player
@@ -226,7 +227,14 @@ public class PlayerController : Character
                jump.doubleJumpCountdown = 0;
                jump.currentJump++;
           }
-          if (IsGrounded() && movement.rbody.velocity.y < 0)
+     }
+
+     public void ResetCurrentJump()
+     {
+          if (IsGrounded() &&
+              movement.rbody.velocity.y < 0 &&
+              !PlayerAnimationController.instance.fallingIdle &&
+              jump.currentJump > 0)
           {
                jump.currentJump = 0;
                jump.doubleJumpCountdown = 0;
@@ -500,6 +508,7 @@ public class PlayerController : Character
           else if (Physics.Raycast(_ray, cliff.cliffDetectorHeightDist))
           {
                _cliffDectorLockPlayer = true;
+               PlayerAnimationController.instance.balance = false;
           }
      }
 
