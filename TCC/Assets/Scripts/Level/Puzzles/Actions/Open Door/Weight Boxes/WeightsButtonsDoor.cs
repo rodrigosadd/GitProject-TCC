@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakingObjectsDoor : OpenDoor
+public class WeightsButtonsDoor : OpenDoor
 {
-     public BreakableObject[] breakableObjects;
+     public WeightButton[] weightButtons;
 
      void Start()
      {
@@ -20,9 +20,9 @@ public class BreakingObjectsDoor : OpenDoor
      {
           bool _isComplete = true;
 
-          for (int i = 0; i < breakableObjects.Length; i++)
+          for (int i = 0; i < weightButtons.Length; i++)
           {
-               if (!breakableObjects[i].triggerBroken)
+               if (!weightButtons[i].rightWeight)
                {
                     _isComplete = false;
                     break;
@@ -32,6 +32,10 @@ public class BreakingObjectsDoor : OpenDoor
           if (_isComplete)
           {
                CanOpenDoor();
+          }
+          else
+          {
+               CanCloseDoor();
           }
      }
 }

@@ -4,47 +4,72 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+     public PlatformType type;
      public Transform[] spotsToMovePlatform;
      public Transform playerEmpty;
-     public int spotToMove = 0;
-     public float speed = 2f;
-     public float startWaitTime = 2f;
-     public float waitTimeToMove = 0f;
-
-     void Start()
-     {
-          StartWaitTime();
-     }
+     public Transform interactObjectEmpty;
+     public int spotToMove;
+     public float speed;
+     public float waitTimeToMove;
+     private float _countdown;
+     private bool _canMove = true;
 
      void Update()
      {
+          CountdownToMove();
           MovementBetweenSpots();
-     }
-
-     public void StartWaitTime()
-     {
-          waitTimeToMove = startWaitTime;
+          MoveToSpot();
      }
 
      public virtual void MovementBetweenSpots()
      {
-          transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime);
-
-          if (Vector3.Distance(transform.position, spotsToMovePlatform[spotToMove].position) < 1.8f)
+          if (type == PlatformType.MOVEMENT_BETWEEN_SPOTS)
           {
-               if (waitTimeToMove <= 0)
+               if (_canMove)
                {
-                    spotToMove++;
-                    waitTimeToMove = startWaitTime;
+                    transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime);
                }
-               else
+
+               if (transform.position == spotsToMovePlatform[spotToMove].position)
                {
-                    waitTimeToMove -= Time.deltaTime;
+                    if (_countdown == 0)
+                    {
+                         _canMove = false;
+                         spotToMove++;
+                    }
+                    if (spotToMove >= spotsToMovePlatform.Length)
+                    {
+                         spotToMove = 0;
+                    }
                }
-               if (spotToMove >= spotsToMovePlatform.Length)
+          }
+     }
+
+     public void CountdownToMove()
+     {
+          if (type == PlatformType.MOVEMENT_BETWEEN_SPOTS)
+          {
+               if (!_canMove)
                {
-                    spotToMove = 0;
+                    if (_countdown < 1)
+                    {
+                         _countdown += Time.deltaTime / waitTimeToMove;
+                         _canMove = false;
+                    }
+                    else
+                    {
+                         _countdown = 0;
+                         _canMove = true;
+                    }
                }
+          }
+     }
+
+     public void MoveToSpot()
+     {
+          if (type == PlatformType.MOVE_TO_SPOT)
+          {
+               transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime);
           }
      }
 
@@ -54,13 +79,23 @@ public class Platform : MonoBehaviour
           {
                PlayerController.instance.transform.parent = transform;
           }
+          if (other.tag == "Light" ||
+              other.tag == "Heavy")
+          {
+               other.transform.parent = transform;
+          }
      }
 
      void OnTriggerExit(Collider other)
      {
           if (other.tag == "Player")
           {
-               PlayerController.instance.transform.parent = playerEmpty.transform;
+               PlayerController.instance.transform.parent = playerEmpty;
+          }
+          if (other.tag == "Light" ||
+              other.tag == "Heavy")
+          {
+               other.transform.parent = interactObjectEmpty;
           }
      }
 }

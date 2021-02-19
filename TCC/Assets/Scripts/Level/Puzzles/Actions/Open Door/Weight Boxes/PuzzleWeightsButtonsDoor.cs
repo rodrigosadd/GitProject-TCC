@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressWeightsButtonsDoor : OpenDoor
+public class PuzzleWeightsButtonsDoor : OpenDoor
 {
      public WeightButton[] weightButtons;
      public WeightButton[] fakeWeightButtons;

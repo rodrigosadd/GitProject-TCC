@@ -1349,9 +1349,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5239532047522203994}
-  - component: {fileID: 8722005205152915421}
+  - component: {fileID: 4265985486182968249}
   m_Layer: 8
-  m_Name: Puzzle buttons
+  m_Name: Puzzle buttons Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1375,7 +1375,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8722005205152915421
+--- !u!114 &4265985486182968249
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1384,13 +1384,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5239532047522203995}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e817c9835a4194479bf22a6c014ca5a, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f8b4f23e0a218540b89966675706c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorLeft: {fileID: 5239532048450444224}
-  targetMoveLeft: {fileID: 5239532048442298600}
-  doorRight: {fileID: 5239532049351555234}
-  targetMoveRight: {fileID: 5239532048772217782}
+  doorLeft: {fileID: 5239532048442298600}
+  targetMoveLeft: {fileID: 5239532048450444224}
+  doorRight: {fileID: 5239532048772217782}
+  targetMoveRight: {fileID: 5239532049351555234}
   targetInitialLPos: {x: 0, y: 0, z: 0}
   targetInitialRPos: {x: 0, y: 0, z: 0}
   speedMoveDoor: 5

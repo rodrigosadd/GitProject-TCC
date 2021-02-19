@@ -6,11 +6,6 @@ public class MovePlatform : Platform
 {
      public bool canMove;
 
-     void Start()
-     {
-          StartWaitTime();
-     }
-
      void Update()
      {
           TriggerMovementBetweenSpots();
@@ -20,7 +15,9 @@ public class MovePlatform : Platform
      {
           if (canMove)
           {
+               CountdownToMove();
                MovementBetweenSpots();
+               MoveToSpot();
           }
      }
 }
