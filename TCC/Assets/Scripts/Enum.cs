@@ -22,3 +22,8 @@ public enum BreakableObjectType
 {
      DROP_OBJECT, TRIGGER
 }
+
+public enum PlatformType
+{
+     MOVEMENT_BETWEEN_SPOTS, MOVE_TO_SPOT
+}
