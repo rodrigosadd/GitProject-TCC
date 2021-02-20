@@ -58,19 +58,25 @@ public class PlayerController : Character
 
      [Header("Push variables")]
      public Push push;
+     private float _countdownAfterDropping;
 
      [System.Serializable]
      public class Push
      {
           public Slow slowReference;
+          public Transform targetDropPush;
           public Transform targetPushLight;
           public Transform targetPushHeavy;
           public Transform currentTargetPush;
           public Transform middleOfThePlayer;
           public float rangePush;
-          public float rangeDropObject;
-          public float currentMaxSpeed;
+          public float rangeDrop;
+          public float timeToReturnMovement;
+          public float speedPushLight;
+          public float speedPushHeavy;
+          public float maxDistanceCurrentObject;
           public bool pushingObj;
+          public bool droppingObj;
      }
 
      [Header("Cliff variables")]
@@ -138,6 +144,8 @@ public class PlayerController : Character
           CharacterBetterJump();
           CharacterJump();
           PushingObject();
+          SetPositionCurrentTargetPush();
+          CheckDistanceBetweenPushObject();
           CliffDetector();
           CharacterFace();
           SlopeDetector();
@@ -147,12 +155,13 @@ public class PlayerController : Character
           CheckDeath();
           CountdownAfterDeath();
           ResetCurrentJump();
+          CountdownAfterDropping();
      }
 
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (!death.dead && !movement.sliding)
+          if (!death.dead && !movement.sliding && !push.droppingObj)
           {
                movement.vertical = Input.GetAxis("Vertical");
                movement.horizontal = Input.GetAxis("Horizontal");
@@ -182,7 +191,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (!death.dead && !movement.teleporting)
+          if (!death.dead && !movement.teleporting && !push.droppingObj)
           {
                if (_direction.magnitude >= 0.1f)
                {
@@ -381,13 +390,13 @@ public class PlayerController : Character
               PlayerAttackController.instance.currentAttack == 0)
           {
                PushObject();
-
-               if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
-               {
-                    DropObject();
-               }
           }
           else if (Input.GetButtonUp("Push"))
+          {
+               DropObject();
+          }
+
+          if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
           {
                DropObject();
           }
@@ -397,23 +406,54 @@ public class PlayerController : Character
      {
           RaycastHit _hit;
 
-          if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
+          if (push.currentTargetPush == null)
           {
-               if (_hit.transform.tag == "Light")
+               if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
                {
-                    push.pushingObj = true;
-                    _hit.transform.position = push.targetPushLight.position;
-                    push.currentTargetPush = _hit.transform;
-                    _hit.transform.parent = push.targetPushLight.transform;
-                    SetLightPushSpeed();
+                    if (_hit.transform.tag == "Light")
+                    {
+                         push.pushingObj = true;
+                         _hit.transform.position = push.targetPushLight.position;
+                         push.currentTargetPush = _hit.transform;
+                         SetLightPushSpeed();
+                    }
+                    else if (_hit.transform.tag == "Heavy")
+                    {
+                         push.pushingObj = true;
+                         _hit.transform.position = push.targetPushHeavy.position;
+                         push.currentTargetPush = _hit.transform;
+                         SetHeavyPushSpeed();
+                    }
                }
-               else if (_hit.transform.tag == "Heavy")
+          }
+     }
+
+     public void SetPositionCurrentTargetPush()
+     {
+          if (push.currentTargetPush != null)
+          {
+               if (push.currentTargetPush.tag == "Light")
                {
-                    push.pushingObj = true;
-                    _hit.transform.position = push.targetPushHeavy.position;
-                    push.currentTargetPush = _hit.transform;
-                    _hit.transform.parent = push.targetPushHeavy.transform;
-                    SetHeavyPushSpeed();
+                    push.currentTargetPush.position = push.targetPushLight.position;
+                    push.currentTargetPush.rotation = push.targetPushLight.rotation;
+               }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.currentTargetPush.position = push.targetPushHeavy.position;
+                    push.currentTargetPush.rotation = push.targetPushHeavy.rotation;
+               }
+          }
+     }
+
+     public void CheckDistanceBetweenPushObject()
+     {
+          if (push.pushingObj)
+          {
+               float _distanceBetween = Vector3.Distance(transform.position, push.currentTargetPush.position);
+
+               if (_distanceBetween > push.maxDistanceCurrentObject)
+               {
+                    DropObject();
                }
           }
      }
@@ -422,33 +462,49 @@ public class PlayerController : Character
      {
           if (push.currentTargetPush != null)
           {
-               RaycastHit _hit;
+               RaycastHit _hitDropObject;
 
-               if (Physics.Raycast(push.currentTargetPush.position, Vector3.up * -1, out _hit, push.rangeDropObject))
+               if (Physics.Raycast(push.targetDropPush.position, Vector3.down, out _hitDropObject, push.rangeDrop))
                {
-                    if (_hit.transform.position != null)
+                    if (push.currentTargetPush.tag == "Light")
                     {
-                         if (push.currentTargetPush.tag == "Light")
-                         {
-                              push.pushingObj = false;
-                              push.currentTargetPush.parent = null;
-                              push.currentTargetPush.position = _hit.point + new Vector3(0f, 0.8f, 0f);
-                              movement.maxSpeed = push.currentMaxSpeed;
-                              push.slowReference = null;
-                              movement.turnSmoothtime = 0.15f;
-                              push.currentTargetPush = null;
-                         }
-                         else if (push.currentTargetPush.tag == "Heavy")
-                         {
-                              push.pushingObj = false;
-                              push.currentTargetPush.parent = null;
-                              push.currentTargetPush.position = _hit.point + new Vector3(0f, 1.3f, 0f);
-                              movement.maxSpeed = push.currentMaxSpeed;
-                              push.slowReference = null;
-                              movement.turnSmoothtime = 0.15f;
-                              push.currentTargetPush = null;
-                         }
+                         push.pushingObj = false;
+                         push.droppingObj = true;
+                         push.currentTargetPush.parent = null;
+                         push.currentTargetPush.position = _hitDropObject.point + new Vector3(0f, 0.75f, 0f);
+                         movement.maxSpeed = movement.fixedMaxSpeed;
+                         push.slowReference = null;
+                         movement.turnSmoothtime = 0.15f;
+                         push.currentTargetPush = null;
                     }
+                    else if (push.currentTargetPush.tag == "Heavy")
+                    {
+                         push.pushingObj = false;
+                         push.droppingObj = true;
+                         push.currentTargetPush.parent = null;
+                         push.currentTargetPush.position = _hitDropObject.point + new Vector3(0f, 1.25f, 0f);
+                         movement.maxSpeed = movement.fixedMaxSpeed;
+                         push.slowReference = null;
+                         movement.turnSmoothtime = 0.15f;
+                         push.currentTargetPush = null;
+                    }
+               }
+          }
+
+     }
+
+     public void CountdownAfterDropping()
+     {
+          if (push.droppingObj && !push.pushingObj)
+          {
+               if (_countdownAfterDropping < 1)
+               {
+                    _countdownAfterDropping += Time.deltaTime / push.timeToReturnMovement;
+               }
+               else
+               {
+                    _countdownAfterDropping = 0;
+                    push.droppingObj = false;
                }
           }
      }
@@ -457,8 +513,7 @@ public class PlayerController : Character
      {
           if (push.slowReference == null)
           {
-               push.currentMaxSpeed = movement.fixedMaxSpeed;
-               movement.maxSpeed = 2f;
+               movement.maxSpeed = push.speedPushLight;
                movement.turnSmoothtime = 0.25f;
           }
           else
@@ -466,8 +521,7 @@ public class PlayerController : Character
                if (movement.slowing == false)
                {
                     push.slowReference = null;
-                    push.currentMaxSpeed = movement.fixedMaxSpeed;
-                    movement.maxSpeed = 2f;
+                    movement.maxSpeed = push.speedPushLight;
                     movement.turnSmoothtime = 0.25f;
                }
           }
@@ -477,8 +531,7 @@ public class PlayerController : Character
      {
           if (push.slowReference == null)
           {
-               push.currentMaxSpeed = movement.fixedMaxSpeed;
-               movement.maxSpeed = 2f;
+               movement.maxSpeed = push.speedPushHeavy;
                movement.turnSmoothtime = 0.4f;
           }
           else
@@ -486,8 +539,7 @@ public class PlayerController : Character
                if (movement.slowing == false)
                {
                     push.slowReference = null;
-                    push.currentMaxSpeed = movement.fixedMaxSpeed;
-                    movement.maxSpeed = 2f;
+                    movement.maxSpeed = push.speedPushHeavy;
                     movement.turnSmoothtime = 0.4f;
                }
           }
@@ -606,6 +658,8 @@ public class PlayerController : Character
           {
                Gizmos.color = Color.magenta;
                Gizmos.DrawLine(push.middleOfThePlayer.position, push.middleOfThePlayer.position + push.middleOfThePlayer.forward * push.rangePush);
+               Gizmos.color = Color.red;
+               Gizmos.DrawLine(push.targetDropPush.position, push.targetDropPush.position + Vector3.down * push.rangeDrop);
           }
 
           if (seeRangeCliff)
