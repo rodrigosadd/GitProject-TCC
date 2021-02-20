@@ -6091,11 +6091,13 @@ MonoBehaviour:
     rangePush: 1.18
     rangeDrop: 4
     timeToReturnMovement: 0.5
+    timeToSetPositionDropObject: 0.5
     speedPushLight: 7
     speedPushHeavy: 6
     maxDistanceCurrentObject: 8
     pushingObj: 0
     droppingObj: 0
+    setPositionDropObject: 0
   cliff:
     cliffDetectorFwrdDist: 0.3
     cliffDetectorHeightDist: 5
@@ -6112,7 +6114,7 @@ MonoBehaviour:
     currentPoint: {fileID: 0}
     offsetDead: 1
     dead: 0
-  seeRangePush: 1
+  seeRangePush: 0
   seeRangeCliff: 0
   seeRangegroundDetector: 0
   seeRangeMissedJump: 0
@@ -22872,7 +22874,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8976844379374867856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.5}
+  m_LocalPosition: {x: 0, y: 2, z: 1.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5633505654633755389}
