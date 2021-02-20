@@ -76,6 +76,7 @@ public class PlayerController : Character
           public float timeToSetPositionDropObject;
           public float speedPushLight;
           public float speedPushHeavy;
+          public float velocityDropObject;
           public float maxDistanceCurrentObject;
           public bool pushingObj;
           public bool droppingObj;
@@ -487,11 +488,11 @@ public class PlayerController : Character
                {
                     if (push.currentTargetPush.tag == "Light")
                     {
-                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, _hitDropObject.point + new Vector3(0f, 0.75f, 0f), 10f * Time.deltaTime);
+                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, _hitDropObject.point + new Vector3(0f, 0.80f, 0f), push.velocityDropObject * Time.deltaTime);
                     }
                     else if (push.currentTargetPush.tag == "Heavy")
                     {
-                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, _hitDropObject.point + new Vector3(0f, 1.25f, 0f), 10f * Time.deltaTime);
+                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, _hitDropObject.point + new Vector3(0f, 1.30f, 0f), push.velocityDropObject * Time.deltaTime);
                     }
                }
           }
