@@ -644,6 +644,12 @@ public class PlayerController : Character
                               death.dead = true;
                          }
                     }
+                    else
+                    {
+                         _currentMaxSpeed = movement.fixedMaxSpeed;
+                         movement.maxSpeed = 0;
+                         death.dead = true;
+                    }
                }
           }
      }
