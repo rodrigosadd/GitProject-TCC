@@ -18,7 +18,7 @@ public class Platform : MonoBehaviour
      {
           CountdownToMove();
           MovementBetweenSpots();
-          MoveToSpot();
+          MoveToSecondSpot();
      }
 
      public virtual void MovementBetweenSpots()
@@ -65,11 +65,19 @@ public class Platform : MonoBehaviour
           }
      }
 
-     public void MoveToSpot()
+     public void MoveToFirstSpot()
      {
           if (type == PlatformType.MOVE_TO_SPOT)
           {
                transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime);
+          }
+     }
+
+     public void MoveToSecondSpot()
+     {
+          if (type == PlatformType.MOVE_TO_SPOT)
+          {
+               transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.deltaTime);
           }
      }
 
