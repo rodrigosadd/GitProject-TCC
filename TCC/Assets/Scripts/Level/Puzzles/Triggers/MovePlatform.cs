@@ -13,11 +13,18 @@ public class MovePlatform : Platform
 
      public void TriggerMovementBetweenSpots()
      {
-          if (canMove)
+          if (canMove && type == PlatformType.MOVEMENT_BETWEEN_SPOTS)
           {
                CountdownToMove();
                MovementBetweenSpots();
-               MoveToSpot();
+          }
+          else if (canMove && type == PlatformType.MOVE_TO_SPOT)
+          {
+               MoveToFirstSpot();
+          }
+          else if (!canMove && type == PlatformType.MOVE_TO_SPOT)
+          {
+               MoveToSecondSpot();
           }
      }
 }

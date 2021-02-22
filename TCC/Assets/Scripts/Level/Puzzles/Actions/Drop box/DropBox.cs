@@ -7,6 +7,7 @@ public class DropBox : MonoBehaviour
      public GameObject[] objects;
      public Transform[] targets;
      public Button[] buttons;
+     private bool _canSpawn = true;
 
      void Update()
      {
@@ -28,15 +29,20 @@ public class DropBox : MonoBehaviour
 
           if (_isComplete)
           {
-               ActiveObjetcs();
+               ActiveObjetcsAlways();
                _isComplete = false;
           }
      }
 
-     public void ActiveObjetcs()
+     public void ActiveObjetcsAlways()
      {
           for (int i = 0; i < objects.Length; i++)
           {
+               if (objects[i].activeSelf)
+               {
+                    return;
+               }
+
                objects[i].SetActive(true);
                objects[i].transform.position = targets[i].position;
           }
