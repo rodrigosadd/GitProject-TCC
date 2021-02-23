@@ -18,9 +18,9 @@ public class Slide : MonoBehaviour
      {
           if (collider.tag == "Player" && !_canSlide)
           {
+               PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
                PlayerController.instance.movement.sliding = true;
                _canSlide = true;
-               PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
           }
      }
 

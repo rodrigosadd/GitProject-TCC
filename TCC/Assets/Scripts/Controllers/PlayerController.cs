@@ -179,7 +179,7 @@ public class PlayerController : Character
      {
           _direction = new Vector3(movement.horizontal, 0f, movement.vertical).normalized;
 
-          if (_direction.magnitude >= 0.1f)
+          if (_direction.magnitude >= 0.1f && !movement.rbody.IsSleeping())
           {
                movement.currentSpeed += movement.acceleration * Time.deltaTime;
                movement.currentSpeed = Mathf.Clamp(movement.currentSpeed, 0, movement.maxSpeed);

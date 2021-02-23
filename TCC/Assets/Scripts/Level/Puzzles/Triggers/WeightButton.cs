@@ -30,8 +30,7 @@ public class WeightButton : MonoBehaviour
                {
                     if (amount.Length != amountLights + amountHeavies)
                     {
-                         if (amount[i].transform.tag == "Light" ||
-                             amount[i].transform.tag == "Player")
+                         if (amount[i].transform.tag == "Light")
                          {
                               amountLights++;
                          }
