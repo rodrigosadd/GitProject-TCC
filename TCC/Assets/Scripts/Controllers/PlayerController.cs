@@ -176,6 +176,20 @@ public class PlayerController : Character
           UpdateMovementPlayer();
      }
 
+     public void SetControllerPosition(Vector3 toPosition)
+     {
+          movement.controller.enabled = false;
+          transform.position = toPosition;
+          movement.controller.enabled = true;
+     }
+
+     public void SetControllerParent(Transform toParent)
+     {
+          movement.controller.enabled = false;
+          transform.parent = toParent;
+          movement.controller.enabled = true;
+     }
+
      #region Movement Player
      private void UpdateMovementPlayer()
      {
@@ -567,13 +581,6 @@ public class PlayerController : Character
      #endregion
 
      #region Movement Assistance
-     public void SetControllerPosition(Vector3 toPosition)
-     {
-          movement.controller.enabled = false;
-          transform.position = toPosition;
-          movement.controller.enabled = true;
-     }
-
      public void CliffDetector()
      {
           Vector3 _origin = transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist;

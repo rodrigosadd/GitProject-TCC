@@ -85,7 +85,7 @@ public class Platform : MonoBehaviour
      {
           if (other.tag == "Player")
           {
-               PlayerController.instance.transform.parent = transform;
+               PlayerController.instance.SetControllerParent(transform);
           }
           if (other.tag == "Light" ||
               other.tag == "Heavy")
@@ -98,7 +98,7 @@ public class Platform : MonoBehaviour
      {
           if (other.tag == "Player")
           {
-               PlayerController.instance.transform.parent = playerEmpty;
+               PlayerController.instance.SetControllerParent(playerEmpty);
           }
           if (other.tag == "Light" ||
               other.tag == "Heavy")

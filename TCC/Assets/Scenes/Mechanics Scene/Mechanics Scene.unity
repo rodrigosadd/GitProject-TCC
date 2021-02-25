@@ -11984,21 +11984,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 201927438}
     m_Modifications:
-    - target: {fileID: 808444196, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 207283326217072127, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 741654644317177979, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_Name
       value: Player Beto
-      objectReference: {fileID: 0}
-    - target: {fileID: 789239519288306624, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12056,69 +12044,15 @@ PrefabInstance:
       propertyPath: death.currentPoint
       value: 
       objectReference: {fileID: 1912633650}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: characterCollider
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: movement.controller
-      value: 
-      objectReference: {fileID: 3298514135490557513}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: movement.groundCheck
-      value: 
-      objectReference: {fileID: 3298514135490557514}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: movement.groundDistance
-      value: 0.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: movement.groundMask.m_Bits
-      value: 29440
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangePositionDead
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangeFalling
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangeMissedJump
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangegroundDetector
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangeCliff
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangePush
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: seeRangeGroundDetector
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7316757490277970053, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.08
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 297328338442521315, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-    - {fileID: 6966764577319375529, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
 --- !u!1 &3298514135490557512 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 741654644317177979, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
   m_PrefabInstance: {fileID: 3298514135490557511}
   m_PrefabAsset: {fileID: 0}
---- !u!143 &3298514135490557513
-CharacterController:
+--- !u!136 &3298514135490557513
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -12127,19 +12061,10 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2.2
   m_Radius: 0.27
-  m_SlopeLimit: 45
-  m_StepOffset: 0.5
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 2.2
+  m_Direction: 1
   m_Center: {x: 0, y: 0.1, z: 0}
---- !u!4 &3298514135490557514 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7316757490277970053, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-  m_PrefabInstance: {fileID: 3298514135490557511}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3454523186398640109
 PrefabInstance:
   m_ObjectHideFlags: 0
