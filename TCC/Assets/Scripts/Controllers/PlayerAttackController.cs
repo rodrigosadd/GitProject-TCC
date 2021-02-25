@@ -52,7 +52,7 @@ public class PlayerAttackController : MonoBehaviour
                     _currentMaxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                }
 
-               if (PlayerController.instance.IsGrounded())
+               if (PlayerController.instance.movement.isGrounded)
                {
                     FirstAttack();
                }
@@ -63,7 +63,7 @@ public class PlayerAttackController : MonoBehaviour
      {
           if (!PlayerController.instance.death.dead &&
                currentAttack != 3 &&
-               PlayerController.instance.IsGrounded())
+               PlayerController.instance.movement.isGrounded)
           {
                _lastAttackTime = Time.time;
                currentAttack++;
@@ -184,12 +184,15 @@ public class PlayerAttackController : MonoBehaviour
                }
                else
                {
-                    PlayerController.instance.transform.position = Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, attackImpulse * Time.deltaTime);
-
-                    if (_finalImpulse == PlayerController.instance.transform.position)
+                    if (!Physics.Raycast(PlayerController.instance.transform.position, PlayerController.instance.characterGraphic.forward, PlayerController.instance.push.rangePush))
                     {
-                         _finalImpulse = Vector3.zero;
-                         attaking = false;
+                         PlayerController.instance.SetControllerPosition(Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, attackImpulse * Time.deltaTime));
+
+                         if (_finalImpulse == PlayerController.instance.transform.position)
+                         {
+                              _finalImpulse = Vector3.zero;
+                              attaking = false;
+                         }
                     }
                }
           }

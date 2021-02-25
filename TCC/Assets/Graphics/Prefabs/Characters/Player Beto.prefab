@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &793410240
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 793410241}
-  m_Layer: 11
-  m_Name: Ground detec front
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &793410241
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 793410240}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.68, z: 0.15999985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7316757490277970053}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &808444195
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,96 +29,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5633505654633755389}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1016231698
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1016231699}
-  m_Layer: 11
-  m_Name: Ground detec back
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1016231699
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1016231698}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.68, z: -0.12700018}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7316757490277970053}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1089015859
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1089015860}
-  m_Layer: 11
-  m_Name: Ground detec left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1089015860
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1089015859}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.16299948, y: 0.68, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7316757490277970053}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1956816530
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1956816531}
-  m_Layer: 11
-  m_Name: Ground detec right
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1956816531
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1956816530}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.16299948, y: 0.68, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7316757490277970053}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2130165110
 GameObject:
@@ -5735,13 +5615,9 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 793410241}
-  - {fileID: 1016231699}
-  - {fileID: 1089015860}
-  - {fileID: 1956816531}
+  m_Children: []
   m_Father: {fileID: 8340338824846291260}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &572961647511245135
 GameObject:
@@ -6044,43 +5920,46 @@ MonoBehaviour:
     maxHitCount: 3
     timeResetHitCount: 6
   movement:
-    rbody: {fileID: 297328338442521315}
+    velocity: {x: 0, y: 0, z: 0}
+    groundMask:
+      serializedVersion: 2
+      m_Bits: 0
+    controller: {fileID: 0}
     cam: {fileID: 0}
+    groundCheck: {fileID: 0}
+    groundDistance: 0
+    gravity: -9.81
+    fixedGravity: 0
     maxSpeed: 9
     currentSpeed: 0
     fixedMaxSpeed: 0
     acceleration: 20
     turnSmoothtime: 0.15
+    isGrounded: 0
     slowing: 0
     sliding: 0
     teleporting: 0
     horizontal: 0
     vertical: 0
   jump:
-    groundDetectors:
-    - {fileID: 793410241}
-    - {fileID: 1016231699}
-    - {fileID: 1089015860}
-    - {fileID: 1956816531}
     groundLayer:
       serializedVersion: 2
       m_Bits: 29440
+    groundDetector: {fileID: 0}
     jumpShadow: {fileID: 0}
     handMaterial: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     fallingDust: {fileID: 2130165113}
-    doubleJumpCountdown: 0
-    fallMultiplier: 1
-    lowJumpMultiplier: 2.5
-    groundDetectorRange: 1.13
-    jumpForce: 7
-    maxDistanceShadow: 7
-    speedShadow: 30
-    rangeSlopeDetector: 1.13
-    doubleJumpTime: 0.41
-    handShaderStrength: 0
-    rangeFallingGround: 1.5
     currentJump: 0
     maxJump: 2
+    jumpForce: 7
+    doubleJumpTime: 0.41
+    doubleJumpCountdown: 0
+    speedShadow: 30
+    maxDistanceShadow: 7
+    rangeSlopeDetector: 1.13
+    rangeFallingGround: 1.5
+    handShaderStrength: 0
+    groundDetectorRange: 1.13
   push:
     slowReference: {fileID: 0}
     targetDropPush: {fileID: 789239519288306624}
@@ -13465,7 +13344,7 @@ Transform:
   - {fileID: 808444196}
   - {fileID: 789239519288306624}
   m_Father: {fileID: 8340338824846291260}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2495549384238119297
 GameObject:
@@ -16117,8 +15996,8 @@ Transform:
   - {fileID: 3990809950753993954}
   - {fileID: 2130165111}
   - {fileID: 3298514136003075760}
-  - {fileID: 5633505654633755389}
   - {fileID: 7316757490277970053}
+  - {fileID: 5633505654633755389}
   m_Father: {fileID: 3298514136166854644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
