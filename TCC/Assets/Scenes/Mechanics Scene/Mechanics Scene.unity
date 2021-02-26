@@ -1657,7 +1657,6 @@ Transform:
   - {fileID: 501097490}
   - {fileID: 1737095429}
   - {fileID: 1912633650}
-  - {fileID: 475946998}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2851,101 +2850,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
---- !u!1 &475946997
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 475946998}
-  - component: {fileID: 475947001}
-  - component: {fileID: 475947000}
-  - component: {fileID: 475946999}
-  m_Layer: 8
-  m_Name: Cube
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &475946998
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475946997}
-  m_LocalRotation: {x: -0.1305268, y: -0, z: -0, w: 0.9914448}
-  m_LocalPosition: {x: 113.9, y: -0.19, z: 0.05}
-  m_LocalScale: {x: 2, y: 1, z: 3}
-  m_Children: []
-  m_Father: {fileID: 201927438}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: -15, y: 0, z: 0}
---- !u!65 &475946999
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475946997}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &475947000
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475946997}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &475947001
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 475946997}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &492141469
 GameObject:
   m_ObjectHideFlags: 0
@@ -11303,10 +11207,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slow
       objectReference: {fileID: 0}
-    - target: {fileID: 1068021338280409910, guid: 92487f03691830149bf2584dc3623668, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d8064994eb74bed488488d2d21d776fe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92487f03691830149bf2584dc3623668, type: 3}
 --- !u!1001 &1729016154890932179
@@ -11554,10 +11454,6 @@ PrefabInstance:
     - target: {fileID: 568410698312470738, guid: f1c643ae0188850469171416e31cbfe0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 568410698312470739, guid: f1c643ae0188850469171416e31cbfe0, type: 3}
-      propertyPath: spotsToMovePlatform.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 568410698312470739, guid: f1c643ae0188850469171416e31cbfe0, type: 3}
       propertyPath: spotsToMovePlatform.Array.data[0]
@@ -11919,10 +11815,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1744361451}
     m_Modifications:
-    - target: {fileID: 2865882055903207433, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
-      propertyPath: playerEmpty
-      value: 
-      objectReference: {fileID: 201927438}
     - target: {fileID: 2865882056716242096, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
       propertyPath: m_Name
       value: Puzzle Stay on top Platform
@@ -11971,10 +11863,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2865882056730923692, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
-      propertyPath: playerEmpty
-      value: 
-      objectReference: {fileID: 201927438}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
 --- !u!1001 &3298514135490557511
@@ -11990,7 +11878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 119.9
+      value: -14.3
       objectReference: {fileID: 0}
     - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12046,25 +11934,6 @@ PrefabInstance:
       objectReference: {fileID: 1912633650}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
---- !u!1 &3298514135490557512 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 741654644317177979, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
-  m_PrefabInstance: {fileID: 3298514135490557511}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &3298514135490557513
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3298514135490557512}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.27
-  m_Height: 2.2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1001 &3454523186398640109
 PrefabInstance:
   m_ObjectHideFlags: 0

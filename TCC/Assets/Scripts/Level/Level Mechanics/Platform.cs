@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
+     public Rigidbody rbody;
      public PlatformType type;
      public Transform[] spotsToMovePlatform;
-     public Transform playerEmpty;
      public Transform interactObjectEmpty;
      public int spotToMove;
      public float speed;
@@ -17,6 +17,10 @@ public class Platform : MonoBehaviour
      void Update()
      {
           CountdownToMove();
+     }
+
+     void FixedUpdate()
+     {
           MovementBetweenSpots();
           MoveToSecondSpot();
      }
@@ -27,7 +31,7 @@ public class Platform : MonoBehaviour
           {
                if (_canMove)
                {
-                    transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime);
+                    rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime));
                }
 
                if (transform.position == spotsToMovePlatform[spotToMove].position)
@@ -69,7 +73,7 @@ public class Platform : MonoBehaviour
      {
           if (type == PlatformType.MOVE_TO_SPOT)
           {
-               transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime);
+               rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime));
           }
      }
 
@@ -77,16 +81,12 @@ public class Platform : MonoBehaviour
      {
           if (type == PlatformType.MOVE_TO_SPOT)
           {
-               transform.position = Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.deltaTime);
+               rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.deltaTime));
           }
      }
 
      void OnTriggerEnter(Collider other)
      {
-          if (other.tag == "Player")
-          {
-               PlayerController.instance.SetControllerParent(transform);
-          }
           if (other.tag == "Light" ||
               other.tag == "Heavy")
           {
@@ -94,12 +94,16 @@ public class Platform : MonoBehaviour
           }
      }
 
-     void OnTriggerExit(Collider other)
+     void OnTriggerStay(Collider other)
      {
           if (other.tag == "Player")
           {
-               PlayerController.instance.SetControllerParent(playerEmpty);
+               PlayerController.instance.movement.controller.Move(rbody.velocity * Time.deltaTime);
           }
+     }
+
+     void OnTriggerExit(Collider other)
+     {
           if (other.tag == "Light" ||
               other.tag == "Heavy")
           {

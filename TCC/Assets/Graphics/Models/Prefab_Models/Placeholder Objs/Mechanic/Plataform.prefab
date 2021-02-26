@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 568410698312470750}
   - component: {fileID: 568410698312470743}
   - component: {fileID: 568410698312470742}
+  - component: {fileID: 608460690}
   m_Layer: 8
   m_Name: Plataform
   m_TagString: Platform
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 568410698312470737}
-  m_LocalRotation: {x: -0, y: 0.70710677, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children:
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1d176d2647b35249bc975922b27a3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rbody: {fileID: 608460690}
   type: 0
   spotsToMovePlatform:
   - {fileID: 0}
@@ -56,7 +58,6 @@ MonoBehaviour:
   interactObjectEmpty: {fileID: 0}
   spotToMove: 0
   speed: 5
-  startWaitTime: 2
   waitTimeToMove: 2
 --- !u!208 &568410698312470740
 NavMeshObstacle:
@@ -85,8 +86,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9390273, y: 0.15784025, z: 0.9397917}
-  m_Center: {x: 0.0015322566, y: 0.52343345, z: 0.002240166}
+  m_Size: {x: 0.99576616, y: 0.60326624, z: 0.9965267}
+  m_Center: {x: 0.0015375018, y: 0.78573346, z: -0.001306057}
 --- !u!33 &568410698312470743
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -136,6 +137,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &608460690
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568410698312470737}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &4456250731014086738
 GameObject:
   m_ObjectHideFlags: 0

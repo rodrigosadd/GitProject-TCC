@@ -183,13 +183,6 @@ public class PlayerController : Character
           movement.controller.enabled = true;
      }
 
-     public void SetControllerParent(Transform toParent)
-     {
-          movement.controller.enabled = false;
-          transform.parent = toParent;
-          movement.controller.enabled = true;
-     }
-
      #region Movement Player
      private void UpdateMovementPlayer()
      {
@@ -223,7 +216,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (!death.dead && !movement.teleporting && !push.droppingObj)
+          if (!death.dead && !movement.teleporting && !movement.sliding && !push.droppingObj)
           {
                if (_direction.magnitude >= 0.1f)
                {
@@ -312,17 +305,17 @@ public class PlayerController : Character
           }
      }
 
-     public void CharacterBetterJump()
-     {
-          if (movement.velocity.y <= 0)
-          {
-               movement.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
-          }
-          else if (movement.velocity.y > 0 && !Input.GetButton("Jump"))
-          {
-               movement.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
-          }
-     }
+     // public void CharacterBetterJump()
+     // {
+     //      if (movement.velocity.y <= 0)
+     //      {
+     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
+     //      }
+     //      else if (movement.velocity.y > 0 && !Input.GetButton("Jump"))
+     //      {
+     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
+     //      }
+     // }
 
      public bool CanJump()
      {
@@ -474,7 +467,6 @@ public class PlayerController : Character
                     movement.maxSpeed = movement.fixedMaxSpeed;
                     push.slowReference = null;
                     movement.turnSmoothtime = 0.15f;
-
                }
                else if (push.currentTargetPush.tag == "Heavy")
                {
@@ -494,18 +486,15 @@ public class PlayerController : Character
      {
           if (push.currentTargetPush != null && push.setPositionDropObject)
           {
-               RaycastHit _hitDropObject;
-
-               if (Physics.Raycast(push.targetDropPush.position, Vector3.down, out _hitDropObject, push.rangeDrop))
+               if (push.currentTargetPush.tag == "Light")
                {
-                    if (push.currentTargetPush.tag == "Light")
-                    {
-                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, _hitDropObject.point + new Vector3(0f, 0.80f, 0f), push.velocityDropObject * Time.deltaTime);
-                    }
-                    else if (push.currentTargetPush.tag == "Heavy")
-                    {
-                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, _hitDropObject.point + new Vector3(0f, 1.30f, 0f), push.velocityDropObject * Time.deltaTime);
-                    }
+                    push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
+                    push.currentTargetPush.rotation = push.targetDropPush.rotation;
+               }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
+                    push.currentTargetPush.rotation = push.targetDropPush.rotation;
                }
           }
      }
@@ -523,6 +512,7 @@ public class PlayerController : Character
                     _countdownSetPositionDropObject = 0;
                     push.setPositionDropObject = false;
                     push.currentTargetPush = null;
+                    movement.currentSpeed = 0f;
                }
           }
      }
