@@ -408,7 +408,7 @@ public class PlayerController : Character
 
           if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
           {
-               DropObject();
+               DropDeactiveObject();
           }
      }
 
@@ -479,7 +479,30 @@ public class PlayerController : Character
                }
 
           }
+     }
 
+     public void DropDeactiveObject()
+     {
+          if (push.currentTargetPush != null)
+          {
+               if (push.currentTargetPush.tag == "Light")
+               {
+                    push.pushingObj = false;
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                    movement.turnSmoothtime = 0.15f;
+                    push.currentTargetPush = null;
+               }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.pushingObj = false;
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                    movement.turnSmoothtime = 0.15f;
+                    push.currentTargetPush = null;
+               }
+
+          }
      }
 
      public void SetPositionDropObject()
@@ -577,7 +600,7 @@ public class PlayerController : Character
 
           Ray _ray = new Ray(_origin, Vector3.up * -1);
 
-          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && movement.isGrounded && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed)
+          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && movement.isGrounded && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed && movement.currentSpeed < cliff.cliffDetectorMaxSpeed)
           {
                PlayerAnimationController.instance.SetBalance();
           }

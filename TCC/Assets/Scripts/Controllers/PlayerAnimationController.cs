@@ -440,6 +440,10 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
           fallingIdle = false;
-          balance = true;
+
+          if (!balance)
+          {
+               balance = true;
+          }
      }
 }
