@@ -45,6 +45,7 @@ public class PuzzleWeightsButtonsDoor : OpenDoor
 
           if (isComplete)
           {
+               Debug.Log("Iscomplete true");
                CanOpenDoor();
           }
           else

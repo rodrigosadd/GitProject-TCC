@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5404463939253331781}
   - component: {fileID: 8869054988031860876}
   m_Layer: 0
-  m_Name: Puzzle press buttons
+  m_Name: Puzzle press buttons Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,11 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorLeft: {fileID: 5404463940815554224}
-  targetMoveLeft: {fileID: 5404463939532159095}
   doorRight: {fileID: 5404463940510111847}
+  targetMoveLeft: {fileID: 5404463939532159095}
   targetMoveRight: {fileID: 5404463940828891241}
-  targetInitialLPos: {x: 0, y: 0, z: 0}
-  targetInitialRPos: {x: 0, y: 0, z: 0}
   speedMoveDoor: 5
   buttons:
   - {fileID: 5702663564539042806}
@@ -99,7 +97,7 @@ GameObject:
   m_Layer: 8
   m_Name: Target Left
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -351,7 +349,7 @@ GameObject:
   m_Layer: 8
   m_Name: Target Righ
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

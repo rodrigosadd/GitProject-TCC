@@ -5,83 +5,65 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
      public Rigidbody rbody;
-     public PlatformType type;
      public Transform[] spotsToMovePlatform;
      public Transform interactObjectEmpty;
      public int spotToMove;
      public float speed;
      public float waitTimeToMove;
+     private GameObject _currentBox;
      private float _countdown;
      private bool _canMove = true;
-
-     void Update()
-     {
-          CountdownToMove();
-     }
-
-     void FixedUpdate()
-     {
-          MovementBetweenSpots();
-          MoveToSecondSpot();
-     }
+     private bool _canCopyVelocity;
 
      public virtual void MovementBetweenSpots()
      {
-          if (type == PlatformType.MOVEMENT_BETWEEN_SPOTS)
+          if (_canMove)
           {
-               if (_canMove)
-               {
-                    rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.deltaTime));
-               }
+               rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.fixedDeltaTime));
+          }
 
-               if (transform.position == spotsToMovePlatform[spotToMove].position)
+          if (transform.position == spotsToMovePlatform[spotToMove].position)
+          {
+               if (_countdown == 0)
                {
-                    if (_countdown == 0)
-                    {
-                         _canMove = false;
-                         spotToMove++;
-                    }
-                    if (spotToMove >= spotsToMovePlatform.Length)
-                    {
-                         spotToMove = 0;
-                    }
+                    _canMove = false;
+                    spotToMove++;
+               }
+               if (spotToMove >= spotsToMovePlatform.Length)
+               {
+                    spotToMove = 0;
                }
           }
      }
 
      public void CountdownToMove()
      {
-          if (type == PlatformType.MOVEMENT_BETWEEN_SPOTS)
+          if (!_canMove)
           {
-               if (!_canMove)
+               if (_countdown < 1)
                {
-                    if (_countdown < 1)
-                    {
-                         _countdown += Time.deltaTime / waitTimeToMove;
-                         _canMove = false;
-                    }
-                    else
-                    {
-                         _countdown = 0;
-                         _canMove = true;
-                    }
+                    _countdown += Time.deltaTime / waitTimeToMove;
+                    _canMove = false;
+               }
+               else
+               {
+                    _countdown = 0;
+                    _canMove = true;
                }
           }
      }
 
-     public void MoveToFirstSpot()
+     public void SetVelocityToCurrentBox()
      {
-          if (type == PlatformType.MOVE_TO_SPOT)
+          if (_currentBox != null && !_currentBox.activeSelf)
           {
-               rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime));
+               _currentBox = null;
+               return;
           }
-     }
 
-     public void MoveToSecondSpot()
-     {
-          if (type == PlatformType.MOVE_TO_SPOT)
+          if (_canCopyVelocity)
           {
-               rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.deltaTime));
+               _currentBox.GetComponent<Rigidbody>().velocity = rbody.velocity;
           }
      }
 
@@ -90,6 +72,8 @@ public class Platform : MonoBehaviour
           if (other.tag == "Light" ||
               other.tag == "Heavy")
           {
+               _currentBox = other.gameObject;
+               _canCopyVelocity = true;
                other.transform.parent = transform;
           }
      }
@@ -98,7 +82,7 @@ public class Platform : MonoBehaviour
      {
           if (other.tag == "Player")
           {
-               PlayerController.instance.movement.controller.Move(rbody.velocity * Time.deltaTime);
+               PlayerController.instance.movement.controller.Move(rbody.velocity * Time.fixedDeltaTime);
           }
      }
 
@@ -107,6 +91,8 @@ public class Platform : MonoBehaviour
           if (other.tag == "Light" ||
               other.tag == "Heavy")
           {
+               _canCopyVelocity = false;
+               _currentBox = null;
                other.transform.parent = interactObjectEmpty;
           }
      }

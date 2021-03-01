@@ -38,7 +38,13 @@ public class DropBox : MonoBehaviour
      {
           for (int i = 0; i < objects.Length; i++)
           {
+               if (objects[i].activeSelf)
+               {
+                    break;
+               }
+
                objects[i].SetActive(true);
+               objects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
                objects[i].transform.position = targets[i].position;
           }
      }

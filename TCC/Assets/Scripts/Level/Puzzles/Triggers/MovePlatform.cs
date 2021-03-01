@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class MovePlatform : Platform
 {
+     public PlatformType type;
      public bool canMove;
 
-     void Update()
+     void FixedUpdate()
      {
           TriggerMovementBetweenSpots();
+          SetVelocityToCurrentBox();
      }
 
      public void TriggerMovementBetweenSpots()
@@ -26,5 +28,16 @@ public class MovePlatform : Platform
           {
                MoveToSecondSpot();
           }
+     }
+
+     public void MoveToFirstSpot()
+     {
+          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime));
+     }
+
+     public void MoveToSecondSpot()
+     {
+
+          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.deltaTime));
      }
 }

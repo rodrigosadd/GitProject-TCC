@@ -32,14 +32,14 @@ public class Lever : MonoBehaviour
 
      public void SetLeverRotOpenDoor()
      {
-          lever.rotation = Quaternion.AngleAxis(rotationLever, Vector3.right);
+          lever.rotation = Quaternion.AngleAxis(rotationLever, transform.right);
      }
 
      public void SetLeverRotCloseDoor()
      {
           if (!triggerLever)
           {
-               lever.rotation = Quaternion.AngleAxis(rotationLever * -1, Vector3.right);
+               lever.rotation = Quaternion.AngleAxis(rotationLever * -1, transform.right);
           }
      }
 

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 1729016154733182690}
   - component: {fileID: 1710333015286416751}
   m_Layer: 8
-  m_Name: Puzzle levers
+  m_Name: Puzzle levers Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,15 +79,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorLeft: {fileID: 1729016155401511692}
-  targetMoveLeft: {fileID: 1729016155384966088}
   doorRight: {fileID: 1729016154863549044}
+  targetMoveLeft: {fileID: 1729016155384966088}
   targetMoveRight: {fileID: 1729016155350744081}
-  targetInitialLPos: {x: 0, y: 0, z: 0}
-  targetInitialRPos: {x: 0, y: 0, z: 0}
   speedMoveDoor: 5
   levers:
   - {fileID: 7377845909822174712}
-  timeToCloseDoor: 2
 --- !u!1 &1729016154766834341
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +224,7 @@ GameObject:
   m_Layer: 8
   m_Name: Target Righ
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -257,7 +254,7 @@ GameObject:
   m_Layer: 8
   m_Name: Target Left
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

@@ -206,7 +206,7 @@ public class PlayerController : Character
 
                Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.deltaTime);
+               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);
           }
           else
           {
@@ -397,6 +397,8 @@ public class PlayerController : Character
      {
           if (Input.GetButton("Push") &&
               movement.isGrounded &&
+              !push.droppingObj &&
+              !PlayerAnimationController.instance.fallingIdle &&
               PlayerAttackController.instance.currentAttack == 0)
           {
                PushObject();
@@ -466,7 +468,6 @@ public class PlayerController : Character
                     push.setPositionDropObject = true;
                     movement.maxSpeed = movement.fixedMaxSpeed;
                     push.slowReference = null;
-                    movement.turnSmoothtime = 0.15f;
                }
                else if (push.currentTargetPush.tag == "Heavy")
                {
@@ -475,7 +476,6 @@ public class PlayerController : Character
                     push.setPositionDropObject = true;
                     movement.maxSpeed = movement.fixedMaxSpeed;
                     push.slowReference = null;
-                    movement.turnSmoothtime = 0.15f;
                }
 
           }
@@ -490,7 +490,6 @@ public class PlayerController : Character
                     push.pushingObj = false;
                     movement.maxSpeed = movement.fixedMaxSpeed;
                     push.slowReference = null;
-                    movement.turnSmoothtime = 0.15f;
                     push.currentTargetPush = null;
                }
                else if (push.currentTargetPush.tag == "Heavy")
@@ -498,7 +497,6 @@ public class PlayerController : Character
                     push.pushingObj = false;
                     movement.maxSpeed = movement.fixedMaxSpeed;
                     push.slowReference = null;
-                    movement.turnSmoothtime = 0.15f;
                     push.currentTargetPush = null;
                }
 
@@ -507,7 +505,10 @@ public class PlayerController : Character
 
      public void SetPositionDropObject()
      {
-          if (push.currentTargetPush != null && push.setPositionDropObject)
+          if (push.currentTargetPush != null &&
+              push.setPositionDropObject &&
+              !push.pushingObj &&
+              push.droppingObj)
           {
                if (push.currentTargetPush.tag == "Light")
                {
@@ -524,7 +525,9 @@ public class PlayerController : Character
 
      public void CountdownSetPositionDropObject()
      {
-          if (push.setPositionDropObject && !push.pushingObj)
+          if (push.setPositionDropObject &&
+              !push.pushingObj &&
+              push.droppingObj)
           {
                if (_countdownSetPositionDropObject < 1)
                {
@@ -561,7 +564,6 @@ public class PlayerController : Character
           if (push.slowReference == null)
           {
                movement.maxSpeed = push.speedPushLight;
-               movement.turnSmoothtime = 0.25f;
           }
           else
           {
@@ -569,7 +571,6 @@ public class PlayerController : Character
                {
                     push.slowReference = null;
                     movement.maxSpeed = push.speedPushLight;
-                    movement.turnSmoothtime = 0.25f;
                }
           }
      }
@@ -579,7 +580,6 @@ public class PlayerController : Character
           if (push.slowReference == null)
           {
                movement.maxSpeed = push.speedPushHeavy;
-               movement.turnSmoothtime = 0.4f;
           }
           else
           {
@@ -587,7 +587,6 @@ public class PlayerController : Character
                {
                     push.slowReference = null;
                     movement.maxSpeed = push.speedPushHeavy;
-                    movement.turnSmoothtime = 0.4f;
                }
           }
      }

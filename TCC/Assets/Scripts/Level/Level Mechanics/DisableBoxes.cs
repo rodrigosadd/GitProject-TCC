@@ -5,6 +5,7 @@ using UnityEngine;
 public class DisableBoxes : MonoBehaviour
 {
      public Transform interactEmpty;
+     public float timeToRespawnBox;
      private GameObject _currentBox;
      private bool _deactiveBox;
      private float _countdown;
@@ -22,8 +23,8 @@ public class DisableBoxes : MonoBehaviour
           {
                _deactiveBox = true;
                _currentBox = collider.gameObject;
-               collider.transform.position = collider.GetComponent<WeightBox>().targetToRespawn.position;
-               collider.transform.rotation = collider.GetComponent<WeightBox>().targetToRespawn.rotation;
+               collider.transform.position = collider.GetComponent<WeightBox>().targetToRespawn;
+               collider.GetComponent<Rigidbody>().velocity = Vector3.zero;
                collider.gameObject.SetActive(false);
                collider.transform.parent = interactEmpty.transform;
           }
@@ -35,7 +36,7 @@ public class DisableBoxes : MonoBehaviour
           {
                if (_countdown < 1)
                {
-                    _countdown += Time.deltaTime / 1f;
+                    _countdown += Time.deltaTime / timeToRespawnBox;
                }
                else
                {

@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 3645519173260983309}
   - component: {fileID: 3645519173260983311}
   - component: {fileID: 3645519173260983310}
+  - component: {fileID: 8275984008665117934}
   m_Layer: 14
   m_Name: Breakable drop obj
   m_TagString: Breakable
@@ -156,6 +157,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2.02, z: 2}
   m_Center: {x: 0, y: 1.02, z: 0}
+--- !u!54 &8275984008665117934
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3645519173260983308}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &3645519173841125866
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,7 +509,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5736269683346497289, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7433737154780121223, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -567,7 +584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5736269683346497289, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7433737154780121223, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
       propertyPath: m_LocalPosition.x
