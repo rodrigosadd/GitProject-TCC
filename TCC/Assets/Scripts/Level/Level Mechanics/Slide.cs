@@ -5,38 +5,51 @@ using UnityEngine;
 public class Slide : MonoBehaviour
 {
      public float forceSlide;
-     public float timeToMoveAgaing;
-     private float _countdown;
-     private bool _canSlide;
+     public float velocitySlide;
+     public bool sliding;
+     private Vector3 _finalImpulse;
 
      void Update()
      {
-          CountdownCanMoveAgaing();
+          Impulse();
      }
 
      void OnTriggerEnter(Collider collider)
      {
-          if (collider.tag == "Player" && !_canSlide)
+          if (collider.tag == "Player" && !sliding)
           {
                PlayerController.instance.movement.sliding = true;
-               _canSlide = true;
-               PlayerController.instance.movement.rbody.AddForce(PlayerController.instance.characterGraphic.transform.forward * forceSlide, ForceMode.Impulse);
+               sliding = true;
           }
      }
 
-     public void CountdownCanMoveAgaing()
+     public void Impulse()
      {
-          if (_canSlide)
+          if (sliding)
           {
-               if (_countdown < 1)
+               if (_finalImpulse == Vector3.zero)
                {
-                    _countdown += Time.deltaTime / timeToMoveAgaing;
+                    _finalImpulse = PlayerController.instance.transform.position + (PlayerController.instance.characterGraphic.forward * forceSlide);
                }
                else
                {
-                    PlayerController.instance.movement.sliding = false;
-                    _canSlide = false;
-                    _countdown = 0;
+                    if (!Physics.Raycast(PlayerController.instance.transform.position, PlayerController.instance.characterGraphic.forward, PlayerController.instance.push.rangePush))
+                    {
+                         PlayerController.instance.SetControllerPosition(Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, velocitySlide * Time.deltaTime));
+
+                         if (_finalImpulse == PlayerController.instance.transform.position)
+                         {
+                              _finalImpulse = Vector3.zero;
+                              PlayerController.instance.movement.sliding = false;
+                              sliding = false;
+                         }
+                    }
+                    else
+                    {
+                         _finalImpulse = Vector3.zero;
+                         PlayerController.instance.movement.sliding = false;
+                         sliding = false;
+                    }
                }
           }
      }

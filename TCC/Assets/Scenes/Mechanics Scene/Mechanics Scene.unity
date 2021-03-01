@@ -4442,6 +4442,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 507026747}
     m_Modifications:
+    - target: {fileID: 1782973636079421555, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126628846267858999, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
+      propertyPath: targetToRespawn
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5736269683346497289, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
       propertyPath: m_Name
       value: Box Light 7
@@ -7175,7 +7183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterGraphic: {fileID: 1322408479}
-  characterCollider: {fileID: 1378582732}
   animator: {fileID: 0}
   hit:
     hitCount: 0
@@ -11208,10 +11215,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slow
       objectReference: {fileID: 0}
-    - target: {fileID: 1068021338280409910, guid: 92487f03691830149bf2584dc3623668, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: d8064994eb74bed488488d2d21d776fe, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92487f03691830149bf2584dc3623668, type: 3}
 --- !u!1001 &1729016154890932179
@@ -11459,10 +11462,6 @@ PrefabInstance:
     - target: {fileID: 568410698312470738, guid: f1c643ae0188850469171416e31cbfe0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 568410698312470739, guid: f1c643ae0188850469171416e31cbfe0, type: 3}
-      propertyPath: spotsToMovePlatform.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 568410698312470739, guid: f1c643ae0188850469171416e31cbfe0, type: 3}
       propertyPath: spotsToMovePlatform.Array.data[0]
@@ -11824,10 +11823,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1744361451}
     m_Modifications:
-    - target: {fileID: 2865882055903207433, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
-      propertyPath: playerEmpty
-      value: 
-      objectReference: {fileID: 201927438}
     - target: {fileID: 2865882056716242096, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
       propertyPath: m_Name
       value: Puzzle Stay on top Platform
@@ -11876,10 +11871,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2865882056730923692, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
-      propertyPath: playerEmpty
-      value: 
-      objectReference: {fileID: 201927438}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
 --- !u!1001 &3298514135490557511
@@ -11895,7 +11886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 119.9
+      value: 118.2
       objectReference: {fileID: 0}
     - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12072,6 +12063,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 140042569}
     m_Modifications:
+    - target: {fileID: 3925850535609062129, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 3925850536397452675, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
       propertyPath: m_Name
       value: Button drop box
@@ -13318,6 +13313,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1744361451}
     m_Modifications:
+    - target: {fileID: 8242892999753860838, guid: 7ac6f4bbc4466e34696b29d68e449795, type: 3}
+      propertyPath: interactEmpty
+      value: 
+      objectReference: {fileID: 1185958012}
     - target: {fileID: 8700880302291175776, guid: 7ac6f4bbc4466e34696b29d68e449795, type: 3}
       propertyPath: m_Name
       value: Puzzle disable boxes

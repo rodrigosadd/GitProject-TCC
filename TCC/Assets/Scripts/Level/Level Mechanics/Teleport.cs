@@ -81,7 +81,7 @@ public class Teleport : MonoBehaviour
 
      public void MovePlayerToPortalExit()
      {
-          PlayerController.instance.transform.position = exitPortal.position + exitPortal.forward;
+          PlayerController.instance.SetControllerPosition(exitPortal.position + exitPortal.forward);
      }
 
      public void SetRotation()
@@ -93,7 +93,8 @@ public class Teleport : MonoBehaviour
      {
           camera3RdPerson.targetCamera = targetCameraExitPortal;
           targetCameraExitPortal.position = Vector3.MoveTowards(targetCameraExitPortal.position, exitPortal.position, cameraVelocity * Time.deltaTime);
-          PlayerController.instance.movement.rbody.constraints = RigidbodyConstraints.FreezePosition;
+          PlayerController.instance.movement.gravity = 0;
+          PlayerController.instance.movement.velocity = Vector3.zero;
           PlayerController.instance.movement.maxSpeed = 0;
           PlayerController.instance.movement.teleporting = true;
      }
@@ -101,7 +102,7 @@ public class Teleport : MonoBehaviour
      public void PlayerConfigsExitTeleport()
      {
           camera3RdPerson.targetCamera = targetCameraPlayer;
-          PlayerController.instance.movement.rbody.constraints = RigidbodyConstraints.FreezeRotation;
+          PlayerController.instance.movement.gravity = PlayerController.instance.movement.fixedGravity;
           PlayerController.instance.jump.currentJump = 0;
           PlayerController.instance.jump.doubleJumpCountdown = 0;
           PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;

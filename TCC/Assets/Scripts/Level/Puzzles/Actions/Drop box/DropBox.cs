@@ -29,20 +29,15 @@ public class DropBox : MonoBehaviour
 
           if (_isComplete)
           {
-               ActiveObjetcsAlways();
+               ActiveAllObjetcs();
                _isComplete = false;
           }
      }
 
-     public void ActiveObjetcsAlways()
+     public void ActiveAllObjetcs()
      {
           for (int i = 0; i < objects.Length; i++)
           {
-               if (objects[i].activeSelf)
-               {
-                    return;
-               }
-
                objects[i].SetActive(true);
                objects[i].transform.position = targets[i].position;
           }

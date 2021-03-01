@@ -134,7 +134,7 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetIsGrounded()
      {
-          PlayerController.instance.animator.SetBool("IsGrounded", PlayerController.instance.IsGrounded());
+          PlayerController.instance.animator.SetBool("IsGrounded", PlayerController.instance.movement.isGrounded);
      }
 
      public void SetIdle()
@@ -142,7 +142,7 @@ public class PlayerAnimationController : MonoBehaviour
           if ((PlayerController.instance.movement.horizontal == 0 &&
                PlayerController.instance.movement.vertical == 0) &&
                PlayerController.instance.movement.currentSpeed == 0f &&
-               PlayerController.instance.IsGrounded() &&
+               PlayerController.instance.movement.isGrounded &&
                !balance &&
                PlayerController.instance.push.pushingObj == false &&
                PlayerAttackController.instance.currentAttack == 0)
@@ -168,9 +168,9 @@ public class PlayerAnimationController : MonoBehaviour
           if ((PlayerController.instance.movement.horizontal != 0 ||
                PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.movement.currentSpeed > 0f &&
-               PlayerController.instance.IsGrounded() &&
+               PlayerController.instance.movement.isGrounded &&
                !balance &&
-               PlayerController.instance.movement.rbody.velocity.y <= 0 &&
+               PlayerController.instance.movement.controller.velocity.y <= 0 &&
                PlayerController.instance.push.pushingObj == false &&
                PlayerAttackController.instance.currentAttack == 0)
           {
@@ -192,11 +192,11 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetSingleJump()
      {
-          if (PlayerController.instance.movement.rbody.velocity.y > 0 &&
+          if (PlayerController.instance.movement.velocity.y > -2 &&
                (PlayerController.instance.movement.horizontal != 0 ||
                PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.jump.currentJump == 1 &&
-               !PlayerController.instance.IsGrounded() &&
+               !PlayerController.instance.movement.isGrounded &&
                !PlayerAttackController.instance.attaking)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -217,11 +217,11 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetSingleJumpRunning()
      {
-          if (PlayerController.instance.movement.rbody.velocity.y > 0 &&
+          if (PlayerController.instance.movement.velocity.y > -2 &&
               (PlayerController.instance.movement.horizontal == 0 &&
               PlayerController.instance.movement.vertical == 0) &&
               PlayerController.instance.jump.currentJump == 1 &&
-              !PlayerController.instance.IsGrounded() &&
+              !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -242,9 +242,9 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetDoubleJump()
      {
-          if (PlayerController.instance.movement.rbody.velocity.y > 0 &&
+          if (PlayerController.instance.movement.controller.velocity.y > 0 &&
                PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump &&
-              !PlayerController.instance.IsGrounded() &&
+              !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -311,8 +311,8 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetFallingIdle()
      {
-          if (PlayerController.instance.movement.rbody.velocity.y <= -2f &&
-              !PlayerController.instance.IsGrounded() &&
+          if (PlayerController.instance.movement.controller.velocity.y <= -0.1 &&
+              !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -327,7 +327,11 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Idle", true);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
-               fallingIdle = true;
+
+               if (!fallingIdle)
+               {
+                    fallingIdle = true;
+               }
           }
      }
 
@@ -335,7 +339,7 @@ public class PlayerAnimationController : MonoBehaviour
      {
           if ((PlayerController.instance.movement.horizontal == 0 &&
               PlayerController.instance.movement.vertical == 0) &&
-              PlayerController.instance.IsGrounded() &&
+              PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
               PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
           {
@@ -361,7 +365,7 @@ public class PlayerAnimationController : MonoBehaviour
      {
           if ((PlayerController.instance.movement.horizontal != 0 ||
                PlayerController.instance.movement.vertical != 0) &&
-               PlayerController.instance.IsGrounded() &&
+               PlayerController.instance.movement.isGrounded &&
                !PlayerAttackController.instance.attaking &&
                PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
           {
@@ -436,6 +440,10 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Falling Ground", false);
           PlayerController.instance.animator.SetBool("Falling Running", false);
           fallingIdle = false;
-          balance = true;
+
+          if (!balance)
+          {
+               balance = true;
+          }
      }
 }

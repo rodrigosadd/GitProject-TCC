@@ -9,7 +9,10 @@ public class Slow : MonoBehaviour
 
      void OnTriggerStay(Collider collider)
      {
-          if (!PlayerController.instance.movement.slowing && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
+          if (collider.transform.tag == "Player" &&
+              !PlayerController.instance.movement.slowing &&
+              !PlayerController.instance.push.pushingObj &&
+              !PlayerController.instance.movement.slowing)
           {
                _currentMaxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                PlayerController.instance.movement.maxSpeed = slowValue;

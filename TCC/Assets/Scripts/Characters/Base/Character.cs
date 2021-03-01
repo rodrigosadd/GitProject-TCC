@@ -5,9 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
      public Transform characterGraphic;
-     public Collider characterCollider;
      public Animator animator;
-
 
      [Header("Hit variables")]
      public Hit hit;

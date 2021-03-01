@@ -39,6 +39,11 @@ public class DeactivateDisableBoxes : MonoBehaviour
      {
           for (int i = 0; i < disableBoxes.Length; i++)
           {
+               if (!disableBoxes[i].gameObject.activeSelf)
+               {
+                    break;
+               }
+
                disableBoxes[i].gameObject.SetActive(false);
           }
      }
@@ -47,6 +52,11 @@ public class DeactivateDisableBoxes : MonoBehaviour
      {
           for (int i = 0; i < disableBoxes.Length; i++)
           {
+               if (disableBoxes[i].gameObject.activeSelf)
+               {
+                    break;
+               }
+
                disableBoxes[i].gameObject.SetActive(true);
           }
      }

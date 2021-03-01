@@ -6,6 +6,7 @@ public class Floor : MonoBehaviour
 {
      public MeshRenderer meshObj;
      public BoxCollider boxObj;
+     public BoxCollider boxObjTrigger;
      public GameObject obj;
      public float timeDisableFloor;
      public float timeEnableFloor;
@@ -27,6 +28,7 @@ public class Floor : MonoBehaviour
                {
                     meshObj.enabled = false;
                     boxObj.enabled = false;
+                    boxObjTrigger.enabled = false;
                     obj.SetActive(false);
                }
 
@@ -34,6 +36,7 @@ public class Floor : MonoBehaviour
                {
                     meshObj.enabled = true;
                     boxObj.enabled = true;
+                    boxObjTrigger.enabled = true;
                     obj.SetActive(true);
                     offFloor = false;
                     time = 0;
@@ -41,9 +44,9 @@ public class Floor : MonoBehaviour
           }
      }
 
-     void OnCollisionEnter(Collision collision)
+     void OnTriggerEnter(Collider other)
      {
-          if (collision.transform.tag == "Player")
+          if (other.transform.tag == "Player")
           {
                offFloor = true;
           }
