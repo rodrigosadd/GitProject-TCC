@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class DisableBoxes : MonoBehaviour
 {
-     public Transform interactEmpty;
      public float timeToRespawnBox;
      private GameObject _currentBox;
+     private Rigidbody _rigidbodyCurrentBox;
      private bool _deactiveBox;
      private float _countdown;
 
@@ -24,9 +24,9 @@ public class DisableBoxes : MonoBehaviour
                _deactiveBox = true;
                _currentBox = collider.gameObject;
                collider.transform.position = collider.GetComponent<WeightBox>().targetToRespawn;
-               collider.GetComponent<Rigidbody>().velocity = Vector3.zero;
+               _rigidbodyCurrentBox = collider.GetComponent<Rigidbody>();
+               _rigidbodyCurrentBox.velocity = Vector3.zero;
                collider.gameObject.SetActive(false);
-               collider.transform.parent = interactEmpty.transform;
           }
      }
 
@@ -42,6 +42,8 @@ public class DisableBoxes : MonoBehaviour
                {
                     _countdown = 0;
                     _deactiveBox = false;
+                    _rigidbodyCurrentBox.velocity = Vector3.zero;
+                    _rigidbodyCurrentBox.isKinematic = false;
                     _currentBox.gameObject.SetActive(true);
                }
           }
