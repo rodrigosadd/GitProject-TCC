@@ -5922,7 +5922,7 @@ MonoBehaviour:
     velocity: {x: 0, y: 0, z: 0}
     groundMask:
       serializedVersion: 2
-      m_Bits: 29440
+      m_Bits: 62208
     controller: {fileID: 3298514135490557513}
     cam: {fileID: 0}
     groundCheck: {fileID: 7316757490277970053}
@@ -6009,13 +6009,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de619b636643c1748b9491595b333081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origin: {fileID: 3298514136166854644}
   layer:
     serializedVersion: 2
     m_Bits: 32768
-  maxDistanceRay: 1
   _myRBody: {fileID: 0}
   controller: {fileID: 3298514135490557513}
+  origin: {fileID: 3298514136166854644}
+  maxDistanceRay: 1.1
+  seeRangeDistanceRay: 1
 --- !u!143 &3298514135490557513
 CharacterController:
   m_ObjectHideFlags: 0
