@@ -6,21 +6,9 @@ using UnityEngine.SceneManagement;
 public class LoadScene : MonoBehaviour
 {
      public int indexScene;
-     private float _distanceBetween;
 
-     void Update()
+     void OnTriggerEnter(Collider other)
      {
-          Load();
+          SceneManager.LoadScene(indexScene);
      }
-
-     void Load()
-     {
-          _distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
-
-          if (_distanceBetween < 2)
-          {
-               SceneManager.LoadScene(indexScene);
-          }
-     }
-
 }

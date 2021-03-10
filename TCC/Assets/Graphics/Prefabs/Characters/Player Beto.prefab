@@ -5876,6 +5876,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3298514136166854644}
   - component: {fileID: 4149616829580453490}
+  - component: {fileID: 1900117761952523965}
   - component: {fileID: 3298514135490557513}
   m_Layer: 11
   m_Name: Player Beto
@@ -5921,7 +5922,7 @@ MonoBehaviour:
     velocity: {x: 0, y: 0, z: 0}
     groundMask:
       serializedVersion: 2
-      m_Bits: 29440
+      m_Bits: 62208
     controller: {fileID: 3298514135490557513}
     cam: {fileID: 0}
     groundCheck: {fileID: 7316757490277970053}
@@ -5968,8 +5969,7 @@ MonoBehaviour:
     rangeDrop: 4
     timeToReturnMovement: 1
     timeToSetPositionDropObject: 0.5
-    speedPushLight: 7
-    speedPushHeavy: 6
+    speedPush: 7
     velocityDropObject: 7
     maxDistanceCurrentObject: 8
     pushingObj: 0
@@ -5997,6 +5997,26 @@ MonoBehaviour:
   seeRangeMissedJump: 0
   seeRangePositionDead: 0
   seeRangeFalling: 0
+--- !u!114 &1900117761952523965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741654644317177979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de619b636643c1748b9491595b333081, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layer:
+    serializedVersion: 2
+    m_Bits: 32768
+  _myRBody: {fileID: 0}
+  controller: {fileID: 3298514135490557513}
+  origin: {fileID: 3298514136166854644}
+  maxDistanceRay: 1.1
+  seeRangeDistanceRay: 1
 --- !u!143 &3298514135490557513
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6008,7 +6028,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2.2
+  m_Height: 2.17
   m_Radius: 0.27
   m_SlopeLimit: 45
   m_StepOffset: 0.5

@@ -10,7 +10,6 @@ public class MovePlatform : Platform
      void FixedUpdate()
      {
           TriggerMovementBetweenSpots();
-          SetVelocityToCurrentBox();
      }
 
      public void TriggerMovementBetweenSpots()

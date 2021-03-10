@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-     public Rigidbody rbody;
      public Transform[] spotsToMovePlatform;
-     public Transform interactObjectEmpty;
+     public Rigidbody rbody;
      public int spotToMove;
      public float speed;
      public float waitTimeToMove;
-     private GameObject _currentBox;
      private float _countdown;
      private bool _canMove = true;
-     private bool _canCopyVelocity;
 
      public virtual void MovementBetweenSpots()
      {
@@ -50,50 +47,6 @@ public class Platform : MonoBehaviour
                     _countdown = 0;
                     _canMove = true;
                }
-          }
-     }
-
-     public void SetVelocityToCurrentBox()
-     {
-          if (_currentBox != null && !_currentBox.activeSelf)
-          {
-               _currentBox = null;
-               return;
-          }
-
-          if (_canCopyVelocity)
-          {
-               _currentBox.GetComponent<Rigidbody>().velocity = rbody.velocity;
-          }
-     }
-
-     void OnTriggerEnter(Collider other)
-     {
-          if (other.tag == "Light" ||
-              other.tag == "Heavy")
-          {
-               _currentBox = other.gameObject;
-               _canCopyVelocity = true;
-               other.transform.parent = transform;
-          }
-     }
-
-     void OnTriggerStay(Collider other)
-     {
-          if (other.tag == "Player")
-          {
-               PlayerController.instance.movement.controller.Move(rbody.velocity * Time.fixedDeltaTime);
-          }
-     }
-
-     void OnTriggerExit(Collider other)
-     {
-          if (other.tag == "Light" ||
-              other.tag == "Heavy")
-          {
-               _canCopyVelocity = false;
-               _currentBox = null;
-               other.transform.parent = interactObjectEmpty;
           }
      }
 }
