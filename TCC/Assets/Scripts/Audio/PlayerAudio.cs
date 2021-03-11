@@ -13,17 +13,20 @@ public class PlayerAudio : MonoBehaviour {
 
     //Character Sound System Functions
     public void PlayFootsteps () {
-        int rand = Random.Range (1, 4);
+        int rand = Random.Range (1, 5);
 
         switch (rand) {
             case 1:
-                FMODUnity.RuntimeManager.PlayOneShot (playerFootsteps[0]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerFootsteps[0], transform.position);
                 break;
             case 2:
-                FMODUnity.RuntimeManager.PlayOneShot (playerFootsteps[1]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerFootsteps[1], transform.position);
                 break;
             case 3:
-                FMODUnity.RuntimeManager.PlayOneShot (playerFootsteps[2]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerFootsteps[2], transform.position);
+                break;
+            case 4:
+                FMODUnity.RuntimeManager.PlayOneShot (playerFootsteps[3], transform.position);
                 break;
         }
     }
@@ -33,13 +36,13 @@ public class PlayerAudio : MonoBehaviour {
 
         switch (rand) {
             case 1:
-                FMODUnity.RuntimeManager.PlayOneShot (playerAttackSounds[0]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerAttackSounds[0], transform.position);
                 break;
             case 2:
-                FMODUnity.RuntimeManager.PlayOneShot (playerAttackSounds[1]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerAttackSounds[1], transform.position);
                 break;
             case 3:
-                FMODUnity.RuntimeManager.PlayOneShot (playerAttackSounds[2]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerAttackSounds[2], transform.position);
                 break;
         }
     }
@@ -49,26 +52,26 @@ public class PlayerAudio : MonoBehaviour {
 
         switch (rand) {
             case 1:
-                FMODUnity.RuntimeManager.PlayOneShot (playerJumpSounds[0]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerJumpSounds[0], transform.position);
                 break;
             case 2:
-                FMODUnity.RuntimeManager.PlayOneShot (playerJumpSounds[1]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerJumpSounds[1], transform.position);
                 break;
             case 3:
-                FMODUnity.RuntimeManager.PlayOneShot (playerJumpSounds[2]);
+                FMODUnity.RuntimeManager.PlayOneShot (playerJumpSounds[2], transform.position);
                 break;
         }
     }
 
     public void PlayPickSound () {
-        FMODUnity.RuntimeManager.PlayOneShot (minningSound);
+        FMODUnity.RuntimeManager.PlayOneShot (minningSound, transform.position);
     }
 
     public void PlayDeathSound () {
-        FMODUnity.RuntimeManager.PlayOneShot (deathCry);
+        FMODUnity.RuntimeManager.PlayOneShot (deathCry, transform.position);
     }
 
     public void PlayPushingSound () {
-        FMODUnity.RuntimeManager.PlayOneShot (boxPushingSound);
+        FMODUnity.RuntimeManager.PlayOneShot (boxPushingSound, transform.position);
     }
 }

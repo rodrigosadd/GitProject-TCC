@@ -11536,6 +11536,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Beto
       objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerJumpSounds.Array.data[0]
+      value: event:/Player Jump 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerJumpSounds.Array.data[1]
+      value: event:/Player Jump 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerJumpSounds.Array.data[2]
+      value: event:/Player Jump 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerAttackSounds.Array.data[0]
+      value: event:/Player Attack 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerAttackSounds.Array.data[1]
+      value: event:/Player Attack 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: playerAttackSounds.Array.data[2]
+      value: event:/Player Attack 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: minningSound
+      value: event:/Menu Confirm
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: deathCry
+      value: event:/Death
+      objectReference: {fileID: 0}
+    - target: {fileID: 2202987477871483687, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: boxPushingSound
+      value: event:/Menu Move
+      objectReference: {fileID: 0}
     - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 106.25
@@ -11598,7 +11634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7316757490277970053, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}

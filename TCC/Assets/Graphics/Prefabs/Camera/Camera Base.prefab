@@ -47,7 +47,6 @@ MonoBehaviour:
   targetCamera: {fileID: 0}
   minDistance: 1
   maxDistance: 12
-  smoothnessToMoveCam: 120
   clampAngleUp: 50
   clampAngleDown: 25
   inputSensitivityX: 150
@@ -65,8 +64,8 @@ GameObject:
   - component: {fileID: 328130100312797667}
   - component: {fileID: 328130100312797664}
   - component: {fileID: 328130100312797666}
-  - component: {fileID: 328130100312797693}
   - component: {fileID: 328130100312797692}
+  - component: {fileID: 2991001050006797232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -148,14 +147,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &328130100312797693
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 328130100312797695}
-  m_Enabled: 1
 --- !u!114 &328130100312797692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +178,16 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &2991001050006797232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328130100312797695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: -1
