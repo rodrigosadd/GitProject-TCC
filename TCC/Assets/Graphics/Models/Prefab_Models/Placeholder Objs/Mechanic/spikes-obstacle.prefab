@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5558935811371912769}
+  - component: {fileID: 4562536609585646265}
   - component: {fileID: 8830034120316436964}
   - component: {fileID: 6732426753288615214}
   - component: {fileID: 5381792584680614317}
-  - component: {fileID: 5381792584680614316}
   m_Layer: 0
   m_Name: spikes-obstacle
   m_TagString: Untagged
@@ -28,12 +28,24 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5075167580389709051}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -31.3525, y: -0.033504486, z: 21.516}
+  m_LocalPosition: {x: 0, y: -0.033504486, z: 0}
   m_LocalScale: {x: 400, y: 400, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4562536609585646265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5075167580389709051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &8830034120316436964
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96,23 +108,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.019999996, z: 0.021769414}
   m_Center: {x: 0, y: 0, z: 0.010884707}
---- !u!114 &5381792584680614316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5075167580389709051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 956b590874590494baa0cde96fee2c31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mechanicType: 2
-  forceSlide: 0
-  slowValue: 0
-  slowed: 0
-  timeDisableFloor: 0
-  timeEnableFloor: 0
-  meshObj: {fileID: 0}
-  boxObj: {fileID: 0}

@@ -17,14 +17,23 @@ public class PlayerController : Character
      [System.Serializable]
      public class Movement
      {
-          public Rigidbody rbody;
+          public Vector3 velocity;
+          public LayerMask groundMask;
+          public CharacterController controller;
           public Transform cam;
+          public Transform groundCheck;
+          public float groundDistance;
+          public float gravity = -9.81f;
+          public float fixedGravity;
           public float maxSpeed;
           public float currentSpeed;
           public float fixedMaxSpeed;
           public float acceleration;
           public float turnSmoothtime;
-          public bool slowed;
+          public bool isGrounded;
+          public bool slowing;
+          public bool sliding;
+          public bool teleporting;
           public float horizontal, vertical;
      }
 
@@ -34,41 +43,50 @@ public class PlayerController : Character
      [System.Serializable]
      public class Jump
      {
-          public Transform[] groundDetectors;
-          public LayerMask groundLayer;
+          public Transform groundDetector;
           public Transform jumpShadow;
           public Material handMaterial;
           public ParticleSystem fallingDust;
-          public float doubleJumpCountdown;
           public float fallMultiplier;
           public float lowJumpMultiplier;
-          public float groundDetectorRange;
-          public float jumpForce;
-          public float maxDistanceShadow;
-          public float speedShadow;
-          public float rangeSlopeDetector;
-          public float doubleJumpTime;
-          public float handShaderStrength;
-          public float rangeFallingGround;
           public int currentJump;
           public int maxJump;
+          public float jumpForce;
+          public float doubleJumpTime;
+          public float doubleJumpCountdown;
+          public float speedShadow;
+          public float maxDistanceShadow;
+          public float rangeSlopeDetector;
+          public float rangeFallingGround;
+          public float handShaderStrength;
+          public float groundDetectorRange;
      }
 
      [Header("Push variables")]
      public Push push;
+     private float _countdownAfterDropping;
+     private float _countdownSetPositionDropObject;
 
      [System.Serializable]
      public class Push
      {
           public Slow slowReference;
+          public Transform targetDropPush;
           public Transform targetPushLight;
           public Transform targetPushHeavy;
           public Transform currentTargetPush;
           public Transform middleOfThePlayer;
           public float rangePush;
-          public float rangeDropObject;
-          public float currentMaxSpeed;
+          public float rangeDrop;
+          public float timeToReturnMovement;
+          public float timeToSetPositionDropObject;
+          public float speedPushLight;
+          public float speedPushHeavy;
+          public float velocityDropObject;
+          public float maxDistanceCurrentObject;
           public bool pushingObj;
+          public bool droppingObj;
+          public bool setPositionDropObject;
      }
 
      [Header("Cliff variables")]
@@ -115,7 +133,7 @@ public class PlayerController : Character
      [Header("See Range variables")]
      public bool seeRangePush = false;
      public bool seeRangeCliff = false;
-     public bool seeRangegroundDetector = false;
+     public bool seeRangeGroundDetector = false;
      public bool seeRangeMissedJump = false;
      public bool seeRangePositionDead = false;
      public bool seeRangeFalling = false;
@@ -128,28 +146,47 @@ public class PlayerController : Character
           Cursor.visible = false;
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
+          movement.fixedGravity = movement.gravity;
      }
 
      void Update()
      {
-          UpdateMovementPlayer();
-          CharacterBetterJump();
+          Gravity();
+          CheckIsGrounded();
           CharacterJump();
+          //CharacterBetterJump();
           PushingObject();
+          SetPositionCurrentTargetPush();
+          SetPositionDropObject();
+          CountdownAfterDropping();
+          CountdownSetPositionDropObject();
           CliffDetector();
           CharacterFace();
           SlopeDetector();
           SetHandShader();
+          ResetCurrentJump();
           CatchMissedJumps();
           JumpShadow();
           CheckDeath();
           CountdownAfterDeath();
      }
 
+     void FixedUpdate()
+     {
+          UpdateMovementPlayer();
+     }
+
+     public void SetControllerPosition(Vector3 toPosition)
+     {
+          movement.controller.enabled = false;
+          transform.position = toPosition;
+          movement.controller.enabled = true;
+     }
+
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (!death.dead)
+          if (!death.dead && !movement.sliding && !push.droppingObj)
           {
                movement.vertical = Input.GetAxis("Vertical");
                movement.horizontal = Input.GetAxis("Horizontal");
@@ -169,7 +206,7 @@ public class PlayerController : Character
 
                Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-               transform.Translate(_moveDirection.normalized * movement.currentSpeed * Time.deltaTime);
+               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.deltaTime);
           }
           else
           {
@@ -179,12 +216,15 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (_direction.magnitude >= 0.1f)
+          if (!death.dead && !movement.teleporting && !movement.sliding && !push.droppingObj)
           {
-               _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + movement.cam.eulerAngles.y;
-               _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, movement.turnSmoothtime);
+               if (_direction.magnitude >= 0.1f)
+               {
+                    _targetAngle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg + movement.cam.eulerAngles.y;
+                    _angle = Mathf.SmoothDampAngle(characterGraphic.eulerAngles.y, _targetAngle, ref _turnSmoothVelocity, movement.turnSmoothtime);
 
-               characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
+                    characterGraphic.rotation = Quaternion.Euler(0f, _angle, 0f);
+               }
           }
      }
 
@@ -204,25 +244,53 @@ public class PlayerController : Character
      #endregion
 
      #region Jump
+     public void CheckIsGrounded()
+     {
+          movement.isGrounded = Physics.CheckSphere(movement.groundCheck.position, movement.groundDistance, movement.groundMask);
+
+          if (movement.isGrounded && movement.velocity.y < 0)
+          {
+               movement.velocity.y = -2f;
+          }
+     }
+
+     public void Gravity()
+     {
+          movement.velocity.y += movement.gravity * Time.deltaTime;
+          movement.controller.Move(movement.velocity * Time.deltaTime);
+     }
+
      public void CharacterJump()
      {
           DoubleJumpCountdown();
 
-          if (Input.GetButtonDown("Jump") && CanJump() && push.pushingObj == false &&
+          if (Input.GetButtonDown("Jump") && CanJump() &&
+              push.pushingObj == false &&
+              !movement.sliding &&
               !PlayerAttackController.instance.attaking &&
               PlayerAttackController.instance.currentAttack == 0 &&
               !GameManager.instance.settingsData.settingsOpen &&
               !PlayerAnimationController.instance.afterFalling &&
               (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0))
           {
-               movement.rbody.velocity = Vector3.up * jump.jumpForce;
+               movement.velocity.y = Mathf.Sqrt(2f * -2f * movement.gravity);
+               PlayerAnimationController.instance.fallingIdle = false;
                jump.doubleJumpCountdown = 0;
                jump.currentJump++;
           }
-          if (IsGrounded() && movement.rbody.velocity.y < 0)
+     }
+
+     public void ResetCurrentJump()
+     {
+          if (movement.isGrounded &&
+              movement.velocity.y < 0 &&
+              !PlayerAnimationController.instance.fallingIdle &&
+              jump.currentJump > 0)
           {
+               PlayerAnimationController.instance.fallingIdle = false;
                jump.currentJump = 0;
                jump.doubleJumpCountdown = 0;
+               movement.velocity.y = -2f;
           }
      }
 
@@ -237,51 +305,17 @@ public class PlayerController : Character
           }
      }
 
-     public void CharacterBetterJump()
-     {
-          if (movement.rbody.velocity.y <= 0)
-          {
-               movement.rbody.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
-          }
-          else if (movement.rbody.velocity.y > 0 && !Input.GetButton("Jump"))
-          {
-               movement.rbody.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
-          }
-     }
-
-     public bool IsGrounded()
-     {
-          Ray _rayMiddle = new Ray(transform.position, Vector3.up * -1 * jump.groundDetectorRange);
-          Ray _rayFront = new Ray(jump.groundDetectors[0].position, Vector3.up * -1 * jump.groundDetectorRange);
-          Ray _rayBack = new Ray(jump.groundDetectors[1].position, Vector3.up * -1 * jump.groundDetectorRange);
-          Ray _rayLeft = new Ray(jump.groundDetectors[2].position, Vector3.up * -1 * jump.groundDetectorRange);
-          Ray _rayRight = new Ray(jump.groundDetectors[3].position, Vector3.up * -1 * jump.groundDetectorRange);
-
-          if (Physics.Raycast(_rayMiddle, jump.groundDetectorRange, jump.groundLayer))
-          {
-               return true;
-          }
-          else if (Physics.Raycast(_rayFront, jump.groundDetectorRange, jump.groundLayer))
-          {
-               return true;
-          }
-          else if (Physics.Raycast(_rayBack, jump.groundDetectorRange, jump.groundLayer))
-          {
-               return true;
-          }
-          else if (Physics.Raycast(_rayLeft, jump.groundDetectorRange, jump.groundLayer))
-          {
-               return true;
-          }
-          else if (Physics.Raycast(_rayRight, jump.groundDetectorRange, jump.groundLayer))
-          {
-               return true;
-          }
-          else
-          {
-               return false;
-          }
-     }
+     // public void CharacterBetterJump()
+     // {
+     //      if (movement.velocity.y <= 0)
+     //      {
+     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
+     //      }
+     //      else if (movement.velocity.y > 0 && !Input.GetButton("Jump"))
+     //      {
+     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
+     //      }
+     // }
 
      public bool CanJump()
      {
@@ -290,7 +324,7 @@ public class PlayerController : Character
 
      public void JumpShadow()
      {
-          if (!IsGrounded())
+          if (!movement.isGrounded)
           {
                RaycastHit _hitInfo;
                if (Physics.Raycast(transform.position, Vector3.up * -1, out _hitInfo, jump.maxDistanceShadow))
@@ -327,9 +361,9 @@ public class PlayerController : Character
           {
                if (_hitInfo.transform.tag == "Ground")
                {
-                    if (_hitInfo.normal != new Vector3(0, 1, 0) && movement.rbody.velocity.y <= 0)
+                    if (_hitInfo.normal != new Vector3(0, 1, 0) && movement.controller.velocity.y <= 0)
                     {
-                         transform.position = new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z);
+                         SetControllerPosition(new Vector3(transform.position.x, _hitInfo.point.y + transform.localScale.y, transform.position.z));
                     }
                }
           }
@@ -362,11 +396,17 @@ public class PlayerController : Character
      private void PushingObject()
      {
           if (Input.GetButton("Push") &&
+              movement.isGrounded &&
               PlayerAttackController.instance.currentAttack == 0)
           {
                PushObject();
           }
           else if (Input.GetButtonUp("Push"))
+          {
+               DropObject();
+          }
+
+          if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
           {
                DropObject();
           }
@@ -376,73 +416,136 @@ public class PlayerController : Character
      {
           RaycastHit _hit;
 
-          if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
+          if (push.currentTargetPush == null)
           {
-               if (_hit.transform.tag == "Light")
+               if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
                {
-                    push.pushingObj = true;
-                    _hit.transform.position = push.targetPushLight.position;
-                    push.currentTargetPush = _hit.transform;
-                    _hit.transform.parent = push.targetPushLight.transform;
-                    SetLightPushSpeed();
+                    if (_hit.transform.tag == "Light")
+                    {
+                         push.pushingObj = true;
+                         _hit.transform.position = push.targetPushLight.position;
+                         push.currentTargetPush = _hit.transform;
+                         SetLightPushSpeed();
+                    }
+                    else if (_hit.transform.tag == "Heavy")
+                    {
+                         push.pushingObj = true;
+                         _hit.transform.position = push.targetPushHeavy.position;
+                         push.currentTargetPush = _hit.transform;
+                         SetHeavyPushSpeed();
+                    }
                }
-               else if (_hit.transform.tag == "Heavy")
+          }
+     }
+
+     public void SetPositionCurrentTargetPush()
+     {
+          if (push.currentTargetPush != null && !push.setPositionDropObject)
+          {
+               if (push.currentTargetPush.tag == "Light")
                {
-                    push.pushingObj = true;
-                    _hit.transform.position = push.targetPushHeavy.position;
-                    push.currentTargetPush = _hit.transform;
-                    _hit.transform.parent = push.targetPushHeavy.transform;
-                    SetHeavyPushSpeed();
+                    push.currentTargetPush.position = push.targetPushLight.position;
+                    push.currentTargetPush.rotation = push.targetPushLight.rotation;
+               }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.currentTargetPush.position = push.targetPushHeavy.position;
+                    push.currentTargetPush.rotation = push.targetPushHeavy.rotation;
                }
           }
      }
 
      public void DropObject()
      {
-          RaycastHit _hit;
-
-          if (Physics.Raycast(push.currentTargetPush.position, Vector3.up * -1, out _hit, push.rangeDropObject))
+          if (push.currentTargetPush != null)
           {
-               if (_hit.transform.position != null)
+               if (push.currentTargetPush.tag == "Light")
                {
-                    if (push.currentTargetPush.tag == "Light")
-                    {
-                         push.pushingObj = false;
-                         push.currentTargetPush.parent = null;
-                         push.currentTargetPush.position = _hit.point + new Vector3(0f, 0.8f, 0f);
-                         movement.maxSpeed = push.currentMaxSpeed;
-                         push.slowReference = null;
-                         movement.turnSmoothtime = 0.15f;
-                    }
-                    else if (push.currentTargetPush.tag == "Heavy")
-                    {
-                         push.pushingObj = false;
-                         push.currentTargetPush.parent = null;
-                         push.currentTargetPush.position = _hit.point + new Vector3(0f, 1.3f, 0f);
-                         movement.maxSpeed = push.currentMaxSpeed;
-                         push.slowReference = null;
-                         movement.turnSmoothtime = 0.15f;
-                    }
+                    push.pushingObj = false;
+                    push.droppingObj = true;
+                    push.setPositionDropObject = true;
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                    movement.turnSmoothtime = 0.15f;
                }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.pushingObj = false;
+                    push.droppingObj = true;
+                    push.setPositionDropObject = true;
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                    movement.turnSmoothtime = 0.15f;
+               }
+
           }
 
+     }
+
+     public void SetPositionDropObject()
+     {
+          if (push.currentTargetPush != null && push.setPositionDropObject)
+          {
+               if (push.currentTargetPush.tag == "Light")
+               {
+                    push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
+                    push.currentTargetPush.rotation = push.targetDropPush.rotation;
+               }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
+                    push.currentTargetPush.rotation = push.targetDropPush.rotation;
+               }
+          }
+     }
+
+     public void CountdownSetPositionDropObject()
+     {
+          if (push.setPositionDropObject && !push.pushingObj)
+          {
+               if (_countdownSetPositionDropObject < 1)
+               {
+                    _countdownSetPositionDropObject += Time.deltaTime / push.timeToSetPositionDropObject;
+               }
+               else
+               {
+                    _countdownSetPositionDropObject = 0;
+                    push.setPositionDropObject = false;
+                    push.currentTargetPush = null;
+                    movement.currentSpeed = 0f;
+               }
+          }
+     }
+
+     public void CountdownAfterDropping()
+     {
+          if (push.droppingObj && !push.pushingObj)
+          {
+               if (_countdownAfterDropping < 1)
+               {
+                    _countdownAfterDropping += Time.deltaTime / push.timeToReturnMovement;
+               }
+               else
+               {
+                    _countdownAfterDropping = 0;
+                    push.droppingObj = false;
+               }
+          }
      }
 
      public void SetLightPushSpeed()
      {
           if (push.slowReference == null)
           {
-               push.currentMaxSpeed = movement.fixedMaxSpeed;
-               movement.maxSpeed = 2f;
+               movement.maxSpeed = push.speedPushLight;
                movement.turnSmoothtime = 0.25f;
           }
           else
           {
-               if (movement.slowed == false)
+               if (movement.slowing == false)
                {
                     push.slowReference = null;
-                    push.currentMaxSpeed = movement.fixedMaxSpeed;
-                    movement.maxSpeed = 2f;
+                    movement.maxSpeed = push.speedPushLight;
                     movement.turnSmoothtime = 0.25f;
                }
           }
@@ -452,17 +555,15 @@ public class PlayerController : Character
      {
           if (push.slowReference == null)
           {
-               push.currentMaxSpeed = movement.fixedMaxSpeed;
-               movement.maxSpeed = 2f;
+               movement.maxSpeed = push.speedPushHeavy;
                movement.turnSmoothtime = 0.4f;
           }
           else
           {
-               if (movement.slowed == false)
+               if (movement.slowing == false)
                {
                     push.slowReference = null;
-                    push.currentMaxSpeed = movement.fixedMaxSpeed;
-                    movement.maxSpeed = 2f;
+                    movement.maxSpeed = push.speedPushHeavy;
                     movement.turnSmoothtime = 0.4f;
                }
           }
@@ -476,13 +577,14 @@ public class PlayerController : Character
 
           Ray _ray = new Ray(_origin, Vector3.up * -1);
 
-          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && IsGrounded() && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed)
+          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && movement.isGrounded && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed)
           {
                PlayerAnimationController.instance.SetBalance();
           }
           else if (Physics.Raycast(_ray, cliff.cliffDetectorHeightDist))
           {
                _cliffDectorLockPlayer = true;
+               PlayerAnimationController.instance.balance = false;
           }
      }
 
@@ -499,7 +601,7 @@ public class PlayerController : Character
                {
                     if (missedJump.canMiss)
                     {
-                         transform.position = Vector3.MoveTowards(transform.position, _hitInfo.point + new Vector3(0f, missedJump.offsetPlayerPos, 0f), missedJump.smootnessMissedJump * Time.deltaTime);
+                         SetControllerPosition(Vector3.MoveTowards(transform.position, _hitInfo.point + new Vector3(0f, missedJump.offsetPlayerPos, 0f), missedJump.smootnessMissedJump * Time.deltaTime));
                          missedJump.canMiss = false;
                     }
                }
@@ -527,23 +629,9 @@ public class PlayerController : Character
           {
                if (!death.dead)
                {
-                    RaycastHit _hitInfo;
-
-                    if (Physics.Raycast(transform.position, Vector3.down, out _hitInfo, 10f))
-                    {
-                         if (_hitInfo.transform.tag == "Interactable" ||
-                             _hitInfo.transform.tag == "Light" ||
-                             _hitInfo.transform.tag == "Heavy" ||
-                             _hitInfo.transform.tag == "Ground")
-                         {
-                              transform.position = _hitInfo.point + new Vector3(0f, death.offsetDead, 0f);
-                              movement.rbody.constraints = RigidbodyConstraints.FreezePosition;
-                              characterCollider.enabled = false;
-                              _currentMaxSpeed = movement.fixedMaxSpeed;
-                              movement.maxSpeed = 0;
-                              death.dead = true;
-                         }
-                    }
+                    _currentMaxSpeed = movement.fixedMaxSpeed;
+                    movement.maxSpeed = 0;
+                    death.dead = true;
                }
           }
      }
@@ -560,9 +648,7 @@ public class PlayerController : Character
                {
                     PlayerAttackController.instance.ResetAttack();
                     hit.hitCount = 0;
-                    transform.position = death.currentPoint.position;
-                    movement.rbody.constraints = RigidbodyConstraints.FreezeRotation;
-                    characterCollider.enabled = true;
+                    SetControllerPosition(death.currentPoint.position);
                     movement.maxSpeed = _currentMaxSpeed;
                     _countdownDeath = 0;
                     death.dead = false;
@@ -580,6 +666,8 @@ public class PlayerController : Character
           {
                Gizmos.color = Color.magenta;
                Gizmos.DrawLine(push.middleOfThePlayer.position, push.middleOfThePlayer.position + push.middleOfThePlayer.forward * push.rangePush);
+               Gizmos.color = Color.red;
+               Gizmos.DrawLine(push.targetDropPush.position, push.targetDropPush.position + Vector3.down * push.rangeDrop);
           }
 
           if (seeRangeCliff)
@@ -590,13 +678,10 @@ public class PlayerController : Character
                Gizmos.DrawRay(transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist, Vector3.up * -1 * cliff.cliffDetectorHeightDist);
           }
 
-          if (seeRangegroundDetector)
+          if (seeRangeGroundDetector)
           {
-               Debug.DrawRay(transform.position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
-               Debug.DrawRay(jump.groundDetectors[0].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
-               Debug.DrawRay(jump.groundDetectors[1].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
-               Debug.DrawRay(jump.groundDetectors[2].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
-               Debug.DrawRay(jump.groundDetectors[3].position, Vector3.up * -1 * jump.groundDetectorRange, Color.blue);
+               Gizmos.color = Color.green;
+               Gizmos.DrawSphere(movement.groundCheck.position, movement.groundDistance);
           }
 
           if (seeRangeMissedJump)

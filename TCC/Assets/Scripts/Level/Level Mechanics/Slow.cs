@@ -9,21 +9,21 @@ public class Slow : MonoBehaviour
 
      void OnTriggerStay(Collider collider)
      {
-          if (!PlayerController.instance.movement.slowed && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
+          if (!PlayerController.instance.movement.slowing && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
           {
                _currentMaxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                PlayerController.instance.movement.maxSpeed = slowValue;
                PlayerController.instance.push.slowReference = this;
-               PlayerController.instance.movement.slowed = true;
+               PlayerController.instance.movement.slowing = true;
           }
      }
 
      void OnTriggerExit(Collider collider)
      {
-          if (PlayerController.instance.movement.slowed && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
+          if (PlayerController.instance.movement.slowing && collider.transform.tag == "Player" && PlayerController.instance.push.pushingObj == false)
           {
                PlayerController.instance.movement.maxSpeed = _currentMaxSpeed;
-               PlayerController.instance.movement.slowed = false;
+               PlayerController.instance.movement.slowing = false;
           }
      }
 }

@@ -6,27 +6,29 @@ public class Floor : MonoBehaviour
 {
      public MeshRenderer meshObj;
      public BoxCollider boxObj;
+     public BoxCollider boxObjTrigger;
      public GameObject obj;
      public float timeDisableFloor;
      public float timeEnableFloor;
-
-     private bool OffFloor = false;
+     public bool offFloor = false;
      private float time;
 
-     private void Update()
+
+     void Update()
      {
           DisableFloor();
      }
 
      public void DisableFloor()
      {
-          if (OffFloor == true)
+          if (offFloor == true)
           {
                time = time + 1 * Time.deltaTime;
                if (time >= timeDisableFloor)
                {
                     meshObj.enabled = false;
                     boxObj.enabled = false;
+                    boxObjTrigger.enabled = false;
                     obj.SetActive(false);
                }
 
@@ -34,19 +36,19 @@ public class Floor : MonoBehaviour
                {
                     meshObj.enabled = true;
                     boxObj.enabled = true;
+                    boxObjTrigger.enabled = true;
                     obj.SetActive(true);
-                    OffFloor = false;
+                    offFloor = false;
                     time = 0;
                }
           }
      }
 
-     void OnCollisionEnter(Collision collision)
+     void OnTriggerEnter(Collider other)
      {
-          if (collision.transform.tag == "Player")
+          if (other.transform.tag == "Player")
           {
-               OffFloor = true;
+               offFloor = true;
           }
-
      }
 }

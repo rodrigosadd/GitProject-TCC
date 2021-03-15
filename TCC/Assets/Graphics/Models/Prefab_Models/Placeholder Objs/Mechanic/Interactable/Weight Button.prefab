@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5600598599843188409}
+  - component: {fileID: 5600598599843188405}
   - component: {fileID: 5600598599843188404}
   - component: {fileID: 5600598599843188411}
   - component: {fileID: 5600598599843188410}
-  - component: {fileID: 5600598599843188405}
   m_Layer: 0
   m_Name: Weight Button
   m_TagString: Untagged
@@ -34,6 +34,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5600598599843188405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5600598599843188408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51efdfa9667596e4ab95c2e151f6e47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weightType: 0
+  layerBox:
+    serializedVersion: 2
+    m_Bits: 14336
+  amount: []
+  maxDistanceCheck: 2.5
+  amountLights: 0
+  amountHeavies: 0
+  rightWeight: 0
 --- !u!33 &5600598599843188404
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -96,24 +117,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5600598599843188405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5600598599843188408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51efdfa9667596e4ab95c2e151f6e47e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weightType: 0
-  layerBox:
-    serializedVersion: 2
-    m_Bits: 12288
-  amount: []
-  maxDistanceCheck: 2.5
-  amountLights: 0
-  amountHeavies: 0
-  rightWeight: 0

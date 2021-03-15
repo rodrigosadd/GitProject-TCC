@@ -5,8 +5,6 @@ using UnityEngine;
 public class BreakingObjectsDoor : OpenDoor
 {
      public BreakableObject[] breakableObjects;
-     private Vector3 _targetInitialLPos;
-     private Vector3 _targetInitialRPos;
 
      void Start()
      {
