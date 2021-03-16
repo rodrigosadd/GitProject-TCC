@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class LoadScene : MonoBehaviour
 {
+     public Transform playerStartPosition;
+     public int currentScene;
      public int indexScene;
 
      void OnTriggerEnter(Collider other)
      {
-          SceneManager.LoadScene(indexScene);
+          InRuntimePersistantData.CachePersistenteComponents(playerStartPosition.position);
+          GameManager.instance.LoadScene(indexScene, currentScene);
      }
 }

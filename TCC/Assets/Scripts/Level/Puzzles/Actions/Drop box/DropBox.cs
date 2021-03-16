@@ -40,7 +40,7 @@ public class DropBox : MonoBehaviour
           {
                if (objects[i].activeSelf)
                {
-                    break;
+                    continue;
                }
 
                objects[i].SetActive(true);
