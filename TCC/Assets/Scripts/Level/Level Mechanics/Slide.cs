@@ -20,6 +20,7 @@ public class Slide : MonoBehaviour
           {
                PlayerController.instance.movement.sliding = true;
                sliding = true;
+               PlayerAttackController.instance.ResetAttack();
           }
      }
 
