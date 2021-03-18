@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Kill : MonoBehaviour
 {
+     public BoxCollider Collider;
+
+#if UNITY_EDITOR
+     public bool seeDeathPart = false;
+#endif
+
      void OnTriggerEnter(Collider collider)
      {
           if (collider.transform.tag == "Player")
@@ -12,4 +18,15 @@ public class Kill : MonoBehaviour
                PlayerController.instance.CheckDeath();
           }
      }
+
+#if UNITY_EDITOR
+     void OnDrawGizmos()
+     {
+          if(seeDeathPart)
+          {
+               Gizmos.color = Color.red;
+               Gizmos.DrawCube(transform.position + Collider.center, Collider.size);
+          }
+     }
+#endif
 }

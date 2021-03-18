@@ -346,7 +346,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: waitTimeToMove
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: speed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2026,7 +2030,7 @@ Transform:
   m_Children:
   - {fileID: 2061310068}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &254737175
 GameObject:
@@ -6581,7 +6585,7 @@ Transform:
   m_Children:
   - {fileID: 1411297992}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1013892385
 PrefabInstance:
@@ -10430,7 +10434,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: waitTimeToMove
-      value: 2
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: speed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11870,6 +11878,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 1873878203}
+  seeDeathPart: 0
 --- !u!114 &1873878205
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12524,15 +12534,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inScenePersitenteComponente:
-  - {fileID: 1558865780}
+  - {fileID: 75951050}
+  - {fileID: 743710969}
+  - {fileID: 912710320}
+  - {fileID: 1120228293}
   - {fileID: 1129330558}
   - {fileID: 1471406730}
-  - {fileID: 743710969}
-  - {fileID: 75951050}
-  - {fileID: 912710320}
   - {fileID: 1505752330}
+  - {fileID: 1558865780}
   - {fileID: 2063344335}
-  - {fileID: 1120228293}
   inScenePlayer: {fileID: 1173975748}
 --- !u!114 &2063344335 stripped
 MonoBehaviour:
