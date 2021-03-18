@@ -45,7 +45,10 @@ public class PlayerAttackController : MonoBehaviour
           if (Input.GetButtonDown("Attack") &&
               !GameManager.instance.settingsData.settingsOpen &&
               PlayerController.instance.movement.slowing == false &&
-              !PlayerController.instance.death.dead)
+              !PlayerController.instance.death.dead &&
+              !PlayerController.instance.push.pushingObj &&
+              !PlayerController.instance.push.setPositionDropObject &&
+              !PlayerController.instance.push.droppingObj)
           {
                if (!attaking)
                {

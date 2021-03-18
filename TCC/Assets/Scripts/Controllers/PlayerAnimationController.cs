@@ -30,6 +30,7 @@ public class PlayerAnimationController : MonoBehaviour
           SetDoubleJump();
           SetPush();
           SetPushIdle();
+          SetDropBox();
           SetFallingAction();
           InFallingAction();
           SetFallingIdle();
@@ -51,6 +52,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Double Jump", false);
           PlayerController.instance.animator.SetBool("Pushing", false);
           PlayerController.instance.animator.SetBool("Pushing Idle", false);
+          PlayerController.instance.animator.SetBool("Drop Box", false);
           PlayerController.instance.animator.SetBool("Dying", false);
           PlayerController.instance.animator.SetBool("Balance", false);
           PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -71,6 +73,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Double Jump", false);
           PlayerController.instance.animator.SetBool("Pushing", false);
           PlayerController.instance.animator.SetBool("Pushing Idle", false);
+          PlayerController.instance.animator.SetBool("Drop Box", false);
           PlayerController.instance.animator.SetBool("Dying", false);
           PlayerController.instance.animator.SetBool("Balance", false);
           PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -91,6 +94,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Double Jump", false);
           PlayerController.instance.animator.SetBool("Pushing", false);
           PlayerController.instance.animator.SetBool("Pushing Idle", false);
+          PlayerController.instance.animator.SetBool("Drop Box", false);
           PlayerController.instance.animator.SetBool("Dying", false);
           PlayerController.instance.animator.SetBool("Balance", false);
           PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -111,6 +115,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Double Jump", false);
           PlayerController.instance.animator.SetBool("Pushing", false);
           PlayerController.instance.animator.SetBool("Pushing Idle", false);
+          PlayerController.instance.animator.SetBool("Drop Box", false);
           PlayerController.instance.animator.SetBool("Dying", false);
           PlayerController.instance.animator.SetBool("Balance", false);
           PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -131,6 +136,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Double Jump", false);
           PlayerController.instance.animator.SetBool("Pushing", false);
           PlayerController.instance.animator.SetBool("Pushing Idle", false);
+          PlayerController.instance.animator.SetBool("Drop Box", false);
           PlayerController.instance.animator.SetBool("Dying", false);
           PlayerController.instance.animator.SetBool("Balance", false);
           PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -164,7 +170,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.movement.currentSpeed == 0f &&
                PlayerController.instance.movement.isGrounded &&
                !balance &&
-               PlayerController.instance.push.pushingObj == false &&
+               !PlayerController.instance.push.pushingObj &&
                PlayerAttackController.instance.currentAttack == 0)
           {
                PlayerController.instance.animator.SetBool("Idle", true);
@@ -174,6 +180,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -195,7 +202,9 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.movement.isGrounded &&
                !balance &&
                PlayerController.instance.movement.controller.velocity.y <= 0 &&
-               PlayerController.instance.push.pushingObj == false &&
+               !PlayerController.instance.push.pushingObj &&
+               !PlayerController.instance.push.droppingObj &&
+               !PlayerController.instance.push.setPositionDropObject &&
                PlayerAttackController.instance.currentAttack == 0)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -205,6 +214,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -234,6 +244,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -261,6 +272,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -286,6 +298,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", true);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -313,6 +326,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", true);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -338,6 +352,32 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", true);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
+               PlayerController.instance.animator.SetBool("Dying", false);
+               PlayerController.instance.animator.SetBool("Balance", false);
+               PlayerController.instance.animator.SetBool("Falling Action", false);
+               PlayerController.instance.animator.SetBool("Falling Idle", false);
+               PlayerController.instance.animator.SetBool("Falling Ground", false);
+               PlayerController.instance.animator.SetBool("Falling Running", false);
+               fallingIdle = false;
+               alreadyPlayedFallingAction = false;
+          }
+     }
+
+     public void SetDropBox()
+     {
+          if(PlayerController.instance.push.droppingObj &&
+             !PlayerController.instance.push.pushingObj &&
+             !PlayerAttackController.instance.attaking)
+          {
+               PlayerController.instance.animator.SetBool("Idle", false);
+               PlayerController.instance.animator.SetBool("Running", false);
+               PlayerController.instance.animator.SetBool("Single Jump", false);
+               PlayerController.instance.animator.SetBool("Single Jump Running", false);
+               PlayerController.instance.animator.SetBool("Double Jump", false);
+               PlayerController.instance.animator.SetBool("Pushing", false);
+               PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", true);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -366,6 +406,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", true);
@@ -392,6 +433,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -421,13 +463,14 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
                PlayerController.instance.animator.SetBool("Falling Idle", true);
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
-               Debug.Log("Entrou no Falling idle jump");
+               
                if (!fallingIdle)
                {
                     fallingIdle = true;
@@ -450,6 +493,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -478,6 +522,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", false);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -537,6 +582,7 @@ public class PlayerAnimationController : MonoBehaviour
           PlayerController.instance.animator.SetBool("Double Jump", false);
           PlayerController.instance.animator.SetBool("Pushing", false);
           PlayerController.instance.animator.SetBool("Pushing Idle", false);
+          PlayerController.instance.animator.SetBool("Drop Box", false);
           PlayerController.instance.animator.SetBool("Dying", false);
           PlayerController.instance.animator.SetBool("Balance", true);
           PlayerController.instance.animator.SetBool("Falling Action", false);
@@ -565,6 +611,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Double Jump", false);
                PlayerController.instance.animator.SetBool("Pushing", false);
                PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
                PlayerController.instance.animator.SetBool("Dying", true);
                PlayerController.instance.animator.SetBool("Balance", false);
                PlayerController.instance.animator.SetBool("Falling Action", false);
