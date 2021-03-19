@@ -40,6 +40,8 @@ public class PlayerAnimationController : MonoBehaviour
           CanJumpAfterFalling();
           SetSliding();
           SetDead();
+          SetEntryTeleport();
+          SetExitTeleport();
      }
 
 #region Attack
@@ -639,6 +641,60 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
                PlayerController.instance.animator.SetBool("Sliding", true);
+               fallingIdle = false;
+               alreadyPlayedFallingAction = false;
+          }
+     }
+#endregion
+
+#region Teleport
+     public void SetEntryTeleport()
+     {
+          if(PlayerController.instance.movement.entryTeleport)
+          {
+               PlayerController.instance.animator.SetBool("Idle", false);
+               PlayerController.instance.animator.SetBool("Running", false);
+               PlayerController.instance.animator.SetBool("Single Jump", false);
+               PlayerController.instance.animator.SetBool("Single Jump Running", false);
+               PlayerController.instance.animator.SetBool("Double Jump", false);
+               PlayerController.instance.animator.SetBool("Pushing", false);
+               PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
+               PlayerController.instance.animator.SetBool("Dying", false);
+               PlayerController.instance.animator.SetBool("Balance", false);
+               PlayerController.instance.animator.SetBool("Falling Action", false);
+               PlayerController.instance.animator.SetBool("Falling Idle", false);
+               PlayerController.instance.animator.SetBool("Falling Ground", false);
+               PlayerController.instance.animator.SetBool("Falling Running", false);
+               PlayerController.instance.animator.SetBool("Sliding", false);
+               PlayerController.instance.animator.SetBool("Entry Teleport", true);
+               PlayerController.instance.animator.SetBool("Exit Teleport", false);
+               fallingIdle = false;
+               alreadyPlayedFallingAction = false;
+          }
+     }
+
+     public void SetExitTeleport()
+     {
+          if(PlayerController.instance.movement.exitTeleport)
+          {
+               PlayerController.instance.animator.SetBool("Idle", false);
+               PlayerController.instance.animator.SetBool("Running", false);
+               PlayerController.instance.animator.SetBool("Single Jump", false);
+               PlayerController.instance.animator.SetBool("Single Jump Running", false);
+               PlayerController.instance.animator.SetBool("Double Jump", false);
+               PlayerController.instance.animator.SetBool("Pushing", false);
+               PlayerController.instance.animator.SetBool("Pushing Idle", false);
+               PlayerController.instance.animator.SetBool("Drop Box", false);
+               PlayerController.instance.animator.SetBool("Dying", false);
+               PlayerController.instance.animator.SetBool("Balance", false);
+               PlayerController.instance.animator.SetBool("Falling Action", false);
+               PlayerController.instance.animator.SetBool("Falling Idle", false);
+               PlayerController.instance.animator.SetBool("Falling Ground", false);
+               PlayerController.instance.animator.SetBool("Falling Running", false);
+               PlayerController.instance.animator.SetBool("Sliding", false);
+               PlayerController.instance.animator.SetBool("Entry Teleport", false);
+               PlayerController.instance.animator.SetBool("Exit Teleport", true);
                fallingIdle = false;
                alreadyPlayedFallingAction = false;
           }

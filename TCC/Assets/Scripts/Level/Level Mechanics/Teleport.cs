@@ -17,8 +17,8 @@ public class Teleport : MonoBehaviour
      private float _distanceBetween;
      private float _countdownEntryTeleport;
      private float _countdownExitTeleport;
-     public bool _CanTeleport;
-     public bool _CanMove;
+     private bool _CanTeleport;
+     private bool _CanMove;
 
      void Start()
      {
@@ -38,7 +38,7 @@ public class Teleport : MonoBehaviour
 
           if (_distanceBetween <= rangeTeleport)
           {
-               _CanTeleport = true;
+               _CanTeleport = true;               
           }
      }
 
@@ -49,10 +49,12 @@ public class Teleport : MonoBehaviour
                if (_countdownEntryTeleport < 1)
                {
                     PlayerConfigsEntryTeleport();
+                    PlayerController.instance.movement.entryTeleport = true;
                     _countdownEntryTeleport += Time.deltaTime / timeEntryTeleport;
                }
                else
                {
+                    PlayerController.instance.movement.entryTeleport = false;
                     _countdownEntryTeleport = 0;
                     _CanTeleport = false;
                     _CanMove = false;
@@ -68,10 +70,12 @@ public class Teleport : MonoBehaviour
           {
                if (_countdownExitTeleport < 1)
                {
+                    PlayerController.instance.movement.exitTeleport = true;
                     _countdownExitTeleport += Time.deltaTime / timeExitTeleport;
                }
                else
                {
+                    PlayerController.instance.movement.exitTeleport = false;
                     _CanMove = true;
                     _countdownExitTeleport = 0;
                     PlayerConfigsExitTeleport();
@@ -86,7 +90,7 @@ public class Teleport : MonoBehaviour
 
      public void SetRotation()
      {
-          PlayerController.instance.characterGraphic.transform.rotation = Quaternion.FromToRotation(PlayerController.instance.characterGraphic.transform.forward, exitPortal.forward);
+          PlayerController.instance.characterGraphic.transform.rotation = exitPortal.rotation;
      }
 
      public void PlayerConfigsEntryTeleport()
@@ -95,8 +99,7 @@ public class Teleport : MonoBehaviour
           targetCameraExitPortal.position = Vector3.MoveTowards(targetCameraExitPortal.position, exitPortal.position, cameraVelocity * Time.deltaTime);
           PlayerController.instance.movement.gravity = 0;
           PlayerController.instance.movement.velocity = Vector3.zero;
-          PlayerController.instance.movement.maxSpeed = 0;
-          PlayerController.instance.movement.teleporting = true;
+          PlayerController.instance.movement.maxSpeed = 0;          
      }
 
      public void PlayerConfigsExitTeleport()
@@ -105,8 +108,7 @@ public class Teleport : MonoBehaviour
           PlayerController.instance.movement.gravity = PlayerController.instance.movement.fixedGravity;
           PlayerController.instance.jump.currentJump = 0;
           PlayerController.instance.jump.doubleJumpCountdown = 0;
-          PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
-          PlayerController.instance.movement.teleporting = false;
+          PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;          
           SetTargetCamPosition();
      }
 

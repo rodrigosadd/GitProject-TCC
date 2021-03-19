@@ -33,7 +33,8 @@ public class PlayerController : Character
           public bool isGrounded;
           public bool slowing;
           public bool sliding;
-          public bool teleporting;
+          public bool entryTeleport;
+          public bool exitTeleport;
           public float horizontal, vertical;
      }
 
@@ -216,7 +217,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (!death.dead && !movement.teleporting && !movement.sliding && !push.droppingObj)
+          if (!death.dead && !movement.entryTeleport && !movement.exitTeleport && !movement.sliding && !push.droppingObj)
           {
                if (_direction.magnitude >= 0.1f)
                {
@@ -553,13 +554,19 @@ public class PlayerController : Character
           {
                if (push.currentTargetPush.tag == "Light")
                {
-                    push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
-                    push.currentTargetPush.rotation = push.targetDropPush.rotation;
+                    if(push.currentTargetPush.position != push.targetDropPush.position)
+                    {
+                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
+                         push.currentTargetPush.rotation = push.targetDropPush.rotation;
+                    }
                }
                else if (push.currentTargetPush.tag == "Heavy")
                {
-                    push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
-                    push.currentTargetPush.rotation = push.targetDropPush.rotation;
+                    if(push.currentTargetPush.position != push.targetDropPush.position)
+                    {
+                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
+                         push.currentTargetPush.rotation = push.targetDropPush.rotation;
+                    }
                }
           }
      }

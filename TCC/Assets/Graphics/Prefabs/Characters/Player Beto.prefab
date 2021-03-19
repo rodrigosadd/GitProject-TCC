@@ -5893,14 +5893,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 741654644317177979}
-  m_LocalRotation: {x: 0, y: 0.7071071, z: 0, w: -0.7071065}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 178.78067, y: 18.025002, z: 114.94504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8340338824846291260}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &3443233228238395506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5955,7 +5955,7 @@ MonoBehaviour:
     horizontal: 0
     vertical: 0
   jump:
-    groundDetector: {fileID: 0}
+    groundDetector: {fileID: 7316757490277970053}
     jumpShadow: {fileID: 0}
     handMaterial: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     fallingDust: {fileID: 2130165113}
@@ -5981,10 +5981,10 @@ MonoBehaviour:
     middleOfThePlayer: {fileID: 8904878184175028437}
     rangePush: 1.18
     rangeDrop: 4
-    timeToReturnMovement: 1
+    timeToReturnMovement: 0.8
     timeToSetPositionDropObject: 0.5
     speedPush: 7
-    velocityDropObject: 7
+    velocityDropObject: 8.5
     maxDistanceCurrentObject: 8
     pushingObj: 0
     droppingObj: 0
@@ -16036,6 +16036,7 @@ MonoBehaviour:
   afterFalling: 0
   fallingIdle: 0
   balance: 0
+  alreadyPlayedFallingAction: 0
 --- !u!114 &6982425783301506864
 MonoBehaviour:
   m_ObjectHideFlags: 0
