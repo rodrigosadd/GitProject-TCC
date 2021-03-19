@@ -7,65 +7,44 @@ ModelImporter:
       74: 2493098847013930233
     second: Beto_A_Pose
   - first:
-      74: 2972844278342774046
-    second: Beto_Dying
-  - first:
-      74: -8176977376005070302
-    second: Beto_Atacking
-  - first:
-      74: -9016165300148405584
-    second: Beto_Atacking2
-  - first:
-      74: -8395006310669907956
-    second: Beto_Atacking3
-  - first:
-      74: -7972029029956433629
-    second: Beto_Mining
-  - first:
-      74: 6267976585216358013
-    second: Beto_1st_Jump
-  - first:
-      74: -6310272634548350753
-    second: Beto_2nd_Jump
-  - first:
-      74: 1862032485477642982
-    second: Beto_Falling_Idle
-  - first:
-      74: 4103132297201997874
-    second: Beto_Falling_Action
-  - first:
-      74: 5226887535829664142
-    second: Beto_Falling_Running
-  - first:
-      74: 916302498551972471
-    second: Beto_Falling_Ground
-  - first:
-      74: -2504301592108313997
-    second: Beto_Idle_Caution
-  - first:
-      74: 6094458377718280121
-    second: Beto_Balancing
-  - first:
-      74: -2553834655166733166
-    second: Beto_Caution_Idle_To_Idle
-  - first:
-      74: 282604160872017538
-    second: Beto_Running_45_R
-  - first:
       74: 522778490458544810
     second: Beto_Running_Foward
   - first:
-      74: 8959012058975403355
-    second: Beto_Pushing_Foward
+      74: -7465898853957265576
+    second: Beto_Running_Foward_With_Box
   - first:
-      74: 7984302958824197608
-    second: Beto_Pushing_Idle
+      74: 4991464553050951110
+    second: Beto_Idle_With_Box
+  - first:
+      74: -5451490063423996794
+    second: Beto_Drop_Box
+  - first:
+      74: 931272433863312126
+    second: Beto_Sliding
   - first:
       74: -6870790625702406259
     second: Beto_Idle_Suave
   - first:
       74: -3334595825009039826
     second: Beto_Idle
+  - first:
+      74: -5943958139749908369
+    second: Beto_Entering_Portal
+  - first:
+      74: -7338380332854739827
+    second: Beto_Interacting
+  - first:
+      74: -8441915050780475766
+    second: Beto_Leaving_Portal
+  - first:
+      74: 8832167020594932139
+    second: Beto_Uuuugh
+  - first:
+      74: -4476855173370818783
+    second: Beto_MOOVE!
+  - first:
+      74: 272213440694560638
+    second: Beto_A_Pose.001
   - first:
       74: 7565054986033332823
     second: Armature_Beto_Blender|Beto_1st_Jump
@@ -91,8 +70,14 @@ ModelImporter:
       74: 7691952718896275453
     second: Armature_Beto_Blender|Beto_Caution_Idle_To_Idle
   - first:
+      74: -4013468473314610436
+    second: Armature_Beto_Blender|Beto_Drop_Box
+  - first:
       74: 5316470574166484919
     second: Armature_Beto_Blender|Beto_Dying
+  - first:
+      74: -8537464881933227241
+    second: Armature_Beto_Blender|Beto_Entering_Portal
   - first:
       74: -5973409413069755183
     second: Armature_Beto_Blender|Beto_Falling_Action
@@ -115,8 +100,20 @@ ModelImporter:
       74: 6077924574925745134
     second: Armature_Beto_Blender|Beto_Idle_Suave
   - first:
+      74: 1956388001383622538
+    second: Armature_Beto_Blender|Beto_Idle_With_Box
+  - first:
+      74: -2565620871368684181
+    second: Armature_Beto_Blender|Beto_Interacting
+  - first:
+      74: -7588599445631555715
+    second: Armature_Beto_Blender|Beto_Leaving_Portal
+  - first:
       74: 8334244406438442705
     second: Armature_Beto_Blender|Beto_Mining
+  - first:
+      74: -6359125134610523865
+    second: Armature_Beto_Blender|Beto_MOOVE!
   - first:
       74: 3250618003034980002
     second: Armature_Beto_Blender|Beto_Pushing_Foward
@@ -132,6 +129,18 @@ ModelImporter:
   - first:
       74: -2779753273664381701
     second: Armature_Beto_Blender|Beto_Running_Foward
+  - first:
+      74: -744508337922645924
+    second: Armature_Beto_Blender|Beto_Running_Foward_With_Box
+  - first:
+      74: 471681777520367508
+    second: Armature_Beto_Blender|Beto_Sliding
+  - first:
+      74: -6349865277197501065
+    second: Armature_Beto_Blender|Beto_Super_Jump
+  - first:
+      74: 4143069932633945355
+    second: Armature_Beto_Blender|Beto_Uuuugh
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -164,7 +173,7 @@ ModelImporter:
       name: Armature_Beto_Blender|Beto_1st_Jump
       takeName: Armature_Beto_Blender|Beto_1st_Jump
       internalID: 0
-      firstFrame: 5
+      firstFrame: 4
       lastFrame: 29
       wrapMode: 0
       orientationOffsetY: 0
@@ -184,14 +193,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.1147541
-        functionName: PlayJumpSound
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -200,7 +202,7 @@ ModelImporter:
       name: Armature_Beto_Blender|Beto_2nd_Jump
       takeName: Armature_Beto_Blender|Beto_2nd_Jump
       internalID: 0
-      firstFrame: 4
+      firstFrame: 3
       lastFrame: 37
       wrapMode: 0
       orientationOffsetY: 0
@@ -220,14 +222,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.19125682
-        functionName: PlayJumpSound
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -285,35 +280,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.114156015
-        functionName: Attaking
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.24316761
-        functionName: AttackDetection
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.31035763
-        functionName: SecondAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.18306011
-        functionName: PlayAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -342,35 +309,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.051359516
-        functionName: Attaking
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.08257673
-        functionName: AttackDetection
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.22190431
-        functionName: FinalAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.06830601
-        functionName: PlayAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -399,35 +338,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.062054962
-        functionName: Attaking
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.13486648
-        functionName: AttackDetection
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.2798816
-        functionName: ResetAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.12568305
-        functionName: PlayAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -491,6 +402,35 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Drop_Box
+      takeName: Armature_Beto_Blender|Beto_Drop_Box
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: Armature_Beto_Blender|Beto_Dying
       takeName: Armature_Beto_Blender|Beto_Dying
       internalID: 0
@@ -514,14 +454,36 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.06557377
-        functionName: PlayDeathSound
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Entering_Portal
+      takeName: Armature_Beto_Blender|Beto_Entering_Portal
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 19
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -730,6 +692,93 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Idle_With_Box
+      takeName: Armature_Beto_Blender|Beto_Idle_With_Box
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Interacting
+      takeName: Armature_Beto_Blender|Beto_Interacting
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Leaving_Portal
+      takeName: Armature_Beto_Blender|Beto_Leaving_Portal
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 23
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
       name: Armature_Beto_Blender|Beto_Mining
       takeName: Armature_Beto_Blender|Beto_Mining
       internalID: 0
@@ -759,55 +808,19 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature_Beto_Blender|Beto_Pushing_Foward
-      takeName: Armature_Beto_Blender|Beto_Pushing_Foward
+      name: Armature_Beto_Blender|Beto_MOOVE!
+      takeName: Armature_Beto_Blender|Beto_MOOVE!
       internalID: 0
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 21
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0
-        functionName: PlayPushingSound
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature_Beto_Blender|Beto_Pushing_Idle
-      takeName: Armature_Beto_Blender|Beto_Pushing_Idle
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 60
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -819,92 +832,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature_Beto_Blender|Beto_Running_45_L
-      takeName: Armature_Beto_Blender|Beto_Running_45_L
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 14
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0.22404373
-        functionName: PlayFootsteps
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6748634
-        functionName: PlayFootsteps
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Armature_Beto_Blender|Beto_Running_45_R
-      takeName: Armature_Beto_Blender|Beto_Running_45_R
-      internalID: 0
-      firstFrame: 0
-      lastFrame: 14
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events:
-      - time: 0.18306011
-        functionName: PlayFootsteps
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6693989
-        functionName: PlayFootsteps
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -933,35 +860,123 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0.2021858
-        functionName: PlayFootsteps
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.6639344
-        functionName: PlayFootsteps
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.19547823
-        functionName: PlayParticleDust
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.65909094
-        functionName: PlayParticleDust
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Running_Foward_With_Box
+      takeName: Armature_Beto_Blender|Beto_Running_Foward_With_Box
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 14
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Sliding
+      takeName: Armature_Beto_Blender|Beto_Sliding
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 349
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Super_Jump
+      takeName: Armature_Beto_Blender|Beto_Super_Jump
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 39
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Beto_Blender|Beto_Uuuugh
+      takeName: Armature_Beto_Blender|Beto_Uuuugh
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 29
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
