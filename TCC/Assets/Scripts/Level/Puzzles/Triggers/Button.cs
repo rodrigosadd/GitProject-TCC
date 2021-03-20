@@ -11,6 +11,8 @@ public class Button : MonoBehaviour
      public bool triggerButton;
      private Vector3 _startPositionButton;
      private float _countdownAnimationButton;
+     private float _countdownDeactivateInteractAnimation;
+     private bool _canPlayInteractAnimation;
 
      void Start()
      {
@@ -21,6 +23,7 @@ public class Button : MonoBehaviour
      {
           CheckPressButton();
           CountdownButtonAnimation();
+          CountdownDeactivateInteractAnimation();
      }
 
      public void CheckPressButton()
@@ -29,9 +32,14 @@ public class Button : MonoBehaviour
 
           if (_distanceBetween < maxDistancePressButton &&
               !triggerButton &&
+              !_canPlayInteractAnimation &&
+              PlayerController.instance.movement.isGrounded &&
+              !PlayerAttackController.instance.attaking &&
               Input.GetButtonDown("Interact"))
           {
                triggerButton = true;
+               _canPlayInteractAnimation = true;
+               PlayerController.instance.movement.interacting = true;
           }
      }
 
@@ -59,7 +67,11 @@ public class Button : MonoBehaviour
 
      public void EndButtonAnimation()
      {
-          button.position = Vector3.MoveTowards(button.position, _startPositionButton, 1f * Time.deltaTime);
+          if (type == ButtonType.ALWAYS_PRESS)
+          {
+               button.position = Vector3.MoveTowards(button.position, _startPositionButton, 1f * Time.deltaTime);
+          }
+
           ResetButton();
      }
 
@@ -75,6 +87,24 @@ public class Button : MonoBehaviour
                else
                {
                     EndButtonAnimation();
+               }
+          }
+     }
+
+     public void CountdownDeactivateInteractAnimation()
+     {
+          if(_canPlayInteractAnimation)
+          {
+               if(_countdownDeactivateInteractAnimation < 1)
+               {
+                    _countdownDeactivateInteractAnimation += Time.deltaTime / 0.3f;
+               }
+               else
+               {
+                    _countdownDeactivateInteractAnimation = 0;
+                    _canPlayInteractAnimation = false;
+                    PlayerController.instance.movement.interacting = false;
+                    PlayerController.instance.movement.currentSpeed = 0f;
                }
           }
      }

@@ -35,6 +35,7 @@ public class PlayerController : Character
           public bool sliding;
           public bool entryTeleport;
           public bool exitTeleport;
+          public bool interacting;
           public float horizontal, vertical;
      }
 
@@ -187,7 +188,7 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (!death.dead && !movement.sliding && !push.droppingObj)
+          if (!death.dead && !movement.sliding && !push.droppingObj && !movement.interacting)
           {
                movement.vertical = Input.GetAxis("Vertical");
                movement.horizontal = Input.GetAxis("Horizontal");

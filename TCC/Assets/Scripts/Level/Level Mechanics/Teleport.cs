@@ -16,9 +16,11 @@ public class Teleport : MonoBehaviour
      public bool seeRangeTeleport;
      private float _distanceBetween;
      private float _countdownEntryTeleport;
+     private float _countdownMoveCamera;
      private float _countdownExitTeleport;
-     private bool _CanTeleport;
-     private bool _CanMove = true;
+     private bool _canTeleport;
+     private bool _canMoveCamera = true;
+     private bool _canMove = true;
 
      void Start()
      {
@@ -29,6 +31,7 @@ public class Teleport : MonoBehaviour
      {
           PlayerTeleport();
           CountdownEntryTeleport();
+          CountdownMoveCamera();
           CountdownExitTeleport();
      }
 
@@ -38,16 +41,21 @@ public class Teleport : MonoBehaviour
 
           if (_distanceBetween <= rangeTeleport)
           {
-               _CanTeleport = true;               
+               _canTeleport = true;               
           }
      }
 
      public void CountdownEntryTeleport()
      {
-          if (_CanTeleport)
+          if (_canTeleport)
           {
                if (_countdownEntryTeleport < 1)
                {
+                    if(_canMoveCamera)
+                    {
+                         _canMoveCamera = false;
+                    }
+
                     PlayerConfigsEntryTeleport();
                     PlayerController.instance.movement.entryTeleport = true;
                     _countdownEntryTeleport += Time.deltaTime / timeEntryTeleport;
@@ -56,17 +64,32 @@ public class Teleport : MonoBehaviour
                {
                     PlayerController.instance.movement.entryTeleport = false;
                     _countdownEntryTeleport = 0;
-                    _CanTeleport = false;
-                    _CanMove = false;
+                    _canTeleport = false;
+                    _canMove = false;
                     MovePlayerToPortalExit();
                     SetRotation();
                }
           }
      }
 
+     public void CountdownMoveCamera()
+     {
+          if(!_canMoveCamera)
+          {
+               if(_countdownMoveCamera < 1)
+               {
+                    _countdownMoveCamera += Time.deltaTime / 0.35f;
+               }
+               else
+               {                    
+                    MoveCamera();                     
+               }
+          }
+     }
+
      public void CountdownExitTeleport()
      {
-          if (!_CanMove)
+          if (!_canMove)
           {
                if (_countdownExitTeleport < 1)
                {
@@ -76,7 +99,7 @@ public class Teleport : MonoBehaviour
                else
                {
                     PlayerController.instance.movement.exitTeleport = false;
-                    _CanMove = true;
+                    _canMove = true;
                     _countdownExitTeleport = 0;
                     PlayerConfigsExitTeleport();
                }
@@ -95,11 +118,15 @@ public class Teleport : MonoBehaviour
 
      public void PlayerConfigsEntryTeleport()
      {
-          camera3RdPerson.targetCamera = targetCameraExitPortal;
-          targetCameraExitPortal.position = Vector3.MoveTowards(targetCameraExitPortal.position, exitPortal.position, cameraVelocity * Time.deltaTime);
+          camera3RdPerson.targetCamera = targetCameraExitPortal;          
           PlayerController.instance.movement.gravity = 0;
           PlayerController.instance.movement.velocity = Vector3.zero;
-          PlayerController.instance.movement.maxSpeed = 0;          
+          PlayerController.instance.movement.maxSpeed = 0;                   
+     }
+
+     public void MoveCamera()
+     {
+          targetCameraExitPortal.position = Vector3.MoveTowards(targetCameraExitPortal.position, exitPortal.position, cameraVelocity * Time.deltaTime);
      }
 
      public void PlayerConfigsExitTeleport()
@@ -108,7 +135,9 @@ public class Teleport : MonoBehaviour
           PlayerController.instance.movement.gravity = PlayerController.instance.movement.fixedGravity;
           PlayerController.instance.jump.currentJump = 0;
           PlayerController.instance.jump.doubleJumpCountdown = 0;
-          PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;          
+          PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;   
+          _canMoveCamera = true;       
+          _countdownMoveCamera = 0;
           SetTargetCamPosition();
      }
 
