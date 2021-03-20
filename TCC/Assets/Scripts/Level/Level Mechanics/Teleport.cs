@@ -18,7 +18,7 @@ public class Teleport : MonoBehaviour
      private float _countdownEntryTeleport;
      private float _countdownExitTeleport;
      private bool _CanTeleport;
-     private bool _CanMove;
+     private bool _CanMove = true;
 
      void Start()
      {

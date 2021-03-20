@@ -166,7 +166,7 @@ public class PlayerAttackController : MonoBehaviour
           }
      }
 
-     public void Attaking()
+     public void Attacking()
      {
           if (!PlayerController.instance.death.dead)
           {

@@ -701,6 +701,13 @@ public class PlayerAnimationController : MonoBehaviour
      }
 #endregion
 
+#region Interact
+     public void SetInteract()
+     {
+          
+     }
+#endregion
+
 #region Dead
      public void SetDead()
      {
