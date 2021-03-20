@@ -36,10 +36,11 @@ public class Slide : MonoBehaviour
                {
                     if (!Physics.Raycast(PlayerController.instance.transform.position, PlayerController.instance.characterGraphic.forward, PlayerController.instance.push.rangePush))
                     {
+                         PlayerController.instance.movement.velocity.y = 0;
                          PlayerController.instance.SetControllerPosition(Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, velocitySlide * Time.deltaTime));
 
                          if (_finalImpulse == PlayerController.instance.transform.position)
-                         {
+                         {                              
                               _finalImpulse = Vector3.zero;
                               PlayerController.instance.movement.sliding = false;
                               sliding = false;

@@ -5953,6 +5953,7 @@ MonoBehaviour:
     sliding: 0
     entryTeleport: 0
     exitTeleport: 0
+    interacting: 0
     horizontal: 0
     vertical: 0
   jump:
@@ -6031,7 +6032,7 @@ MonoBehaviour:
   controller: {fileID: 3298514135490557513}
   origin: {fileID: 3298514136166854644}
   maxDistanceRay: 1.1
-  seeRangeDistanceRay: 1
+  seeRangeDistanceRay: 0
 --- !u!143 &3298514135490557513
 CharacterController:
   m_ObjectHideFlags: 0

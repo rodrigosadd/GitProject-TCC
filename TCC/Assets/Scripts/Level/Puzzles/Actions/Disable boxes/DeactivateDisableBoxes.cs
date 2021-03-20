@@ -44,7 +44,9 @@ public class DeactivateDisableBoxes : MonoBehaviour
                     break;
                }
 
-               disableBoxes[i].gameObject.SetActive(false);
+               disableBoxes[i].triggerCollider.enabled = false;
+               disableBoxes[i].portalDeactivate.gameObject.SetActive(false);
+               disableBoxes[i].portalSafe.gameObject.SetActive(true);
           }
      }
 
@@ -52,12 +54,14 @@ public class DeactivateDisableBoxes : MonoBehaviour
      {
           for (int i = 0; i < disableBoxes.Length; i++)
           {
-               if (disableBoxes[i].gameObject.activeSelf)
+               if (disableBoxes[i].triggerCollider.enabled)
                {
-                    break;
+                    continue;
                }
 
-               disableBoxes[i].gameObject.SetActive(true);
+               disableBoxes[i].triggerCollider.enabled = true;
+               disableBoxes[i].portalDeactivate.gameObject.SetActive(true);
+               disableBoxes[i].portalSafe.gameObject.SetActive(false);          
           }
      }
 }

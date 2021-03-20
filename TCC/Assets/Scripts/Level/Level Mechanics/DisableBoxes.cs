@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class DisableBoxes : MonoBehaviour
 {
+     public GameObject portalDeactivate;
+     public GameObject portalSafe;
+     public Collider triggerCollider;
      public float timeToRespawnBox;
      private GameObject _currentBox;
      private Rigidbody _rigidbodyCurrentBox;
