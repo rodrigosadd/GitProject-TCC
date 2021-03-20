@@ -11,21 +11,31 @@ public class Lever : MonoBehaviour
      public float rotationLever;
      public bool triggerLever;
      private float _countdown;
+     private float _countdownDeactivateInteractAnimation;
+     private bool _canPlayInteractAnimation;
 
      void Update()
      {
           PushLever();
           SetLeverRotCloseDoor();
           CountdownCloseDoor();
+          CountdownDeactivateInteractAnimation();
      }
 
      public void PushLever()
      {
           float distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
-          if (Input.GetButtonDown("Interact") && distanceBetween < maxDistancePushLever)
+          if (Input.GetButtonDown("Interact") && 
+              distanceBetween < maxDistancePushLever &&
+              !triggerLever &&
+              !_canPlayInteractAnimation &&
+              PlayerController.instance.movement.isGrounded &&
+              !PlayerAttackController.instance.attaking)
           {
                triggerLever = true;
+               _canPlayInteractAnimation = true;
+               PlayerController.instance.movement.interacting = true;
                SetLeverRotOpenDoor();
           }
      }
@@ -55,6 +65,24 @@ public class Lever : MonoBehaviour
                {
                     _countdown = 0;
                     triggerLever = false;
+               }
+          }
+     }
+
+     public void CountdownDeactivateInteractAnimation()
+     {
+          if(_canPlayInteractAnimation)
+          {
+               if(_countdownDeactivateInteractAnimation < 1)
+               {
+                    _countdownDeactivateInteractAnimation += Time.deltaTime / 0.3f;
+               }
+               else
+               {
+                    _countdownDeactivateInteractAnimation = 0;
+                    _canPlayInteractAnimation = false;
+                    PlayerController.instance.movement.interacting = false;
+                    PlayerController.instance.movement.currentSpeed = 0f;
                }
           }
      }
