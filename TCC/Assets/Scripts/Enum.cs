@@ -25,5 +25,5 @@ public enum BreakableObjectType
 
 public enum PlatformType
 {
-     MOVEMENT_BETWEEN_SPOTS, MOVE_TO_SPOT
+     MOVEMENT_BETWEEN_SPOTS, MOVE_TO_SPOT, MOVE_RESET
 }

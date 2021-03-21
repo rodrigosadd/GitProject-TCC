@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressButtonPlatform : MonoBehaviour
+public class PressButtonToResetPlatform : MonoBehaviour
 {
-     public MovePlatform[] platforms;
+    public MovePlatform[] platforms;
      public Button[] buttons;
 
      void Update()
@@ -32,9 +32,9 @@ public class PressButtonPlatform : MonoBehaviour
      }
 
      public void MovePlatforms()
-     {
+     {          
           for (int i = 0; i < platforms.Length; i++)
-          {
+          {     
                platforms[i].Initialize();
           }
      }

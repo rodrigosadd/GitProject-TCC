@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platforms:
-  - {fileID: 0}
+  - {fileID: 119378840191194126}
   buttons:
   - {fileID: 5058117453509875198}
 --- !u!1 &6683145395996649180
@@ -248,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1913262735214379534, guid: cadf69920dc0afa46a3b0ba61dad14ed, type: 3}
       propertyPath: type
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1913262735214379535, guid: cadf69920dc0afa46a3b0ba61dad14ed, type: 3}
       propertyPath: m_LocalPosition.x
@@ -327,33 +327,45 @@ PrefabInstance:
       propertyPath: spotsToMovePlatform.Array.data[1]
       value: 
       objectReference: {fileID: 6683145397018704674}
+    - target: {fileID: 7482947572248574272, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
+      propertyPath: spotToMove
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482947572248574272, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
+      propertyPath: waitTimeToMove
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482947572248574272, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
+      propertyPath: hasDelayToMove
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574276, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_Name
       value: Plataform Trigger New
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.21
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -7.46
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_LocalRotation.w
@@ -382,3 +394,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7482947572248574279, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
   m_PrefabInstance: {fileID: 7381640889932983630}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &119378840191194126 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7482947572248574272, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
+  m_PrefabInstance: {fileID: 7381640889932983630}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9958dffa6336c794ab4cdb46279f1d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
