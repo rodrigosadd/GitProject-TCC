@@ -1644,7 +1644,6 @@ GameObject:
   m_Component:
   - component: {fileID: 779409049}
   - component: {fileID: 779409048}
-  - component: {fileID: 779409047}
   - component: {fileID: 779409046}
   - component: {fileID: 779409050}
   m_Layer: 0
@@ -1685,14 +1684,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &779409047
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 779409045}
-  m_Enabled: 1
 --- !u!20 &779409048
 Camera:
   m_ObjectHideFlags: 0
@@ -2853,7 +2844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/Beto - Menu
+  Event: event:/Mine or Fight
   PlayEvent: 1
   StopEvent: 2
   AllowFadeout: 1
