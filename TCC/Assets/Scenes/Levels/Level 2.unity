@@ -7905,6 +7905,10 @@ PrefabInstance:
       propertyPath: waitTimeToMove
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: hasDelayToMove
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -55.88
@@ -8210,19 +8214,19 @@ Transform:
   - {fileID: 1771255402}
   - {fileID: 1421614018}
   - {fileID: 277311534}
+  - {fileID: 787573500}
   - {fileID: 768665269}
   - {fileID: 2063521089}
   - {fileID: 1976809705}
   - {fileID: 1706044509}
   - {fileID: 1779438467}
   - {fileID: 1391272974}
-  - {fileID: 361412}
   - {fileID: 1026547379}
+  - {fileID: 361412}
   - {fileID: 174362904}
-  - {fileID: 1797709662}
-  - {fileID: 787573500}
   - {fileID: 683428635}
   - {fileID: 134917883}
+  - {fileID: 1797709662}
   m_Father: {fileID: 1751958927}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10803,6 +10807,10 @@ PrefabInstance:
     - target: {fileID: 7268415087754407896, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
       propertyPath: waitTimeToMove
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268415087754407896, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
+      propertyPath: hasDelayToMove
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7268415087754407903, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15707,7 +15715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &999698439
 Transform:
   m_ObjectHideFlags: 0
@@ -21171,6 +21179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!114 &1313511951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21183,6 +21193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60fd39ca75fc05441ba50fb6e1b7f30c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portalDeactivate: {fileID: 0}
+  portalSafe: {fileID: 0}
+  triggerCollider: {fileID: 0}
   timeToRespawnBox: 1
 --- !u!1001 &1324363083
 PrefabInstance:
@@ -26418,6 +26431,10 @@ PrefabInstance:
       propertyPath: waitTimeToMove
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7268415087754407896, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
+      propertyPath: hasDelayToMove
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7268415087754407903, guid: 99a8af8ece4a9934d9a41bfb1ac6cad0, type: 3}
       propertyPath: m_LocalPosition.z
       value: -78.3
@@ -26716,6 +26733,10 @@ PrefabInstance:
     - target: {fileID: 7482947572248574272, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: waitTimeToMove
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482947572248574272, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
+      propertyPath: hasDelayToMove
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7482947572248574276, guid: b60937861d87e3a4da1615fce93bcc31, type: 3}
       propertyPath: m_Name
@@ -35645,6 +35666,10 @@ PrefabInstance:
     - target: {fileID: 3762751947687639630, guid: cf226b2dd5b697d4ab47dd1c02bcead2, type: 3}
       propertyPath: waitTimeToMove
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3762751947687639630, guid: cf226b2dd5b697d4ab47dd1c02bcead2, type: 3}
+      propertyPath: hasDelayToMove
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4852294956978834984, guid: cf226b2dd5b697d4ab47dd1c02bcead2, type: 3}
       propertyPath: m_Name
