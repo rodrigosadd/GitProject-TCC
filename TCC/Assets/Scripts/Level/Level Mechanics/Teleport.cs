@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Teleport : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Teleport : MonoBehaviour
      public float timeExitTeleport;
      public float cameraVelocity;
      public bool seeRangeTeleport;
+     [EventRef]
+     public string teleportSound;
      private float _distanceBetween;
      private float _countdownEntryTeleport;
      private float _countdownMoveCamera;
@@ -41,7 +44,8 @@ public class Teleport : MonoBehaviour
 
           if (_distanceBetween <= rangeTeleport)
           {
-               _canTeleport = true;               
+               _canTeleport = true;
+               RuntimeManager.PlayOneShot(teleportSound, transform.position);
           }
      }
 

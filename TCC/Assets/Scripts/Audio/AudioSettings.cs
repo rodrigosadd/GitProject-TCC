@@ -8,6 +8,7 @@ public class AudioSettings : MonoBehaviour
 {
      [EventRef] public string menuMoveSound;
      [EventRef] public string menuConfirmSound;
+     [EventRef] public string volumeTestingSound;
 
      EventInstance SFXVolumeTestEvent;
 
@@ -17,7 +18,6 @@ public class AudioSettings : MonoBehaviour
 
      void Awake()
      {
-          DontDestroyOnLoad(gameObject);
           SetPath();
      }
 
@@ -31,7 +31,7 @@ public class AudioSettings : MonoBehaviour
           Music = RuntimeManager.GetBus("bus:/Master/Music");
           SFX = RuntimeManager.GetBus("bus:/Master/SFX");
           Master = RuntimeManager.GetBus("bus:/Master");
-          SFXVolumeTestEvent = RuntimeManager.CreateInstance("event:/Pickaxe");
+          SFXVolumeTestEvent = RuntimeManager.CreateInstance(volumeTestingSound);
      }
 
      public void SetVolumes()

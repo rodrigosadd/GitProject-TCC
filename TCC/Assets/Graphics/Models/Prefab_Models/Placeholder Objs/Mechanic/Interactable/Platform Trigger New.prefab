@@ -158,15 +158,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9958dffa6336c794ab4cdb46279f1d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rbody: {fileID: 7482947572248574278}
+  type: 1
   spotsToMovePlatform:
   - {fileID: 0}
   - {fileID: 0}
-  rbody: {fileID: 7482947572248574278}
   spotToMove: 0
-  speed: 10
+  speed: 25
+  countdownToMove: 0
   waitTimeToMove: 0
-  type: 0
   canMove: 0
+  hasRestarted: 0
+  hasDelayToMove: 0
+  moveSound: event:/Player Attack 1
 --- !u!54 &7482947572248574278
 Rigidbody:
   m_ObjectHideFlags: 0

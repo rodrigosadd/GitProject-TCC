@@ -15,7 +15,7 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 0
   HasPlatforms: 0
-  sourceProjectPath: ../../../FMOD Project Beto/LegendsOfBetoFSPRO/LegendsOfBetoFSPRO.fspro
+  sourceProjectPath: ../../../../PUC/FMOD Project/LegendsOfBetoFSPRO/LegendsOfBetoFSPRO.fspro
   sourceBankPath: Assets/StreamingAssets
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
@@ -76,7 +76,11 @@ MonoBehaviour:
   - Platform: 20
     Value: 32
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - Ambient
+  - OST
+  - SFX
   BanksToLoad: []
   LiveUpdatePort: 9264

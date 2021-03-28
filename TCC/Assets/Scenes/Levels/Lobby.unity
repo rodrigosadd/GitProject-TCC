@@ -5759,6 +5759,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9958dffa6336c794ab4cdb46279f1d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &767306475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 767306477}
+  - component: {fileID: 767306476}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &767306476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767306475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/I'm just knowing the situation
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!4 &767306477
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 767306475}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &791429577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7088,50 +7142,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 110656425}
     m_Modifications:
-    - target: {fileID: 3163447011934551251, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: referencePrefab
-      value: 
-      objectReference: {fileID: 5736269683346497289, guid: 7dd77308112817a46bce8ed3a16d5f2f, type: 3}
-    - target: {fileID: 3239823235752230817, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -77.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 3239823235752230817, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 33.715
-      objectReference: {fileID: 0}
-    - target: {fileID: 3239823235752230817, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 25.79
-      objectReference: {fileID: 0}
-    - target: {fileID: 3239823235752230817, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3239823235752230817, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 3239823235752230817, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925850535609062129, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -4.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925850535609062129, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 19.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925850535609062129, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 8.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925850535694477926, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3925850536397452675, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
       propertyPath: m_Name
       value: Drop Box (1)
@@ -7179,26 +7189,6 @@ PrefabInstance:
     - target: {fileID: 3925850536397452684, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925850536397452685, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: objects.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925850536397452685, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: targets.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4736415295346500986, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_Name
-      value: Box Heavy 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6480083690324150508, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: referencePrefab
-      value: 
-      objectReference: {fileID: 8628981406674775834, guid: 3ae550a0e8739184a8fdea5f77bc1671, type: 3}
-    - target: {fileID: 8782088137130731382, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
-      propertyPath: m_Name
-      value: Box Light 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}

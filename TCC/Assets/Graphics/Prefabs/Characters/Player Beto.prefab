@@ -16094,20 +16094,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerFootsteps:
-  - event:/Footsteps
-  - event:/Footsteps1
-  - event:/Footsteps2
+  - event:/Player Footsteps 1
+  - event:/Player Footsteps 2
+  - event:/Player Footsteps 3
+  - event:/Player Fotsteps 4
   playerJumpSounds:
-  - event:/Jump
-  - event:/Jump1
-  - event:/Jump2
+  - event:/Player Jump 1
+  - event:/Player Jump 2
+  - event:/Player Jump 3
   playerAttackSounds:
-  - event:/MeleeMove
-  - event:/Shout1
-  - event:/Shout2
-  minningSound: event:/Pickaxe
-  deathCry: event:/Shout
-  boxPushingSound: event:/Boulder
+  - event:/Player Attack 1
+  - event:/Player Attack 2
+  - event:/Player Attack 3
+  hitSound: event:/Button Trigger
+  deathCry: event:/Death
+  boxPushingSound: event:/Dissolution
 --- !u!95 &6995068270813550338
 Animator:
   serializedVersion: 3

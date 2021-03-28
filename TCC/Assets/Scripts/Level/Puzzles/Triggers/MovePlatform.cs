@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class MovePlatform : Platform
 {
@@ -13,6 +14,8 @@ public class MovePlatform : Platform
      public bool canMove;
      public bool hasRestarted;
      public bool hasDelayToMove;
+     [EventRef]
+     public string moveSound;
      
      void Update()
      {
@@ -68,6 +71,7 @@ public class MovePlatform : Platform
      {
           if (canMove)
           {
+               RuntimeManager.PlayOneShot(moveSound, transform.position);
                rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.fixedDeltaTime));
           }
 
