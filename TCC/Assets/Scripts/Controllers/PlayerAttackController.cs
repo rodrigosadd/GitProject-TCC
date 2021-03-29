@@ -44,12 +44,12 @@ public class PlayerAttackController : MonoBehaviour
      {
           if (Input.GetButtonDown("Attack") &&
               !GameManager.instance.settingsData.settingsOpen &&
-              !PlayerController.instance.movement.slowing &&
+              !PlayerController.instance.levelMechanics.slowing &&
               !PlayerController.instance.death.dead &&
               !PlayerController.instance.push.pushingObj &&
               !PlayerController.instance.push.setPositionDropObject &&
               !PlayerController.instance.push.droppingObj &&
-              !PlayerController.instance.movement.sliding)
+              !PlayerController.instance.levelMechanics.sliding)
           {
                if (!attaking)
                {
@@ -170,7 +170,7 @@ public class PlayerAttackController : MonoBehaviour
      {
           if (!PlayerController.instance.death.dead)
           {
-               if (PlayerController.instance.movement.slowing == false)
+               if (PlayerController.instance.levelMechanics.slowing == false)
                {
                     PlayerController.instance.movement.maxSpeed = 0f;
                     attaking = true;

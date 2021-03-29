@@ -18,7 +18,7 @@ public class Slide : MonoBehaviour
      {
           if (collider.tag == "Player" && !sliding)
           {
-               PlayerController.instance.movement.sliding = true;
+               PlayerController.instance.levelMechanics.sliding = true;
                sliding = true;
                PlayerAttackController.instance.ResetAttack();
           }
@@ -42,14 +42,14 @@ public class Slide : MonoBehaviour
                          if (_finalImpulse == PlayerController.instance.transform.position)
                          {                              
                               _finalImpulse = Vector3.zero;
-                              PlayerController.instance.movement.sliding = false;
+                              PlayerController.instance.levelMechanics.sliding = false;
                               sliding = false;
                          }
                     }
                     else
                     {
                          _finalImpulse = Vector3.zero;
-                         PlayerController.instance.movement.sliding = false;
+                         PlayerController.instance.levelMechanics.sliding = false;
                          sliding = false;
                     }
                }

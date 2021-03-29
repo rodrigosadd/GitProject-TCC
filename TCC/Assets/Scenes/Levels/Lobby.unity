@@ -356,6 +356,10 @@ PrefabInstance:
       propertyPath: hasDelayToMove
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 7.63
@@ -367,6 +371,22 @@ PrefabInstance:
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 50.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Size.x
+      value: 10.022247
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Center.x
+      value: -0.00730896
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Size.z
+      value: 8.00457
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Center.z
+      value: 0.00687027
       objectReference: {fileID: 0}
     - target: {fileID: 6435193745489950556, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2222,6 +2242,10 @@ PrefabInstance:
       propertyPath: m_Center.x
       value: 12.6384945
       objectReference: {fileID: 0}
+    - target: {fileID: 4205110340192132917, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
+      propertyPath: animCheckPoint
+      value: 
+      objectReference: {fileID: 1211157098}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
 --- !u!4 &278842655 stripped
@@ -5559,6 +5583,10 @@ PrefabInstance:
       propertyPath: m_Center.x
       value: 1.0284119
       objectReference: {fileID: 0}
+    - target: {fileID: 4205110340192132917, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
+      propertyPath: animCheckPoint
+      value: 
+      objectReference: {fileID: 1211157098}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
 --- !u!4 &754185346 stripped
@@ -5607,7 +5635,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: speed
-      value: 10
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: type
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5620,6 +5652,22 @@ PrefabInstance:
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.z
       value: -29.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Size.x
+      value: 10.007839
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Center.x
+      value: -0.006910324
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Size.z
+      value: 7.97674
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Center.z
+      value: -0.0034036636
       objectReference: {fileID: 0}
     - target: {fileID: 6435193745489950556, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -6637,7 +6685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1012471006
 Transform:
   m_ObjectHideFlags: 0
@@ -8065,6 +8113,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7296911624837552350, guid: 8f0ebc78a958d574bbd5c9b4eaab3960, type: 3}
   m_PrefabInstance: {fileID: 1200121456}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1211157098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8675755799435105951, guid: 2e14614316074e14e8093b585506a4a9, type: 3}
+  m_PrefabInstance: {fileID: 837230354}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1230117394
 GameObject:
@@ -10440,11 +10493,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: speed
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: hasDelayToMove
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2430063277471767442, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: type
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10457,6 +10514,22 @@ PrefabInstance:
     - target: {fileID: 2430063277471767445, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 69.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Size.x
+      value: 9.994015
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Center.x
+      value: 0.021409988
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Size.z
+      value: 8.018936
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266477363383977652, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
+      propertyPath: m_Center.z
+      value: -0.0033340454
       objectReference: {fileID: 0}
     - target: {fileID: 6435193745489950556, guid: 5bec3cdc0b6a52e49b7ee6a76605c65e, type: 3}
       propertyPath: m_LocalRotation.x
@@ -10985,6 +11058,10 @@ PrefabInstance:
       propertyPath: m_Center.x
       value: 2.20467
       objectReference: {fileID: 0}
+    - target: {fileID: 4205110340192132917, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
+      propertyPath: animCheckPoint
+      value: 
+      objectReference: {fileID: 1211157098}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
 --- !u!4 &1635060283 stripped
@@ -11598,6 +11675,10 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 4.6017904
       objectReference: {fileID: 0}
+    - target: {fileID: 4205110340192132917, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
+      propertyPath: animCheckPoint
+      value: 
+      objectReference: {fileID: 1211157098}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2965f4bed31ddee40aeee4f07ae56c95, type: 3}
 --- !u!4 &1835790214 stripped

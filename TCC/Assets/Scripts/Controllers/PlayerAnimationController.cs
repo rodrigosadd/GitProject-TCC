@@ -186,7 +186,7 @@ public class PlayerAnimationController : MonoBehaviour
                !balance &&
                !PlayerController.instance.push.pushingObj &&
                PlayerAttackController.instance.currentAttack == 0 &&
-               !PlayerController.instance.movement.interacting)
+               !PlayerController.instance.levelMechanics.interacting)
           {
                PlayerController.instance.animator.SetBool("Idle", true);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -645,7 +645,7 @@ public class PlayerAnimationController : MonoBehaviour
 #region Sliding
      public void SetSliding()
      {
-          if(PlayerController.instance.movement.sliding)
+          if(PlayerController.instance.levelMechanics.sliding)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -672,7 +672,7 @@ public class PlayerAnimationController : MonoBehaviour
 #region Teleport
      public void SetEntryTeleport()
      {
-          if(PlayerController.instance.movement.entryTeleport)
+          if(PlayerController.instance.levelMechanics.entryTeleport)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -699,7 +699,7 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetExitTeleport()
      {
-          if(PlayerController.instance.movement.exitTeleport)
+          if(PlayerController.instance.levelMechanics.exitTeleport)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -728,7 +728,7 @@ public class PlayerAnimationController : MonoBehaviour
 #region Interact
      public void SetInteract()
      {
-          if(PlayerController.instance.movement.interacting)
+          if(PlayerController.instance.levelMechanics.interacting)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
