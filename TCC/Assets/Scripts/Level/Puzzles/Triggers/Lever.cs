@@ -35,7 +35,7 @@ public class Lever : MonoBehaviour
           {
                triggerLever = true;
                _canPlayInteractAnimation = true;
-               PlayerController.instance.movement.interacting = true;
+               PlayerController.instance.levelMechanics.interacting = true;
                SetLeverRotOpenDoor();
           }
      }
@@ -81,7 +81,7 @@ public class Lever : MonoBehaviour
                {
                     _countdownDeactivateInteractAnimation = 0;
                     _canPlayInteractAnimation = false;
-                    PlayerController.instance.movement.interacting = false;
+                    PlayerController.instance.levelMechanics.interacting = false;
                     PlayerController.instance.movement.currentSpeed = 0f;
                }
           }

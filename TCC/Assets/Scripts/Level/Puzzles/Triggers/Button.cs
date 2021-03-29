@@ -42,7 +42,7 @@ public class Button : MonoBehaviour
           {
                triggerButton = true;
                _canPlayInteractAnimation = true;
-               PlayerController.instance.movement.interacting = true;
+               PlayerController.instance.levelMechanics.interacting = true;
                RuntimeManager.PlayOneShot(clickSound, transform.position);
           }
      }
@@ -107,7 +107,7 @@ public class Button : MonoBehaviour
                {
                     _countdownDeactivateInteractAnimation = 0;
                     _canPlayInteractAnimation = false;
-                    PlayerController.instance.movement.interacting = false;
+                    PlayerController.instance.levelMechanics.interacting = false;
                     PlayerController.instance.movement.currentSpeed = 0f;
                }
           }

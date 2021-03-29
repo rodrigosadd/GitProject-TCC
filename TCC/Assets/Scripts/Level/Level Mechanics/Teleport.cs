@@ -61,12 +61,12 @@ public class Teleport : MonoBehaviour
                     }
 
                     PlayerConfigsEntryTeleport();
-                    PlayerController.instance.movement.entryTeleport = true;
+                    PlayerController.instance.levelMechanics.entryTeleport = true;
                     _countdownEntryTeleport += Time.deltaTime / timeEntryTeleport;
                }
                else
                {
-                    PlayerController.instance.movement.entryTeleport = false;
+                    PlayerController.instance.levelMechanics.entryTeleport = false;
                     _countdownEntryTeleport = 0;
                     _canTeleport = false;
                     _canMove = false;
@@ -97,12 +97,12 @@ public class Teleport : MonoBehaviour
           {
                if (_countdownExitTeleport < 1)
                {
-                    PlayerController.instance.movement.exitTeleport = true;
+                    PlayerController.instance.levelMechanics.exitTeleport = true;
                     _countdownExitTeleport += Time.deltaTime / timeExitTeleport;
                }
                else
                {
-                    PlayerController.instance.movement.exitTeleport = false;
+                    PlayerController.instance.levelMechanics.exitTeleport = false;
                     _canMove = true;
                     _countdownExitTeleport = 0;
                     PlayerConfigsExitTeleport();

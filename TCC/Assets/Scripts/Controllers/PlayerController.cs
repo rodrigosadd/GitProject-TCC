@@ -31,12 +31,20 @@ public class PlayerController : Character
           public float acceleration;
           public float turnSmoothtime;
           public bool isGrounded;
+          public float horizontal, vertical;
+     }
+
+     [Header("Jump variables")]
+     public LevelMechanics levelMechanics;
+
+     [System.Serializable]
+     public class LevelMechanics
+     {
           public bool slowing;
           public bool sliding;
           public bool entryTeleport;
           public bool exitTeleport;
           public bool interacting;
-          public float horizontal, vertical;
      }
 
      [Header("Jump variables")]
@@ -188,7 +196,7 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (!death.dead && !movement.sliding && !push.droppingObj && !movement.interacting)
+          if (!death.dead && !levelMechanics.sliding && !push.droppingObj && !levelMechanics.interacting)
           {
                movement.vertical = Input.GetAxis("Vertical");
                movement.horizontal = Input.GetAxis("Horizontal");
@@ -218,7 +226,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (!death.dead && !movement.entryTeleport && !movement.exitTeleport && !movement.sliding && !push.droppingObj)
+          if (!death.dead && !levelMechanics.entryTeleport && !levelMechanics.exitTeleport && !levelMechanics.sliding && !push.droppingObj)
           {
                if (_direction.magnitude >= 0.1f)
                {
@@ -268,7 +276,7 @@ public class PlayerController : Character
 
           if (Input.GetButtonDown("Jump") && CanJump() &&
               push.pushingObj == false &&
-              !movement.sliding &&
+              !levelMechanics.sliding &&
               !PlayerAttackController.instance.attaking &&
               PlayerAttackController.instance.currentAttack == 0 &&
               !GameManager.instance.settingsData.settingsOpen &&
@@ -616,7 +624,7 @@ public class PlayerController : Character
           }
           else
           {
-               if (movement.slowing == false)
+               if (levelMechanics.slowing == false)
                {
                     push.slowReference = null;
                     movement.maxSpeed = push.speedPush;
