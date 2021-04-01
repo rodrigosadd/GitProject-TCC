@@ -19,6 +19,7 @@ public class PlayerController : Character
      {
           public Vector3 velocity;
           public LayerMask groundMask;
+          public LayerMask rayToMoveMask;
           public CharacterController controller;
           public Transform cam;
           public Transform groundCheck;
@@ -31,6 +32,7 @@ public class PlayerController : Character
           public float acceleration;
           public float turnSmoothtime;
           public bool isGrounded;
+          public bool isFacingWall;
           public float horizontal, vertical;
      }
 
@@ -162,8 +164,8 @@ public class PlayerController : Character
      void Update()
      {
           Gravity();
-          CheckIsGrounded();
           CharacterJump();
+          CheckIsGrounded();          
           //CharacterBetterJump();
           PushingObject();
           SetPositionCurrentTargetPush();
@@ -196,9 +198,15 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
+          Vector3 _origin = characterGraphic.position + characterGraphic.forward * 0.3f;
+          Ray _ray = new Ray(_origin, characterGraphic.forward);
+          RaycastHit _hitInfo;
+
+          movement.isFacingWall = Physics.Raycast(_ray, out _hitInfo, 0.3f, movement.rayToMoveMask);
+
           if (!death.dead && !levelMechanics.sliding && !push.droppingObj && !levelMechanics.interacting)
           {
-               movement.vertical = Input.GetAxis("Vertical");
+               movement.vertical = Input.GetAxis("Vertical");               
                movement.horizontal = Input.GetAxis("Horizontal");
 
                CharacterMovement();
@@ -216,7 +224,15 @@ public class PlayerController : Character
 
                Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);
+               if(!movement.isFacingWall)
+               {
+                    movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);    
+               }
+               else
+               {
+                    movement.currentSpeed = 0f;
+                    PlayerAnimationController.instance.ResetFallingAnimations();
+               }
           }
           else
           {
@@ -658,9 +674,9 @@ public class PlayerController : Character
           if (Physics.Raycast(missedJump.targetMissedJump.position, Vector3.down, out _hitInfo, missedJump.rangeRayMissedJump))
           {
                if (_hitInfo.transform.tag == "Ground" ||
-                   _hitInfo.transform.tag == "Interactable" ||
-                   _hitInfo.transform.tag == "Light" ||
-                   _hitInfo.transform.tag == "Heavy")
+               _hitInfo.transform.tag == "Interactable" ||
+               _hitInfo.transform.tag == "Light" ||
+               _hitInfo.transform.tag == "Heavy")
                {
                     if (missedJump.canMiss)
                     {
@@ -744,7 +760,7 @@ public class PlayerController : Character
           if (seeRangeGroundDetector)
           {
                Gizmos.color = Color.green;
-               Gizmos.DrawSphere(movement.groundCheck.position, movement.groundDistance);
+               Gizmos.DrawSphere(movement.groundCheck.position, movement.groundDistance);               
           }
 
           if (seeRangeMissedJump)

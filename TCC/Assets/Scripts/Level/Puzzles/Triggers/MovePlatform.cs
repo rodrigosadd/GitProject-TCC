@@ -17,7 +17,7 @@ public class MovePlatform : Platform
      [EventRef]
      public string moveSound;
      
-     void Update()
+     void FixedUpdate()
      {
           TriggerMovementBetweenSpots();
      }

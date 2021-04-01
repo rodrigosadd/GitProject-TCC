@@ -422,6 +422,17 @@ public class PlayerAnimationController : MonoBehaviour
 #endregion
 
 #region Falling
+     public void ResetFallingAnimations()
+     {
+          PlayerController.instance.animator.SetBool("Idle", true);
+          PlayerController.instance.animator.SetBool("Falling Action", false);
+          PlayerController.instance.animator.SetBool("Falling Idle", false);
+          PlayerController.instance.animator.SetBool("Falling Ground", false);
+          PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
+          alreadyPlayedFallingAction = false;
+     }
+
      public void SetFallingAction()
      {
           if(PlayerController.instance.movement.controller.velocity.y <= -0.1 &&
