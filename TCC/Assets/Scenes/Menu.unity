@@ -309,6 +309,17 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &53212727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2081202151, guid: 6c9f98ea002b00044b1febcb4b569379, type: 3}
+  m_PrefabInstance: {fileID: 7525246974003628770}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b98caecebe3ad334c975d3b326f52145, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &102877988
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +784,18 @@ MonoBehaviour:
       - m_Target: {fileID: 2017179810}
         m_TargetAssemblyTypeName: AudioSettings, Assembly-CSharp
         m_MethodName: PlayConfirmSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 53212727}
+        m_TargetAssemblyTypeName: SavePlayerStats, Assembly-CSharp
+        m_MethodName: CleanPlayerStats
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4799,6 +4822,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 53487509, guid: 6c9f98ea002b00044b1febcb4b569379, type: 3}
+      propertyPath: canAttack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 53487509, guid: 6c9f98ea002b00044b1febcb4b569379, type: 3}
+      propertyPath: canSeeTeleport
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 53487509, guid: 6c9f98ea002b00044b1febcb4b569379, type: 3}
+      propertyPath: maxJump
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7525246975007976601, guid: 6c9f98ea002b00044b1febcb4b569379, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -4847,9 +4882,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7525246975007976607, guid: 6c9f98ea002b00044b1febcb4b569379, type: 3}
-      propertyPath: audioSettings
-      value: 
-      objectReference: {fileID: 2017179810}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c9f98ea002b00044b1febcb4b569379, type: 3}

@@ -37,15 +37,15 @@ public class InRuntimePersistantData : ScriptableObject
     }
 
     public static void CachePersistenteComponents(Vector3 playerPosition)
-    {        
-        if(_instance.lastLoadedLevel != -1)
-        {
-            return;
-        }
-
+    {    
         if(_instance == null)
         {          
             _instance = Instance;
+        }
+
+        if(_instance.lastLoadedLevel != -1)
+        {
+            return;
         }
 
         var itens = GameObject.FindObjectsOfType<InRuntimePersistentDataComponent>();      

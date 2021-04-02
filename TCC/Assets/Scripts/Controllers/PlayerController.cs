@@ -47,6 +47,7 @@ public class PlayerController : Character
           public bool entryTeleport;
           public bool exitTeleport;
           public bool interacting;
+          public bool canSeeTeleport;
      }
 
      [Header("Jump variables")]
@@ -151,14 +152,18 @@ public class PlayerController : Character
      public bool seeRangeFalling = false;
 #endif
 
-     void Start()
+     void Awake()
      {
           instance = this;
+     }
 
+     void Start()
+     {
           Cursor.visible = false;
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
           movement.fixedGravity = movement.gravity;
+          GameManager.instance.playerStatsData.ApplySettings();
      }
 
      void Update()
@@ -166,7 +171,6 @@ public class PlayerController : Character
           Gravity();
           CharacterJump();
           CheckIsGrounded();          
-          //CharacterBetterJump();
           PushingObject();
           SetPositionCurrentTargetPush();
           SetPositionDropObject();
@@ -231,7 +235,7 @@ public class PlayerController : Character
                else
                {
                     movement.currentSpeed = 0f;
-                    PlayerAnimationController.instance.ResetFallingAnimations();
+                    PlayerAnimationController.instance.ResetFallingAnimations();                    
                }
           }
           else
@@ -330,18 +334,6 @@ public class PlayerController : Character
                }
           }
      }
-
-     // public void CharacterBetterJump()
-     // {
-     //      if (movement.velocity.y <= 0)
-     //      {
-     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
-     //      }
-     //      else if (movement.velocity.y > 0 && !Input.GetButton("Jump"))
-     //      {
-     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
-     //      }
-     // }
 
      public bool CanJump()
      {

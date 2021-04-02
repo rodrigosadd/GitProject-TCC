@@ -8,6 +8,8 @@ public class Teleport : MonoBehaviour
      public Camera3rdPerson camera3RdPerson;
      public Transform targetCameraPlayer;
      public Transform targetCameraExitPortal;
+     public GameObject entrancePortalDeactive;
+     public GameObject exitPortalDeactive;
      public Transform entrancePortal;
      public Transform exitPortal;
      public float rangeTeleport;
@@ -28,14 +30,39 @@ public class Teleport : MonoBehaviour
      void Start()
      {
           SetTargetCamPosition();
+          entrancePortalDeactive.transform.position = entrancePortal.position;
+          exitPortalDeactive.transform.position = exitPortal.position;
      }
 
      void Update()
      {
-          PlayerTeleport();
-          CountdownEntryTeleport();
-          CountdownMoveCamera();
-          CountdownExitTeleport();
+          CheckPlayerCanToSeeTeleport();
+
+          if(PlayerController.instance.levelMechanics.canSeeTeleport)
+          {
+               PlayerTeleport();
+               CountdownEntryTeleport();
+               CountdownMoveCamera();
+               CountdownExitTeleport();
+          }
+     }
+
+     public void CheckPlayerCanToSeeTeleport()
+     {
+          if(PlayerController.instance.levelMechanics.canSeeTeleport)
+          {
+               entrancePortal.gameObject.SetActive(true);
+               exitPortal.gameObject.SetActive(true);
+               entrancePortalDeactive.SetActive(false);
+               exitPortalDeactive.SetActive(false);
+          }
+          else
+          {
+               entrancePortal.gameObject.SetActive(false);
+               exitPortal.gameObject.SetActive(false);
+               entrancePortalDeactive.SetActive(true);
+               exitPortalDeactive.SetActive(true);
+          }
      }
 
      public void PlayerTeleport()
@@ -45,6 +72,7 @@ public class Teleport : MonoBehaviour
           if (_distanceBetween <= rangeTeleport)
           {
                _canTeleport = true;
+               PlayerAnimationController.instance.SetEntryTeleport();               
                RuntimeManager.PlayOneShot(teleportSound, transform.position);
           }
      }
