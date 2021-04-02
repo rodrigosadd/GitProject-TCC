@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DropBox : MonoBehaviour
 {
+     public DropBoxType type;
      public GameObject[] objects;
      public Transform[] targets;
      public Button[] buttons;
@@ -27,10 +28,21 @@ public class DropBox : MonoBehaviour
                }
           }
 
-          if (_isComplete)
-          {
-               ActiveAllObjetcs();
-               _isComplete = false;
+          if(type == DropBoxType.ALWAYS_DROP)
+          {               
+               if (_isComplete)
+               {
+                    ActiveAllObjetcs();                                  
+               }
+          }
+
+          if(type == DropBoxType.DROP_ONCE)
+          {               
+               if (_isComplete && _canSpawn)
+               {
+                    ActiveAllObjetcs();
+                    _canSpawn = false;               
+               }
           }
      }
 
@@ -38,11 +50,6 @@ public class DropBox : MonoBehaviour
      {
           for (int i = 0; i < objects.Length; i++)
           {
-               if (objects[i].activeSelf)
-               {
-                    continue;
-               }
-
                objects[i].SetActive(true);
                objects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
                objects[i].transform.position = targets[i].position;

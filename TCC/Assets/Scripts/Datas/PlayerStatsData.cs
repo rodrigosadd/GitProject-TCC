@@ -15,6 +15,11 @@ public class PlayerStatsData : MonoBehaviour
 
     public void ApplySettings()
      {
+        if(PlayerController.instance == null || PlayerAttackController.instance == null)
+        {
+            return;
+        }
+
         PlayerController.instance.jump.maxJump = maxJump;
 
         PlayerAttackController.instance.canAttack = (canAttack == 1) ? true : false;

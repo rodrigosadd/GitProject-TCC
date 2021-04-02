@@ -27,3 +27,8 @@ public enum PlatformType
 {
      MOVEMENT_BETWEEN_SPOTS, MOVE_TO_SPOT, MOVE_RESET
 }
+
+public enum DropBoxType
+{
+     ALWAYS_DROP, DROP_ONCE  
+}

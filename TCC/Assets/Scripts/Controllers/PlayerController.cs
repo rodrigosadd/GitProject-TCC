@@ -19,7 +19,6 @@ public class PlayerController : Character
      {
           public Vector3 velocity;
           public LayerMask groundMask;
-          public LayerMask rayToMoveMask;
           public CharacterController controller;
           public Transform cam;
           public Transform groundCheck;
@@ -32,7 +31,6 @@ public class PlayerController : Character
           public float acceleration;
           public float turnSmoothtime;
           public bool isGrounded;
-          public bool isFacingWall;
           public float horizontal, vertical;
      }
 
@@ -202,12 +200,6 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          Vector3 _origin = characterGraphic.position + characterGraphic.forward * 0.3f;
-          Ray _ray = new Ray(_origin, characterGraphic.forward);
-          RaycastHit _hitInfo;
-
-          movement.isFacingWall = Physics.Raycast(_ray, out _hitInfo, 0.3f, movement.rayToMoveMask);
-
           if (!death.dead && !levelMechanics.sliding && !push.droppingObj && !levelMechanics.interacting)
           {
                movement.vertical = Input.GetAxis("Vertical");               
@@ -228,15 +220,7 @@ public class PlayerController : Character
 
                Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-               if(!movement.isFacingWall)
-               {
-                    movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);    
-               }
-               else
-               {
-                    movement.currentSpeed = 0f;
-                    PlayerAnimationController.instance.ResetFallingAnimations();                    
-               }
+               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);    
           }
           else
           {
@@ -427,6 +411,11 @@ public class PlayerController : Character
                DropObject();
           }
 
+          if(!movement.isGrounded && movement.velocity.y < -5)
+          {
+               DropObjectAfterFalling();
+          }
+
           if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
           {
                DropDeactiveObject();
@@ -534,6 +523,32 @@ public class PlayerController : Character
                     push.setPositionDropObject = true;
                     movement.maxSpeed = movement.fixedMaxSpeed;
                     push.slowReference = null;
+                    ResetTargetPushComponents();
+               }
+
+          }
+     }
+
+     public void DropObjectAfterFalling()
+     {
+          if (push.currentTargetPush != null)
+          {
+               if (push.currentTargetPush.tag == "Light")
+               {
+                    push.pushingObj = false;
+                    push.droppingObj = true;                    
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                    _countdownAfterDropping = 1;
+                    ResetTargetPushComponents();
+               }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.pushingObj = false;
+                    push.droppingObj = true;                    
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                     _countdownAfterDropping = 1;
                     ResetTargetPushComponents();
                }
 
@@ -668,7 +683,9 @@ public class PlayerController : Character
                if (_hitInfo.transform.tag == "Ground" ||
                _hitInfo.transform.tag == "Interactable" ||
                _hitInfo.transform.tag == "Light" ||
-               _hitInfo.transform.tag == "Heavy")
+               _hitInfo.transform.tag == "Heavy" ||
+               _hitInfo.transform.tag == "Platform" ||
+               _hitInfo.transform.tag == "Breakable")
                {
                     if (missedJump.canMiss)
                     {
