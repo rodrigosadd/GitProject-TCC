@@ -11,8 +11,8 @@ public class SettingsData : MonoBehaviour
      public int indexResolution;
      public int currentResolutionIndex = 0;
      public int indexQuality;
-     public float xSensitivity;
-     public float ySensitivity;
+     public float xSensitivity = 100;
+     public float ySensitivity = 100;
      public int invertX;
      public int invertY;
      public int isFullscreen;

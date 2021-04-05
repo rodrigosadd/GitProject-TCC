@@ -5939,6 +5939,7 @@ MonoBehaviour:
       m_Bits: 62208
     controller: {fileID: 3298514135490557513}
     cam: {fileID: 0}
+    targetCam: {fileID: 3298514136003075760}
     groundCheck: {fileID: 7316757490277970053}
     groundDistance: 0.23
     gravity: -9.81
@@ -5949,6 +5950,7 @@ MonoBehaviour:
     acceleration: 20
     turnSmoothtime: 0.15
     isGrounded: 0
+    canMove: 1
     horizontal: 0
     vertical: 0
   levelMechanics:
@@ -5998,9 +6000,6 @@ MonoBehaviour:
     cliffDetectorHeightDist: 5
     cliffDetectorMaxSpeed: 0.5
   missedJump:
-    missedJumpMask:
-      serializedVersion: 2
-      m_Bits: 62263
     targetMissedJump: {fileID: 1285583413466102973}
     rangeRayMissedJump: 0.4
     offsetPlayerPos: 1

@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class BreakingObjectsDrop : MonoBehaviour
 {
+     public Camera3rdPerson camera3RdPerson;
+     public Transform targetCam;
      public BreakableObject[] breakableObjects;
      public BreakableObject[] breakableObjectsDrop;
+     public float timeToReturnPlayerTarget = 2f;
+     public bool seeObject;
+     private float countdownToReturnPlayerTarget;
+     private bool canChangeTargetCam; 
 
      void Update()
      {
           CheckObjectsBroken();
+          CountdownToReturnPlayerTarget();
      }
 
      public void CheckObjectsBroken()
@@ -28,6 +35,7 @@ public class BreakingObjectsDrop : MonoBehaviour
           if (_isComplete)
           {
              ActiveGravity();
+             SeeObjectDrop();
           }
      }
 
@@ -38,5 +46,33 @@ public class BreakingObjectsDrop : MonoBehaviour
                 breakableObjectsDrop[i].rbody.isKinematic = false;
                 breakableObjectsDrop[i].rbody.useGravity = true;
          }
+     }
+
+     public void SeeObjectDrop()
+     {
+          if(seeObject)
+          {
+               canChangeTargetCam = true;
+               camera3RdPerson.targetCamera = targetCam;
+               PlayerController.instance.movement.canMove = false;
+          }
+     }
+
+     public void CountdownToReturnPlayerTarget()
+     {
+          if(canChangeTargetCam)
+          {
+               if(countdownToReturnPlayerTarget < 1)
+               {
+                    countdownToReturnPlayerTarget += Time.deltaTime / timeToReturnPlayerTarget;
+               }
+               else
+               {
+                    canChangeTargetCam = false;
+                    camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
+                    PlayerController.instance.movement.canMove = true;
+                    seeObject = false;
+               }
+          }
      }
 }

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class DropBox : MonoBehaviour
 {
+     public Camera3rdPerson camera3RdPerson;
+     public Transform targetCam;
      public DropBoxType type;
      public GameObject[] objects;
      public Transform[] targets;
      public Button[] buttons;
+     public float timeToReturnPlayerTarget = 2f;
+     public bool seeObject;
      private bool _canSpawn = true;
+     private float countdownToReturnPlayerTarget;
+     private bool canChangeTargetCam; 
 
      void Update()
      {
           CheckTriggers();
+          CountdownToReturnPlayerTarget();
      }
 
      public void CheckTriggers()
@@ -32,7 +39,8 @@ public class DropBox : MonoBehaviour
           {               
                if (_isComplete)
                {
-                    ActiveAllObjetcs();                                  
+                    ActiveAllObjetcs();   
+                    SeeObjectDrop();                               
                }
           }
 
@@ -41,6 +49,7 @@ public class DropBox : MonoBehaviour
                if (_isComplete && _canSpawn)
                {
                     ActiveAllObjetcs();
+                    SeeObjectDrop();
                     _canSpawn = false;               
                }
           }
@@ -53,6 +62,34 @@ public class DropBox : MonoBehaviour
                objects[i].SetActive(true);
                objects[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
                objects[i].transform.position = targets[i].position;
+          }
+     }
+
+     public void SeeObjectDrop()
+     {
+          if(seeObject)
+          {
+               canChangeTargetCam = true;
+               camera3RdPerson.targetCamera = targetCam;
+               PlayerController.instance.movement.canMove = false;
+          }
+     }
+
+     public void CountdownToReturnPlayerTarget()
+     {
+          if(canChangeTargetCam)
+          {
+               if(countdownToReturnPlayerTarget < 1)
+               {
+                    countdownToReturnPlayerTarget += Time.deltaTime / timeToReturnPlayerTarget;
+               }
+               else
+               {
+                    canChangeTargetCam = false;
+                    camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
+                    PlayerController.instance.movement.canMove = true;
+                    seeObject = false;
+               }
           }
      }
 }

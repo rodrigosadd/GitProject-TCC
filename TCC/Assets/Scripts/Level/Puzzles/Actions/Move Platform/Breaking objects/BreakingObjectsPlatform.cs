@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class BreakingObjectsPlatform : MonoBehaviour
 {
+     public Camera3rdPerson camera3RdPerson;
+     public Transform targetCam;
      public MovePlatform[] platforms;
      public BreakableObject[] breakableObjects;
+     public float timeToReturnPlayerTarget = 2f;
+     public bool seeObject;
+     private float countdownToReturnPlayerTarget;
+     private bool canChangeTargetCam; 
 
      void Update()
      {
           CheckObjectsBroken();
+          CountdownToReturnPlayerTarget();
      }
 
      public void CheckObjectsBroken()
@@ -28,6 +35,7 @@ public class BreakingObjectsPlatform : MonoBehaviour
           if (_isComplete)
           {
                MovePlatforms();
+               SeeObjectDrop();
           }
      }
 
@@ -36,6 +44,34 @@ public class BreakingObjectsPlatform : MonoBehaviour
           for (int i = 0; i < platforms.Length; i++)
           {
                platforms[i].canMove = true;
+          }
+     }
+
+     public void SeeObjectDrop()
+     {
+          if(seeObject)
+          {
+               canChangeTargetCam = true;
+               camera3RdPerson.targetCamera = targetCam;
+               PlayerController.instance.movement.canMove = false;
+          }
+     }
+
+     public void CountdownToReturnPlayerTarget()
+     {
+          if(canChangeTargetCam)
+          {
+               if(countdownToReturnPlayerTarget < 1)
+               {
+                    countdownToReturnPlayerTarget += Time.deltaTime / timeToReturnPlayerTarget;
+               }
+               else
+               {
+                    canChangeTargetCam = false;
+                    camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
+                    PlayerController.instance.movement.canMove = true;
+                    seeObject = false;
+               }
           }
      }
 }

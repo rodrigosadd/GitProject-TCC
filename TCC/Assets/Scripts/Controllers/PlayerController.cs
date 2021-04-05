@@ -21,6 +21,7 @@ public class PlayerController : Character
           public LayerMask groundMask;
           public CharacterController controller;
           public Transform cam;
+          public Transform targetCam;
           public Transform groundCheck;
           public float groundDistance;
           public float gravity = -9.81f;
@@ -31,6 +32,7 @@ public class PlayerController : Character
           public float acceleration;
           public float turnSmoothtime;
           public bool isGrounded;
+          public bool canMove = true;
           public float horizontal, vertical;
      }
 
@@ -200,7 +202,7 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (!death.dead && !levelMechanics.sliding && !push.droppingObj && !levelMechanics.interacting)
+          if (movement.canMove && !death.dead && !levelMechanics.sliding && !push.droppingObj && !levelMechanics.interacting)
           {
                movement.vertical = Input.GetAxis("Vertical");               
                movement.horizontal = Input.GetAxis("Horizontal");
@@ -230,7 +232,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (!death.dead && !levelMechanics.entryTeleport && !levelMechanics.exitTeleport && !levelMechanics.sliding && !push.droppingObj)
+          if (movement.canMove && !death.dead && !levelMechanics.entryTeleport && !levelMechanics.exitTeleport && !levelMechanics.sliding && !push.droppingObj)
           {
                if (_direction.magnitude >= 0.1f)
                {
