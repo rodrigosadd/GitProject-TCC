@@ -34,7 +34,7 @@ public class Slide : MonoBehaviour
                }
                else
                {
-                    if (!Physics.Raycast(PlayerController.instance.transform.position, PlayerController.instance.characterGraphic.forward, PlayerController.instance.push.rangePush))
+                    if (!Physics.Raycast(PlayerController.instance.characterGraphic.position, PlayerController.instance.characterGraphic.forward, 1.18f))
                     {
                          PlayerController.instance.movement.velocity.y = 0;
                          PlayerController.instance.SetControllerPosition(Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, velocitySlide * Time.deltaTime));

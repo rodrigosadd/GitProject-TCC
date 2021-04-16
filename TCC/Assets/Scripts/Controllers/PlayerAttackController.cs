@@ -6,6 +6,7 @@ public class PlayerAttackController : MonoBehaviour
 {
      public static PlayerAttackController instance;
 
+     public GameObject pickaxe;
      public Transform targetAttack;
      public LayerMask layerObjs;
      public GameObject[] trails;
@@ -17,6 +18,7 @@ public class PlayerAttackController : MonoBehaviour
      public float distanceImpulse;
      public float timeToResetAttack;
      public bool attaking;
+     public bool canAttack;
      private float _countdownReset;
 
 #if UNITY_EDITOR
@@ -34,10 +36,27 @@ public class PlayerAttackController : MonoBehaviour
 
      void LateUpdate()
      {
-          InputsAttack();
-          CanAttack();
-          Impulse();
-          CheckAttaking();
+          CheckPlayerCanToSeePickaxe();
+
+          if(canAttack)
+          {
+               InputsAttack();
+               CanAttack();
+               Impulse();
+               CheckAttaking();
+          }
+     }
+
+     public void CheckPlayerCanToSeePickaxe()
+     {
+          if(canAttack)
+          {
+               pickaxe.SetActive(true);
+          }
+          else
+          {
+               pickaxe.SetActive(false);
+          }
      }
 
      public void InputsAttack()

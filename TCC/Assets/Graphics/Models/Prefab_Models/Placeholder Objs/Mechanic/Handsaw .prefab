@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8615392392550631072}
   - component: {fileID: 8615392392550631075}
   - component: {fileID: 8615392392550631074}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!1 &8615392392909162825
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +123,7 @@ GameObject:
   - component: {fileID: 8615392392909162869}
   - component: {fileID: 8615392392909162868}
   - component: {fileID: 8615392392909162871}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,6 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!1 &8615392392976786985
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +234,7 @@ GameObject:
   - component: {fileID: 8615392392976786903}
   - component: {fileID: 8615392392976786899}
   - component: {fileID: 8615392392976786898}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: 'Handsaw '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +371,7 @@ GameObject:
   - component: {fileID: 8615392393448611867}
   - component: {fileID: 8615392393448611866}
   - component: {fileID: 8615392393448611869}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,6 +466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!1 &8615392393513252757
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,7 +481,7 @@ GameObject:
   - component: {fileID: 8615392393513252753}
   - component: {fileID: 8615392393513252752}
   - component: {fileID: 8615392393513252755}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -570,6 +576,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!1 &8615392393818348258
 GameObject:
   m_ObjectHideFlags: 0
@@ -583,7 +591,7 @@ GameObject:
   - component: {fileID: 8615392393818348270}
   - component: {fileID: 8615392393818348257}
   - component: {fileID: 8615392393818348256}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,6 +686,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!1 &8615392393985766439
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +701,7 @@ GameObject:
   - component: {fileID: 8615392393985766435}
   - component: {fileID: 8615392393985766434}
   - component: {fileID: 8615392393985766437}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,6 +796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!1 &8615392394022604697
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +811,7 @@ GameObject:
   - component: {fileID: 8615392394022604677}
   - component: {fileID: 8615392394022604676}
   - component: {fileID: 8615392394022604679}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -894,6 +906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0
 --- !u!1 &8615392394181079101
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,7 +921,7 @@ GameObject:
   - component: {fileID: 8615392394181079097}
   - component: {fileID: 8615392394181079096}
   - component: {fileID: 8615392394181079099}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Blade 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1002,3 +1016,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 0}
+  seeDeathPart: 0

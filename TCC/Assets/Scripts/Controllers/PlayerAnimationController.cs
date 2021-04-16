@@ -310,7 +310,7 @@ public class PlayerAnimationController : MonoBehaviour
      public void SetDoubleJump()
      {
           if (PlayerController.instance.movement.controller.velocity.y > 0 &&
-               PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump &&
+               PlayerController.instance.jump.currentJump >= 2 &&
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking)
           {
@@ -422,12 +422,23 @@ public class PlayerAnimationController : MonoBehaviour
 #endregion
 
 #region Falling
+     public void ResetFallingAnimations()
+     {
+          PlayerController.instance.animator.SetBool("Idle", true);
+          PlayerController.instance.animator.SetBool("Falling Action", false);
+          PlayerController.instance.animator.SetBool("Falling Idle", false);
+          PlayerController.instance.animator.SetBool("Falling Ground", false);
+          PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
+          alreadyPlayedFallingAction = false;
+     }
+
      public void SetFallingAction()
      {
           if(PlayerController.instance.movement.controller.velocity.y <= -0.1 &&
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
-              PlayerController.instance.jump.currentJump >= PlayerController.instance.jump.maxJump &&
+              PlayerController.instance.jump.currentJump >= 2 &&
               !alreadyPlayedFallingAction)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -456,7 +467,7 @@ public class PlayerAnimationController : MonoBehaviour
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
               !alreadyPlayedFallingAction &&
-              PlayerController.instance.jump.currentJump < PlayerController.instance.jump.maxJump &&
+              PlayerController.instance.jump.currentJump <= 1 &&
               !_inFallingAction)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -488,7 +499,7 @@ public class PlayerAnimationController : MonoBehaviour
           if (PlayerController.instance.movement.controller.velocity.y <= -0.1 &&
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
-              PlayerController.instance.jump.currentJump >= PlayerController.instance.jump.maxJump &&
+              PlayerController.instance.jump.currentJump >= 2 &&
               alreadyPlayedFallingAction)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -521,7 +532,7 @@ public class PlayerAnimationController : MonoBehaviour
               PlayerController.instance.movement.vertical == 0) &&
               PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
-              PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
+              PlayerController.instance.jump.currentJump >= 2)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -552,7 +563,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.movement.isGrounded &&
                !PlayerAttackController.instance.attaking &&
-               PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
+               PlayerController.instance.jump.currentJump >= 2)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
