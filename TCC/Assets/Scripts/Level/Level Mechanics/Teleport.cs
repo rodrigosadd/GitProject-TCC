@@ -73,7 +73,7 @@ public class Teleport : MonoBehaviour
           {
                _canTeleport = true;
                PlayerAnimationController.instance.SetEntryTeleport();               
-               RuntimeManager.PlayOneShot(teleportSound, transform.position);
+               RuntimeManager.PlayOneShot(teleportSound, PlayerController.instance.transform.position);
           }
      }
 

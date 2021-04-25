@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using FMODUnity;
 
 public class AttackStat : Stats
 {
@@ -16,6 +15,7 @@ public class AttackStat : Stats
 
         if(_distanceBetween < maxDistancePickedUp && Input.GetButtonDown("Interact"))
         {
+            RuntimeManager.PlayOneShot(collectSound, transform.position);
             GameManager.instance.playerStatsData.canAttack = 1;
             GameManager.instance.playerStatsData.ApplySettings();
             gameObject.SetActive(false);

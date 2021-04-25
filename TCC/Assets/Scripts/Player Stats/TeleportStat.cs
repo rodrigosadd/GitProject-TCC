@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using FMODUnity;
 using UnityEngine;
 
 public class TeleportStat : Stats
@@ -16,6 +15,7 @@ public class TeleportStat : Stats
 
         if(_distanceBetween < maxDistancePickedUp && Input.GetButtonDown("Interact"))
         {
+            RuntimeManager.PlayOneShot(collectSound, transform.position);
             GameManager.instance.playerStatsData.canSeeTeleport = 1;
             GameManager.instance.playerStatsData.ApplySettings();
             gameObject.SetActive(false);

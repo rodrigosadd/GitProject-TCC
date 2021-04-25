@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using FMODUnity;
 using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
@@ -8,6 +7,8 @@ public class Checkpoint : MonoBehaviour
      public GameObject animCheckPoint;
      public float timeToDeactivate;
      public bool active;
+
+     [EventRef] public string checkpointSound;
 
      private float _countdownDeactivate;
 
@@ -39,6 +40,7 @@ public class Checkpoint : MonoBehaviour
           {
                if (collider.tag == "Player" && !active)
                {
+                    RuntimeManager.PlayOneShot(checkpointSound, transform.position);
                     PlayerController.instance.death.currentPoint = spot;
                     animCheckPoint.SetActive(true);
                     active = true;
