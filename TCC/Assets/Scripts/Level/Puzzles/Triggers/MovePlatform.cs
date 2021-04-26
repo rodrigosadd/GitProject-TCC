@@ -114,12 +114,12 @@ public class MovePlatform : Platform
 
      public void MoveToFirstSpot()
      {
-          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime));
+          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.fixedDeltaTime));
      }
 
      public void MoveToSecondSpot()
      {
-          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.deltaTime));
+          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.fixedDeltaTime));
      }
 
      public void ResetAndMoveToSpot()

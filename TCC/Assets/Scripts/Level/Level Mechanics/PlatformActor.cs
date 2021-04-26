@@ -33,7 +33,7 @@ public class PlatformActor : MonoBehaviour
      {
           RaycastHit _hitInfo;
 
-          if (Physics.Raycast(origin.position, Vector3.down, out _hitInfo, maxDistanceRay, layer))
+          if (Physics.Raycast(origin.position, origin.up * -1, out _hitInfo, maxDistanceRay, layer))
           {
                if (_rbody == null)
                {
@@ -83,7 +83,7 @@ public class PlatformActor : MonoBehaviour
           if (seeRangeDistanceRay)
           {
                Gizmos.color = Color.blue;
-               Gizmos.DrawRay(origin.position, Vector3.down * maxDistanceRay);
+               Gizmos.DrawRay(origin.position, (transform.up * -1) * maxDistanceRay);
           }
      }
 #endif
