@@ -14,8 +14,6 @@ public class MovePlatform : Platform
      public bool canMove;
      public bool hasRestarted;
      public bool hasDelayToMove;
-     [EventRef]
-     public string moveSound;
      
      void FixedUpdate()
      {
@@ -71,7 +69,6 @@ public class MovePlatform : Platform
      {
           if (canMove)
           {
-               RuntimeManager.PlayOneShot(moveSound, transform.position);
                rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[spotToMove].position, speed * Time.fixedDeltaTime));
           }
 
