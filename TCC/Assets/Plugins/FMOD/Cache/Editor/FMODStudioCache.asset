@@ -18,6 +18,29 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &-9165404706530362585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonStayPress
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonStayPress
+  guid: 19d8c4b7fb9bc14ea84ff1c5113e8458
+  Banks:
+  - {fileID: 3099381896083984100}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 372
 --- !u!114 &-9158696899549567992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../../../../PUC/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/Ambient.bank
   Name: Ambient
-  lastModified: 637549714281528553
+  lastModified: 637562531420907338
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -864,7 +887,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 1000
+  Length: 2298
 --- !u!114 &-5921629025273740959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1112,7 +1135,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 150
+  MaxDistance: 30
   Length: 377
 --- !u!114 &-5338941697975190147
 MonoBehaviour:
@@ -1413,7 +1436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../../../../PUC/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/OST.bank
   Name: OST
-  lastModified: 637549714286621813
+  lastModified: 637562531422367938
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -1678,7 +1701,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 30
   Length: 377
 --- !u!114 &-2785533235825559834
 MonoBehaviour:
@@ -1702,7 +1725,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 60
-  Length: 250
+  Length: 125
 --- !u!114 &-2734171044132116788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2045,6 +2068,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-819758184596764849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Hit 2
+  m_EditorClassIdentifier: 
+  Path: event:/Hit 2
+  guid: 01e5a47bc189de4790dc6215043f92b1
+  Banks:
+  - {fileID: 3099381896083984100}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 550
 --- !u!114 &-817430209834747964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2365,12 +2411,15 @@ MonoBehaviour:
   - {fileID: 9053150654358573089}
   - {fileID: -5151001700462164395}
   - {fileID: 7658443970565624254}
+  - {fileID: -9165404706530362585}
+  - {fileID: 6178863107104887679}
+  - {fileID: -819758184596764849}
   EditorParameters: []
   MasterBanks:
   - {fileID: 7050282206010048322}
   StringsBanks:
   - {fileID: 8936069945597442419}
-  stringsBankWriteTime: 637549714282017956
+  stringsBankWriteTime: 637562531421117937
   cacheVersion: 4
 --- !u!114 &147920336543617514
 MonoBehaviour:
@@ -2526,7 +2575,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 30
-  Length: 2274
+  Length: 922
 --- !u!114 &911077343975203803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2658,7 +2707,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 40
-  Length: 333
+  Length: 305
 --- !u!114 &1498872534507946011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3070,7 +3119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../../../../PUC/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/SFX.bank
   Name: SFX
-  lastModified: 637549714297523567
+  lastModified: 637562531425517859
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -3952,6 +4001,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 4000
+--- !u!114 &6178863107104887679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonStayUp
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonStayUp
+  guid: f03217f927d18b4cb0fabe57c8fe422d
+  Banks:
+  - {fileID: 3099381896083984100}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 372
 --- !u!114 &6188095567728713971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4014,7 +4086,7 @@ MonoBehaviour:
   IsOneShot: 1
   Parameters: []
   MinDistance: 1
-  MaxDistance: 20
+  MaxDistance: 30
   Length: 346
 --- !u!114 &6995739226574613913
 MonoBehaviour:
@@ -4093,7 +4165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../../../../PUC/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/Master.bank
   Name: Master
-  lastModified: 637549714281937959
+  lastModified: 637562531421017338
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -4581,11 +4653,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: ../../../../PUC/FMOD Project/LegendsOfBetoFSPRO/Build/Desktop/Master.strings.bank
   Name: Master.strings
-  lastModified: 637549714282017956
+  lastModified: 637562531421117937
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 2758
+    Value: 2898
   Exists: 1
 --- !u!114 &9053150654358573089
 MonoBehaviour:
@@ -4609,7 +4681,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 60
-  Length: 218
+  Length: 125
 --- !u!114 &9097001074142793664
 MonoBehaviour:
   m_ObjectHideFlags: 0
