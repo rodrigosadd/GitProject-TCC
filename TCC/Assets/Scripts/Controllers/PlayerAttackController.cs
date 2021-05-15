@@ -68,17 +68,15 @@ public class PlayerAttackController : MonoBehaviour
               !PlayerController.instance.push.pushingObj &&
               !PlayerController.instance.push.setPositionDropObject &&
               !PlayerController.instance.push.droppingObj &&
-              !PlayerController.instance.levelMechanics.sliding)
+              !PlayerController.instance.levelMechanics.sliding &&
+              PlayerController.instance.movement.isGrounded)
           {
                if (!attaking)
                {
                     _currentMaxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                }
 
-               if (PlayerController.instance.movement.isGrounded)
-               {
-                    FirstAttack();
-               }
+               FirstAttack();               
           }
      }
 
@@ -207,15 +205,23 @@ public class PlayerAttackController : MonoBehaviour
                }
                else
                {
-                    if (!Physics.Raycast(PlayerController.instance.transform.position, PlayerController.instance.characterGraphic.forward, PlayerController.instance.push.rangePush))
+                    if (!Physics.Raycast(PlayerController.instance.characterGraphic.position, PlayerController.instance.characterGraphic.forward, 1.18f))
                     {
+                         PlayerController.instance.movement.velocity.y = 0;
                          PlayerController.instance.SetControllerPosition(Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, attackImpulse * Time.deltaTime));
 
                          if (_finalImpulse == PlayerController.instance.transform.position)
-                         {
+                         {                              
                               _finalImpulse = Vector3.zero;
+                              PlayerController.instance.levelMechanics.sliding = false;
                               attaking = false;
                          }
+                    }
+                    else
+                    {
+                         _finalImpulse = Vector3.zero;
+                         PlayerController.instance.levelMechanics.sliding = false;
+                         attaking = false;
                     }
                }
           }

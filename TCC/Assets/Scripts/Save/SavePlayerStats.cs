@@ -11,18 +11,18 @@ public class SavePlayerStats : MonoBehaviour
 
      public void CleanPlayerStats()
      {
-        Debug.Log("Clean Stats");
-        PlayerPrefs.SetInt("IndexMaxJump", 1);
-        PlayerPrefs.SetInt("IndexCanAttack", 0);
-        PlayerPrefs.SetInt("IndexCanSeeTeleport", 0);
+          Debug.Log("Clean Stats");
+          PlayerPrefs.SetInt("IndexMaxJump", 1);
+          PlayerPrefs.SetInt("IndexCanAttack", 0);
+          PlayerPrefs.SetInt("IndexCanSeeTeleport", 0);
      }
 
      public void Save()
      {
-        Debug.Log("Save Stats");
-        PlayerPrefs.SetInt("IndexMaxJump", GameManager.instance.playerStatsData.maxJump);
-        PlayerPrefs.SetInt("IndexCanAttack", GameManager.instance.playerStatsData.canAttack);
-        PlayerPrefs.SetInt("IndexCanSeeTeleport", GameManager.instance.playerStatsData.canSeeTeleport);
+          Debug.Log("Save Stats");
+          PlayerPrefs.SetInt("IndexMaxJump", GameManager.instance.playerStatsData.maxJump);
+          PlayerPrefs.SetInt("IndexCanAttack", GameManager.instance.playerStatsData.canAttack);
+          PlayerPrefs.SetInt("IndexCanSeeTeleport", GameManager.instance.playerStatsData.canSeeTeleport);
      }
 
      public void Load()
