@@ -46,7 +46,7 @@ public class WeightsButtonsDoorPlatform : OpenDoor
      {
           for (int i = 0; i < platforms.Length; i++)
           {
-               platforms[i].canMove = true;
+               platforms[i].Initialize();
           }
      }
 
@@ -55,6 +55,7 @@ public class WeightsButtonsDoorPlatform : OpenDoor
           for (int i = 0; i < platforms.Length; i++)
           {
                platforms[i].canMove = false;
+               platforms[i].hasRestarted = false;
           }
      }
 }

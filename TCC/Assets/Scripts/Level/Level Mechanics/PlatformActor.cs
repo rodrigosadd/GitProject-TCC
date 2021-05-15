@@ -5,15 +5,24 @@ using UnityEngine;
 public class PlatformActor : MonoBehaviour
 {
      public LayerMask layer;
-     public Rigidbody _myRBody;
+     public Rigidbody myRBody;
      public CharacterController controller;
      public Transform origin;
      public float maxDistanceRay;
      private Rigidbody _rbody;
+     private bool _isOnThePlatform;
 
 #if UNITY_EDITOR
      public bool seeRangeDistanceRay;
 #endif
+
+     void Start()
+     {
+          if(controller == null)
+          {
+               myRBody = GetComponent<Rigidbody>();
+          }
+     }
 
      void FixedUpdate()
      {
@@ -24,7 +33,7 @@ public class PlatformActor : MonoBehaviour
      {
           RaycastHit _hitInfo;
 
-          if (Physics.Raycast(origin.position, Vector3.down, out _hitInfo, maxDistanceRay, layer))
+          if (Physics.Raycast(origin.position, origin.up * -1, out _hitInfo, maxDistanceRay, layer))
           {
                if (_rbody == null)
                {
@@ -38,11 +47,12 @@ public class PlatformActor : MonoBehaviour
                     }
                     else
                     {
-                         if (_myRBody != null)
+                         if (myRBody != null)
                          {
                               if (_rbody.velocity != Vector3.zero)
                               {
-                                   _myRBody.velocity = _rbody.velocity;
+                                   myRBody.velocity = _rbody.velocity;
+                                   _isOnThePlatform = true;
                               }
                          }
                          else
@@ -51,10 +61,19 @@ public class PlatformActor : MonoBehaviour
                          }
                     }
                }
+
+               if(_rbody.velocity == Vector3.zero && _isOnThePlatform && controller == null)
+               {
+                    myRBody.velocity = Vector3.zero;
+               }
           }
           else
           {
-               _rbody = null;
+               if(_rbody != null)
+               {                     
+                    _rbody = null;
+                    _isOnThePlatform = false;
+               }
           }
      }
 
@@ -64,7 +83,7 @@ public class PlatformActor : MonoBehaviour
           if (seeRangeDistanceRay)
           {
                Gizmos.color = Color.blue;
-               Gizmos.DrawRay(origin.position, Vector3.down * maxDistanceRay);
+               Gizmos.DrawRay(origin.position, (transform.up * -1) * maxDistanceRay);
           }
      }
 #endif

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Button : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Button : MonoBehaviour
      public Transform button;
      public Transform targetMoveButton;
      public float maxDistancePressButton;
+     [EventRef]
+     public string clickSound;
      public bool triggerButton;
      private Vector3 _startPositionButton;
      private float _countdownAnimationButton;
@@ -39,7 +42,8 @@ public class Button : MonoBehaviour
           {
                triggerButton = true;
                _canPlayInteractAnimation = true;
-               PlayerController.instance.movement.interacting = true;
+               PlayerController.instance.levelMechanics.interacting = true;
+               RuntimeManager.PlayOneShot(clickSound, transform.position);
           }
      }
 
@@ -103,7 +107,7 @@ public class Button : MonoBehaviour
                {
                     _countdownDeactivateInteractAnimation = 0;
                     _canPlayInteractAnimation = false;
-                    PlayerController.instance.movement.interacting = false;
+                    PlayerController.instance.levelMechanics.interacting = false;
                     PlayerController.instance.movement.currentSpeed = 0f;
                }
           }

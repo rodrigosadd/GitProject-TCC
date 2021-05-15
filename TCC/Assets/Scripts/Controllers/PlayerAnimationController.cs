@@ -13,7 +13,10 @@ public class PlayerAnimationController : MonoBehaviour
      private bool _canJumpAfterFalling;
      private bool _inFallingAction;
      private float _countdownAfterFalling;
-      private float _countdownFallingAction;
+     private float _countdownFallingAction;
+     private bool first;
+     private bool second;
+     private bool final;
 
      void Start()
      {
@@ -43,9 +46,17 @@ public class PlayerAnimationController : MonoBehaviour
           SetEntryTeleport();
           SetExitTeleport();
           SetInteract();
+          CheckAttackAnimationIsFinished();
      }
 
 #region Attack
+     public void CheckAttackAnimationIsFinished()
+     {
+          first = PlayerController.instance.animator.GetBool("First Attack");
+          second = PlayerController.instance.animator.GetBool("Second Attack");
+          final = PlayerController.instance.animator.GetBool("Final Attack");
+     }
+
      public void SetFirstAttack()
      {
           PlayerController.instance.animator.SetBool("First Attack", true);
@@ -186,7 +197,7 @@ public class PlayerAnimationController : MonoBehaviour
                !balance &&
                !PlayerController.instance.push.pushingObj &&
                PlayerAttackController.instance.currentAttack == 0 &&
-               !PlayerController.instance.movement.interacting)
+               !PlayerController.instance.levelMechanics.interacting)
           {
                PlayerController.instance.animator.SetBool("Idle", true);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -222,7 +233,8 @@ public class PlayerAnimationController : MonoBehaviour
                !PlayerController.instance.push.pushingObj &&
                !PlayerController.instance.push.droppingObj &&
                !PlayerController.instance.push.setPositionDropObject &&
-               PlayerAttackController.instance.currentAttack == 0)
+               PlayerAttackController.instance.currentAttack == 0 &&
+               !PlayerAttackController.instance.attaking)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", true);
@@ -310,7 +322,7 @@ public class PlayerAnimationController : MonoBehaviour
      public void SetDoubleJump()
      {
           if (PlayerController.instance.movement.controller.velocity.y > 0 &&
-               PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump &&
+               PlayerController.instance.jump.currentJump >= 2 &&
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking)
           {
@@ -422,12 +434,23 @@ public class PlayerAnimationController : MonoBehaviour
 #endregion
 
 #region Falling
+     public void ResetFallingAnimations()
+     {
+          PlayerController.instance.animator.SetBool("Idle", true);
+          PlayerController.instance.animator.SetBool("Falling Action", false);
+          PlayerController.instance.animator.SetBool("Falling Idle", false);
+          PlayerController.instance.animator.SetBool("Falling Ground", false);
+          PlayerController.instance.animator.SetBool("Falling Running", false);
+          fallingIdle = false;
+          alreadyPlayedFallingAction = false;
+     }
+
      public void SetFallingAction()
      {
           if(PlayerController.instance.movement.controller.velocity.y <= -0.1 &&
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
-              PlayerController.instance.jump.currentJump >= PlayerController.instance.jump.maxJump &&
+              PlayerController.instance.jump.currentJump >= 2 &&
               !alreadyPlayedFallingAction)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -456,8 +479,11 @@ public class PlayerAnimationController : MonoBehaviour
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
               !alreadyPlayedFallingAction &&
-              PlayerController.instance.jump.currentJump < PlayerController.instance.jump.maxJump &&
-              !_inFallingAction)
+              PlayerController.instance.jump.currentJump <= 1 &&
+              !_inFallingAction &&
+              !first &&
+              !second &&
+              !final)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -475,10 +501,13 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Running", false);
                PlayerController.instance.animator.SetBool("Sliding", false);
                PlayerController.instance.animator.SetBool("Interacting", false); 
+               PlayerController.instance.animator.SetBool("Final Attack", false);
+               PlayerController.instance.animator.SetBool("Second Attack", false);
+               PlayerController.instance.animator.SetBool("First Attack", false);
 
                if (!fallingIdle)
                {
-                    fallingIdle = true;
+                    fallingIdle = true;                    
                }
           }
      }
@@ -488,7 +517,7 @@ public class PlayerAnimationController : MonoBehaviour
           if (PlayerController.instance.movement.controller.velocity.y <= -0.1 &&
               !PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
-              PlayerController.instance.jump.currentJump >= PlayerController.instance.jump.maxJump &&
+              PlayerController.instance.jump.currentJump >= 2 &&
               alreadyPlayedFallingAction)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
@@ -521,7 +550,7 @@ public class PlayerAnimationController : MonoBehaviour
               PlayerController.instance.movement.vertical == 0) &&
               PlayerController.instance.movement.isGrounded &&
               !PlayerAttackController.instance.attaking &&
-              PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
+              PlayerController.instance.jump.currentJump >= 2)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -552,7 +581,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.movement.vertical != 0) &&
                PlayerController.instance.movement.isGrounded &&
                !PlayerAttackController.instance.attaking &&
-               PlayerController.instance.jump.currentJump == PlayerController.instance.jump.maxJump)
+               PlayerController.instance.jump.currentJump >= 2)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -645,7 +674,7 @@ public class PlayerAnimationController : MonoBehaviour
 #region Sliding
      public void SetSliding()
      {
-          if(PlayerController.instance.movement.sliding)
+          if(PlayerController.instance.levelMechanics.sliding)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -672,7 +701,7 @@ public class PlayerAnimationController : MonoBehaviour
 #region Teleport
      public void SetEntryTeleport()
      {
-          if(PlayerController.instance.movement.entryTeleport)
+          if(PlayerController.instance.levelMechanics.entryTeleport)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -699,7 +728,7 @@ public class PlayerAnimationController : MonoBehaviour
 
      public void SetExitTeleport()
      {
-          if(PlayerController.instance.movement.exitTeleport)
+          if(PlayerController.instance.levelMechanics.exitTeleport)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -728,7 +757,7 @@ public class PlayerAnimationController : MonoBehaviour
 #region Interact
      public void SetInteract()
      {
-          if(PlayerController.instance.movement.interacting)
+          if(PlayerController.instance.levelMechanics.interacting)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);

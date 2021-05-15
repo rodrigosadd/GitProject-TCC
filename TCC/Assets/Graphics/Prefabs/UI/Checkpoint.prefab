@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4205110339994868199}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Spot
   m_TagString: Checkpoint
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4205110340192132915}
   - component: {fileID: 4205110340192132917}
   - component: {fileID: 4205110340192132916}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Checkpoint
   m_TagString: Checkpoint
   m_Icon: {fileID: 0}
@@ -77,8 +77,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spot: {fileID: 4205110339994868199}
   animCheckPoint: {fileID: 0}
-  timeToDeactivate: 4
+  timeToDeactivate: 3
   active: 0
+  checkpointSound: event:/Checkpoint Feedback
 --- !u!65 &4205110340192132916
 BoxCollider:
   m_ObjectHideFlags: 0

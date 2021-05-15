@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using FMODUnity;
 
 public class Piston : MonoBehaviour
 {
@@ -10,6 +9,8 @@ public class Piston : MonoBehaviour
      public float pistonSpeedUp;
      public float pistonOffset;
      public bool goingDown = true;
+     [EventRef] public string pistonLiftingSound;
+     [EventRef] public string pistonSmashSound;
 
      private float _currentCountdown;
      private Vector3 _initialPositionPiston;
@@ -50,6 +51,7 @@ public class Piston : MonoBehaviour
                          {
                               goingDown = false;
                               _currentCountdown = 0;
+                              RuntimeManager.PlayOneShot(pistonLiftingSound, deathCollider.transform.position);
                          }
                     }
                }
@@ -60,6 +62,7 @@ public class Piston : MonoBehaviour
                     if (distanceUntilFirstPosition <= 0)
                     {
                          goingDown = true;
+                         RuntimeManager.PlayOneShot(pistonSmashSound, deathCollider.transform.position);
                     }
                }
           }

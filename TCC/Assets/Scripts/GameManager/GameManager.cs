@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
      public static GameManager instance;
      public SettingsData settingsData;
      public SaveSettings saveSettings;
+     public PlayerStatsData playerStatsData;
+     public SavePlayerStats savePlayerStats;
      public AudioSettings audioSettings;
 
      void Awake()
@@ -29,6 +31,9 @@ public class GameManager : MonoBehaviour
 
      public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
      {
+          GameManager.instance.savePlayerStats.Load();
+          GameManager.instance.playerStatsData.ApplySettings();
+
           if(scene.buildIndex != InRuntimePersistantData.Instance.lastLoadedLevel)
           {    
                return;
@@ -76,6 +81,6 @@ public class GameManager : MonoBehaviour
           }
           
           InRuntimePersistantData.Instance.cachedPersistenteComponentInfo = new List<InRuntimePersistenteComponentInfo>();
-          InRuntimePersistantData.Instance.lastLoadedLevel = -1;
+          InRuntimePersistantData.Instance.lastLoadedLevel = -1;          
      }
 }

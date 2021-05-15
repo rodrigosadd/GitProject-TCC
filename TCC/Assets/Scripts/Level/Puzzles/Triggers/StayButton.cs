@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class StayButton : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class StayButton : MonoBehaviour
      public float maxDistanceStayOnButton;
      public bool triggerButton;
      private Vector3 _startPositionButton;
+     [EventRef]
+     public string[] buttonSounds;
 
      void Start()
      {
@@ -26,11 +29,16 @@ public class StayButton : MonoBehaviour
 
           if (distanceBetween < maxDistanceStayOnButton)
           {
+               if(!triggerButton) {
+                    RuntimeManager.PlayOneShot(buttonSounds[0]);
+               }
                StartButtonAnimation();
                triggerButton = true;
           }
           else
           {
+               if(triggerButton)
+                    RuntimeManager.PlayOneShot(buttonSounds[1], transform.position);
                PressedButtonAnimation();
                triggerButton = false;
           }
@@ -43,6 +51,7 @@ public class StayButton : MonoBehaviour
 
      public void PressedButtonAnimation()
      {
+
           button.position = Vector3.MoveTowards(button.position, _startPositionButton, 1f * Time.deltaTime);
      }
 

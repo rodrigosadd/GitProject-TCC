@@ -8,6 +8,7 @@ public class BreakableObject : MonoBehaviour
      public GameObject[] objects;
      public Transform[] targets;
      public GameObject[] brokenParts;
+     public Rigidbody rbody;
      public Collider col;
      public int maxHit;
      public int hit;
@@ -64,6 +65,7 @@ public class BreakableObject : MonoBehaviour
                {
                     objects[i].SetActive(true);
                     objects[i].transform.position = targets[i].position;
+                    objects[i].transform.parent = null;
                }
           }
      }

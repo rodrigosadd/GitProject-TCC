@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class MovePlatform : Platform
 {
@@ -14,7 +15,7 @@ public class MovePlatform : Platform
      public bool hasRestarted;
      public bool hasDelayToMove;
      
-     void Update()
+     void FixedUpdate()
      {
           TriggerMovementBetweenSpots();
      }
@@ -110,12 +111,12 @@ public class MovePlatform : Platform
 
      public void MoveToFirstSpot()
      {
-          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.deltaTime));
+          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[0].position, speed * Time.fixedDeltaTime));
      }
 
      public void MoveToSecondSpot()
      {
-          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.deltaTime));
+          rbody.MovePosition(Vector3.MoveTowards(transform.position, spotsToMovePlatform[1].position, speed * Time.fixedDeltaTime));
      }
 
      public void ResetAndMoveToSpot()

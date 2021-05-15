@@ -21,6 +21,7 @@ public class PlayerController : Character
           public LayerMask groundMask;
           public CharacterController controller;
           public Transform cam;
+          public Transform targetCam;
           public Transform groundCheck;
           public float groundDistance;
           public float gravity = -9.81f;
@@ -31,12 +32,22 @@ public class PlayerController : Character
           public float acceleration;
           public float turnSmoothtime;
           public bool isGrounded;
+          public bool canMove = true;
+          public float horizontal, vertical;
+     }
+
+     [Header("Jump variables")]
+     public LevelMechanics levelMechanics;
+
+     [System.Serializable]
+     public class LevelMechanics
+     {
           public bool slowing;
           public bool sliding;
           public bool entryTeleport;
           public bool exitTeleport;
           public bool interacting;
-          public float horizontal, vertical;
+          public bool canSeeTeleport;
      }
 
      [Header("Jump variables")]
@@ -141,22 +152,25 @@ public class PlayerController : Character
      public bool seeRangeFalling = false;
 #endif
 
-     void Start()
+     void Awake()
      {
           instance = this;
+     }
 
+     void Start()
+     {
           Cursor.visible = false;
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
           movement.fixedGravity = movement.gravity;
+          GameManager.instance.playerStatsData.ApplySettings();
      }
 
      void Update()
      {
           Gravity();
-          CheckIsGrounded();
           CharacterJump();
-          //CharacterBetterJump();
+          CheckIsGrounded();          
           PushingObject();
           SetPositionCurrentTargetPush();
           SetPositionDropObject();
@@ -188,9 +202,9 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (!death.dead && !movement.sliding && !push.droppingObj && !movement.interacting)
+          if (movement.canMove && !death.dead && !levelMechanics.sliding && !push.droppingObj && !levelMechanics.interacting)
           {
-               movement.vertical = Input.GetAxis("Vertical");
+               movement.vertical = Input.GetAxis("Vertical");               
                movement.horizontal = Input.GetAxis("Horizontal");
 
                CharacterMovement();
@@ -208,7 +222,7 @@ public class PlayerController : Character
 
                Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);
+               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);    
           }
           else
           {
@@ -218,7 +232,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (!death.dead && !movement.entryTeleport && !movement.exitTeleport && !movement.sliding && !push.droppingObj)
+          if (movement.canMove && !death.dead && !levelMechanics.entryTeleport && !levelMechanics.exitTeleport && !levelMechanics.sliding && !push.droppingObj)
           {
                if (_direction.magnitude >= 0.1f)
                {
@@ -268,7 +282,7 @@ public class PlayerController : Character
 
           if (Input.GetButtonDown("Jump") && CanJump() &&
               push.pushingObj == false &&
-              !movement.sliding &&
+              !levelMechanics.sliding &&
               !PlayerAttackController.instance.attaking &&
               PlayerAttackController.instance.currentAttack == 0 &&
               !GameManager.instance.settingsData.settingsOpen &&
@@ -306,18 +320,6 @@ public class PlayerController : Character
                }
           }
      }
-
-     // public void CharacterBetterJump()
-     // {
-     //      if (movement.velocity.y <= 0)
-     //      {
-     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.fallMultiplier - 1) * Time.deltaTime;
-     //      }
-     //      else if (movement.velocity.y > 0 && !Input.GetButton("Jump"))
-     //      {
-     //           movement.velocity += Vector3.up * Physics.gravity.y * (jump.lowJumpMultiplier - 1) * Time.deltaTime;
-     //      }
-     // }
 
      public bool CanJump()
      {
@@ -409,6 +411,11 @@ public class PlayerController : Character
           else if (Input.GetButtonUp("Push"))
           {
                DropObject();
+          }
+
+          if(!movement.isGrounded && movement.velocity.y < -5)
+          {
+               DropObjectAfterFalling();
           }
 
           if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
@@ -524,6 +531,32 @@ public class PlayerController : Character
           }
      }
 
+     public void DropObjectAfterFalling()
+     {
+          if (push.currentTargetPush != null)
+          {
+               if (push.currentTargetPush.tag == "Light")
+               {
+                    push.pushingObj = false;
+                    push.droppingObj = true;                    
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                    _countdownAfterDropping = 1;
+                    ResetTargetPushComponents();
+               }
+               else if (push.currentTargetPush.tag == "Heavy")
+               {
+                    push.pushingObj = false;
+                    push.droppingObj = true;                    
+                    movement.maxSpeed = movement.fixedMaxSpeed;
+                    push.slowReference = null;
+                     _countdownAfterDropping = 1;
+                    ResetTargetPushComponents();
+               }
+
+          }
+     }
+
      public void DropDeactiveObject()
      {
           if (push.currentTargetPush != null)
@@ -616,7 +649,7 @@ public class PlayerController : Character
           }
           else
           {
-               if (movement.slowing == false)
+               if (levelMechanics.slowing == false)
                {
                     push.slowReference = null;
                     movement.maxSpeed = push.speedPush;
@@ -632,7 +665,12 @@ public class PlayerController : Character
 
           Ray _ray = new Ray(_origin, Vector3.up * -1);
 
-          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && movement.isGrounded && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed && movement.currentSpeed < cliff.cliffDetectorMaxSpeed)
+          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && 
+               movement.isGrounded && 
+               _cliffDectorLockPlayer == true && 
+               GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed && 
+               movement.currentSpeed < cliff.cliffDetectorMaxSpeed &&
+               !PlayerAttackController.instance.attaking)
           {
                PlayerAnimationController.instance.SetBalance();
           }
@@ -650,9 +688,11 @@ public class PlayerController : Character
           if (Physics.Raycast(missedJump.targetMissedJump.position, Vector3.down, out _hitInfo, missedJump.rangeRayMissedJump))
           {
                if (_hitInfo.transform.tag == "Ground" ||
-                   _hitInfo.transform.tag == "Interactable" ||
-                   _hitInfo.transform.tag == "Light" ||
-                   _hitInfo.transform.tag == "Heavy")
+               _hitInfo.transform.tag == "Interactable" ||
+               _hitInfo.transform.tag == "Light" ||
+               _hitInfo.transform.tag == "Heavy" ||
+               _hitInfo.transform.tag == "Platform" ||
+               _hitInfo.transform.tag == "Breakable")
                {
                     if (missedJump.canMiss)
                     {
@@ -736,7 +776,7 @@ public class PlayerController : Character
           if (seeRangeGroundDetector)
           {
                Gizmos.color = Color.green;
-               Gizmos.DrawSphere(movement.groundCheck.position, movement.groundDistance);
+               Gizmos.DrawSphere(movement.groundCheck.position, movement.groundDistance);               
           }
 
           if (seeRangeMissedJump)

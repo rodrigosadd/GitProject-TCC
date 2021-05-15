@@ -5939,8 +5939,9 @@ MonoBehaviour:
       m_Bits: 62208
     controller: {fileID: 3298514135490557513}
     cam: {fileID: 0}
+    targetCam: {fileID: 3298514136003075760}
     groundCheck: {fileID: 7316757490277970053}
-    groundDistance: 0.23
+    groundDistance: 0.35
     gravity: -9.81
     fixedGravity: 0
     maxSpeed: 9
@@ -5949,13 +5950,16 @@ MonoBehaviour:
     acceleration: 20
     turnSmoothtime: 0.15
     isGrounded: 0
+    canMove: 1
+    horizontal: 0
+    vertical: 0
+  levelMechanics:
     slowing: 0
     sliding: 0
     entryTeleport: 0
     exitTeleport: 0
     interacting: 0
-    horizontal: 0
-    vertical: 0
+    canSeeTeleport: 0
   jump:
     groundDetector: {fileID: 7316757490277970053}
     jumpShadow: {fileID: 0}
@@ -5964,7 +5968,7 @@ MonoBehaviour:
     fallMultiplier: 0
     lowJumpMultiplier: 0
     currentJump: 0
-    maxJump: 2
+    maxJump: 1
     jumpForce: 7
     doubleJumpTime: 0.41
     doubleJumpCountdown: 0
@@ -6009,7 +6013,7 @@ MonoBehaviour:
     dead: 0
   seeRangePush: 0
   seeRangeCliff: 0
-  seeRangeGroundDetector: 0
+  seeRangeGroundDetector: 1
   seeRangeMissedJump: 0
   seeRangePositionDead: 0
   seeRangeFalling: 0
@@ -6028,10 +6032,10 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 32768
-  _myRBody: {fileID: 0}
+  myRBody: {fileID: 0}
   controller: {fileID: 3298514135490557513}
   origin: {fileID: 3298514136166854644}
-  maxDistanceRay: 1.1
+  maxDistanceRay: 1.5
   seeRangeDistanceRay: 0
 --- !u!143 &3298514135490557513
 CharacterController:
@@ -6045,7 +6049,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 2.17
-  m_Radius: 0.27
+  m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.5
   m_SkinWidth: 0.08
@@ -16051,6 +16055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae5aa1e274ff76458109b13d416453e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickaxe: {fileID: 7609037221261882469}
   targetAttack: {fileID: 4925743234915172221}
   layerObjs:
     serializedVersion: 2
@@ -16067,6 +16072,7 @@ MonoBehaviour:
   distanceImpulse: 2
   timeToResetAttack: 1.5
   attaking: 0
+  canAttack: 0
   seeAttackRange: 0
 --- !u!114 &7024965970814197559
 MonoBehaviour:
@@ -16094,20 +16100,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerFootsteps:
-  - event:/Footsteps
-  - event:/Footsteps1
-  - event:/Footsteps2
+  - event:/Player Footsteps 1
+  - event:/Player Footsteps 2
+  - event:/Player Footsteps 3
+  - event:/Player Fotsteps 4
   playerJumpSounds:
-  - event:/Jump
-  - event:/Jump1
-  - event:/Jump2
+  - event:/Player Jump 1
+  - event:/Player Jump 2
+  - event:/Player Jump 3
   playerAttackSounds:
-  - event:/MeleeMove
-  - event:/Shout1
-  - event:/Shout2
-  minningSound: event:/Pickaxe
-  deathCry: event:/Shout
-  boxPushingSound: event:/Boulder
+  - event:/Player Attack 1
+  - event:/Player Attack 2
+  - event:/Player Attack 3
+  hitSound: event:/Button Trigger
+  deathCry: event:/Death
+  boxPushingSound: event:/Dissolution
 --- !u!95 &6995068270813550338
 Animator:
   serializedVersion: 3

@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 1913262735214379534}
   m_Layer: 8
   m_Name: Button
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,6 +146,7 @@ MonoBehaviour:
   button: {fileID: 1913262736192729486}
   targetMoveButton: {fileID: 1913262735671781197}
   maxDistancePressButton: 2.5
+  clickSound: event:/Button Trigger
   triggerButton: 0
 --- !u!1 &1913262735671781196
 GameObject:

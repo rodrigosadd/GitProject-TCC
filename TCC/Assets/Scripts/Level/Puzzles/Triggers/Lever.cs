@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using FMODUnity;
 using UnityEngine;
 
 public class Lever : MonoBehaviour
@@ -10,6 +9,7 @@ public class Lever : MonoBehaviour
      public float time;
      public float rotationLever;
      public bool triggerLever;
+     [EventRef] public string leverSound;
      private float _countdown;
      private float _countdownDeactivateInteractAnimation;
      private bool _canPlayInteractAnimation;
@@ -35,7 +35,7 @@ public class Lever : MonoBehaviour
           {
                triggerLever = true;
                _canPlayInteractAnimation = true;
-               PlayerController.instance.movement.interacting = true;
+               PlayerController.instance.levelMechanics.interacting = true;
                SetLeverRotOpenDoor();
           }
      }
@@ -43,6 +43,7 @@ public class Lever : MonoBehaviour
      public void SetLeverRotOpenDoor()
      {
           lever.rotation = Quaternion.AngleAxis(rotationLever, transform.right);
+          RuntimeManager.PlayOneShot(leverSound, transform.position);
      }
 
      public void SetLeverRotCloseDoor()
@@ -81,7 +82,7 @@ public class Lever : MonoBehaviour
                {
                     _countdownDeactivateInteractAnimation = 0;
                     _canPlayInteractAnimation = false;
-                    PlayerController.instance.movement.interacting = false;
+                    PlayerController.instance.levelMechanics.interacting = false;
                     PlayerController.instance.movement.currentSpeed = 0f;
                }
           }

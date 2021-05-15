@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class Teleport : MonoBehaviour
 {
      public Camera3rdPerson camera3RdPerson;
      public Transform targetCameraPlayer;
      public Transform targetCameraExitPortal;
+     public GameObject entrancePortalDeactive;
+     public GameObject exitPortalDeactive;
      public Transform entrancePortal;
      public Transform exitPortal;
      public float rangeTeleport;
@@ -14,6 +17,8 @@ public class Teleport : MonoBehaviour
      public float timeExitTeleport;
      public float cameraVelocity;
      public bool seeRangeTeleport;
+     [EventRef]
+     public string teleportSound;
      private float _distanceBetween;
      private float _countdownEntryTeleport;
      private float _countdownMoveCamera;
@@ -25,14 +30,39 @@ public class Teleport : MonoBehaviour
      void Start()
      {
           SetTargetCamPosition();
+          entrancePortalDeactive.transform.position = entrancePortal.position;
+          exitPortalDeactive.transform.position = exitPortal.position;
      }
 
      void Update()
      {
-          PlayerTeleport();
-          CountdownEntryTeleport();
-          CountdownMoveCamera();
-          CountdownExitTeleport();
+          CheckPlayerCanToSeeTeleport();
+
+          if(PlayerController.instance.levelMechanics.canSeeTeleport)
+          {
+               PlayerTeleport();
+               CountdownEntryTeleport();
+               CountdownMoveCamera();
+               CountdownExitTeleport();
+          }
+     }
+
+     public void CheckPlayerCanToSeeTeleport()
+     {
+          if(PlayerController.instance.levelMechanics.canSeeTeleport)
+          {
+               entrancePortal.gameObject.SetActive(true);
+               exitPortal.gameObject.SetActive(true);
+               entrancePortalDeactive.SetActive(false);
+               exitPortalDeactive.SetActive(false);
+          }
+          else
+          {
+               entrancePortal.gameObject.SetActive(false);
+               exitPortal.gameObject.SetActive(false);
+               entrancePortalDeactive.SetActive(true);
+               exitPortalDeactive.SetActive(true);
+          }
      }
 
      public void PlayerTeleport()
@@ -41,7 +71,9 @@ public class Teleport : MonoBehaviour
 
           if (_distanceBetween <= rangeTeleport)
           {
-               _canTeleport = true;               
+               _canTeleport = true;
+               PlayerAnimationController.instance.SetEntryTeleport();               
+               RuntimeManager.PlayOneShot(teleportSound, PlayerController.instance.transform.position);
           }
      }
 
@@ -57,12 +89,12 @@ public class Teleport : MonoBehaviour
                     }
 
                     PlayerConfigsEntryTeleport();
-                    PlayerController.instance.movement.entryTeleport = true;
+                    PlayerController.instance.levelMechanics.entryTeleport = true;
                     _countdownEntryTeleport += Time.deltaTime / timeEntryTeleport;
                }
                else
                {
-                    PlayerController.instance.movement.entryTeleport = false;
+                    PlayerController.instance.levelMechanics.entryTeleport = false;
                     _countdownEntryTeleport = 0;
                     _canTeleport = false;
                     _canMove = false;
@@ -93,12 +125,12 @@ public class Teleport : MonoBehaviour
           {
                if (_countdownExitTeleport < 1)
                {
-                    PlayerController.instance.movement.exitTeleport = true;
+                    PlayerController.instance.levelMechanics.exitTeleport = true;
                     _countdownExitTeleport += Time.deltaTime / timeExitTeleport;
                }
                else
                {
-                    PlayerController.instance.movement.exitTeleport = false;
+                    PlayerController.instance.levelMechanics.exitTeleport = false;
                     _canMove = true;
                     _countdownExitTeleport = 0;
                     PlayerConfigsExitTeleport();

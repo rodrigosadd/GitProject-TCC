@@ -1,0 +1,32 @@
+﻿using FMODUnity;
+using UnityEngine;
+
+public class TeleportStat : Stats
+{
+    void Update()
+    {
+        RotateObject();
+        CheckPickedUp();
+    }
+
+    public void CheckPickedUp()
+    {
+        float _distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
+
+        if(_distanceBetween < maxDistancePickedUp && Input.GetButtonDown("Interact"))
+        {
+            RuntimeManager.PlayOneShot(collectSound, transform.position);
+            GameManager.instance.playerStatsData.canSeeTeleport = 1;
+            GameManager.instance.playerStatsData.ApplySettings();
+            gameObject.SetActive(false);
+        }
+    } 
+
+#if UNITY_EDITOR
+     void OnDrawGizmos()
+     {
+          Gizmos.color = Color.yellow;
+          Gizmos.DrawWireSphere(transform.position, maxDistancePickedUp);
+     }
+#endif
+}

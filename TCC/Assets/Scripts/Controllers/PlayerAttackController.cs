@@ -6,6 +6,7 @@ public class PlayerAttackController : MonoBehaviour
 {
      public static PlayerAttackController instance;
 
+     public GameObject pickaxe;
      public Transform targetAttack;
      public LayerMask layerObjs;
      public GameObject[] trails;
@@ -17,6 +18,7 @@ public class PlayerAttackController : MonoBehaviour
      public float distanceImpulse;
      public float timeToResetAttack;
      public bool attaking;
+     public bool canAttack;
      private float _countdownReset;
 
 #if UNITY_EDITOR
@@ -34,32 +36,47 @@ public class PlayerAttackController : MonoBehaviour
 
      void LateUpdate()
      {
-          InputsAttack();
-          CanAttack();
-          Impulse();
-          CheckAttaking();
+          CheckPlayerCanToSeePickaxe();
+
+          if(canAttack)
+          {
+               InputsAttack();
+               CanAttack();
+               Impulse();
+               CheckAttaking();
+          }
+     }
+
+     public void CheckPlayerCanToSeePickaxe()
+     {
+          if(canAttack)
+          {
+               pickaxe.SetActive(true);
+          }
+          else
+          {
+               pickaxe.SetActive(false);
+          }
      }
 
      public void InputsAttack()
      {
           if (Input.GetButtonDown("Attack") &&
               !GameManager.instance.settingsData.settingsOpen &&
-              !PlayerController.instance.movement.slowing &&
+              !PlayerController.instance.levelMechanics.slowing &&
               !PlayerController.instance.death.dead &&
               !PlayerController.instance.push.pushingObj &&
               !PlayerController.instance.push.setPositionDropObject &&
               !PlayerController.instance.push.droppingObj &&
-              !PlayerController.instance.movement.sliding)
+              !PlayerController.instance.levelMechanics.sliding &&
+              PlayerController.instance.movement.isGrounded)
           {
                if (!attaking)
                {
                     _currentMaxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                }
 
-               if (PlayerController.instance.movement.isGrounded)
-               {
-                    FirstAttack();
-               }
+               FirstAttack();               
           }
      }
 
@@ -170,7 +187,7 @@ public class PlayerAttackController : MonoBehaviour
      {
           if (!PlayerController.instance.death.dead)
           {
-               if (PlayerController.instance.movement.slowing == false)
+               if (PlayerController.instance.levelMechanics.slowing == false)
                {
                     PlayerController.instance.movement.maxSpeed = 0f;
                     attaking = true;
@@ -188,15 +205,23 @@ public class PlayerAttackController : MonoBehaviour
                }
                else
                {
-                    if (!Physics.Raycast(PlayerController.instance.transform.position, PlayerController.instance.characterGraphic.forward, PlayerController.instance.push.rangePush))
+                    if (!Physics.Raycast(PlayerController.instance.characterGraphic.position, PlayerController.instance.characterGraphic.forward, 1.18f))
                     {
+                         PlayerController.instance.movement.velocity.y = 0;
                          PlayerController.instance.SetControllerPosition(Vector3.MoveTowards(PlayerController.instance.transform.position, _finalImpulse, attackImpulse * Time.deltaTime));
 
                          if (_finalImpulse == PlayerController.instance.transform.position)
-                         {
+                         {                              
                               _finalImpulse = Vector3.zero;
+                              PlayerController.instance.levelMechanics.sliding = false;
                               attaking = false;
                          }
+                    }
+                    else
+                    {
+                         _finalImpulse = Vector3.zero;
+                         PlayerController.instance.levelMechanics.sliding = false;
+                         attaking = false;
                     }
                }
           }
