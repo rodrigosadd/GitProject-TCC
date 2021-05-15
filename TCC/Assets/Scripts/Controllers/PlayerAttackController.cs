@@ -29,7 +29,7 @@ public class PlayerAttackController : MonoBehaviour
      private float _lastAttackTime;
      private Vector3 _finalImpulse;
 
-     void Start()
+     void Awake()
      {
           instance = this;
      }

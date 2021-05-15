@@ -18,6 +18,7 @@ public class AttackStat : Stats
             RuntimeManager.PlayOneShot(collectSound, transform.position);
             GameManager.instance.playerStatsData.canAttack = 1;
             GameManager.instance.playerStatsData.ApplySettings();
+            GameManager.instance.savePlayerStats.Save();
             gameObject.SetActive(false);
         }
     } 

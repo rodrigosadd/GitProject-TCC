@@ -31,5 +31,6 @@ public class SavePlayerStats : MonoBehaviour
           GameManager.instance.playerStatsData.maxJump = PlayerPrefs.GetInt("IndexMaxJump");
           GameManager.instance.playerStatsData.canAttack = PlayerPrefs.GetInt("IndexCanAttack");
           GameManager.instance.playerStatsData.canSeeTeleport = PlayerPrefs.GetInt("IndexCanSeeTeleport");
+          GameManager.instance.playerStatsData.ApplySettings();
      }
 }

@@ -17,6 +17,7 @@ public class PlayerStatsData : MonoBehaviour
      {
         if(PlayerController.instance == null || PlayerAttackController.instance == null)
         {
+            Debug.Log("Not Apply Settings Stats");
             return;
         }
 
@@ -24,6 +25,7 @@ public class PlayerStatsData : MonoBehaviour
 
         PlayerAttackController.instance.canAttack = (canAttack == 1) ? true : false;
 
-        PlayerController.instance.levelMechanics.canSeeTeleport = (canSeeTeleport == 1) ? true : false;         
+        PlayerController.instance.levelMechanics.canSeeTeleport = (canSeeTeleport == 1) ? true : false;   
+        Debug.Log("Apply Settings Stats");      
      }
 }

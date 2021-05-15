@@ -2172,6 +2172,10 @@ PrefabInstance:
       propertyPath: death.currentPoint
       value: 
       objectReference: {fileID: 1143845961}
+    - target: {fileID: 4149616829580453490, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: seeRangeGroundDetector
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
 --- !u!4 &75951049 stripped
@@ -18102,6 +18106,10 @@ PrefabInstance:
       propertyPath: forceSlide
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3526111654725723886, guid: bc1699769b77cce4b9377f7e155ae97a, type: 3}
+      propertyPath: TimeToReset
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc1699769b77cce4b9377f7e155ae97a, type: 3}
 --- !u!4 &971651962 stripped
@@ -18551,7 +18559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1012471006
 Transform:
   m_ObjectHideFlags: 0

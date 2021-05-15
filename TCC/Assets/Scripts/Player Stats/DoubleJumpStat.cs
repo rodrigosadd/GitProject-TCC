@@ -18,6 +18,7 @@ public class DoubleJumpStat : Stats
             RuntimeManager.PlayOneShot(collectSound, transform.position);
             GameManager.instance.playerStatsData.maxJump = 2;
             GameManager.instance.playerStatsData.ApplySettings();
+            GameManager.instance.savePlayerStats.Save();
             gameObject.SetActive(false);
         }
     } 
