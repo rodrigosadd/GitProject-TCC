@@ -665,7 +665,12 @@ public class PlayerController : Character
 
           Ray _ray = new Ray(_origin, Vector3.up * -1);
 
-          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && movement.isGrounded && _cliffDectorLockPlayer == true && GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed && movement.currentSpeed < cliff.cliffDetectorMaxSpeed)
+          if (!Physics.Raycast(_ray, cliff.cliffDetectorHeightDist) && 
+               movement.isGrounded && 
+               _cliffDectorLockPlayer == true && 
+               GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed && 
+               movement.currentSpeed < cliff.cliffDetectorMaxSpeed &&
+               !PlayerAttackController.instance.attaking)
           {
                PlayerAnimationController.instance.SetBalance();
           }
