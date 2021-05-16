@@ -485,7 +485,7 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
                PlayerController.instance.animator.SetBool("Sliding", false);
-               PlayerController.instance.animator.SetBool("Interacting", false); 
+               PlayerController.instance.animator.SetBool("Interacting", false);
 
                if (!fallingIdle)
                {
@@ -584,8 +584,7 @@ public class PlayerAnimationController : MonoBehaviour
                _canJumpAfterFalling = false;
                fallingIdle = false;
                alreadyPlayedFallingAction = false;
-               PlayerController.instance.jump.fallingDust.Play();
-          }
+        }
      }
 
      public void InFallingAction()

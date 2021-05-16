@@ -2116,6 +2116,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Beto
       objectReference: {fileID: 0}
+    - target: {fileID: 1324768177084722528, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: fallingDust
+      value: 
+      objectReference: {fileID: 75951052}
+    - target: {fileID: 1324768177084722528, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+      propertyPath: stun
+      value: 
+      objectReference: {fileID: 75951051}
     - target: {fileID: 3298514136166854644, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.009994507
@@ -2190,6 +2198,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d383808b9776704e87475b261efe23c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!198 &75951051 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8197823953881235738, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+  m_PrefabInstance: {fileID: 75951048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &75951052 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5122699958423196446, guid: 247f4c362f46c2b4a838f9a02bc84c76, type: 3}
+  m_PrefabInstance: {fileID: 75951048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &79793414
 GameObject:
   m_ObjectHideFlags: 0
