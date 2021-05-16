@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5577129083042087841}
   - component: {fileID: 5577129083042087852}
   - component: {fileID: 5577129083042087855}
-  - component: {fileID: 5577129083042087854}
+  - component: {fileID: 3311536793652744325}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5577129083042087854
-CapsuleCollider:
+--- !u!64 &3311536793652744325
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,10 +92,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5577129084052683876
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,8 +107,8 @@ GameObject:
   - component: {fileID: 5577129084052683872}
   - component: {fileID: 5577129084052683875}
   - component: {fileID: 5577129084052683874}
-  - component: {fileID: 5577129084052683877}
   - component: {fileID: 5577129084052683873}
+  - component: {fileID: 5089239568226027233}
   m_Layer: 0
   m_Name: Piston
   m_TagString: Untagged
@@ -181,20 +181,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5577129084052683877
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5577129084052683876}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.55
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0.5, z: -0.00000008940697}
 --- !u!114 &5577129084052683873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553ff2b755f6d024fa34c947b77a9dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathCollider: {fileID: 5577129084472846761}
+  deathCollider: {fileID: 6414558483568135026}
   timeToMovePiston: 1
   pistonSpeedDown: 20
   pistonSpeedUp: 2
@@ -215,6 +201,20 @@ MonoBehaviour:
   goingDown: 1
   pistonLiftingSound: event:/PillarRising
   pistonSmashSound: event:/PillarImpact
+--- !u!64 &5089239568226027233
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5577129084052683876}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &5577129084472846763
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 5577129084472846775}
   - component: {fileID: 5577129084472846774}
   - component: {fileID: 5577129084472846772}
-  - component: {fileID: 5577129084472846761}
+  - component: {fileID: 6414558483568135026}
   m_Layer: 0
   m_Name: Kill
   m_TagString: Untagged
@@ -310,10 +310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Collider: {fileID: 0}
-  seeDeathPart: 0
---- !u!65 &5577129084472846761
-BoxCollider:
+--- !u!64 &6414558483568135026
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -322,6 +320,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.72230786, y: 2.0133657, z: 0.6847815}
-  m_Center: {x: -0.0037526859, y: -0.006683546, z: -0.0037526235}
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}

@@ -163,6 +163,7 @@ public class PlayerController : Character
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
           movement.fixedGravity = movement.gravity;
+          GameManager.instance.savePlayerStats.Load();
           GameManager.instance.playerStatsData.ApplySettings();
      }
 

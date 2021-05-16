@@ -10,8 +10,10 @@ public class DropBox : MonoBehaviour
      public GameObject[] objects;
      public Transform[] targets;
      public Button[] buttons;
+     public GameObject objThatWillBeActivated;
      public float timeToReturnPlayerTarget = 2f;
      public bool seeObject;
+     public bool activateObject;
      private bool _canSpawn = true;
      private float countdownToReturnPlayerTarget;
      private bool canChangeTargetCam; 
@@ -40,7 +42,8 @@ public class DropBox : MonoBehaviour
                if (_isComplete)
                {
                     ActiveAllObjetcs();   
-                    SeeObjectDrop();                               
+                    SeeObjectDrop(); 
+                    ActivateObject();                              
                }
           }
 
@@ -50,6 +53,7 @@ public class DropBox : MonoBehaviour
                {
                     ActiveAllObjetcs();
                     SeeObjectDrop();
+                    ActivateObject(); 
                     _canSpawn = false;               
                }
           }
@@ -64,7 +68,7 @@ public class DropBox : MonoBehaviour
                objects[i].transform.position = targets[i].position;
           }
      }
-
+     
      public void SeeObjectDrop()
      {
           if(seeObject)
@@ -72,6 +76,14 @@ public class DropBox : MonoBehaviour
                canChangeTargetCam = true;
                camera3RdPerson.targetCamera = targetCam;
                PlayerController.instance.movement.canMove = false;
+          }
+     }
+
+     public void ActivateObject()
+     {
+          if(activateObject)
+          {
+               objThatWillBeActivated.SetActive(true);
           }
      }
 

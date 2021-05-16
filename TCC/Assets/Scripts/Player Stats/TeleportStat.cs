@@ -18,6 +18,7 @@ public class TeleportStat : Stats
             RuntimeManager.PlayOneShot(collectSound, transform.position);
             GameManager.instance.playerStatsData.canSeeTeleport = 1;
             GameManager.instance.playerStatsData.ApplySettings();
+            GameManager.instance.savePlayerStats.Save();
             gameObject.SetActive(false);
         }
     } 

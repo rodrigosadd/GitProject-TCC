@@ -6,12 +6,15 @@ public class Slide : MonoBehaviour
 {
      public float forceSlide;
      public float velocitySlide;
+     public float TimeToReset;
      public bool sliding;
      private Vector3 _finalImpulse;
+     private float _countdownFinishSliding;
 
      void Update()
      {
           Impulse();
+          ResetSliding();
      }
 
      void OnTriggerEnter(Collider collider)
@@ -20,10 +23,11 @@ public class Slide : MonoBehaviour
           {
                PlayerController.instance.levelMechanics.sliding = true;
                sliding = true;
+               _countdownFinishSliding = 0;
                PlayerAttackController.instance.ResetAttack();
           }
      }
-
+     
      public void Impulse()
      {
           if (sliding)
@@ -43,6 +47,7 @@ public class Slide : MonoBehaviour
                          {                              
                               _finalImpulse = Vector3.zero;
                               PlayerController.instance.levelMechanics.sliding = false;
+                              PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                               sliding = false;
                          }
                     }
@@ -50,8 +55,28 @@ public class Slide : MonoBehaviour
                     {
                          _finalImpulse = Vector3.zero;
                          PlayerController.instance.levelMechanics.sliding = false;
+                         PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                          sliding = false;
                     }
+               }
+          }
+     }
+
+     void ResetSliding()
+     {
+          if(sliding)
+          {
+               if(_countdownFinishSliding < 1)
+               {
+                    _countdownFinishSliding += Time.deltaTime / TimeToReset;
+               }
+               else
+               {
+                    _countdownFinishSliding = 0;
+                    _finalImpulse = Vector3.zero;
+                    PlayerController.instance.levelMechanics.sliding = false;
+                    PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
+                    sliding = false;
                }
           }
      }
