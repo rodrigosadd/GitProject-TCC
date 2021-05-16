@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
                InRuntimePersistantData.Instance.lastLoadedLevel = lastScene;
           }
 
-          SceneManager.LoadScene(index);
+          LevelLoader.instance.LoadNextLevel(index);
      }
 
      public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
