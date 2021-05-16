@@ -45,8 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 0}
-  minDistance: 1
-  maxDistance: 15
+  minDistance: 0
+  fixedMinDistance: 1
+  maxDistance: 0
+  fixedMaxDistance: 15
   clampAngleUp: 50
   clampAngleDown: 25
   inputSensitivityX: 150
@@ -54,6 +56,7 @@ MonoBehaviour:
   invertAxisX: 0
   invertAxisY: 0
   canMove: 1
+  showObject: 0
 --- !u!1 &328130100312797695
 GameObject:
   m_ObjectHideFlags: 0

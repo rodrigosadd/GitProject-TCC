@@ -66,6 +66,7 @@ public class PressWeightsButtonsPlatform : MonoBehaviour
           {
                canChangeTargetCam = true;
                camera3RdPerson.targetCamera = targetCam;
+               camera3RdPerson.ConfigToShowObject();
                PlayerController.instance.movement.canMove = false;
           }
      }
@@ -82,6 +83,7 @@ public class PressWeightsButtonsPlatform : MonoBehaviour
                {
                     canChangeTargetCam = false;
                     camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
+                    camera3RdPerson.ResetConfig();
                     PlayerController.instance.movement.canMove = true;
                     seeObject = false;
                }
