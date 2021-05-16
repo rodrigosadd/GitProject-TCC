@@ -7,6 +7,7 @@ public class TeleportStat : Stats
     {
         RotateObject();
         CheckPickedUp();
+        CountdownToReturnPlayerTarget();
     }
 
     public void CheckPickedUp()
@@ -19,7 +20,7 @@ public class TeleportStat : Stats
             GameManager.instance.playerStatsData.canSeeTeleport = 1;
             GameManager.instance.playerStatsData.ApplySettings();
             GameManager.instance.savePlayerStats.Save();
-            gameObject.SetActive(false);
+            SeeObjectDrop();
         }
     } 
 
