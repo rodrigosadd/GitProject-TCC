@@ -3602,7 +3602,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1043485383005444838, guid: b666ce0abcd0724428ef2f45a6ea6962, type: 3}
   m_PrefabInstance: {fileID: 1043485382811536356}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1043485382811536357}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2d383808b9776704e87475b261efe23c, type: 3}
@@ -20367,6 +20367,14 @@ PrefabInstance:
       propertyPath: camera3RdPerson
       value: 
       objectReference: {fileID: 2071233911}
+    - target: {fileID: 3925850536397452685, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
+      propertyPath: objThatWillBeActivated
+      value: 
+      objectReference: {fileID: 1043485382811536357}
+    - target: {fileID: 3925850536397452685, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
+      propertyPath: activateObject
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6622431999134949560, guid: 4376fad18a0f529489c1e3fcf9c4f83e, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
@@ -35552,8 +35560,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inScenePersitenteComponente:
-  - {fileID: 210850050}
   - {fileID: 75951050}
+  - {fileID: 210850050}
   - {fileID: 743710969}
   - {fileID: 912710320}
   - {fileID: 1120228293}
@@ -37241,6 +37249,11 @@ PrefabInstance:
       objectReference: {fileID: 1043485383005444836, guid: b666ce0abcd0724428ef2f45a6ea6962, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b666ce0abcd0724428ef2f45a6ea6962, type: 3}
+--- !u!1 &1043485382811536357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1043485383005444836, guid: b666ce0abcd0724428ef2f45a6ea6962, type: 3}
+  m_PrefabInstance: {fileID: 1043485382811536356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3783216826064855920
 PrefabInstance:
   m_ObjectHideFlags: 0
