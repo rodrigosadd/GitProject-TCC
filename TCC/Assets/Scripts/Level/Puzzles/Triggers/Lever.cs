@@ -1,5 +1,6 @@
 ﻿using FMODUnity;
 using UnityEngine;
+using FMOD.Studio;
 
 public class Lever : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Lever : MonoBehaviour
      public float rotationLever;
      public bool triggerLever;
      [EventRef] public string leverSound;
+     [EventRef] public string ticTacSound;
+     public bool isTicTacking;
      private float _countdown;
      private float _countdownDeactivateInteractAnimation;
      private bool _canPlayInteractAnimation;
@@ -43,7 +46,7 @@ public class Lever : MonoBehaviour
      public void SetLeverRotOpenDoor()
      {
           lever.rotation = Quaternion.AngleAxis(rotationLever, transform.right);
-          RuntimeManager.PlayOneShot(leverSound, transform.position);
+          RuntimeManager.PlayOneShotAttached(leverSound, gameObject);
      }
 
      public void SetLeverRotCloseDoor()
@@ -60,10 +63,15 @@ public class Lever : MonoBehaviour
           {
                if (_countdown < 1)
                {
+                    if (!isTicTacking) {
+                         isTicTacking = true;
+                         RuntimeManager.PlayOneShot(ticTacSound);
+                    }
                     _countdown += Time.deltaTime / time;
                }
                else
                {
+                    isTicTacking = false;
                     _countdown = 0;
                     triggerLever = false;
                }
