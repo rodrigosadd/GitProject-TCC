@@ -282,7 +282,9 @@ public class PlayerController : Character
      {
           DoubleJumpCountdown();
 
-          if (Input.GetButtonDown("Jump") && CanJump() &&
+          if (Input.GetButtonDown("Jump") && 
+              CanJump() &&
+              movement.canMove &&
               push.pushingObj == false &&
               !levelMechanics.sliding &&
               !PlayerAttackController.instance.attaking &&
@@ -403,6 +405,7 @@ public class PlayerController : Character
      private void PushingObject()
      {
           if (Input.GetButton("Push") &&
+              movement.canMove &&
               movement.isGrounded &&
               !push.droppingObj &&
               !PlayerAnimationController.instance.fallingIdle &&

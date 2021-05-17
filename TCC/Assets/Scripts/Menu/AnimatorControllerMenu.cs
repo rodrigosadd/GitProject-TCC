@@ -4,52 +4,130 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AnimatorControllerMenu : MonoBehaviour
-{
-    public Animator animator_Menu;
-    public Rigidbody rigidbody;
-    float time_WaitPlay;
-    float time;
-    bool jump = false;
+{   
+    public Material head;
+    public Material body;
+    public Animator anim;
+    public Rigidbody rbody;
+    public Transform targetDirection;
+    public float forceJump;
+    public float waitTimeToLoadLevel;
+    public float speedHeadCutoffHeight;
+    public float speedBodyCutoffHeight;
+    private Vector3 _direction;
+    private float _headCutoffHeight;
+    private float _bodyCutoffHeight;
+    private bool _canActivateShaderHeadBody;
 
-    private void Update()
+    void Start()
     {
-        ControllerAnimator();
-        if (jump)
+        _headCutoffHeight = 5f;
+        _bodyCutoffHeight = 5f;
+        head.SetFloat("_Cutoff_Height", 5f);
+        body.SetFloat("_Cutoff_Height", 5f);
+        StartCoroutine("TimeToStartLeavingPortal");
+    }
+
+    void Update()
+    {
+        ActivateShaderHeadBody();
+    }
+
+    IEnumerator TimeToStartLeavingPortal()
+    {
+        yield return new WaitForSeconds(1f);
+        
+        _canActivateShaderHeadBody = true;
+        anim.SetBool("Leaving Portal", true);
+        anim.SetBool("Lost", false);
+        anim.SetBool("Idle", false);
+        anim.SetBool("Crouch", false);
+        anim.SetBool("Jump", false);
+        anim.SetBool("Falling Idle", false);
+    }
+
+    public void ActivateShaderHeadBody()
+    {   
+        if(_canActivateShaderHeadBody)
         {
-            time_WaitPlay += 1 * Time.deltaTime;
-            if (time_WaitPlay > 4)
-            {
-                LoadScene_Menu(5);
-            }
+            _headCutoffHeight -= Time.deltaTime * speedHeadCutoffHeight;
+            _headCutoffHeight = Mathf.Clamp(_headCutoffHeight, -1f, 5f);
+            head.SetFloat("_Cutoff_Height", _headCutoffHeight);
+
+            _bodyCutoffHeight -= Time.deltaTime * speedBodyCutoffHeight;
+            _bodyCutoffHeight = Mathf.Clamp(_bodyCutoffHeight, -1f, 5f);
+            body.SetFloat("_Cutoff_Height", _bodyCutoffHeight);
         }
     }
 
-    void ControllerAnimator()
+    public void SetLost()
     {
-        time += 1 * Time.deltaTime;
-        animator_Menu.SetFloat("State", time);
-        if (time >= 19)
-        {
-            animator_Menu.SetBool("State", true);
-            time = 0;
-        }
+        anim.SetBool("Leaving Portal", false);
+        anim.SetBool("Lost", true);
+        anim.SetBool("Idle", false);
+        anim.SetBool("Crouch", false);
+        anim.SetBool("Jump", false);
+        anim.SetBool("Falling Idle", false);
     }
 
-    public void Play_Click()
+    public void SetIdle()
     {
-        animator_Menu.SetBool("jump", true);
-        jump = true;
+        anim.SetBool("Leaving Portal", false);
+        anim.SetBool("Lost", false);
+        anim.SetBool("Idle", true);
+        anim.SetBool("Crouch", false);
+        anim.SetBool("Jump", false);
+        anim.SetBool("Falling Idle", false);
     }
 
-    public void LoadScene_Menu(int index)
+    public void SetCrouch()
     {
-
-        SceneManager.LoadScene(index);
+        anim.SetBool("Leaving Portal", false);
+        anim.SetBool("Lost", false);
+        anim.SetBool("Idle", false);
+        anim.SetBool("Crouch", true);
+        anim.SetBool("Jump", false);  
+        anim.SetBool("Falling Idle", false);              
     }
 
-    public void Jump_BetoMenu()
+    public void SetJump()
     {
-        rigidbody.AddForce(new Vector3(-200, 500, 0) * Time.deltaTime, ForceMode.Impulse );
-        Debug.Log("Pulei");
+        anim.SetBool("Leaving Portal", false);
+        anim.SetBool("Lost", false);
+        anim.SetBool("Idle", false);
+        anim.SetBool("Crouch", false);
+        anim.SetBool("Jump", true);
+        anim.SetBool("Falling Idle", false);
+        Jump();
+    }
+
+    public void SetFallingIdle()
+    {
+        anim.SetBool("Leaving Portal", false);
+        anim.SetBool("Lost", false);
+        anim.SetBool("Idle", false);
+        anim.SetBool("Crouch", false);
+        anim.SetBool("Jump", false);
+        anim.SetBool("Falling Idle", true);
+    }
+
+    public void Jump()
+    {
+        _direction = (targetDirection.position - transform.position).normalized;
+        rbody.AddForce(_direction * forceJump, ForceMode.Impulse);        
+    }
+
+    public void SetLoadLevelAfterJump(int indexLevel)
+    {
+        StartCoroutine(TimeToLoadLevel(indexLevel));
+    }
+
+    IEnumerator TimeToLoadLevel(int indexLevel)
+    {
+        SetCrouch();
+
+        yield return new WaitForSeconds(waitTimeToLoadLevel);
+
+        LevelLoader.instance.LoadNextLevel(indexLevel);
     }
 }

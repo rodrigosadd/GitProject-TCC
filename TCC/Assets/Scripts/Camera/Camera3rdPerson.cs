@@ -6,8 +6,10 @@ public class Camera3rdPerson : MonoBehaviour
 {
      public static Camera3rdPerson instance;
      public Transform targetCamera;
-     public float minDistance = 1.0f;
-     public float maxDistance = 4.0f;
+     public float minDistance;
+     public float fixedMinDistance = 1.0f;
+     public float maxDistance;
+     public float fixedMaxDistance = 4.0f;
      public float clampAngleUp = 80.0f;
      public float clampAngleDown = 50.0f;
      public float inputSensitivityX = 150.0f;
@@ -15,6 +17,7 @@ public class Camera3rdPerson : MonoBehaviour
      public bool invertAxisX;
      public bool invertAxisY;
      public bool canMove;
+     public bool showObject;
      private float _mouseX;
      private float _mouseY;
      private float _inputX;
@@ -24,14 +27,20 @@ public class Camera3rdPerson : MonoBehaviour
      private float _rotY = 0.0f;
      private float _rotX = 0.0f;
 
-     void Start()
+     void Awake()
      {
           instance = this;
+     }
+
+     void Start()
+     {
           Vector3 _rot = transform.localRotation.eulerAngles;
           _rotX = _rot.x;
           _rotY = _rot.y;
           Cursor.lockState = CursorLockMode.Locked;
           Cursor.visible = false;
+          minDistance = fixedMinDistance;
+          maxDistance = fixedMaxDistance;
      }
 
      void Update()
@@ -84,6 +93,27 @@ public class Camera3rdPerson : MonoBehaviour
 
      public void CameraUpdater()
      {
+          if(!showObject)
+          {
+               transform.position = targetCamera.position;
+          }
+     }
+
+     public void ConfigToShowObject()
+     {
+          showObject = true;
           transform.position = targetCamera.position;
+          transform.rotation = targetCamera.rotation;
+          minDistance = 0;
+          maxDistance = 0;
+          canMove = false;
+     }
+
+     public void ResetConfig()
+     {
+          showObject = false;
+          minDistance = fixedMinDistance;
+          maxDistance = fixedMaxDistance;
+          canMove = true;
      }
 }

@@ -7,6 +7,7 @@ public class DoubleJumpStat : Stats
     {
         RotateObject();
         CheckPickedUp();
+        CountdownToReturnPlayerTarget();
     }
 
     public void CheckPickedUp()
@@ -19,7 +20,7 @@ public class DoubleJumpStat : Stats
             GameManager.instance.playerStatsData.maxJump = 2;
             GameManager.instance.playerStatsData.ApplySettings();
             GameManager.instance.savePlayerStats.Save();
-            gameObject.SetActive(false);
+            SeeObjectDrop();
         }
     } 
 

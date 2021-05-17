@@ -13,7 +13,10 @@ public class PlayerAnimationController : MonoBehaviour
      private bool _canJumpAfterFalling;
      private bool _inFallingAction;
      private float _countdownAfterFalling;
-      private float _countdownFallingAction;
+     private float _countdownFallingAction;
+     private bool first;
+     private bool second;
+     private bool final;
 
      void Start()
      {
@@ -43,9 +46,17 @@ public class PlayerAnimationController : MonoBehaviour
           SetEntryTeleport();
           SetExitTeleport();
           SetInteract();
+          CheckAttackAnimationIsFinished();
      }
 
 #region Attack
+     public void CheckAttackAnimationIsFinished()
+     {
+          first = PlayerController.instance.animator.GetBool("First Attack");
+          second = PlayerController.instance.animator.GetBool("Second Attack");
+          final = PlayerController.instance.animator.GetBool("Final Attack");
+     }
+
      public void SetFirstAttack()
      {
           PlayerController.instance.animator.SetBool("First Attack", true);
@@ -222,7 +233,8 @@ public class PlayerAnimationController : MonoBehaviour
                !PlayerController.instance.push.pushingObj &&
                !PlayerController.instance.push.droppingObj &&
                !PlayerController.instance.push.setPositionDropObject &&
-               PlayerAttackController.instance.currentAttack == 0)
+               PlayerAttackController.instance.currentAttack == 0 &&
+               !PlayerAttackController.instance.attaking)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", true);
@@ -468,7 +480,10 @@ public class PlayerAnimationController : MonoBehaviour
               !PlayerAttackController.instance.attaking &&
               !alreadyPlayedFallingAction &&
               PlayerController.instance.jump.currentJump <= 1 &&
-              !_inFallingAction)
+              !_inFallingAction &&
+              !first &&
+              !second &&
+              !final)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);
@@ -485,11 +500,14 @@ public class PlayerAnimationController : MonoBehaviour
                PlayerController.instance.animator.SetBool("Falling Ground", false);
                PlayerController.instance.animator.SetBool("Falling Running", false);
                PlayerController.instance.animator.SetBool("Sliding", false);
-               PlayerController.instance.animator.SetBool("Interacting", false);
+               PlayerController.instance.animator.SetBool("Interacting", false); 
+               PlayerController.instance.animator.SetBool("Final Attack", false);
+               PlayerController.instance.animator.SetBool("Second Attack", false);
+               PlayerController.instance.animator.SetBool("First Attack", false);
 
                if (!fallingIdle)
                {
-                    fallingIdle = true;
+                    fallingIdle = true;                    
                }
           }
      }
@@ -584,7 +602,8 @@ public class PlayerAnimationController : MonoBehaviour
                _canJumpAfterFalling = false;
                fallingIdle = false;
                alreadyPlayedFallingAction = false;
-        }
+               PlayerController.instance.jump.fallingDust.Play();
+          }
      }
 
      public void InFallingAction()

@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class WeightsButtonsDoorPlatform : OpenDoor
 {
+     public Camera3rdPerson camera3RdPerson;
+     public Transform targetCam;
      public MovePlatform[] platforms;
      public WeightButton[] weightButtons;
+     public float timeToReturnPlayerTarget = 2f;
+     public bool seeObject;
+     private float countdownToReturnPlayerTarget;
+     private bool canChangeTargetCam; 
 
      void Start()
      {
@@ -15,6 +21,7 @@ public class WeightsButtonsDoorPlatform : OpenDoor
      void Update()
      {
           CheckPressButtons();
+          CountdownToReturnPlayerTarget();
      }
 
      public void CheckPressButtons()
@@ -34,6 +41,7 @@ public class WeightsButtonsDoorPlatform : OpenDoor
           {
                CanOpenDoor();
                MovePlatforms();
+               SeeObjectDrop();
           }
           else
           {
@@ -56,6 +64,36 @@ public class WeightsButtonsDoorPlatform : OpenDoor
           {
                platforms[i].canMove = false;
                platforms[i].hasRestarted = false;
+          }
+     }
+
+     public void SeeObjectDrop()
+     {
+          if(seeObject)
+          {
+               canChangeTargetCam = true;
+               camera3RdPerson.targetCamera = targetCam;
+               camera3RdPerson.ConfigToShowObject();
+               PlayerController.instance.movement.canMove = false;
+          }
+     }
+
+     public void CountdownToReturnPlayerTarget()
+     {
+          if(canChangeTargetCam)
+          {
+               if(countdownToReturnPlayerTarget < 1)
+               {
+                    countdownToReturnPlayerTarget += Time.deltaTime / timeToReturnPlayerTarget;
+               }
+               else
+               {
+                    canChangeTargetCam = false;
+                    camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
+                    camera3RdPerson.ResetConfig();
+                    PlayerController.instance.movement.canMove = true;
+                    seeObject = false;
+               }
           }
      }
 }

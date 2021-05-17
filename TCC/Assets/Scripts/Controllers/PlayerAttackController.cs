@@ -69,7 +69,8 @@ public class PlayerAttackController : MonoBehaviour
               !PlayerController.instance.push.setPositionDropObject &&
               !PlayerController.instance.push.droppingObj &&
               !PlayerController.instance.levelMechanics.sliding &&
-              PlayerController.instance.movement.isGrounded)
+              PlayerController.instance.movement.isGrounded &&
+              PlayerController.instance.movement.canMove)
           {
                if (!attaking)
                {

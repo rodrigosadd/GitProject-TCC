@@ -60,6 +60,7 @@ public class PressWeightsButtonsDropBox : MonoBehaviour
           {
                canChangeTargetCam = true;
                camera3RdPerson.targetCamera = targetCam;
+               camera3RdPerson.ConfigToShowObject();
                PlayerController.instance.movement.canMove = false;
           }
      }
@@ -76,6 +77,7 @@ public class PressWeightsButtonsDropBox : MonoBehaviour
                {
                     canChangeTargetCam = false;
                     camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
+                    camera3RdPerson.ResetConfig();
                     PlayerController.instance.movement.canMove = true;
                     seeObject = false;
                }
