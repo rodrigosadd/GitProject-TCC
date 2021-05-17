@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class PressWeightsButtonsPlatform : MonoBehaviour
 {
+     public static List<string> allKeys = new List<string>();
      public Camera3rdPerson camera3RdPerson;
      public Transform targetCam;
      public MovePlatform[] platforms;
      public WeightButton[] weightButtons;
      public float timeToReturnPlayerTarget = 2f;
      public bool seeObject;
+     public string key;
+     public bool isTriggered;
      private float countdownToReturnPlayerTarget;
      private bool canChangeTargetCam; 
+
+     void Start()
+     {
+          allKeys.Add(key);
+          isTriggered = PlayerPrefs.HasKey(key) && (PlayerPrefs.GetInt(key) == 1);
+     }
 
      void Update()
      {
@@ -62,8 +71,10 @@ public class PressWeightsButtonsPlatform : MonoBehaviour
 
      public void SeeObjectDrop()
      {
-          if(seeObject)
+          if(seeObject && !isTriggered)
           {
+               isTriggered = true;
+               PlayerPrefs.SetInt(key, isTriggered == true? 1 : 0);
                canChangeTargetCam = true;
                camera3RdPerson.targetCamera = targetCam;
                camera3RdPerson.ConfigToShowObject();
@@ -88,5 +99,15 @@ public class PressWeightsButtonsPlatform : MonoBehaviour
                     seeObject = false;
                }
           }
+     }
+
+     public static void ClearKeys()
+     {
+          for (int i = 0; i < allKeys.Count; i++)
+          {
+              PlayerPrefs.DeleteKey(allKeys[i]);
+          }
+
+          allKeys = new List<string>();
      }
 }

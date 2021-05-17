@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "LOB/scriptableObjects/In Runtime Persistant Data", fileName = "In Runtime Persistant Data")]
 public class InRuntimePersistantData : ScriptableObject
 {
+    public static bool blockLoad;    
     public List<InRuntimePersistenteComponentInfo> cachedPersistenteComponentInfo;
     public int lastLoadedLevel;
 

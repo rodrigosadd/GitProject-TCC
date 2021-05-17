@@ -83,4 +83,14 @@ public class GameManager : MonoBehaviour
           InRuntimePersistantData.Instance.cachedPersistenteComponentInfo = new List<InRuntimePersistenteComponentInfo>();
           InRuntimePersistantData.Instance.lastLoadedLevel = -1;          
      }
+
+     public void ClearPersistantDataPosition()
+     {
+          InRuntimePersistantData.Instance.cachedPersistenteComponentInfo = new List<InRuntimePersistenteComponentInfo>();
+     }
+
+     public void ClearKeysPressWBP()
+     {
+          PressWeightsButtonsPlatform.ClearKeys();
+     }
 }
