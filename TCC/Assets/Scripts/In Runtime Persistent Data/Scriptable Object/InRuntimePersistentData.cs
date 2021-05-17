@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "LOB/scriptableObjects/In Runtime Persistant Data", fileName = "In Runtime Persistant Data")]
-public class InRuntimePersistantData : ScriptableObject
+public class InRuntimePersistentData : ScriptableObject
 {
     public static bool blockLoad;    
-    public List<InRuntimePersistenteComponentInfo> cachedPersistenteComponentInfo;
+    public List<InRuntimePersistentComponentInfo> cachedPersistenteComponentInfo;
     public int lastLoadedLevel;
 
     const string path = "ScriptableObjects";
 
-    static InRuntimePersistantData _instance = null;
-    public static InRuntimePersistantData Instance
+    static InRuntimePersistentData _instance = null;
+    public static InRuntimePersistentData Instance
     {
         get
         {
-            var items = Resources.LoadAll<InRuntimePersistantData>(path);
+            var items = Resources.LoadAll<InRuntimePersistentData>(path);
 
             if (items.Length > 0)
             {
                 foreach (var item in items) 
                 {
-                    if (item.GetType() == typeof(InRuntimePersistantData))
+                    if (item.GetType() == typeof(InRuntimePersistentData))
                     {
                         _instance = item;
                         break;
@@ -31,7 +31,7 @@ public class InRuntimePersistantData : ScriptableObject
                 return _instance;
             }
 
-            Debug.Log(typeof(InRuntimePersistantData).Name + $"There is no singleton scriptable object of type {(typeof(InRuntimePersistantData))}");
+            Debug.Log(typeof(InRuntimePersistentData).Name + $"There is no singleton scriptable object of type {(typeof(InRuntimePersistentData))}");
 
             return null;
         }
