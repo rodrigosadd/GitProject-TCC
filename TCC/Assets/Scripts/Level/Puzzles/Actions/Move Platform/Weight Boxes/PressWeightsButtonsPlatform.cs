@@ -12,14 +12,18 @@ public class PressWeightsButtonsPlatform : MonoBehaviour
      public float timeToReturnPlayerTarget = 2f;
      public bool seeObject;
      public string key;
-     public bool isTriggered;
+     public bool canCheckKey = true;
+     private bool isTriggered;
      private float countdownToReturnPlayerTarget;
      private bool canChangeTargetCam; 
 
      void Start()
      {
-          allKeys.Add(key);
-          isTriggered = PlayerPrefs.HasKey(key) && (PlayerPrefs.GetInt(key) == 1);
+          if(canCheckKey)
+          {
+               allKeys.Add(key);
+               isTriggered = PlayerPrefs.HasKey(key) && (PlayerPrefs.GetInt(key) == 1);
+          }
      }
 
      void Update()
@@ -73,8 +77,12 @@ public class PressWeightsButtonsPlatform : MonoBehaviour
      {
           if(seeObject && !isTriggered)
           {
-               isTriggered = true;
-               PlayerPrefs.SetInt(key, isTriggered == true? 1 : 0);
+               if(canCheckKey)
+               {
+                    isTriggered = true;
+                    PlayerPrefs.SetInt(key, isTriggered == true? 1 : 0);
+               }
+
                canChangeTargetCam = true;
                camera3RdPerson.targetCamera = targetCam;
                camera3RdPerson.ConfigToShowObject();

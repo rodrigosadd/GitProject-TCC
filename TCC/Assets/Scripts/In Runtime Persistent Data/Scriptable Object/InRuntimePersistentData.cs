@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "LOB/scriptableObjects/In Runtime Persistant Data", fileName = "In Runtime Persistant Data")]
+[CreateAssetMenu(menuName = "LOB/scriptableObjects/In Runtime Persistent Data", fileName = "In Runtime Persistent Data")]
 public class InRuntimePersistentData : ScriptableObject
 {
     public static bool blockLoad;    
