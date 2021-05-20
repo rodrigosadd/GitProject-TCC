@@ -869,17 +869,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4590690678371319652, guid: 67732b1fca177b34889a0c3de140a6a1, type: 3}
   m_PrefabInstance: {fileID: 2106388643}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &67218166 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 505211737956188324, guid: 37a3a2bf0e6096042b20c0733c4183fc, type: 3}
-  m_PrefabInstance: {fileID: 32021899}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eff17c30cc3205441a3c9307669115e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &69611023 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4590690678371319652, guid: 67732b1fca177b34889a0c3de140a6a1, type: 3}
@@ -22856,14 +22845,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.10980392, g: 0.10980392, b: 0.10980392, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26567,7 +26556,6 @@ MonoBehaviour:
   waitTimeToLoadLevel: 2
   speedHeadCutoffHeight: 8
   speedBodyCutoffHeight: 8
-  levelLoader: {fileID: 67218166}
 --- !u!54 &1874825709
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27604,14 +27592,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.10980392, g: 0.10980392, b: 0.10980392, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30525,6 +30513,30 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2381321958658799857, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381321958658799857, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_Color.r
+      value: 0.10980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381321958658799857, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_Color.g
+      value: 0.10980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381321958658799857, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_Color.b
+      value: 0.10980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381321958658799857, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_Color.a
+      value: 0.5882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381321959054708510, guid: af70988d273ac124795d0b6396f5e324, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6a4fc5058b1251c4886e52fa15f37e6e, type: 3}
     - target: {fileID: 7686950024654964184, guid: af70988d273ac124795d0b6396f5e324, type: 3}
       propertyPath: firstButtons.Array.data[1]
       value: 
