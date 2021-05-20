@@ -12,7 +12,7 @@ public class LoadScene : MonoBehaviour
      void OnTriggerEnter(Collider other)
      {
           GameManager.instance.savePlayerStats.Save(); 
-          InRuntimePersistantData.CachePersistenteComponents(playerStartPosition.position);
+          InRuntimePersistentData.CachePersistenteComponents(playerStartPosition.position);
           GameManager.instance.LoadScene(indexScene, currentScene);
      }
 }

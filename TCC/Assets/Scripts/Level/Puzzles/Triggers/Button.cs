@@ -8,10 +8,12 @@ public class Button : MonoBehaviour
      public ButtonType type;
      public Transform button;
      public Transform targetMoveButton;
+     public GameObject objThatWillBeActivated;
      public float maxDistancePressButton;
      [EventRef]
      public string clickSound;
      public bool triggerButton;
+     public bool activateObject;
      private Vector3 _startPositionButton;
      private float _countdownAnimationButton;
      private float _countdownDeactivateInteractAnimation;
@@ -44,6 +46,7 @@ public class Button : MonoBehaviour
                _canPlayInteractAnimation = true;
                PlayerController.instance.levelMechanics.interacting = true;
                RuntimeManager.PlayOneShot(clickSound, transform.position);
+               ActivateObject();
           }
      }
 
@@ -110,6 +113,14 @@ public class Button : MonoBehaviour
                     PlayerController.instance.levelMechanics.interacting = false;
                     PlayerController.instance.movement.currentSpeed = 0f;
                }
+          }
+     }
+
+     public void ActivateObject()
+     {
+          if(activateObject)
+          {
+               objThatWillBeActivated.SetActive(true);
           }
      }
 

@@ -14,9 +14,9 @@ public class PlayerAnimationController : MonoBehaviour
      private bool _inFallingAction;
      private float _countdownAfterFalling;
      private float _countdownFallingAction;
-     private bool first;
-     private bool second;
-     private bool final;
+     private bool firstAttack;
+     private bool secondAttack;
+     private bool finalAttack;
 
      void Start()
      {
@@ -52,9 +52,9 @@ public class PlayerAnimationController : MonoBehaviour
 #region Attack
      public void CheckAttackAnimationIsFinished()
      {
-          first = PlayerController.instance.animator.GetBool("First Attack");
-          second = PlayerController.instance.animator.GetBool("Second Attack");
-          final = PlayerController.instance.animator.GetBool("Final Attack");
+          firstAttack = PlayerController.instance.animator.GetBool("First Attack");
+          secondAttack = PlayerController.instance.animator.GetBool("Second Attack");
+          finalAttack = PlayerController.instance.animator.GetBool("Final Attack");
      }
 
      public void SetFirstAttack()
@@ -481,9 +481,9 @@ public class PlayerAnimationController : MonoBehaviour
               !alreadyPlayedFallingAction &&
               PlayerController.instance.jump.currentJump <= 1 &&
               !_inFallingAction &&
-              !first &&
-              !second &&
-              !final)
+              !firstAttack &&
+              !secondAttack &&
+              !finalAttack)
           {
                PlayerController.instance.animator.SetBool("Idle", false);
                PlayerController.instance.animator.SetBool("Running", false);

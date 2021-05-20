@@ -6,8 +6,8 @@ public class InRuntimePersistentDataComponent : MonoBehaviour
 {
     public GameObject referencePrefab;
 
-    public InRuntimePersistenteComponentInfo CacheValues(Vector3 lastPosition, Vector3 lastRotation)
+    public InRuntimePersistentComponentInfo CacheValues(Vector3 lastPosition, Vector3 lastRotation)
     {
-        return new InRuntimePersistenteComponentInfo(gameObject.name ,lastPosition, lastRotation, referencePrefab == null? null : referencePrefab);
+        return new InRuntimePersistentComponentInfo(gameObject.name ,lastPosition, lastRotation, referencePrefab == null? null : referencePrefab);
     }
 }

@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
 
      public void LoadScene(int index, int lastScene)
      {    
-          if(InRuntimePersistantData.Instance.lastLoadedLevel == -1)
+          if(InRuntimePersistentData.Instance.lastLoadedLevel == -1)
           {
-               InRuntimePersistantData.Instance.lastLoadedLevel = lastScene;
+               InRuntimePersistentData.Instance.lastLoadedLevel = lastScene;
           }
 
           LevelLoader.instance.LoadNextLevel(index);
@@ -33,13 +33,13 @@ public class GameManager : MonoBehaviour
      {
           GameManager.instance.savePlayerStats.Load();
           GameManager.instance.playerStatsData.ApplySettings();
-
-          if(scene.buildIndex != InRuntimePersistantData.Instance.lastLoadedLevel)
+          
+          if(InRuntimePersistentData.Instance == null || scene.buildIndex != InRuntimePersistentData.Instance.lastLoadedLevel)
           {    
                return;
           }
 
-          var cachedComponents = InRuntimePersistantData.Instance.cachedPersistenteComponentInfo;
+          var cachedComponents = InRuntimePersistentData.Instance.cachedPersistenteComponentInfo;
           
           if(cachedComponents == null)
           {
@@ -80,7 +80,22 @@ public class GameManager : MonoBehaviour
                Debug.Log("Current Level Manager null");
           }
           
-          InRuntimePersistantData.Instance.cachedPersistenteComponentInfo = new List<InRuntimePersistenteComponentInfo>();
-          InRuntimePersistantData.Instance.lastLoadedLevel = -1;          
+          InRuntimePersistentData.Instance.cachedPersistenteComponentInfo = new List<InRuntimePersistentComponentInfo>();
+          InRuntimePersistentData.Instance.lastLoadedLevel = -1;          
+     }
+
+     public void ClearPersistantDataPosition()
+     {
+          if(InRuntimePersistentData.Instance == null)
+          {    
+               return;
+          }
+          
+          InRuntimePersistentData.Instance.cachedPersistenteComponentInfo = new List<InRuntimePersistentComponentInfo>();
+     }
+
+     public void ClearKeysPressWBP()
+     {
+          PressWeightsButtonsPlatform.ClearKeys();
      }
 }
