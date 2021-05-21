@@ -101,6 +101,7 @@ public class PlayerController : Character
           public bool pushingObj;
           public bool droppingObj;
           public bool setPositionDropObject;
+          public bool canDropBox;
      }
 
      [Header("Cliff variables")]
@@ -174,6 +175,7 @@ public class PlayerController : Character
           CharacterJump();
           CheckIsGrounded();          
           PushingObject();
+          UpdatePushedObj();
           SetPositionCurrentTargetPush();
           SetPositionDropObject();
           CountdownAfterDropping();
@@ -404,18 +406,17 @@ public class PlayerController : Character
      #region Pushing Object
      private void PushingObject()
      {
-          if (Input.GetButton("Push") &&
+          if (Input.GetButtonDown("Push") &&
               movement.canMove &&
               movement.isGrounded &&
               !push.droppingObj &&
               !PlayerAnimationController.instance.fallingIdle &&
               PlayerAttackController.instance.currentAttack == 0)
-          {
-               PushObject();
-          }
-          else if (Input.GetButtonUp("Push"))
-          {
-               DropObject();
+          {                             
+               if(!PushObject())
+               {    
+                    DropObject();                   
+               }
           }
 
           if(!movement.isGrounded && movement.velocity.y < -5)
@@ -429,7 +430,7 @@ public class PlayerController : Character
           }
      }
 
-     public void PushObject()
+     public bool PushObject()
      {
           RaycastHit _hit;
 
@@ -437,23 +438,33 @@ public class PlayerController : Character
           {
                if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
                {
-                    if (_hit.transform.tag == "Light")
-                    {
-                         push.pushingObj = true;
-                         _hit.transform.position = push.targetPushLight.position;
-                         push.currentTargetPush = _hit.transform;
-                         SetPushSpeed();
-                         SetTargetPushComponents();
-                    }
-                    else if (_hit.transform.tag == "Heavy")
-                    {
-                         push.pushingObj = true;
-                         _hit.transform.position = push.targetPushHeavy.position;
-                         push.currentTargetPush = _hit.transform;
-                         SetPushSpeed();
-                         SetTargetPushComponents();
-                    }
+                    push.currentTargetPush = _hit.transform;
+                    return true;
                }
+          }
+          return false;
+     }
+
+     public void UpdatePushedObj()
+     {
+          if(push.currentTargetPush == null || push.droppingObj)
+          {
+               return;
+          }
+
+          if (push.currentTargetPush.tag == "Light")
+          {
+               push.pushingObj = true;
+               push.currentTargetPush.position = push.targetPushLight.position;
+               SetPushSpeed();
+               SetTargetPushComponents();
+          }
+          else if (push.currentTargetPush.tag == "Heavy")
+          {
+               push.pushingObj = true;
+               push.currentTargetPush.position = push.targetPushHeavy.position;
+               SetPushSpeed();
+               SetTargetPushComponents();
           }
      }
 

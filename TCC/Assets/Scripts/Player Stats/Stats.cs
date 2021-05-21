@@ -28,6 +28,8 @@ public class Stats : MonoBehaviour
                camera3RdPerson.ConfigToShowObject();
                PlayerController.instance.movement.canMove = false;
                transform.position = targetShowItem.position;
+               PlayerAnimationController.instance.SetPowerUp();
+               PlayerController.instance.movement.canMove = false;
           }
      }
 
@@ -47,6 +49,7 @@ public class Stats : MonoBehaviour
                     PlayerController.instance.movement.canMove = true;
                     gameObject.SetActive(false);
                     seeObject = false;
+                    PlayerController.instance.movement.canMove = true;
                }
           }
      }

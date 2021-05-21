@@ -103,7 +103,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void SecondAttack()
      {
-          if (!PlayerController.instance.death.dead)
+          if (!PlayerController.instance.death.dead && PlayerController.instance.movement.canMove)
           {
                if (currentAttack >= 2)
                {
@@ -128,7 +128,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void FinalAttack()
      {
-          if (!PlayerController.instance.death.dead)
+          if (!PlayerController.instance.death.dead && PlayerController.instance.movement.canMove)
           {
                if (currentAttack >= 3)
                {
