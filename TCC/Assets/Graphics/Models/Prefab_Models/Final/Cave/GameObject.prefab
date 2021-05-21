@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5573748264245096222}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GameObject
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stalactite2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8939596554536243676, guid: c8ec984d378045b4586911ed1f87a365, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8ec984d378045b4586911ed1f87a365, type: 3}
 --- !u!4 &8299657344548781542 stripped
@@ -116,6 +120,10 @@ PrefabInstance:
     - target: {fileID: 6310068361889705974, guid: 9b4d1ed75aa69154286c3c5aa8974b8d, type: 3}
       propertyPath: m_Name
       value: Stalactite1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6310068361889705974, guid: 9b4d1ed75aa69154286c3c5aa8974b8d, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6690674570198627660, guid: 9b4d1ed75aa69154286c3c5aa8974b8d, type: 3}
       propertyPath: m_LocalPosition.x
