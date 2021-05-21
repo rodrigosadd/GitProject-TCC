@@ -14,7 +14,12 @@ public class DoubleJumpStat : Stats
     {
         float _distanceBetween = Vector3.Distance(transform.position, PlayerController.instance.transform.position);
 
-        if(_distanceBetween < maxDistancePickedUp && Input.GetButtonDown("Interact"))
+        if(_distanceBetween < maxDistancePickedUp && 
+            Input.GetButtonDown("Interact") &&
+            PlayerController.instance.movement.canMove &&
+            !PlayerAttackController.instance.attaking &&
+            PlayerAttackController.instance.currentAttack == 0 &&
+            PlayerController.instance.jump.currentJump <= 0)
         {
             RuntimeManager.PlayOneShot(collectSound, transform.position);
             GameManager.instance.playerStatsData.maxJump = 2;

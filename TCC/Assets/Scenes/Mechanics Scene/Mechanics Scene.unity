@@ -3485,7 +3485,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &613913015
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9080,6 +9080,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 613913015}
     m_Modifications:
+    - target: {fileID: 80884665, guid: 37a3a2bf0e6096042b20c0733c4183fc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6666145030690875652, guid: 37a3a2bf0e6096042b20c0733c4183fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6666145030935129044, guid: 37a3a2bf0e6096042b20c0733c4183fc, type: 3}
       propertyPath: m_Name
       value: LevelLoader
