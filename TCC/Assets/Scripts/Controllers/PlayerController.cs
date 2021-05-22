@@ -133,15 +133,31 @@ public class PlayerController : Character
 
      [Header("Death variables")]
      public Death death;
-     private float _countdownDeath;
-     private float _currentMaxSpeed;
+     private float _headCutoffHeight;
+     private float _bodyCutoffHeight;
+     private float _pickaxeCutoffHeight;
 
      [System.Serializable]
      public class Death
      {
+          public Material head;
+          public Material body;
+          public Material pickaxe;
           public Transform currentPoint;
+          public float timeDead;
+          public float timeToMoveAfterDead;
+          public float speedHeadCutoffHeightDisappear;
+          public float speedHeadCutoffHeightAppear;
+          public float speedBodyCutoffHeightDisappear;
+          public float speedBodyCutoffHeightAppear;
+          public float speedPickaxeCutoffHeightDisappear;
+          public float speedPickaxeCutoffHeightAppear;
           public float offsetDead;
           public bool dead;
+          [HideInInspector]
+          public bool canSetAppearShader;
+          [HideInInspector]
+          public bool canSetDisappearShader;
      }
 
 #if UNITY_EDITOR
@@ -167,6 +183,7 @@ public class PlayerController : Character
           movement.fixedGravity = movement.gravity;
           GameManager.instance.savePlayerStats.Load();
           GameManager.instance.playerStatsData.ApplySettings();
+          ResetValueDissolveShader();
      }
 
      void Update()
@@ -188,7 +205,10 @@ public class PlayerController : Character
           ResetCurrentJump();
           CatchMissedJumps();
           CheckDeath();
-          CountdownAfterDeath();
+          //CountdownAfterDeath();
+          SetDissolveShaderAppear();          
+          SetDissolveShaderDisappear();
+          PlayerConfigsAfterDeath();
      }
 
      void FixedUpdate()
@@ -740,32 +760,94 @@ public class PlayerController : Character
           {
                if (!death.dead)
                {
-                    _currentMaxSpeed = movement.fixedMaxSpeed;
                     movement.maxSpeed = 0;
                     death.dead = true;
+                    StartCoroutine("AfterDeath");
                }
           }
      }
 
-     public void CountdownAfterDeath()
+     IEnumerator AfterDeath()
      {
-          if (death.dead)
+          death.canSetDisappearShader = true;
+
+          yield return new WaitForSeconds(death.timeDead);
+
+          death.canSetAppearShader = true;
+          death.canSetDisappearShader = false;
+          PlayerController.instance.levelMechanics.exitTeleport = true;
+          SetControllerPosition(death.currentPoint.position);
+
+          yield return new WaitForSeconds(death.timeToMoveAfterDead);
+          
+          PlayerAttackController.instance.ResetAttack();
+          hit.hitCount = 0;
+          movement.maxSpeed = movement.fixedMaxSpeed;
+          PlayerController.instance.levelMechanics.exitTeleport = false;
+          death.canSetAppearShader = false;
+          death.dead = false;
+          ResetPlayerConfigsAfterDeath();
+     }
+
+     public void PlayerConfigsAfterDeath()
+     {    
+          if(death.canSetAppearShader)
           {
-               if (_countdownDeath < 1)
-               {
-                    _countdownDeath += Time.deltaTime / 2f;
-               }
-               else
-               {
-                    PlayerAttackController.instance.ResetAttack();
-                    hit.hitCount = 0;
-                    SetControllerPosition(death.currentPoint.position);
-                    movement.maxSpeed = _currentMaxSpeed;
-                    _countdownDeath = 0;
-                    death.dead = false;
-                    PlayerController.instance.animator.SetBool("Idle", true);
-                    PlayerController.instance.animator.SetBool("Dying", false);
-               }
+               PlayerController.instance.movement.gravity = 0;
+               PlayerController.instance.movement.velocity = Vector3.zero;
+               PlayerController.instance.movement.maxSpeed = 0;                   
+          }     
+     }
+
+     public void ResetPlayerConfigsAfterDeath()
+     {
+          PlayerController.instance.movement.gravity = PlayerController.instance.movement.fixedGravity;
+          PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;   
+     }
+
+     public void ResetValueDissolveShader()
+     {
+          _headCutoffHeight = -1f;
+          _bodyCutoffHeight = -1f;
+          _pickaxeCutoffHeight = -1;
+          death.head.SetFloat("_Cutoff_Height", -1f);
+          death.body.SetFloat("_Cutoff_Height", -1f);
+          death.pickaxe.SetFloat("_Cutoff_Height", -1f);
+     }
+
+     public void SetDissolveShaderAppear()
+     {
+          if(death.canSetAppearShader)
+          {
+               _headCutoffHeight -= Time.deltaTime * death.speedHeadCutoffHeightAppear ;
+               _headCutoffHeight = Mathf.Clamp(_headCutoffHeight, -1f, 5f);
+               death.head.SetFloat("_Cutoff_Height", _headCutoffHeight);
+
+               _bodyCutoffHeight -= Time.deltaTime * death.speedBodyCutoffHeightAppear;
+               _bodyCutoffHeight = Mathf.Clamp(_bodyCutoffHeight, -1f, 5f);
+               death.body.SetFloat("_Cutoff_Height", _bodyCutoffHeight);
+
+               _pickaxeCutoffHeight -= Time.deltaTime * death.speedPickaxeCutoffHeightAppear;
+               _pickaxeCutoffHeight = Mathf.Clamp(_pickaxeCutoffHeight, -1f, 5f);
+               death.pickaxe.SetFloat("_Cutoff_Height", _pickaxeCutoffHeight);
+          }
+     }
+
+     public void SetDissolveShaderDisappear()
+     {  
+          if(death.canSetDisappearShader)
+          {
+               _headCutoffHeight += Time.deltaTime * death.speedHeadCutoffHeightDisappear;
+               _headCutoffHeight = Mathf.Clamp(_headCutoffHeight, -1f, 5f);
+               death.head.SetFloat("_Cutoff_Height", _headCutoffHeight);
+
+               _bodyCutoffHeight += Time.deltaTime * death.speedBodyCutoffHeightDisappear;
+               _bodyCutoffHeight = Mathf.Clamp(_bodyCutoffHeight, -1f, 5f);
+               death.body.SetFloat("_Cutoff_Height", _bodyCutoffHeight);
+
+               _pickaxeCutoffHeight += Time.deltaTime * death.speedPickaxeCutoffHeightDisappear;
+               _pickaxeCutoffHeight = Mathf.Clamp(_pickaxeCutoffHeight, -1f, 5f);
+               death.pickaxe.SetFloat("_Cutoff_Height", _pickaxeCutoffHeight);
           }
      }
      #endregion
