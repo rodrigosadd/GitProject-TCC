@@ -126,6 +126,8 @@ public class Teleport : MonoBehaviour
                if (_countdownExitTeleport < 1)
                {
                     PlayerController.instance.levelMechanics.exitTeleport = true;
+                    PlayerController.instance.death.canSetAppearShader = true;
+                    PlayerController.instance.death.canSetDisappearShader = false;
                     _countdownExitTeleport += Time.deltaTime / timeExitTeleport;
                }
                else
@@ -134,6 +136,8 @@ public class Teleport : MonoBehaviour
                     _canMove = true;
                     _countdownExitTeleport = 0;
                     PlayerConfigsExitTeleport();
+                    PlayerController.instance.death.canSetAppearShader = false;
+                    PlayerController.instance.death.canSetDisappearShader = false;
                }
           }
      }
@@ -153,7 +157,8 @@ public class Teleport : MonoBehaviour
           camera3RdPerson.targetCamera = targetCameraExitPortal;          
           PlayerController.instance.movement.gravity = 0;
           PlayerController.instance.movement.velocity = Vector3.zero;
-          PlayerController.instance.movement.maxSpeed = 0;                   
+          PlayerController.instance.movement.maxSpeed = 0; 
+          PlayerController.instance.death.canSetDisappearShader = true;
      }
 
      public void MoveCamera()
