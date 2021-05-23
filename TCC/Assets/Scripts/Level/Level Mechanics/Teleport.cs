@@ -64,13 +64,12 @@ public class Teleport : MonoBehaviour
           if (_distanceBetween <= rangeTeleport && _canTeleport)
           {            
                _canTeleport = false;
-               StartCoroutine("IETeleport");
+               StartCoroutine("StartTeleport");
           }
      }
 
-     IEnumerator IETeleport()
+     IEnumerator StartTeleport()
      {
-          Debug.Log("Entrou no IETeleport");
           RuntimeManager.PlayOneShot(teleportSound, PlayerController.instance.transform.position);
           PlayerConfigsEntryTeleport();
           _canSetDisappearShader = true;
@@ -122,7 +121,6 @@ public class Teleport : MonoBehaviour
                exitPortalDeactive.SetActive(true);
           }
      }
-
 
      public void MovePlayerToPortalExit()
      {
