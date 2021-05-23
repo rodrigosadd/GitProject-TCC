@@ -48,6 +48,7 @@ public class PlayerController : Character
           public bool exitTeleport;
           public bool interacting;
           public bool canSeeTeleport;
+          public bool pickingUpItem;
      }
 
      [Header("Jump variables")]
