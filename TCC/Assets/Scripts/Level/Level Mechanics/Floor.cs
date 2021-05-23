@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Floor : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Floor : MonoBehaviour
      public BoxCollider boxObj;
      public BoxCollider boxObjTrigger;
      public GameObject obj;
+     public Vector3 punchRotation;
+     public float durationPunch;
      public float timeDisableFloor;
      public float timeEnableFloor;
      public bool offFloor = false;
@@ -49,6 +52,7 @@ public class Floor : MonoBehaviour
           if (other.transform.tag == "Player")
           {
                offFloor = true;
+               transform.DOPunchRotation(punchRotation, durationPunch);
           }
      }
 }
