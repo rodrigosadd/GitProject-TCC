@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuickStartLobbyController : MonoBehaviourPunCallbacks
 {
@@ -10,6 +11,7 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     private GameObject quickCancelButton; //Button used for stop searching for a game to join.
     [SerializeField]
     private int roomSize; //Button used for stop searching for a game to join.
+    public Text statusText; //Text to be on the players connecting status panel.
     // Start is called before the first frame update
     void Start()
     {
@@ -19,26 +21,30 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster() {
         Debug.Log("We are connected to the " + PhotonNetwork.CloudRegion + " server!");
         PhotonNetwork.AutomaticallySyncScene = true;
-        quickStartButton.SetActive(true);
+        //quickStartButton.SetActive(true);
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message) { //Callback function for joining error.
         Debug.Log("Joining room failed.");
+        statusText.text = "Joining room failed.";
         Debug.Log(message);
         CreateRoom();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message) { //Callback function for creating room error.
         Debug.Log("Failed to create a room.");
+        statusText.text = "Failed to create a room.";
         CreateRoom(); //Retry to create a room with different name.
     }
 
     private void CreateRoom() { //Try to create your own room.
         Debug.Log("Creating new room.");
+        statusText.text = "Creating new room.";
         int randomNumber = Random.Range(0, 10000); //Random name for the room.
         RoomOptions options = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte) roomSize };
         PhotonNetwork.CreateRoom("Room " + randomNumber, options); //Attempting to create a new room.
         Debug.Log("Created Room " + randomNumber);
+        statusText.text = "Created Room " + randomNumber;
     }
 
     public void QuickStart() { //Paired with quick start button.
@@ -51,12 +57,7 @@ public class QuickStartLobbyController : MonoBehaviourPunCallbacks
     public void QuickCancel() {
         quickCancelButton.SetActive(false);
         quickStartButton.SetActive(true);
+        statusText.text = "Click 'Quick Join' to search for a room.";
         PhotonNetwork.LeaveRoom(); //Leaves the actual room.
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
