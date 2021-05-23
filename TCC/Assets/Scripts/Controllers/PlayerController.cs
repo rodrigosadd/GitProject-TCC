@@ -48,6 +48,7 @@ public class PlayerController : Character
           public bool exitTeleport;
           public bool interacting;
           public bool canSeeTeleport;
+          public bool pickingUpItem;
      }
 
      [Header("Jump variables")]
@@ -143,6 +144,8 @@ public class PlayerController : Character
           public Material head;
           public Material body;
           public Material pickaxe;
+          public GameObject crossfadeEnd;
+          public GameObject crossfadeStart;
           public Transform currentPoint;
           public float timeDead;
           public float timeToMoveAfterDead;
@@ -152,6 +155,8 @@ public class PlayerController : Character
           public float speedBodyCutoffHeightAppear;
           public float speedPickaxeCutoffHeightDisappear;
           public float speedPickaxeCutoffHeightAppear;
+          public float delayCrossfadeEnd;
+          public float delayCrossfadeStart;
           public float offsetDead;
           public bool dead;
           [HideInInspector]
@@ -205,7 +210,6 @@ public class PlayerController : Character
           ResetCurrentJump();
           CatchMissedJumps();
           CheckDeath();
-          //CountdownAfterDeath();
           SetDissolveShaderAppear();          
           SetDissolveShaderDisappear();
           PlayerConfigsAfterDeath();
@@ -770,6 +774,7 @@ public class PlayerController : Character
      IEnumerator AfterDeath()
      {
           death.canSetDisappearShader = true;
+          StartCoroutine("DelayCrossfade");
 
           yield return new WaitForSeconds(death.timeDead);
 
@@ -787,6 +792,21 @@ public class PlayerController : Character
           death.canSetAppearShader = false;
           death.dead = false;
           ResetPlayerConfigsAfterDeath();
+          death.crossfadeStart.SetActive(true);
+          death.crossfadeEnd.SetActive(false);
+     }
+
+     IEnumerator DelayCrossfade()
+     {
+          yield return new WaitForSeconds(death.delayCrossfadeEnd);
+
+          death.crossfadeStart.SetActive(false);
+          death.crossfadeEnd.SetActive(true);
+
+          yield return new WaitForSeconds(death.delayCrossfadeStart);
+
+          death.crossfadeStart.SetActive(true);
+          death.crossfadeEnd.SetActive(false);
      }
 
      public void PlayerConfigsAfterDeath()

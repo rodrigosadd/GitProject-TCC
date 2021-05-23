@@ -3,11 +3,12 @@ using FMODUnity;
 
 public class AttackStat : Stats
 {
+    private bool _itemTaken;
     void Update()
     {
         RotateObject();
         CheckPickedUp();
-        CountdownToReturnPlayerTarget();
+        ReturnPlayerTarget();
     }
 
     public void CheckPickedUp()
@@ -19,8 +20,10 @@ public class AttackStat : Stats
             PlayerController.instance.movement.canMove &&
             !PlayerAttackController.instance.attaking &&
             PlayerAttackController.instance.currentAttack == 0 &&
-            PlayerController.instance.jump.currentJump <= 0)
+            PlayerController.instance.jump.currentJump <= 0 &&
+            !_itemTaken)
         {
+            _itemTaken = true;
             RuntimeManager.PlayOneShot(collectSound, transform.position);
             GameManager.instance.playerStatsData.canAttack = 1;
             GameManager.instance.playerStatsData.ApplySettings();
