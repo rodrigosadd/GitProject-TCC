@@ -6069,9 +6069,22 @@ MonoBehaviour:
     smootnessMissedJump: 90
     canMiss: 1
   death:
+    head: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
+    body: {fileID: 2100000, guid: c6aba0ff1bf1d3c40afd263872e3a98d, type: 2}
+    pickaxe: {fileID: 2100000, guid: a5641b93f4e34a6419d701c8104cc60e, type: 2}
     currentPoint: {fileID: 0}
+    timeDead: 2
+    timeToMoveAfterDead: 0.8
+    speedHeadCutoffHeightDisappear: 1.5
+    speedHeadCutoffHeightAppear: 4
+    speedBodyCutoffHeightDisappear: 1.5
+    speedBodyCutoffHeightAppear: 4
+    speedPickaxeCutoffHeightDisappear: 1.5
+    speedPickaxeCutoffHeightAppear: 4
     offsetDead: 1
     dead: 0
+    canSetAppearShader: 0
+    canSetDisappearShader: 0
   seeRangePush: 0
   seeRangeCliff: 0
   seeRangeGroundDetector: 0
@@ -16851,7 +16864,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -16904,7 +16917,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 8
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -17020,7 +17033,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
