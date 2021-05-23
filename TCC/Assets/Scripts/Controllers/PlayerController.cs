@@ -765,7 +765,10 @@ public class PlayerController : Character
                if (!death.dead)
                {
                     movement.maxSpeed = 0;
-                    death.dead = true;
+                    death.dead = true;      
+                    PlayerController.instance.movement.gravity = 0;
+                    PlayerController.instance.movement.velocity = Vector3.zero;
+                    PlayerController.instance.movement.maxSpeed = 0;               
                     StartCoroutine("AfterDeath");
                }
           }
