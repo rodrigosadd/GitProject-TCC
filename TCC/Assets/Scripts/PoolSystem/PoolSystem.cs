@@ -40,7 +40,7 @@ public class PoolSystem : MonoBehaviour
             Projectile _projectileAbove = Instantiate(projectileAbovePrefab);
             _projectileAbove.transform.SetParent(_projectilesAboveHolder.transform);
             _projectileAbove.gameObject.SetActive(false);
-            listProjectilePool.Add(_projectileAbove);
+            listProjectileAbovePool.Add(_projectileAbove);
         }
     }
 
@@ -63,6 +63,32 @@ public class PoolSystem : MonoBehaviour
             _toReturn = Instantiate(projectilePrefab);
             _toReturn.transform.SetParent(_projectilesHolder.transform);
             listProjectilePool.Add(_toReturn);
+        }
+
+        _toReturn.gameObject.SetActive(true);
+
+        return _toReturn;
+    }
+
+    public Projectile TryToGetProjectileAbove()
+    {
+        Projectile _toReturn = null;
+
+        for (int index = 0; index < listProjectileAbovePool.Count; index++)
+        {
+            Projectile _possibleProjectileAbove = listProjectileAbovePool[index];
+            if (!_possibleProjectileAbove.gameObject.activeSelf)
+            {
+                _toReturn = _possibleProjectileAbove;
+                break;
+            }
+        }
+
+        if (_toReturn == null)
+        {
+            _toReturn = Instantiate(projectileAbovePrefab);
+            _toReturn.transform.SetParent(_projectilesAboveHolder.transform);
+            listProjectileAbovePool.Add(_toReturn);
         }
 
         _toReturn.gameObject.SetActive(true);

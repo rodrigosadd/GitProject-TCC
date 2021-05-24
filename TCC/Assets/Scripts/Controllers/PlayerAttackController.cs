@@ -238,9 +238,13 @@ public class PlayerAttackController : MonoBehaviour
                {
                     _hit.transform.GetComponent<Enemy>().TakeHit();
                }
-               if (_hit.tag == "Breakable")
+               else if (_hit.tag == "Breakable")
                {
                     _hit.transform.GetComponent<BreakableObject>().TakeHit();
+               }
+               else if(_hit.tag == "Boss")
+               {
+                    _hit.transform.GetComponent<BossController>().TakeDamage();
                }
           }
      }

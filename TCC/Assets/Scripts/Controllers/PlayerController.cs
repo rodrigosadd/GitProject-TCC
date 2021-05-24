@@ -358,7 +358,7 @@ public class PlayerController : Character
 
      public void JumpShadow()
      {
-          if (!movement.isGrounded)
+          if (!movement.isGrounded && !death.dead)
           {
                RaycastHit _hitInfo;
                if (Physics.Raycast(transform.position, Vector3.up * -1, out _hitInfo, jump.maxDistanceShadow))
