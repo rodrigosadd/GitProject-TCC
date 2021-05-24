@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6588020485917715048
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,10 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Crystal
-  m_Shader: {fileID: -6465566751694194690, guid: 4d3e8dee304f782408b6d34fa07c382e, type: 3}
+  m_Name: Cave_Ground
+  m_Shader: {fileID: -6465566751694194690, guid: a0737c71c872ce74fbbe328da01e115e, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 2
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -56,24 +43,37 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2666233C_Texture_1:
+    - _SampleTexture2D_69D0DF92_Texture_1:
         m_Texture: {fileID: 2800000, guid: 3bd0a4ca095cd9b4b9b55b2a085397bc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_5E306D00_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 3f41b8eac002d8a4db7ee951291d326c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_71E13E6C_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 4d86339147ae65640847b4517f9271f8, type: 3}
+    - _SampleTexture2D_F0D83DCD_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 4b73b5d517025dc4cb0849d3cde5dc20, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Triplanar_1588D073_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 4b73b5d517025dc4cb0849d3cde5dc20, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_56722632_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 3bd0a4ca095cd9b4b9b55b2a085397bc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Triplanar_CE5BF6FF_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 834da31bd7000354e8dbbbdfde535e06, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_A286484C: 1
+    - Vector1_126FE505: 0.08
+    - Vector1_1A39B081: -0.04
+    - Vector1_375F2A19: 0.56
+    - Vector1_600FEAC5: 0.55
+    - Vector1_62F319CD: -0.4
+    - Vector1_80250E2: 0.56
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -96,13 +96,23 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_15605041: {r: 205.51157, g: 16.139652, b: 0, a: 0}
-    - Color_5DEB526F: {r: 0.9433962, g: 0.24121785, b: 0.17354932, a: 0}
-    - Color_70B1CC81: {r: 0.614584, g: 0.07453719, b: 0.6320754, a: 0}
-    - Color_81D50A7: {r: 0.990566, g: 0.0046724924, b: 0.0046724924, a: 0}
-    - Color_8A0E591A: {r: 1, g: 0.995283, b: 0.9953803, a: 0}
+    - Color_12C9ABA4: {r: 0.432163, g: 0.35702205, b: 0.6698113, a: 1}
+    - Color_131C158A: {r: 0.2938323, g: 0.6698113, b: 0.48792237, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &2644221831237426792
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
