@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class PoolSystem : MonoBehaviour
 {
-    [Header("Fruit Pool variables")]
+    [Header("Projectile Pool variables")]
     public List<Projectile> listProjectilePool;
     public Projectile projectilePrefab;
     public int initialAmountProjectiles;
     private GameObject _projectilesHolder;
 
-    [Header("Fruit Pool variables")]
+    [Header("Projectile Above Pool variables")]
     public List<Projectile> listProjectileAbovePool;
     public Projectile projectileAbovePrefab;
     public int initialAmountProjectilesAbove;
     private GameObject _projectilesAboveHolder;
 
-    void Start()
+    [Header("Thorn Pool variables")]
+    public List<BossThorn> listThornPool;
+    public BossThorn thornPrefab;
+    public int initialAmountThorns;
+    private GameObject _thornsHolder;
+
+    void Awake()
     {
         InitializePool();
     }
@@ -41,6 +47,16 @@ public class PoolSystem : MonoBehaviour
             _projectileAbove.transform.SetParent(_projectilesAboveHolder.transform);
             _projectileAbove.gameObject.SetActive(false);
             listProjectileAbovePool.Add(_projectileAbove);
+        }
+
+        _thornsHolder = new GameObject("--- Thorns Pool");
+        _thornsHolder.transform.position = Vector2.zero;
+        for (int index = 0; index <= initialAmountThorns; index++)
+        {
+            BossThorn _thorns = Instantiate(thornPrefab);
+            _thorns.transform.SetParent(_thornsHolder.transform);
+            _thorns.gameObject.SetActive(false);
+            listThornPool.Add(_thorns);
         }
     }
 
@@ -89,6 +105,32 @@ public class PoolSystem : MonoBehaviour
             _toReturn = Instantiate(projectileAbovePrefab);
             _toReturn.transform.SetParent(_projectilesAboveHolder.transform);
             listProjectileAbovePool.Add(_toReturn);
+        }
+
+        _toReturn.gameObject.SetActive(true);
+
+        return _toReturn;
+    }
+
+    public BossThorn TryToGetThorn()
+    {
+        BossThorn _toReturn = null;
+
+        for (int index = 0; index < listThornPool.Count; index++)
+        {
+            BossThorn _possibleThorn = listThornPool[index];
+            if (!_possibleThorn.gameObject.activeSelf)
+            {
+                _toReturn = _possibleThorn;
+                break;
+            }
+        }
+
+        if (_toReturn == null)
+        {
+            _toReturn = Instantiate(thornPrefab);
+            _toReturn.transform.SetParent(_thornsHolder.transform);
+            listThornPool.Add(_toReturn);
         }
 
         _toReturn.gameObject.SetActive(true);

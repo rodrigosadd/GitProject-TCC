@@ -1,17 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BossController : MonoBehaviour
 {
     public static BossController instance;
     public Animator anim;
+    public Transform antlersAttackPoint;
+    public GameObject temporaryObj;
+    [HideInInspector]
+    public Vector3 playerDirection;
+    public float rangeAntlersAttack;
     public int life;
     public int enragedLife;
     public int enragedFinalLife;
+    private bool _canActivateAntlersAttack;
+    private bool _invunerable;
 
-    [HideInInspector]
-    public Vector3 playerDirection;
+#if UNITY_EDITOR
+    public bool seeRangeantlersAttack;
+#endif
+
+    public UnityEvent OnTakedamage;
+    public UnityEvent IsDead;
 
     void Awake()
     {
@@ -22,12 +34,20 @@ public class BossController : MonoBehaviour
     {
         CheckCurrentLife();
         Aim();
+        AntlersAttack();
     }
 
     public void TakeDamage()
     {
-        life--;
-        anim.SetBool("Hit", true);
+        if(!_invunerable)
+        {
+            _invunerable = true;
+            life--;
+            anim.SetBool("Hit", true);
+            StopCoroutine("ResetHit");
+            StartCoroutine("ResetHit");
+            OnTakedamage?.Invoke();
+        }
     }
 
     public void CheckCurrentLife()
@@ -35,11 +55,61 @@ public class BossController : MonoBehaviour
         if(life <= 0)
         {
             anim.SetBool("Dying", true);
+            IsDead?.Invoke();
         }
     }
 
+
+    IEnumerator ResetHit()
+    {
+        yield return new WaitForSeconds(1f);
+        anim.SetBool("Hit", false);
+        _invunerable = false;
+    }
+    
     public void Aim()
     {
         playerDirection = (PlayerController.instance.transform.position - transform.position).normalized;
     }
+
+    public void ActivateAntlersAttack()
+    {
+        _canActivateAntlersAttack = true;
+        seeRangeantlersAttack = true;
+        temporaryObj.SetActive(true);
+    }
+
+    public void DeactivateAntlersAttack()
+    {
+        _canActivateAntlersAttack = false;
+        seeRangeantlersAttack = false;
+        temporaryObj.SetActive(false);
+    }
+
+    public void AntlersAttack()
+    {   
+        if(_canActivateAntlersAttack)
+        {
+            RaycastHit _hitInfo;
+
+            if(Physics.Raycast(antlersAttackPoint.position, antlersAttackPoint.up, out _hitInfo, rangeAntlersAttack))
+            {
+                if(_hitInfo.transform.tag == "Player")
+                {
+                    PlayerController.instance.hit.hitCount = PlayerController.instance.hit.maxHitCount;
+                }
+            }
+        }
+    }
+
+#if UNITY_EDITOR
+     void OnDrawGizmos()
+     {
+          if (seeRangeantlersAttack)
+          {
+               Gizmos.color = Color.red;
+               Gizmos.DrawLine(antlersAttackPoint.position, antlersAttackPoint.position + antlersAttackPoint.up * rangeAntlersAttack);
+          }
+     }
+#endif
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8384535452045396856}
   - component: {fileID: 8384535452045396858}
+  - component: {fileID: 353341131667553383}
   - component: {fileID: 8384535452045396859}
   - component: {fileID: 3016199548854278640}
   m_Layer: 0
@@ -28,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 8384535452045396857}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 8384535452586992806}
   m_Father: {fileID: 0}
@@ -48,6 +49,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rbody: {fileID: 0}
   delayDeactivateObject: 3
+--- !u!114 &353341131667553383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384535452045396857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &8384535452045396859
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -70,7 +83,7 @@ Rigidbody:
   m_GameObject: {fileID: 8384535452045396857}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0

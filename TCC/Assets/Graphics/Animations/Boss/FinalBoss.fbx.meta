@@ -191,6 +191,20 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.20370372
+        functionName: ActivateAntlersAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.6666667
+        functionName: DeactivateAntlersAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -336,7 +350,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.5331808
-        functionName: SpawnProjectile
+        functionName: SpawnProjectileForward
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -379,14 +393,14 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.402746
-        functionName: SpawnProjectile
+        functionName: SpawnProjectileForward
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.7963387
-        functionName: SpawnProjectile
+        functionName: SpawnProjectileForward
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -573,6 +587,13 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
+      - time: 0.49873418
+        functionName: SpawnRandomPositionAbove
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -604,6 +625,13 @@ ModelImporter:
       events:
       - time: 0
         functionName: TimeToThirdAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.46296296
+        functionName: SpawnRandomPositionThorns
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -676,6 +704,13 @@ ModelImporter:
       events:
       - time: 0
         functionName: TimeToSecondAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.47530866
+        functionName: SpawnProjectileThrow
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

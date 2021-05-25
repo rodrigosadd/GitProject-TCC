@@ -244,7 +244,7 @@ public class PlayerAttackController : MonoBehaviour
                }
                else if(_hit.tag == "Boss")
                {
-                    _hit.transform.GetComponent<BossController>().TakeDamage();
+                    _hit.transform.GetComponentInParent<BossController>().TakeDamage();
                }
           }
      }

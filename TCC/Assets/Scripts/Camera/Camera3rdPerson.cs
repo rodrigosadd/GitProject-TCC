@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class Camera3rdPerson : MonoBehaviour
 {
      public static Camera3rdPerson instance;
      public Transform targetCamera;
+     public Transform targetCameraShake;
      public float minDistance;
      public float fixedMinDistance = 1.0f;
      public float maxDistance;
@@ -18,6 +20,8 @@ public class Camera3rdPerson : MonoBehaviour
      public bool invertAxisY;
      public bool canMove;
      public bool showObject;
+     public float durationShake;
+     public float strengthShake;
      private float _mouseX;
      private float _mouseY;
      private float _inputX;
@@ -26,6 +30,7 @@ public class Camera3rdPerson : MonoBehaviour
      private float _finalInputZ;
      private float _rotY = 0.0f;
      private float _rotX = 0.0f;
+     private Vector3 _startPositionTarget;
 
      void Awake()
      {
@@ -41,6 +46,7 @@ public class Camera3rdPerson : MonoBehaviour
           Cursor.visible = false;
           minDistance = fixedMinDistance;
           maxDistance = fixedMaxDistance;
+          _startPositionTarget = targetCamera.position;
      }
 
      void Update()
@@ -115,5 +121,14 @@ public class Camera3rdPerson : MonoBehaviour
           minDistance = fixedMinDistance;
           maxDistance = fixedMaxDistance;
           canMove = true;
+     }
+
+     public void CameraShake()
+     {    
+          Sequence sequence = DOTween.Sequence();
+
+          sequence.AppendCallback(() => targetCamera = targetCameraShake)
+                  .Append(targetCameraShake.DOShakePosition(durationShake, strengthShake).OnComplete(()=> targetCamera = PlayerController.instance.movement.targetCam))
+                  .AppendCallback(() => targetCameraShake.position = targetCamera.position);
      }
 }
