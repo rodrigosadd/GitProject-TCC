@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Animations.Rigging;
 
 public class BossAnimationController : MonoBehaviour
 {
@@ -10,6 +12,11 @@ public class BossAnimationController : MonoBehaviour
     public float delayToThirdAttack;
     public float delayToExitStunIdle;
     private bool _alreadyStartedAnimation;
+
+    public UnityEvent OnStunIdle;
+    public UnityEvent OnExitStunIdle;
+    public UnityEvent OnEnraged;
+    public UnityEvent OnEnragedFinal;
 
     public void TimeToFirstAttack()
     {
@@ -34,6 +41,7 @@ public class BossAnimationController : MonoBehaviour
     {
         if(!_alreadyStartedAnimation)
         {
+            OnExitStunIdle?.Invoke();
             _alreadyStartedAnimation = true;
             StopCoroutine("DelayToSecondAttack");
             StartCoroutine("DelayToSecondAttack");
@@ -94,6 +102,7 @@ public class BossAnimationController : MonoBehaviour
         anim.SetBool("Attack 2", false);
         anim.SetBool("Attack 3", false);
         anim.SetBool("Stun Idle", true);
+        OnStunIdle?.Invoke();
     }
 
     public void CheckLife()
@@ -105,6 +114,7 @@ public class BossAnimationController : MonoBehaviour
             anim.SetBool("Attack 2", false);
             anim.SetBool("Attack 3", false);
             anim.SetBool("Stun Idle", false);
+            OnEnraged?.Invoke();
         }
 
         if(BossController.instance.life == BossController.instance.enragedFinalLife)
@@ -115,6 +125,12 @@ public class BossAnimationController : MonoBehaviour
             anim.SetBool("Attack 2", false);
             anim.SetBool("Attack 3", false);
             anim.SetBool("Stun Idle", false);
+            OnEnragedFinal?.Invoke();
         }
+    }
+
+    public void SetCameraShake(float durationShake)
+    {
+        Camera3rdPerson.instance.CameraShake(durationShake);
     }
 }

@@ -14,6 +14,7 @@ public class Spawner : MonoBehaviour
     public Transform [] spawnPointsProjectileAbove;
     public float impulseForceProjectileAbove;
     public float timeToSpawnRandomPosition;
+    public int maxAmountProjectileAbove;
     public int amountProjectileAbove;
     public UnityEvent OnSpawnProjectileAbove;
 
@@ -58,7 +59,7 @@ public class Spawner : MonoBehaviour
         for (int i = 0; i < spawnPointsProjectileThrow.Length; i++)
         {
             Transform spawnPoint = spawnPointsProjectileThrow[i]; 
-            Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectile();
+            Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectilesThrow();
             projectile.rbody.velocity = Vector3.zero;
             projectile.transform.position = spawnPoint.position;
             projectile.transform.rotation = spawnPoint.rotation;
@@ -89,7 +90,9 @@ public class Spawner : MonoBehaviour
 
             if(amountProjectileAbove <= 0)
             {
+                amountProjectileAbove = maxAmountProjectileAbove;
                 _canSpawnProjectileAbove = false;
+                StopCoroutine("DelaySpawnRandomPosition");
             }
             yield return new WaitForSeconds(timeToSpawnRandomPosition);
         }

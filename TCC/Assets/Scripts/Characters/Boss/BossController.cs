@@ -22,6 +22,7 @@ public class BossController : MonoBehaviour
     public bool seeRangeantlersAttack;
 #endif
 
+    public UnityEvent OnAntlersAttack;
     public UnityEvent OnTakedamage;
     public UnityEvent IsDead;
 
@@ -44,9 +45,9 @@ public class BossController : MonoBehaviour
             _invunerable = true;
             life--;
             anim.SetBool("Hit", true);
+            OnTakedamage?.Invoke();
             StopCoroutine("ResetHit");
             StartCoroutine("ResetHit");
-            OnTakedamage?.Invoke();
         }
     }
 
@@ -77,6 +78,7 @@ public class BossController : MonoBehaviour
         _canActivateAntlersAttack = true;
         seeRangeantlersAttack = true;
         temporaryObj.SetActive(true);
+        OnAntlersAttack?.Invoke();
     }
 
     public void DeactivateAntlersAttack()
