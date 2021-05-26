@@ -10,7 +10,7 @@ public class Obstaculo_Dotweel_Moviment : MonoBehaviour
     public float animDuration;
     public float dist;
     public Ease effects;
-
+    public Vector3 direc;
     //public PathType pathType;
     //public PathMode pathMode;
     public Vector3[] path;
@@ -21,6 +21,11 @@ public class Obstaculo_Dotweel_Moviment : MonoBehaviour
         if (type == "elevator")
         {
             cube.DOMoveY(dist, animDuration).SetLoops(99, LoopType.Yoyo);
+        }
+
+        if (type == "push")
+        {
+           cube.DOMove(direc, animDuration).SetLoops(99, LoopType.Yoyo);
         }
     }
 }
