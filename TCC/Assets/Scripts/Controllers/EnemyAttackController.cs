@@ -9,7 +9,7 @@ public class EnemyAttackController : MonoBehaviour
      public LayerMask layerPlayer;
      public bool seeAttackRange;
 
-     public void AttackDetection()
+     public void EnemyAttackDetection()
      {
           Collider[] _hitPlayer = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerPlayer);
 

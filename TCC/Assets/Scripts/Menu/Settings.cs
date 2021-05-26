@@ -52,7 +52,7 @@ public class Settings : MonoBehaviour
      {
           if (!IsMenuScene())
           {
-               if (Input.GetButtonDown("Cancel") && !settingsOpen)
+               if (Input.GetButtonDown("Cancel") && !settingsOpen && !PlayerController.instance.levelMechanics.pickingUpItem)
                {
                     SetPauseTimeScale();
                     settings.gameObject.SetActive(true);

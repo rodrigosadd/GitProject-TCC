@@ -25,6 +25,8 @@ public class Slide : MonoBehaviour
                sliding = true;
                _countdownFinishSliding = 0;
                PlayerAttackController.instance.ResetAttack();
+               PlayerAnimationController.instance.oil.Play();
+               PlayerAnimationController.instance.dust.Stop();
           }
      }
      
@@ -49,6 +51,7 @@ public class Slide : MonoBehaviour
                               PlayerController.instance.levelMechanics.sliding = false;
                               PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                               sliding = false;
+                              PlayerAnimationController.instance.oil.Stop();
                          }
                     }
                     else
@@ -57,6 +60,7 @@ public class Slide : MonoBehaviour
                          PlayerController.instance.levelMechanics.sliding = false;
                          PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                          sliding = false;
+                         PlayerAnimationController.instance.oil.Stop();
                     }
                }
           }
@@ -77,6 +81,7 @@ public class Slide : MonoBehaviour
                     PlayerController.instance.levelMechanics.sliding = false;
                     PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;
                     sliding = false;
+                    PlayerAnimationController.instance.oil.Stop();
                }
           }
      }

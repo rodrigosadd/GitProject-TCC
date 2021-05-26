@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BreakableObject : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class BreakableObject : MonoBehaviour
      public GameObject[] brokenParts;
      public Rigidbody rbody;
      public Collider col;
+     public float durationShake;
+     public float strengthShake;
      public int maxHit;
      public int hit;
      public bool triggerBroken;
@@ -27,12 +30,12 @@ public class BreakableObject : MonoBehaviour
      public void TakeHit()
      {
           hit++;
-
+          transform.DOShakePosition(durationShake, strengthShake);
           if (hit >= maxHit && !triggerBroken)
           {
                triggerBroken = true;
                col.enabled = false;
-               DropObject();
+               DropObject();               
           }
      }
 

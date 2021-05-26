@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 0}
+  targetCameraShake: {fileID: 0}
   minDistance: 0
   fixedMinDistance: 1
   maxDistance: 0
@@ -57,6 +58,8 @@ MonoBehaviour:
   invertAxisY: 0
   canMove: 1
   showObject: 0
+  durationShake: 0.5
+  strengthShake: 0.3
 --- !u!1 &328130100312797695
 GameObject:
   m_ObjectHideFlags: 0

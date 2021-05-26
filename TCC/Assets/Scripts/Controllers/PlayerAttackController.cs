@@ -103,7 +103,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void SecondAttack()
      {
-          if (!PlayerController.instance.death.dead)
+          if (!PlayerController.instance.death.dead && PlayerController.instance.movement.canMove)
           {
                if (currentAttack >= 2)
                {
@@ -128,7 +128,7 @@ public class PlayerAttackController : MonoBehaviour
 
      public void FinalAttack()
      {
-          if (!PlayerController.instance.death.dead)
+          if (!PlayerController.instance.death.dead && PlayerController.instance.movement.canMove)
           {
                if (currentAttack >= 3)
                {
@@ -238,9 +238,13 @@ public class PlayerAttackController : MonoBehaviour
                {
                     _hit.transform.GetComponent<Enemy>().TakeHit();
                }
-               if (_hit.tag == "Breakable")
+               else if (_hit.tag == "Breakable")
                {
                     _hit.transform.GetComponent<BreakableObject>().TakeHit();
+               }
+               else if(_hit.tag == "Boss")
+               {
+                    _hit.transform.GetComponentInParent<BossController>().TakeDamage();
                }
           }
      }

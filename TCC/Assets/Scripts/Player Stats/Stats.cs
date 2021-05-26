@@ -3,15 +3,14 @@ using FMODUnity;
 
 public class Stats : MonoBehaviour
 {
+    public GameObject itemInformationsPanel;
     public Camera3rdPerson camera3RdPerson;
     public Transform targetCam;
     public Transform targetShowItem;
     public float timeToReturnPlayerTarget = 2f;
     public float maxDistancePickedUp;
     public float speedRotate;
-    public bool seeObject;
-    private float countdownToReturnPlayerTarget;
-    private bool canChangeTargetCam; 
+    private bool _canCloseSeeObj;
 
     [EventRef] public string collectSound;
     public void RotateObject()
@@ -20,34 +19,32 @@ public class Stats : MonoBehaviour
     }
 
     public void SeeObjectDrop()
-     {
-          if(seeObject)
+     {   
+          if(!PlayerController.instance.levelMechanics.pickingUpItem)
           {
-               canChangeTargetCam = true;
                camera3RdPerson.targetCamera = targetCam;
                camera3RdPerson.ConfigToShowObject();
                PlayerController.instance.movement.canMove = false;
                transform.position = targetShowItem.position;
+               PlayerAnimationController.instance.SetPowerUp();
+               PlayerController.instance.levelMechanics.pickingUpItem = true;
+               _canCloseSeeObj = true;
+               itemInformationsPanel.SetActive(true);
           }
      }
 
-     public void CountdownToReturnPlayerTarget()
+     public void ReturnPlayerTarget()
      {
-          if(canChangeTargetCam)
+          if(Input.GetButtonDown("Cancel") && _canCloseSeeObj)
           {
-               if(countdownToReturnPlayerTarget < 1)
-               {
-                    countdownToReturnPlayerTarget += Time.deltaTime / timeToReturnPlayerTarget;
-               }
-               else
-               {
-                    canChangeTargetCam = false;
-                    camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
-                    camera3RdPerson.ResetConfig();
-                    PlayerController.instance.movement.canMove = true;
-                    gameObject.SetActive(false);
-                    seeObject = false;
-               }
+               camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
+               camera3RdPerson.ResetConfig();
+               PlayerController.instance.movement.canMove = true;
+               gameObject.SetActive(false);
+               PlayerController.instance.movement.canMove = true;
+               PlayerController.instance.levelMechanics.pickingUpItem = false;
+               _canCloseSeeObj = false;
+               itemInformationsPanel.SetActive(false);
           }
      }
 }
