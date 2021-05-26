@@ -21,6 +21,12 @@ public class PoolSystem : MonoBehaviour
     public Projectile projectileThrowPrefab;
     public int initialAmountProjectilesThrow;
     private GameObject _projectileThrowHolder;
+    
+    [Header("Projectile In Dir Pool variables")]
+    public List<Projectile> listProjectileInDirPool;
+    public Projectile projectileInDirPrefab;
+    public int initialAmountProjectilesInDir;
+    private GameObject _projectileInDirHolder;
 
     [Header("Thorn Pool variables")]
     public List<BossThorn> listThornPool;
@@ -70,6 +76,16 @@ public class PoolSystem : MonoBehaviour
             _projectileThrow.transform.SetParent(_projectileThrowHolder.transform);
             _projectileThrow.gameObject.SetActive(false);
             listProjectileThrowPool.Add(_projectileThrow);
+        }
+
+        _projectileInDirHolder = new GameObject("--- Projectile In Dir Pool");
+        _projectileInDirHolder.transform.position = Vector2.zero;
+        for (int index = 0; index <= initialAmountProjectilesInDir; index++)
+        {
+            Projectile _projectileInDir = Instantiate(projectileInDirPrefab);
+            _projectileInDir.transform.SetParent(_projectileInDirHolder.transform);
+            _projectileInDir.gameObject.SetActive(false);
+            listProjectileInDirPool.Add(_projectileInDir);
         }
 
         _thornsHolder = new GameObject("--- Thorns Pool");
@@ -164,6 +180,32 @@ public class PoolSystem : MonoBehaviour
             _toReturn = Instantiate(projectileThrowPrefab);
             _toReturn.transform.SetParent(_projectileThrowHolder.transform);
             listProjectileThrowPool.Add(_toReturn);
+        }
+
+        _toReturn.gameObject.SetActive(true);
+
+        return _toReturn;
+    }
+
+    public Projectile TryToGetProjectilesInDir()
+    {
+        Projectile _toReturn = null;
+
+        for (int index = 0; index < listProjectileInDirPool.Count; index++)
+        {
+            Projectile _possibleProjectilesInDir = listProjectileInDirPool[index];
+            if (!_possibleProjectilesInDir.gameObject.activeSelf)
+            {
+                _toReturn = _possibleProjectilesInDir;
+                break;
+            }
+        }
+
+        if (_toReturn == null)
+        {
+            _toReturn = Instantiate(projectileInDirPrefab);
+            _toReturn.transform.SetParent(_projectileInDirHolder.transform);
+            listProjectileInDirPool.Add(_toReturn);
         }
 
         _toReturn.gameObject.SetActive(true);

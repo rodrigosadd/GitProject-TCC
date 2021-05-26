@@ -70,7 +70,7 @@ public class BossController : MonoBehaviour
     
     public void Aim()
     {
-        playerDirection = (PlayerController.instance.transform.position - transform.position).normalized;
+        playerDirection = (PlayerController.instance.movement.targetCam.position - transform.position).normalized;
     }
 
     public void ActivateAntlersAttack()

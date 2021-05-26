@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8384535452045396856}
   - component: {fileID: 8384535452045396858}
-  - component: {fileID: 6908826423424781877}
+  - component: {fileID: 353341131667553383}
   - component: {fileID: 8384535452045396859}
   - component: {fileID: 3016199548854278640}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Projectile In Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   rbody: {fileID: 0}
   delayDeactivateObject: 3
   hasShadow: 0
---- !u!114 &6908826423424781877
+--- !u!114 &353341131667553383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -62,7 +62,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11469592790ac954d8514deade6e769a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resetBoss: 1
 --- !u!135 &8384535452045396859
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -85,12 +84,12 @@ Rigidbody:
   m_GameObject: {fileID: 8384535452045396857}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &8384535452586992807
 GameObject:
@@ -140,7 +139,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8384535452586992807}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1

@@ -6,8 +6,10 @@ using UnityEngine.Events;
 public class Spawner : MonoBehaviour
 {
     [Header("Projectile Forward variables")]
-    public Transform [] spawnPointsProjectileForward;
-    public float impulseForceProjectileForward;
+    public Transform [] spawnPointsProjectileForwardRight;
+    public float impulseForceProjectileForwardRight;
+    public Transform [] spawnPointsProjectileForwardLeft;
+    public float impulseForceProjectileForwardLeft;
     public UnityEvent OnSpawnProjectileForward;
 
     [Header("Projectile Above variables")]
@@ -40,16 +42,30 @@ public class Spawner : MonoBehaviour
         SetDirection();
     }
 
-    void SpawnProjectileForward()
+    void SpawnProjectileForwardRight()
     {
-        for (int i = 0; i < spawnPointsProjectileForward.Length; i++)
+        for (int i = 0; i < spawnPointsProjectileForwardRight.Length; i++)
         {
-            Transform spawnPoint = spawnPointsProjectileForward[i]; 
+            Transform spawnPoint = spawnPointsProjectileForwardRight[i]; 
             Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectile();
             projectile.rbody.velocity = Vector3.zero;
             projectile.transform.position = spawnPoint.position;
             projectile.transform.rotation = spawnPoint.rotation;
-            projectile.rbody.AddForce(projectile.transform.up * impulseForceProjectileForward, ForceMode.Impulse);
+            projectile.rbody.AddForce(projectile.transform.up * impulseForceProjectileForwardRight, ForceMode.Impulse);
+        }                                   
+        OnSpawnProjectileForward?.Invoke(); 
+    }
+
+    void SpawnProjectileForwardLeft()
+    {
+        for (int i = 0; i < spawnPointsProjectileForwardLeft.Length; i++)
+        {
+            Transform spawnPoint = spawnPointsProjectileForwardLeft[i]; 
+            Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectile();
+            projectile.rbody.velocity = Vector3.zero;
+            projectile.transform.position = spawnPoint.position;
+            projectile.transform.rotation = spawnPoint.rotation;
+            projectile.rbody.AddForce(projectile.transform.up * impulseForceProjectileForwardLeft, ForceMode.Impulse);
         }                                   
         OnSpawnProjectileForward?.Invoke(); 
     }
@@ -106,7 +122,7 @@ public class Spawner : MonoBehaviour
 
     void SpawnProjectileInDirection()
     {
-        Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectileAbove();
+        Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectilesInDir();
         projectile.rbody.velocity = Vector3.zero;
         projectile.transform.position = spawnPointProjectileInDir.position;
         projectile.transform.rotation = spawnPointProjectileInDir.rotation;

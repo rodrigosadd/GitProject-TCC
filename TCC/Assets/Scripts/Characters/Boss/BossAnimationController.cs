@@ -42,7 +42,7 @@ public class BossAnimationController : MonoBehaviour
         if(!_alreadyStartedAnimation)
         {
             OnExitStunIdle?.Invoke();
-            _alreadyStartedAnimation = true;
+            _alreadyStartedAnimation = true;            
             StopCoroutine("DelayToSecondAttack");
             StartCoroutine("DelayToSecondAttack");
         }
