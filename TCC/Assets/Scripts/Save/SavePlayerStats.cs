@@ -17,6 +17,13 @@ public class SavePlayerStats : MonoBehaviour
           PlayerPrefs.SetInt("IndexCanSeeTeleport", 0);
      }
 
+     public void SetMultiplayerStats()
+     {
+          Debug.Log("Clean Stats");
+          PlayerPrefs.SetInt("IndexMaxJump", 2);
+          PlayerPrefs.SetInt("IndexCanAttack", 1);
+          PlayerPrefs.SetInt("IndexCanSeeTeleport", 1);
+     }
      public void Save()
      {
           Debug.Log("Save Stats");
