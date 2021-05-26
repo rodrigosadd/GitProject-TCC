@@ -60,6 +60,36 @@ Transform:
   m_Father: {fileID: 5633505654633755389}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1315062369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315062370}
+  m_Layer: 11
+  m_Name: Target Cam Shake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1315062370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315062369}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_Children: []
+  m_Father: {fileID: 8340338824846291260}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1736764252
 GameObject:
   m_ObjectHideFlags: 0
@@ -6020,6 +6050,7 @@ MonoBehaviour:
     exitTeleport: 0
     interacting: 0
     canSeeTeleport: 0
+    pickingUpItem: 0
   jump:
     groundDetector: {fileID: 7316757490277970053}
     jumpShadow: {fileID: 0}
@@ -6072,6 +6103,8 @@ MonoBehaviour:
     head: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     body: {fileID: 2100000, guid: c6aba0ff1bf1d3c40afd263872e3a98d, type: 2}
     pickaxe: {fileID: 2100000, guid: a5641b93f4e34a6419d701c8104cc60e, type: 2}
+    crossfadeEnd: {fileID: 0}
+    crossfadeStart: {fileID: 0}
     currentPoint: {fileID: 0}
     timeDead: 2
     timeToMoveAfterDead: 0.8
@@ -6081,6 +6114,8 @@ MonoBehaviour:
     speedBodyCutoffHeightAppear: 4
     speedPickaxeCutoffHeightDisappear: 1.5
     speedPickaxeCutoffHeightAppear: 4
+    delayCrossfadeEnd: 1
+    delayCrossfadeStart: 0.8
     offsetDead: 1
     dead: 0
     canSetAppearShader: 0
@@ -16099,6 +16134,7 @@ Transform:
   - {fileID: 112067761}
   - {fileID: 1736764253}
   - {fileID: 3300136948924726593}
+  - {fileID: 1315062370}
   m_Father: {fileID: 3298514136166854644}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16137,7 +16173,7 @@ MonoBehaviour:
   targetAttack: {fileID: 4925743234915172221}
   layerObjs:
     serializedVersion: 2
-    m_Bits: 17408
+    m_Bits: 82944
   trails:
   - {fileID: 2432572767439872910}
   - {fileID: 6462945160509493410}

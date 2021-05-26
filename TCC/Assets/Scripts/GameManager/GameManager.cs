@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
      public PlayerStatsData playerStatsData;
      public SavePlayerStats savePlayerStats;
      public AudioSettings audioSettings;
+     public PoolSystem poolSystem;
 
      void Awake()
      {

@@ -140,7 +140,9 @@ public class PlayerController : Character
 
      [System.Serializable]
      public class Death
-     {
+     {    
+          public GameObject boss;
+          public GameObject bossTrigger;
           public Material head;
           public Material body;
           public Material pickaxe;
@@ -358,7 +360,7 @@ public class PlayerController : Character
 
      public void JumpShadow()
      {
-          if (!movement.isGrounded)
+          if (!movement.isGrounded && !death.dead)
           {
                RaycastHit _hitInfo;
                if (Physics.Raycast(transform.position, Vector3.up * -1, out _hitInfo, jump.maxDistanceShadow))
@@ -765,7 +767,10 @@ public class PlayerController : Character
                if (!death.dead)
                {
                     movement.maxSpeed = 0;
-                    death.dead = true;
+                    death.dead = true;      
+                    PlayerController.instance.movement.gravity = 0;
+                    PlayerController.instance.movement.velocity = Vector3.zero;
+                    PlayerController.instance.movement.maxSpeed = 0;               
                     StartCoroutine("AfterDeath");
                }
           }

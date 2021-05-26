@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5055293647748232704}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Statue2_Base
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,10 @@ PrefabInstance:
     - target: {fileID: 6319957617180290107, guid: 14c2d782bc9cdfd47b4552f273698e0f, type: 3}
       propertyPath: m_Name
       value: Pillar_Body_Part_2 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6319957617180290107, guid: 14c2d782bc9cdfd47b4552f273698e0f, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 6701126839600838273, guid: 14c2d782bc9cdfd47b4552f273698e0f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -120,6 +124,10 @@ PrefabInstance:
     - target: {fileID: 8218857973679936118, guid: f8e543b3dfa46fd409dd195b882d953a, type: 3}
       propertyPath: m_Name
       value: Statue2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8218857973679936118, guid: f8e543b3dfa46fd409dd195b882d953a, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8738372392031881420, guid: f8e543b3dfa46fd409dd195b882d953a, type: 3}
       propertyPath: m_LocalPosition.x
