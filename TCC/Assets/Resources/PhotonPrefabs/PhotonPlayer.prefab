@@ -5940,6 +5940,8 @@ GameObject:
   - component: {fileID: 1900117761952523965}
   - component: {fileID: 3298514135490557513}
   - component: {fileID: 4663215516087604179}
+  - component: {fileID: -8215065744400766308}
+  - component: {fileID: 4896375722804791457}
   m_Layer: 11
   m_Name: PhotonPlayer
   m_TagString: Player
@@ -5959,6 +5961,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8340338824846291260}
+  - {fileID: 5080119712936876657}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -6020,17 +6023,17 @@ MonoBehaviour:
     entryTeleport: 0
     exitTeleport: 0
     interacting: 0
-    canSeeTeleport: 0
+    canSeeTeleport: 1
     pickingUpItem: 0
   jump:
     groundDetector: {fileID: 7316757490277970053}
-    jumpShadow: {fileID: 0}
+    jumpShadow: {fileID: 7172526712204078827, guid: 73194a2b39be8bd4bbdcbeaf978d6a49, type: 3}
     handMaterial: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     fallingDust: {fileID: 2130165113}
     fallMultiplier: 0
     lowJumpMultiplier: 0
     currentJump: 0
-    maxJump: 1
+    maxJump: 2
     jumpForce: 7
     doubleJumpTime: 0.41
     doubleJumpCountdown: 0
@@ -6153,10 +6156,44 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 4896375722804791457}
+  - {fileID: 1168894429622250275}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &-8215065744400766308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741654644317177979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a15297e75d7ed3b46b79f7eeafe11ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PhotonView: {fileID: 4663215516087604179}
+  cameraPrefab: {fileID: 328130099107844306, guid: 19cac975af1dffe489bb62a3beaa9a53, type: 3}
+  camSpawnPoint: {fileID: 5080119712936876657}
+  animator: {fileID: 6995068270813550338}
+--- !u!114 &4896375722804791457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741654644317177979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &742102270929266609
 GameObject:
   m_ObjectHideFlags: 0
@@ -16095,6 +16132,7 @@ GameObject:
   - component: {fileID: 6982425783301506864}
   - component: {fileID: 2202987477871483687}
   - component: {fileID: 6995068270813550338}
+  - component: {fileID: 1168894429622250275}
   m_Layer: 11
   m_Name: Graphics Beto
   m_TagString: Player
@@ -16178,7 +16216,7 @@ MonoBehaviour:
   distanceImpulse: 2
   timeToResetAttack: 1.5
   attaking: 0
-  canAttack: 0
+  canAttack: 1
   seeAttackRange: 0
 --- !u!114 &2202987477871483687
 MonoBehaviour:
@@ -16227,6 +16265,93 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1168894429622250275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4492273609177044784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 0
+    Name: IsGrounded
+  - Type: 4
+    SynchronizeType: 0
+    Name: Power Up
+  - Type: 4
+    SynchronizeType: 0
+    Name: Dying
+  - Type: 4
+    SynchronizeType: 0
+    Name: Interacting
+  - Type: 4
+    SynchronizeType: 0
+    Name: Idle
+  - Type: 4
+    SynchronizeType: 0
+    Name: Falling Idle
+  - Type: 4
+    SynchronizeType: 0
+    Name: Falling Running
+  - Type: 4
+    SynchronizeType: 0
+    Name: Falling Ground
+  - Type: 4
+    SynchronizeType: 0
+    Name: Pushing Idle
+  - Type: 4
+    SynchronizeType: 0
+    Name: Running
+  - Type: 4
+    SynchronizeType: 0
+    Name: Pushing
+  - Type: 4
+    SynchronizeType: 0
+    Name: Balance
+  - Type: 4
+    SynchronizeType: 0
+    Name: First Attack
+  - Type: 4
+    SynchronizeType: 0
+    Name: Second Attack
+  - Type: 4
+    SynchronizeType: 0
+    Name: Final Attack
+  - Type: 4
+    SynchronizeType: 0
+    Name: Single Jump
+  - Type: 4
+    SynchronizeType: 0
+    Name: Single Jump Running
+  - Type: 4
+    SynchronizeType: 0
+    Name: Double Jump
+  - Type: 4
+    SynchronizeType: 0
+    Name: Falling Action
+  - Type: 4
+    SynchronizeType: 0
+    Name: Drop Box
+  - Type: 4
+    SynchronizeType: 0
+    Name: Sliding
+  - Type: 4
+    SynchronizeType: 0
+    Name: Entry Teleport
+  - Type: 4
+    SynchronizeType: 0
+    Name: Exit Teleport
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &4507179826497727707
 GameObject:
   m_ObjectHideFlags: 0
@@ -26773,6 +26898,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5212613216349380720}
   m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8085887955168974126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5080119712936876657}
+  m_Layer: 11
+  m_Name: CameraPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5080119712936876657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085887955168974126}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: -4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3298514136166854644}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8100904123713305856
 GameObject:

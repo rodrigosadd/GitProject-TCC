@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
           {
                InRuntimePersistentData.Instance.lastLoadedLevel = lastScene;
           }
-
           LevelLoader.instance.LoadNextLevel(index);
      }
 
