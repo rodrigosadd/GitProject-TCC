@@ -99,9 +99,19 @@ public class BossController : MonoBehaviour
                 if(_hitInfo.transform.tag == "Player")
                 {
                     PlayerController.instance.hit.hitCount = PlayerController.instance.hit.maxHitCount;
+                    StopCoroutine("DelayDeactivateBoss");
+                    StartCoroutine("DelayDeactivateBoss");
                 }
             }
         }
+    }
+
+    IEnumerator DelayDeactivateBoss()
+    {
+        yield return new WaitForSeconds(1.8f);
+        PlayerController.instance.death.boss.SetActive(false);
+        PlayerController.instance.death.boss = null;
+        PlayerController.instance.death.bossTrigger.SetActive(true);
     }
 
 #if UNITY_EDITOR

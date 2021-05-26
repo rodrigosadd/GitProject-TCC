@@ -6,6 +6,7 @@ using UnityEngine.Animations.Rigging;
 
 public class BossAnimationController : MonoBehaviour
 {
+    public static BossAnimationController instance;
     public Animator anim;
     public float delayToFirstAttack;
     public float delayToSecondAttack;
@@ -17,6 +18,11 @@ public class BossAnimationController : MonoBehaviour
     public UnityEvent OnExitStunIdle;
     public UnityEvent OnEnraged;
     public UnityEvent OnEnragedFinal;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     public void TimeToFirstAttack()
     {
@@ -42,7 +48,7 @@ public class BossAnimationController : MonoBehaviour
         if(!_alreadyStartedAnimation)
         {
             OnExitStunIdle?.Invoke();
-            _alreadyStartedAnimation = true;            
+            _alreadyStartedAnimation = true;           
             StopCoroutine("DelayToSecondAttack");
             StartCoroutine("DelayToSecondAttack");
         }

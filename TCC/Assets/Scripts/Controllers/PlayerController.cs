@@ -140,7 +140,9 @@ public class PlayerController : Character
 
      [System.Serializable]
      public class Death
-     {
+     {    
+          public GameObject boss;
+          public GameObject bossTrigger;
           public Material head;
           public Material body;
           public Material pickaxe;
