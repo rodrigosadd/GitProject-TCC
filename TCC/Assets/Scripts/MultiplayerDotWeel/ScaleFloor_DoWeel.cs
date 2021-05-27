@@ -12,6 +12,7 @@ public class ScaleFloor_DoWeel : MonoBehaviour
     private void Start()
     {
         cube = this.gameObject.transform;
-        cube.DOScale(new Vector3(dist,0.5f,dist), animDuration).SetLoops(99, LoopType.Yoyo);
+        float durat = Random.Range(1, 4);
+        cube.DOScale(new Vector3(dist,0.5f,dist), durat).SetLoops(99, LoopType.Yoyo);
     }
 }
