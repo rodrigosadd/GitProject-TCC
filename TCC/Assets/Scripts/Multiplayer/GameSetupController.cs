@@ -43,17 +43,29 @@ public class GameSetupController : MonoBehaviour
         if(readyToCount) {
             if(counter < initTimer) {
                 counter += Time.deltaTime;
-                counterText.text = Mathf.RoundToInt(initTimer - counter).ToString();
+                counterText.text = "Initializing in " Mathf.RoundToInt(initTimer - counter).ToString() + " seconds, get ready!";
             }
             else {
                 if(!isGameReady) {
+                    counterText.text = "Start!";
                     StartGame();
                 }
             }
+        }
+        else {
+            counterText.text = "Waiting for players to join...";
         }
     }
 
     private void StartGame() { //Start the racing.
         isGameReady = true;
+    }
+
+    public void PanelSlideAnimation(string mode) {
+        switch (mode)
+        {
+            
+            // default:
+        }
     }
 }
