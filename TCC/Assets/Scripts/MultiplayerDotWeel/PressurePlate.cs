@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PressurePlate : MonoBehaviour
+public class PressurePlate : MonoBehaviourPun
 {
     public GameObject gameObject_Active;
     float time;
@@ -12,15 +13,17 @@ public class PressurePlate : MonoBehaviour
     {
         if (OnTime)
         {
-            TimeCount();
+            photonView.RPC("TimeCount", RpcTarget.AllBuffered);
         }
     }
+    [PunRPC]
     public void ActiveObject()
     {
         gameObject_Active.SetActive(true);
         OnTime = true;
     }
 
+    [PunRPC]
     public void TimeCount()
     {
         time = time + 1 * Time.deltaTime;
@@ -35,7 +38,7 @@ public class PressurePlate : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ActiveObject();
+            photonView.RPC("ActiveObject",RpcTarget.AllBuffered);
         }
     }
 }
