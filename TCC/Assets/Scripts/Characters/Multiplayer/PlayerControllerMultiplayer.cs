@@ -132,7 +132,6 @@ public class PlayerControllerMultiplayer : Character
 
      [Header("Photon variables")]
      public Photon photon;
-     private PlayerController m_CharacterController;
      [System.Serializable]
      public class Photon
      { 
@@ -165,33 +164,36 @@ public class PlayerControllerMultiplayer : Character
           movement.fixedGravity = movement.gravity;
           ResetValueDissolveShader();
 
-          m_CharacterController = PlayerController.instance;
           photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
           GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
-          m_CharacterController.movement.cam = _cam.transform;
+          movement.cam = _cam.transform;
      }
 
      void Update()
      {
-          Gravity();
-          CharacterJump();
-          CheckIsGrounded();          
-          CliffDetector();
-          CharacterFace();
-          JumpShadow();
-          SlopeDetector();
-          SetHandShader();
-          ResetCurrentJump();
-          CatchMissedJumps();
-          CheckDeath();
-          SetDissolveShaderAppear();          
-          SetDissolveShaderDisappear();
-          PlayerConfigsAfterDeath();
+          if(photon.m_PhotonView.IsMine)
+          {
+               Gravity();
+               CharacterJump();
+               CheckIsGrounded();          
+               CliffDetector();
+               CharacterFace();
+               JumpShadow();
+               SlopeDetector();
+               SetHandShader();
+               ResetCurrentJump();
+               CatchMissedJumps();
+               CheckDeath();
+               SetDissolveShaderAppear();          
+               SetDissolveShaderDisappear();
+               PlayerConfigsAfterDeath();
+          }
      }
 
      void FixedUpdate()
      {
-          UpdateMovementPlayer();
+          if(photon.m_PhotonView.IsMine)
+               UpdateMovementPlayer();
      }
 
      public void SetControllerPosition(Vector3 toPosition)

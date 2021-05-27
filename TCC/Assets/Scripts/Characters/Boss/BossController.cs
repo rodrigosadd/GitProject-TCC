@@ -8,7 +8,7 @@ public class BossController : MonoBehaviour
     public static BossController instance;
     public Animator anim;
     public Transform antlersAttackPoint;
-    public GameObject temporaryObj;
+    public GameObject antlersAttackLaser;
     [HideInInspector]
     public Vector3 playerDirection;
     public float rangeAntlersAttack;
@@ -77,7 +77,7 @@ public class BossController : MonoBehaviour
     {
         _canActivateAntlersAttack = true;
         seeRangeantlersAttack = true;
-        temporaryObj.SetActive(true);
+        antlersAttackLaser.SetActive(true);
         OnAntlersAttack?.Invoke();
     }
 
@@ -85,7 +85,7 @@ public class BossController : MonoBehaviour
     {
         _canActivateAntlersAttack = false;
         seeRangeantlersAttack = false;
-        temporaryObj.SetActive(false);
+        antlersAttackLaser.SetActive(false);
     }
 
     public void AntlersAttack()
@@ -95,7 +95,7 @@ public class BossController : MonoBehaviour
             RaycastHit _hitInfo;
 
             if(Physics.Raycast(antlersAttackPoint.position, antlersAttackPoint.up, out _hitInfo, rangeAntlersAttack))
-            {
+            {               
                 if(_hitInfo.transform.tag == "Player")
                 {
                     PlayerController.instance.hit.hitCount = PlayerController.instance.hit.maxHitCount;
@@ -112,7 +112,7 @@ public class BossController : MonoBehaviour
         PlayerController.instance.death.boss.SetActive(false);
         PlayerController.instance.death.boss = null;
         PlayerController.instance.death.bossTrigger.SetActive(true);
-    }
+    }   
 
 #if UNITY_EDITOR
      void OnDrawGizmos()
