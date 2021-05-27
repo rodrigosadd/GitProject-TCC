@@ -36,6 +36,8 @@ public class Projectile : MonoBehaviour
 
             _countdown = 0;   
             gameObject.SetActive(false);
+            BossController.instance.StopCoroutine("DelayDeactivateBoss");
+            BossController.instance.StartCoroutine("DelayDeactivateBoss");
         }
         else if(other.tag == "Ground" && hasShadow)
         {
@@ -46,7 +48,6 @@ public class Projectile : MonoBehaviour
             gameObject.SetActive(false);  
         }
     }
-
     void CountdownDeactivateObject()
     {
         if(_countdown < 1)

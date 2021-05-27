@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerController : Character
+public class PlayerControllerMultiplayer : Character
 {
-     public static PlayerController instance;
+    public static PlayerControllerMultiplayer instance;
 
      [Header("Movement variables")]
      public Movement movement;
@@ -21,7 +22,6 @@ public class PlayerController : Character
           public LayerMask groundMask;
           public CharacterController controller;
           public Transform cam;
-          public Transform targetCam;
           public Transform groundCheck;
           public float groundDistance;
           public float gravity = -9.81f;
@@ -36,7 +36,7 @@ public class PlayerController : Character
           public float horizontal, vertical;
      }
 
-     [Header("Level Mechanics variables")]
+     [Header("Jump variables")]
      public LevelMechanics levelMechanics;
 
      [System.Serializable]
@@ -47,8 +47,6 @@ public class PlayerController : Character
           public bool entryTeleport;
           public bool exitTeleport;
           public bool interacting;
-          public bool canSeeTeleport;
-          public bool pickingUpItem;
      }
 
      [Header("Jump variables")]
@@ -74,35 +72,6 @@ public class PlayerController : Character
           public float rangeFallingGround;
           public float handShaderStrength;
           public float groundDetectorRange;
-     }
-
-
-     [Header("Push variables")]
-     public Push push;
-     private Rigidbody _targetPushRbody;
-     private float _countdownAfterDropping;
-     private float _countdownSetPositionDropObject;
-
-     [System.Serializable]
-     public class Push
-     {
-          public Slow slowReference;
-          public Transform targetDropPush;
-          public Transform targetPushLight;
-          public Transform targetPushHeavy;
-          public Transform currentTargetPush;
-          public Transform middleOfThePlayer;
-          public float rangePush;
-          public float rangeDrop;
-          public float timeToReturnMovement;
-          public float timeToSetPositionDropObject;
-          public float speedPush;
-          public float velocityDropObject;
-          public float maxDistanceCurrentObject;
-          public bool pushingObj;
-          public bool droppingObj;
-          public bool setPositionDropObject;
-          public bool canDropBox;
      }
 
      [Header("Cliff variables")]
@@ -141,13 +110,9 @@ public class PlayerController : Character
      [System.Serializable]
      public class Death
      {    
-          public GameObject boss;
-          public GameObject bossTrigger;
           public Material head;
           public Material body;
           public Material pickaxe;
-          public GameObject crossfadeEnd;
-          public GameObject crossfadeStart;
           public Transform currentPoint;
           public float timeDead;
           public float timeToMoveAfterDead;
@@ -157,8 +122,6 @@ public class PlayerController : Character
           public float speedBodyCutoffHeightAppear;
           public float speedPickaxeCutoffHeightDisappear;
           public float speedPickaxeCutoffHeightAppear;
-          public float delayCrossfadeEnd;
-          public float delayCrossfadeStart;
           public float offsetDead;
           public bool dead;
           [HideInInspector]
@@ -167,6 +130,18 @@ public class PlayerController : Character
           public bool canSetDisappearShader;
      }
 
+     [Header("Photon variables")]
+     public Photon photon;
+     private PlayerController m_CharacterController;
+     [System.Serializable]
+     public class Photon
+     { 
+          public PhotonView m_PhotonView;
+          public GameObject cameraPrefab;
+          public Transform camSpawnPoint;
+          public Animator animator;
+     }
+     
 #if UNITY_EDITOR
      [Header("See Range variables")]
      public bool seeRangePush = false;
@@ -177,10 +152,10 @@ public class PlayerController : Character
      public bool seeRangeFalling = false;
 #endif
 
-     void Awake()
-     {
-          instance = this;
-     }
+    void Awake()
+    {
+        instance = this;   
+    }
 
      void Start()
      {
@@ -188,9 +163,12 @@ public class PlayerController : Character
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
           movement.fixedGravity = movement.gravity;
-          GameManager.instance.savePlayerStats.Load();
-          GameManager.instance.playerStatsData.ApplySettings();
           ResetValueDissolveShader();
+
+          m_CharacterController = PlayerController.instance;
+          photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
+          GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
+          m_CharacterController.movement.cam = _cam.transform;
      }
 
      void Update()
@@ -198,12 +176,6 @@ public class PlayerController : Character
           Gravity();
           CharacterJump();
           CheckIsGrounded();          
-          PushingObject();
-          UpdatePushedObj();
-          SetPositionCurrentTargetPush();
-          SetPositionDropObject();
-          CountdownAfterDropping();
-          CountdownSetPositionDropObject();
           CliffDetector();
           CharacterFace();
           JumpShadow();
@@ -232,7 +204,7 @@ public class PlayerController : Character
      #region Movement Player
      private void UpdateMovementPlayer()
      {
-          if (movement.canMove && !death.dead && !levelMechanics.sliding && !push.droppingObj && !levelMechanics.interacting)
+          if (movement.canMove && !death.dead && !levelMechanics.sliding && !levelMechanics.interacting)
           {
                movement.vertical = Input.GetAxis("Vertical");               
                movement.horizontal = Input.GetAxis("Horizontal");
@@ -262,7 +234,7 @@ public class PlayerController : Character
 
      public void CharacterFace()
      {
-          if (movement.canMove && !death.dead && !levelMechanics.entryTeleport && !levelMechanics.exitTeleport && !levelMechanics.sliding && !push.droppingObj)
+          if (movement.canMove && !death.dead && !levelMechanics.entryTeleport && !levelMechanics.exitTeleport && !levelMechanics.sliding)
           {
                if (_direction.magnitude >= 0.1f)
                {
@@ -313,16 +285,15 @@ public class PlayerController : Character
           if (Input.GetButtonDown("Jump") && 
               CanJump() &&
               movement.canMove &&
-              push.pushingObj == false &&
               !levelMechanics.sliding &&
-              !PlayerAttackController.instance.attaking &&
-              PlayerAttackController.instance.currentAttack == 0 &&
-              !GameManager.instance.settingsData.settingsOpen &&
-              !PlayerAnimationController.instance.afterFalling &&
+              //!PlayerAttackController.instance.attaking &&
+              //PlayerAttackController.instance.currentAttack == 0 &&
+              //!GameManager.instance.settingsData.settingsOpen &&
+              //!PlayerAnimationController.instance.afterFalling &&
               (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0))
           {
                movement.velocity.y = Mathf.Sqrt(2f * -2f * movement.gravity);
-               PlayerAnimationController.instance.fallingIdle = false;
+               //PlayerAnimationController.instance.fallingIdle = false;
                jump.doubleJumpCountdown = 0;
                jump.currentJump++;
           }
@@ -332,10 +303,10 @@ public class PlayerController : Character
      {
           if (movement.isGrounded &&
               movement.velocity.y < 0 &&
-              !PlayerAnimationController.instance.fallingIdle &&
+              //!PlayerAnimationController.instance.fallingIdle &&
               jump.currentJump > 0)
           {
-               PlayerAnimationController.instance.fallingIdle = false;
+               //PlayerAnimationController.instance.fallingIdle = false;
                jump.currentJump = 0;
                jump.doubleJumpCountdown = 0;
                movement.velocity.y = -2f;
@@ -394,7 +365,7 @@ public class PlayerController : Character
      {
           RaycastHit _hitInfo;
 
-          if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.up * -1, out _hitInfo, jump.rangeSlopeDetector))
+          if (Physics.Raycast(transform.position + new Vector3(0f, 1f, 0f), transform.up * -1, out _hitInfo, jump.rangeSlopeDetector))
           {
                if (_hitInfo.transform.tag == "Ground")
                {
@@ -429,277 +400,6 @@ public class PlayerController : Character
      }
      #endregion
 
-     #region Pushing Object
-     private void PushingObject()
-     {
-          if (Input.GetButtonDown("Push") &&
-              movement.canMove &&
-              movement.isGrounded &&
-              !push.droppingObj &&
-              !PlayerAnimationController.instance.fallingIdle &&
-              PlayerAttackController.instance.currentAttack == 0)
-          {                             
-               if(!PushObject())
-               {    
-                    DropObject();                   
-               }
-          }
-
-          if(!movement.isGrounded && movement.velocity.y < -5)
-          {
-               DropObjectAfterFalling();
-          }
-
-          if (push.currentTargetPush != null && !push.currentTargetPush.gameObject.activeSelf)
-          {
-               DropDeactiveObject();
-          }
-     }
-
-     public bool PushObject()
-     {
-          RaycastHit _hit;
-
-          if (push.currentTargetPush == null)
-          {
-               if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
-               {
-                    push.currentTargetPush = _hit.transform;
-                    return true;
-               }
-          }
-          return false;
-     }
-
-     public void UpdatePushedObj()
-     {
-          if(push.currentTargetPush == null || push.droppingObj)
-          {
-               return;
-          }
-
-          if (push.currentTargetPush.tag == "Light")
-          {
-               push.pushingObj = true;
-               push.currentTargetPush.position = push.targetPushLight.position;
-               SetPushSpeed();
-               SetTargetPushComponents();
-          }
-          else if (push.currentTargetPush.tag == "Heavy")
-          {
-               push.pushingObj = true;
-               push.currentTargetPush.position = push.targetPushHeavy.position;
-               SetPushSpeed();
-               SetTargetPushComponents();
-          }
-     }
-
-     public void SetTargetPushComponents()
-     {
-          if (_targetPushRbody == null)
-          {
-               _targetPushRbody = push.currentTargetPush.GetComponent<Rigidbody>();
-               var coll = push.currentTargetPush.GetComponent<Collider>();
-
-
-               if (_targetPushRbody != null)
-               {
-                    _targetPushRbody.isKinematic = true;
-               }
-
-               if (coll != null)
-               {
-                    coll.enabled = false;
-               }
-          }
-     }
-
-     public void ResetTargetPushComponents()
-     {
-          var coll = push.currentTargetPush.GetComponent<Collider>();
-
-          if (_targetPushRbody != null)
-          {
-               _targetPushRbody.isKinematic = false;
-          }
-          if (coll != null)
-          {
-               coll.enabled = true;
-          }
-
-          _targetPushRbody = null;
-     }
-
-     public void SetPositionCurrentTargetPush()
-     {
-          if (push.currentTargetPush != null && !push.setPositionDropObject)
-          {
-               if (push.currentTargetPush.tag == "Light")
-               {
-                    push.currentTargetPush.position = push.targetPushLight.position;
-                    push.currentTargetPush.rotation = push.targetPushLight.rotation;
-               }
-               else if (push.currentTargetPush.tag == "Heavy")
-               {
-                    push.currentTargetPush.position = push.targetPushHeavy.position;
-                    push.currentTargetPush.rotation = push.targetPushHeavy.rotation;
-               }
-          }
-     }
-
-     public void DropObject()
-     {
-          if (push.currentTargetPush != null)
-          {
-               if (push.currentTargetPush.tag == "Light")
-               {
-                    push.pushingObj = false;
-                    push.droppingObj = true;
-                    push.setPositionDropObject = true;
-                    movement.maxSpeed = movement.fixedMaxSpeed;
-                    push.slowReference = null;
-                    ResetTargetPushComponents();
-               }
-               else if (push.currentTargetPush.tag == "Heavy")
-               {
-                    push.pushingObj = false;
-                    push.droppingObj = true;
-                    push.setPositionDropObject = true;
-                    movement.maxSpeed = movement.fixedMaxSpeed;
-                    push.slowReference = null;
-                    ResetTargetPushComponents();
-               }
-
-          }
-     }
-
-     public void DropObjectAfterFalling()
-     {
-          if (push.currentTargetPush != null)
-          {
-               if (push.currentTargetPush.tag == "Light")
-               {
-                    push.pushingObj = false;
-                    push.droppingObj = true;                    
-                    movement.maxSpeed = movement.fixedMaxSpeed;
-                    push.slowReference = null;
-                    _countdownAfterDropping = 1;
-                    ResetTargetPushComponents();
-               }
-               else if (push.currentTargetPush.tag == "Heavy")
-               {
-                    push.pushingObj = false;
-                    push.droppingObj = true;                    
-                    movement.maxSpeed = movement.fixedMaxSpeed;
-                    push.slowReference = null;
-                     _countdownAfterDropping = 1;
-                    ResetTargetPushComponents();
-               }
-
-          }
-     }
-
-     public void DropDeactiveObject()
-     {
-          if (push.currentTargetPush != null)
-          {
-               if (push.currentTargetPush.tag == "Light")
-               {
-                    push.pushingObj = false;
-                    movement.maxSpeed = movement.fixedMaxSpeed;
-                    push.slowReference = null;
-                    push.currentTargetPush = null;
-               }
-               else if (push.currentTargetPush.tag == "Heavy")
-               {
-                    push.pushingObj = false;
-                    movement.maxSpeed = movement.fixedMaxSpeed;
-                    push.slowReference = null;
-                    push.currentTargetPush = null;
-               }
-
-          }
-     }
-
-     public void SetPositionDropObject()
-     {
-          if (push.currentTargetPush != null &&
-              push.setPositionDropObject &&
-              !push.pushingObj &&
-              push.droppingObj)
-          {
-               if (push.currentTargetPush.tag == "Light")
-               {
-                    if(push.currentTargetPush.position != push.targetDropPush.position)
-                    {
-                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
-                         push.currentTargetPush.rotation = push.targetDropPush.rotation;
-                    }
-               }
-               else if (push.currentTargetPush.tag == "Heavy")
-               {
-                    if(push.currentTargetPush.position != push.targetDropPush.position)
-                    {
-                         push.currentTargetPush.position = Vector3.MoveTowards(push.currentTargetPush.position, push.targetDropPush.position, push.velocityDropObject * Time.deltaTime);
-                         push.currentTargetPush.rotation = push.targetDropPush.rotation;
-                    }
-               }
-          }
-     }
-
-     public void CountdownSetPositionDropObject()
-     {
-          if (push.setPositionDropObject &&
-              !push.pushingObj &&
-              push.droppingObj)
-          {
-               if (_countdownSetPositionDropObject < 1)
-               {
-                    _countdownSetPositionDropObject += Time.deltaTime / push.timeToSetPositionDropObject;
-               }
-               else
-               {
-                    _countdownSetPositionDropObject = 0;
-                    push.setPositionDropObject = false;
-                    push.currentTargetPush = null;
-                    movement.currentSpeed = 0f;
-               }
-          }
-     }
-
-     public void CountdownAfterDropping()
-     {
-          if (push.droppingObj && !push.pushingObj)
-          {
-               if (_countdownAfterDropping < 1)
-               {
-                    _countdownAfterDropping += Time.deltaTime / push.timeToReturnMovement;
-               }
-               else
-               {
-                    _countdownAfterDropping = 0;
-                    push.droppingObj = false;
-               }
-          }
-     }
-
-     public void SetPushSpeed()
-     {
-          if (push.slowReference == null)
-          {
-               movement.maxSpeed = push.speedPush;
-          }
-          else
-          {
-               if (levelMechanics.slowing == false)
-               {
-                    push.slowReference = null;
-                    movement.maxSpeed = push.speedPush;
-               }
-          }
-     }
-     #endregion
-
      #region Movement Assistance
      public void CliffDetector()
      {
@@ -711,15 +411,15 @@ public class PlayerController : Character
                movement.isGrounded && 
                _cliffDectorLockPlayer == true && 
                GetLocomotionSpeed() < cliff.cliffDetectorMaxSpeed && 
-               movement.currentSpeed < cliff.cliffDetectorMaxSpeed &&
-               !PlayerAttackController.instance.attaking)
+               movement.currentSpeed < cliff.cliffDetectorMaxSpeed)
+               //!PlayerAttackController.instance.attaking)
           {
-               PlayerAnimationController.instance.SetBalance();
+               //PlayerAnimationController.instance.SetBalance();
           }
           else if (Physics.Raycast(_ray, cliff.cliffDetectorHeightDist))
           {
                _cliffDectorLockPlayer = true;
-               PlayerAnimationController.instance.balance = false;
+               //PlayerAnimationController.instance.balance = false;
           }
      }
 
@@ -768,9 +468,9 @@ public class PlayerController : Character
                {
                     movement.maxSpeed = 0;
                     death.dead = true;      
-                    PlayerController.instance.movement.gravity = 0;
-                    PlayerController.instance.movement.velocity = Vector3.zero;
-                    PlayerController.instance.movement.maxSpeed = 0;               
+                    movement.gravity = 0;
+                    movement.velocity = Vector3.zero;
+                    movement.maxSpeed = 0;               
                     StartCoroutine("AfterDeath");
                }
           }
@@ -779,55 +479,39 @@ public class PlayerController : Character
      IEnumerator AfterDeath()
      {
           death.canSetDisappearShader = true;
-          StartCoroutine("DelayCrossfade");
 
           yield return new WaitForSeconds(death.timeDead);
 
           death.canSetAppearShader = true;
           death.canSetDisappearShader = false;
-          PlayerController.instance.levelMechanics.exitTeleport = true;
+          levelMechanics.exitTeleport = true;
           SetControllerPosition(death.currentPoint.position);
 
           yield return new WaitForSeconds(death.timeToMoveAfterDead);
           
-          PlayerAttackController.instance.ResetAttack();
+          //PlayerAttackController.instance.ResetAttack();
           hit.hitCount = 0;
           movement.maxSpeed = movement.fixedMaxSpeed;
-          PlayerController.instance.levelMechanics.exitTeleport = false;
+          levelMechanics.exitTeleport = false;
           death.canSetAppearShader = false;
           death.dead = false;
           ResetPlayerConfigsAfterDeath();
-          death.crossfadeStart.SetActive(true);
-          death.crossfadeEnd.SetActive(false);
-     }
-
-     IEnumerator DelayCrossfade()
-     {
-          yield return new WaitForSeconds(death.delayCrossfadeEnd);
-
-          death.crossfadeStart.SetActive(false);
-          death.crossfadeEnd.SetActive(true);
-
-          yield return new WaitForSeconds(death.delayCrossfadeStart);
-
-          death.crossfadeStart.SetActive(true);
-          death.crossfadeEnd.SetActive(false);
      }
 
      public void PlayerConfigsAfterDeath()
      {    
           if(death.canSetAppearShader)
           {
-               PlayerController.instance.movement.gravity = 0;
-               PlayerController.instance.movement.velocity = Vector3.zero;
-               PlayerController.instance.movement.maxSpeed = 0;                   
+               movement.gravity = 0;
+               movement.velocity = Vector3.zero;
+               movement.maxSpeed = 0;                   
           }     
      }
 
      public void ResetPlayerConfigsAfterDeath()
      {
-          PlayerController.instance.movement.gravity = PlayerController.instance.movement.fixedGravity;
-          PlayerController.instance.movement.maxSpeed = PlayerController.instance.movement.fixedMaxSpeed;   
+          movement.gravity = movement.fixedGravity;
+          movement.maxSpeed = movement.fixedMaxSpeed;   
      }
 
      public void ResetValueDissolveShader()
@@ -880,14 +564,6 @@ public class PlayerController : Character
 #if UNITY_EDITOR
      void OnDrawGizmos()
      {
-          if (seeRangePush)
-          {
-               Gizmos.color = Color.magenta;
-               Gizmos.DrawLine(push.middleOfThePlayer.position, push.middleOfThePlayer.position + push.middleOfThePlayer.forward * push.rangePush);
-               Gizmos.color = Color.red;
-               Gizmos.DrawLine(push.targetDropPush.position, push.targetDropPush.position + Vector3.down * push.rangeDrop);
-          }
-
           if (seeRangeCliff)
           {
                Gizmos.color = Color.red;
