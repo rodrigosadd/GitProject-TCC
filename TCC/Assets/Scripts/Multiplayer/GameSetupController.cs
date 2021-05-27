@@ -43,7 +43,7 @@ public class GameSetupController : MonoBehaviour
         if(readyToCount) {
             if(counter < initTimer) {
                 counter += Time.deltaTime;
-                counterText.text = "Initializing in " Mathf.RoundToInt(initTimer - counter).ToString() + " seconds, get ready!";
+                counterText.text = "Initializing in " + Mathf.RoundToInt(initTimer - counter).ToString() + " seconds, get ready!";
             }
             else {
                 if(!isGameReady) {
