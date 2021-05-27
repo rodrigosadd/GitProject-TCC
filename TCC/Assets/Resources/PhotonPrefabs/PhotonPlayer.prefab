@@ -5940,7 +5940,6 @@ GameObject:
   - component: {fileID: 1900117761952523965}
   - component: {fileID: 3298514135490557513}
   - component: {fileID: 4663215516087604179}
-  - component: {fileID: -8215065744400766308}
   - component: {fileID: 4896375722804791457}
   m_Layer: 11
   m_Name: PhotonPlayer
@@ -6074,6 +6073,8 @@ MonoBehaviour:
     smootnessMissedJump: 90
     canMiss: 1
   death:
+    boss: {fileID: 0}
+    bossTrigger: {fileID: 0}
     head: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     body: {fileID: 2100000, guid: c6aba0ff1bf1d3c40afd263872e3a98d, type: 2}
     pickaxe: {fileID: 2100000, guid: a5641b93f4e34a6419d701c8104cc60e, type: 2}
@@ -6162,22 +6163,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-8215065744400766308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741654644317177979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a15297e75d7ed3b46b79f7eeafe11ae3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PhotonView: {fileID: 4663215516087604179}
-  cameraPrefab: {fileID: 328130099107844306, guid: 19cac975af1dffe489bb62a3beaa9a53, type: 3}
-  camSpawnPoint: {fileID: 5080119712936876657}
-  animator: {fileID: 6995068270813550338}
 --- !u!114 &4896375722804791457
 MonoBehaviour:
   m_ObjectHideFlags: 0
