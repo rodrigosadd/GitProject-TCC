@@ -21,7 +21,7 @@ public class QuickStartRoomController : MonoBehaviourPunCallbacks
 
     public void StartGame() { //Function for loading the multiplayer scene.
         if (PhotonNetwork.IsMasterClient) {
-            PhotonNetwork.AutosyncScene = true;
+            PhotonNetwork.AutomaticallySyncScene = true;
             Debug.Log("Starting game...");
             PhotonNetwork.LoadLevel(multiplayerSceneIndex);
         }
