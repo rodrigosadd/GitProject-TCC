@@ -15,8 +15,10 @@ public class BossController : MonoBehaviour
     public int life;
     public int enragedLife;
     public int enragedFinalLife;
+    public float timeToDeactivateMesh;
     private bool _canActivateAntlersAttack;
     private bool _invunerable;
+    private bool _alreadyStartedCoroutine;
 
 #if UNITY_EDITOR
     public bool seeRangeantlersAttack;
@@ -56,10 +58,20 @@ public class BossController : MonoBehaviour
         if(life <= 0)
         {
             anim.SetBool("Dying", true);
-            IsDead?.Invoke();
+
+            if(!_alreadyStartedCoroutine)
+            {
+                _alreadyStartedCoroutine = true;
+                StartCoroutine(DelayToFinishAnimation());
+            }
         }
     }
 
+    IEnumerator DelayToFinishAnimation()
+    {
+        yield return new WaitForSeconds(timeToDeactivateMesh);
+        IsDead?.Invoke();
+    }
 
     IEnumerator ResetHit()
     {

@@ -135,7 +135,8 @@ public class PlayerControllerMultiplayer : Character
 
      [Header("Photon variables")]
      public Photon photon;
-     [System.Serializable]
+
+    [System.Serializable]
      public class Photon
      { 
           public PhotonView m_PhotonView;
@@ -267,7 +268,8 @@ public class PlayerControllerMultiplayer : Character
 
                Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);    
+               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);
+
           }
           else
           {
