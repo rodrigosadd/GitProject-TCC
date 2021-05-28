@@ -40,10 +40,42 @@ public class PoolSystem : MonoBehaviour
     public int initialAmountShadows;
     private GameObject _shadowsHolder;
 
-
     void Awake()
     {
         InitializePool();
+    }
+
+    public void ResetPool()
+    {
+        for (int index = 0; index <= initialAmountProjectiles; index++)
+        {
+            listProjectilePool[index].transform.gameObject.SetActive(false);
+        }
+
+         for (int index = 0; index <= initialAmountProjectilesAbove; index++)
+        {
+            listProjectileAbovePool[index].transform.gameObject.SetActive(false);
+        }
+
+        for (int index = 0; index <= initialAmountProjectilesThrow; index++)
+        {
+            listProjectileThrowPool[index].transform.gameObject.SetActive(false);
+        }
+
+        for (int index = 0; index <= initialAmountProjectilesInDir; index++)
+        {
+            listProjectileInDirPool[index].transform.gameObject.SetActive(false);
+        }
+
+        for (int index = 0; index <= initialAmountThorns; index++)
+        {
+            listThornPool[index].transform.gameObject.SetActive(false);
+        }
+
+        for (int index = 0; index <= initialAmountShadows; index++)
+        {
+            listShadowPool[index].transform.gameObject.SetActive(false);
+        }
     }
 
     void InitializePool()
