@@ -11,8 +11,8 @@ public class Spike : MonoBehaviourPun
 
     void Update()
     {
-        photonView.RPC("TimeCountdown", RpcTarget.AllBuffered);
-        photonView.RPC("SpikePUN", RpcTarget.AllBuffered);
+       photonView.RPC("TimeCountdown", RpcTarget.AllBuffered);
+       photonView.RPC("SpikePUN", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
