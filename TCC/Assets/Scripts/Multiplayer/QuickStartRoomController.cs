@@ -17,11 +17,12 @@ public class QuickStartRoomController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom() { //Callback function for when we successfully join a room.
         Debug.Log("Joined room.");
         StartGame();
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public void StartGame() { //Function for loading the multiplayer scene.
         if (PhotonNetwork.IsMasterClient) {
-            PhotonNetwork.AutomaticallySyncScene = true;
+            
             Debug.Log("Starting game...");
             PhotonNetwork.LoadLevel(multiplayerSceneIndex);
         }
