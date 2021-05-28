@@ -28,7 +28,7 @@ public class NetworkManager_LoginScene : MonoBehaviourPunCallbacks
     public void OnCreateRoomOrJoin()
     {
         
-        string roomName = "Room: " + Random.Range(10,100);
+        string roomName = "Room: " + 1;
         if (!string.IsNullOrEmpty(playerName))
         {
             PhotonNetwork.LocalPlayer.NickName = playerName;
