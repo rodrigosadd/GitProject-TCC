@@ -1,35 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerAnimationControllerMultiplayer : MonoBehaviour
+public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 {   
     public static PlayerAnimationControllerMultiplayer instance;
-     public ParticleSystem oil;
-     public ParticleSystem dust;
-     public float timeToJump;
-     public bool afterFalling;
-     public bool fallingIdle;
-     public bool balance;
-     public bool alreadyPlayedFallingAction;
-     private bool _canJumpAfterFalling;
-     private bool _inFallingAction;
-     private float _countdownAfterFalling;
-     private float _countdownFallingAction;
-     private bool _firstAttack;
-     private bool _secondAttack;
-     private bool _finalAttack;
+    public ParticleSystem oil;
+    public ParticleSystem dust;
+    public float timeToJump;
+    public bool afterFalling;
+    public bool fallingIdle;
+    public bool balance;
+    public bool alreadyPlayedFallingAction;
+    private bool _canJumpAfterFalling;
+    private bool _inFallingAction;
+    private float _countdownAfterFalling;
+    private float _countdownFallingAction;
+    private bool _firstAttack;
+    private bool _secondAttack;
+    private bool _finalAttack;
+    private PhotonView photonView;
 
     void Awake()
     {
         instance = this;
+        photonView = GetComponent<PhotonView>();
     }
 
      void Update()
      {
-          SetIsGrounded();
-          SetIdle();
-          SetRunning();
+          photonView.RPC("SetIsGrounded",RpcTarget.AllBuffered);
+          photonView.RPC("SetIdle", RpcTarget.AllBuffered);
+          photonView.RPC("SetRunning", RpcTarget.AllBuffered);
           SetSingleJump();
           SetSingleJumpRunning();
           SetDoubleJump();
@@ -187,12 +190,13 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviour
 #endregion
 
 #region Idle
+    [PunRPC]
      public void SetIsGrounded()
      {
           PlayerControllerMultiplayer.instance.animator.SetBool("IsGrounded", PlayerControllerMultiplayer.instance.movement.isGrounded);
      }
-
-     public void SetIdle()
+    [PunRPC]
+    public void SetIdle()
      {
           if ((PlayerControllerMultiplayer.instance.movement.horizontal == 0 &&
                PlayerControllerMultiplayer.instance.movement.vertical == 0) &&
@@ -226,10 +230,11 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviour
                alreadyPlayedFallingAction = false;
           }
      }
-#endregion
-     
-#region Running
-     public void SetRunning()
+    #endregion
+
+    #region Running
+    [PunRPC]
+    public void SetRunning()
      {
           if ((PlayerControllerMultiplayer.instance.movement.horizontal != 0 ||
                PlayerControllerMultiplayer.instance.movement.vertical != 0) &&
