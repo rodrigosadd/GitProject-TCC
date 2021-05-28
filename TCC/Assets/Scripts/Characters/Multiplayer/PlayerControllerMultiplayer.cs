@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UI;
+using TMPro;
 
+[RequireComponent(typeof(PhotonView))]
 public class PlayerControllerMultiplayer : Character
 {
     public static PlayerControllerMultiplayer instance;
@@ -140,8 +142,8 @@ public class PlayerControllerMultiplayer : Character
           public GameObject cameraPrefab;
           public Transform camSpawnPoint;
           public Animator animator;
-          public Text playerNameUI;
-          private string playerName;
+          public TMP_Text playerNameUI;
+          public string playerName;
      }
      
 #if UNITY_EDITOR
@@ -171,7 +173,7 @@ public class PlayerControllerMultiplayer : Character
                photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
                GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
                movement.cam = _cam.transform;
-               playerNameUI.text = PhotonNetwork.player.NickName;
+               photon.playerNameUI.text = photon.playerName;
                RandName();
           }
      }
@@ -213,15 +215,13 @@ public class PlayerControllerMultiplayer : Character
      #region Multiplayer
      private void RandName()
      {
-          string[] firstName = new string { "aaron", "abdul", "abe", "abel", "abraham", "adam", "adan", "adolfo", "adolph", "adrian"};
-          string[] lastNames = new string { "abbott", "acosta", "adams", "adkins", "aguilar"};
+          string[] lastNames = { "Mineiro", "Pedreiro", "Rockeiro", "Funkeiro", "Barbeiro", "Sem Freio" };
 
-          int randFirst = Random.Range(0, firstName.Length);
           int randLast = Random.Range(0, lastNames.Length);
           
           if(photon.m_PhotonView.IsMine) {
-               photon.playerName = firstName[randFirst] + " " + lastName[randLast];
-               PhotonNetwork.nickname = photon.playerName;
+               photon.playerName = "Beto" + " " + lastNames[randLast];
+               //PhotonNetwork.player.NickName = photon.playerName;
           }
      }
      #endregion
