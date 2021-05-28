@@ -8,7 +8,7 @@ public class BossController : MonoBehaviour
     public static BossController instance;
     public Animator anim;
     public Transform antlersAttackPoint;
-    public GameObject temporaryObj;
+    public GameObject antlersAttackLaser;
     [HideInInspector]
     public Vector3 playerDirection;
     public float rangeAntlersAttack;
@@ -22,6 +22,7 @@ public class BossController : MonoBehaviour
     public bool seeRangeantlersAttack;
 #endif
 
+    public UnityEvent OnAntlersAttack;
     public UnityEvent OnTakedamage;
     public UnityEvent IsDead;
 
@@ -44,9 +45,9 @@ public class BossController : MonoBehaviour
             _invunerable = true;
             life--;
             anim.SetBool("Hit", true);
+            OnTakedamage?.Invoke();
             StopCoroutine("ResetHit");
             StartCoroutine("ResetHit");
-            OnTakedamage?.Invoke();
         }
     }
 
@@ -69,21 +70,22 @@ public class BossController : MonoBehaviour
     
     public void Aim()
     {
-        playerDirection = (PlayerController.instance.transform.position - transform.position).normalized;
+        playerDirection = (PlayerController.instance.movement.targetCam.position - transform.position).normalized;
     }
 
     public void ActivateAntlersAttack()
     {
         _canActivateAntlersAttack = true;
         seeRangeantlersAttack = true;
-        temporaryObj.SetActive(true);
+        antlersAttackLaser.SetActive(true);
+        OnAntlersAttack?.Invoke();
     }
 
     public void DeactivateAntlersAttack()
     {
         _canActivateAntlersAttack = false;
         seeRangeantlersAttack = false;
-        temporaryObj.SetActive(false);
+        antlersAttackLaser.SetActive(false);
     }
 
     public void AntlersAttack()
@@ -93,14 +95,24 @@ public class BossController : MonoBehaviour
             RaycastHit _hitInfo;
 
             if(Physics.Raycast(antlersAttackPoint.position, antlersAttackPoint.up, out _hitInfo, rangeAntlersAttack))
-            {
+            {               
                 if(_hitInfo.transform.tag == "Player")
                 {
                     PlayerController.instance.hit.hitCount = PlayerController.instance.hit.maxHitCount;
+                    StopCoroutine("DelayDeactivateBoss");
+                    StartCoroutine("DelayDeactivateBoss");
                 }
             }
         }
     }
+
+    IEnumerator DelayDeactivateBoss()
+    {
+        yield return new WaitForSeconds(1.8f);
+        PlayerController.instance.death.boss.SetActive(false);
+        PlayerController.instance.death.boss = null;
+        PlayerController.instance.death.bossTrigger.SetActive(true);
+    }   
 
 #if UNITY_EDITOR
      void OnDrawGizmos()

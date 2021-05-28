@@ -1,15 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.Animations.Rigging;
 
 public class BossAnimationController : MonoBehaviour
 {
+    public static BossAnimationController instance;
     public Animator anim;
     public float delayToFirstAttack;
     public float delayToSecondAttack;
     public float delayToThirdAttack;
     public float delayToExitStunIdle;
     private bool _alreadyStartedAnimation;
+
+    public UnityEvent OnStunIdle;
+    public UnityEvent OnExitStunIdle;
+    public UnityEvent OnEnraged;
+    public UnityEvent OnEnragedFinal;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     public void TimeToFirstAttack()
     {
@@ -34,7 +47,8 @@ public class BossAnimationController : MonoBehaviour
     {
         if(!_alreadyStartedAnimation)
         {
-            _alreadyStartedAnimation = true;
+            OnExitStunIdle?.Invoke();
+            _alreadyStartedAnimation = true;           
             StopCoroutine("DelayToSecondAttack");
             StartCoroutine("DelayToSecondAttack");
         }
@@ -94,6 +108,7 @@ public class BossAnimationController : MonoBehaviour
         anim.SetBool("Attack 2", false);
         anim.SetBool("Attack 3", false);
         anim.SetBool("Stun Idle", true);
+        OnStunIdle?.Invoke();
     }
 
     public void CheckLife()
@@ -105,6 +120,7 @@ public class BossAnimationController : MonoBehaviour
             anim.SetBool("Attack 2", false);
             anim.SetBool("Attack 3", false);
             anim.SetBool("Stun Idle", false);
+            OnEnraged?.Invoke();
         }
 
         if(BossController.instance.life == BossController.instance.enragedFinalLife)
@@ -115,6 +131,12 @@ public class BossAnimationController : MonoBehaviour
             anim.SetBool("Attack 2", false);
             anim.SetBool("Attack 3", false);
             anim.SetBool("Stun Idle", false);
+            OnEnragedFinal?.Invoke();
         }
+    }
+
+    public void SetCameraShake(float durationShake)
+    {
+        Camera3rdPerson.instance.CameraShake(durationShake);
     }
 }

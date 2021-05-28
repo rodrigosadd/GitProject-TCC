@@ -184,13 +184,6 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.9392934
-        functionName: SetStunIdle
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
       - time: 0.20370372
         functionName: ActivateAntlersAttack
         data: 
@@ -200,6 +193,13 @@ ModelImporter:
         messageOptions: 0
       - time: 0.6666667
         functionName: DeactivateAntlersAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.86253434
+        functionName: SetStunIdle
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -263,7 +263,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0
+      - time: 0.018779343
         functionName: TimeToSecondAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -350,7 +350,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.5331808
-        functionName: SpawnProjectileForward
+        functionName: SpawnProjectileForwardRight
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -393,14 +393,14 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.402746
-        functionName: SpawnProjectileForward
+        functionName: SpawnProjectileForwardRight
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.7963387
-        functionName: SpawnProjectileForward
+        functionName: SpawnProjectileForwardLeft
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -492,7 +492,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.99864364
+        functionName: TimeToSecondAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -521,7 +528,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.24843659
+        functionName: SetCameraShake
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 5
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -20,7 +20,6 @@ public class Camera3rdPerson : MonoBehaviour
      public bool invertAxisY;
      public bool canMove;
      public bool showObject;
-     public float durationShake;
      public float strengthShake;
      private float _mouseX;
      private float _mouseY;
@@ -123,7 +122,7 @@ public class Camera3rdPerson : MonoBehaviour
           canMove = true;
      }
 
-     public void CameraShake()
+     public void CameraShake(float durationShake)
      {    
           Sequence sequence = DOTween.Sequence();
 
