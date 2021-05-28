@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class PlayerControllerMultiplayer : Character
 {
@@ -132,7 +133,6 @@ public class PlayerControllerMultiplayer : Character
 
      [Header("Photon variables")]
      public Photon photon;
-     private PlayerController m_CharacterController;
      [System.Serializable]
      public class Photon
      { 
@@ -140,6 +140,8 @@ public class PlayerControllerMultiplayer : Character
           public GameObject cameraPrefab;
           public Transform camSpawnPoint;
           public Animator animator;
+          public Text playerNameUI;
+          private string playerName;
      }
      
 #if UNITY_EDITOR
@@ -165,33 +167,40 @@ public class PlayerControllerMultiplayer : Character
           movement.fixedGravity = movement.gravity;
           ResetValueDissolveShader();
 
-          m_CharacterController = PlayerController.instance;
-          photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
-          GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
-          m_CharacterController.movement.cam = _cam.transform;
+          if(photon.m_PhotonView.IsMine) {
+               photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
+               GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
+               movement.cam = _cam.transform;
+               playerNameUI.text = PhotonNetwork.player.NickName;
+               RandName();
+          }
      }
 
      void Update()
      {
-          Gravity();
-          CharacterJump();
-          CheckIsGrounded();          
-          CliffDetector();
-          CharacterFace();
-          JumpShadow();
-          SlopeDetector();
-          SetHandShader();
-          ResetCurrentJump();
-          CatchMissedJumps();
-          CheckDeath();
-          SetDissolveShaderAppear();          
-          SetDissolveShaderDisappear();
-          PlayerConfigsAfterDeath();
+          if(photon.m_PhotonView.IsMine)
+          {
+               Gravity();
+               CharacterJump();
+               CheckIsGrounded();          
+               CliffDetector();
+               CharacterFace();
+               JumpShadow();
+               SlopeDetector();
+               SetHandShader();
+               ResetCurrentJump();
+               CatchMissedJumps();
+               CheckDeath();
+               SetDissolveShaderAppear();          
+               SetDissolveShaderDisappear();
+               PlayerConfigsAfterDeath();
+          }
      }
 
      void FixedUpdate()
      {
-          UpdateMovementPlayer();
+          if(photon.m_PhotonView.IsMine)
+               UpdateMovementPlayer();
      }
 
      public void SetControllerPosition(Vector3 toPosition)
@@ -200,6 +209,22 @@ public class PlayerControllerMultiplayer : Character
           transform.position = toPosition;
           movement.controller.enabled = true;
      }
+
+     #region Multiplayer
+     private void RandName()
+     {
+          string[] firstName = new string { "aaron", "abdul", "abe", "abel", "abraham", "adam", "adan", "adolfo", "adolph", "adrian"};
+          string[] lastNames = new string { "abbott", "acosta", "adams", "adkins", "aguilar"};
+
+          int randFirst = Random.Range(0, firstName.Length);
+          int randLast = Random.Range(0, lastNames.Length);
+          
+          if(photon.m_PhotonView.IsMine) {
+               photon.playerName = firstName[randFirst] + " " + lastName[randLast];
+               PhotonNetwork.nickname = photon.playerName;
+          }
+     }
+     #endregion
 
      #region Movement Player
      private void UpdateMovementPlayer()

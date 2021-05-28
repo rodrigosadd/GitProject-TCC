@@ -9,6 +9,8 @@ public class MultiplayerController : MonoBehaviour
     public Animator animator;
     private PlayerController m_CharacterController;
 
+    public static MultiplayerController instance;
+
     // Start is called before the first frame update
     void Start()
     {
