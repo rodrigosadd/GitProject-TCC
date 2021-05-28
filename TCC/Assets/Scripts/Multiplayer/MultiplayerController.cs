@@ -17,7 +17,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     private bool readyToCount = false;
     private float counter = 0;
     private PhotonView photon;
-    public static bool isGameReady = false; //Controls when the game is ready for everyone in the room.
+    public bool isGameReady = false; //Controls when the game is ready for everyone in the room.
     void Start()
     {
         photon = GetComponent<PhotonView>();
