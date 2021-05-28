@@ -33,7 +33,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void CreatePlayer() {
+    public void CreatePlayer() {
         Debug.Log("Creating player.");
         int randomNumber = Random.Range(0, spawnPoints.Count);
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), spawnPoints[randomNumber].position + Vector3.up * 10, Quaternion.identity);
@@ -46,7 +46,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void CountBeforeStart() {
+    public void CountBeforeStart() {
         if(readyToCount) {
             if(counter < initTimer) {
                 counter += Time.deltaTime;
@@ -65,7 +65,7 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void StartGame() { //Start the racing.
+    public void StartGame() { //Start the racing.
         isGameReady = true;
     }
 
