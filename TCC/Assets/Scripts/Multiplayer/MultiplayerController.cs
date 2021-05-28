@@ -27,8 +27,11 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
     void Update()
     {
         photon.RPC("CountBeforeStart", RpcTarget.AllBuffered);
+        if(PhotonNetwork.PlayerList.Length > 1) {
+            photon.RPC("GetReady", RpcTarget.All);
+        }
         if (isGameReady) { //Call game functions inside here.
-
+            //TODO
         }
     }
 
@@ -38,11 +41,6 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
         int randomNumber = Random.Range(0, spawnPoints.Count);
         PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonPlayer"), spawnPoints[randomNumber].position + Vector3.up * 10, Quaternion.identity);
         spawnPoints.Remove(spawnPoints[randomNumber]);
-        playersNumber++;
-        if(playersNumber >= 2) {
-            initTimer = 30.0f;
-            readyToCount = true;
-        }
     }
 
     [PunRPC]
@@ -63,7 +61,11 @@ public class MultiplayerController : MonoBehaviourPunCallbacks
             counterText.text = "Waiting for players to join...";
         }
     }
-
+    [PunRPC]
+    public void GetReady() {
+        readyToCount = true;
+        counter = 0;
+    }
     [PunRPC]
     public void StartGame() { //Start the racing.
         isGameReady = true;
