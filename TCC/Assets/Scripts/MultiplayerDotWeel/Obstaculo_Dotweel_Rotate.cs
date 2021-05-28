@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Photon.Pun;
 
-public class Obstaculo_Dotweel_Rotate : MonoBehaviour
+public class Obstaculo_Dotweel_Rotate : MonoBehaviourPun
 {
     public Transform[] walls;
     public float animDuration;
@@ -12,9 +13,10 @@ public class Obstaculo_Dotweel_Rotate : MonoBehaviour
 
     void Start()
     {
-        Rotat();
+        photonView.RPC("Rotat", RpcTarget.AllBuffered);
     }
 
+    [PunRPC]
     public void Rotat()
     {
         for (int x = 0; x < walls.Length; x++)

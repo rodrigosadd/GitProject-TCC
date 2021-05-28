@@ -28,6 +28,9 @@ public class Spawner : MonoBehaviour
     [Header("Thorn variables")]
     public Transform [] spawnPointsThorn;
     public int amountThorns;
+    public int maxAmountThorns;
+    private bool _canSpawnThorns;
+    
     public UnityEvent OnSpawnThorn;
 
     [Header("Projectile In Dir variables")]
@@ -92,25 +95,31 @@ public class Spawner : MonoBehaviour
 
     IEnumerator DelaySpawnRandomPosition()
     {
+        int currentIndex = 0;
         while(_canSpawnProjectileAbove)
         {
             int indexSpanwPoint = Random.Range(0, spawnPointsProjectileAbove.Length);
-            Transform spawnPoint = spawnPointsProjectileAbove[indexSpanwPoint]; 
-            Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectileAbove();
-            projectile.rbody.velocity = Vector3.zero;
-            projectile.transform.position = spawnPoint.position;
-            projectile.transform.rotation = spawnPoint.rotation;
-            projectile.rbody.AddForce(projectile.transform.up * impulseForceProjectileAbove, ForceMode.Impulse); 
-            amountProjectileAbove--;
-            OnSpawnProjectileAbove?.Invoke();
 
-            if(amountProjectileAbove <= 0)
+            if(currentIndex != indexSpanwPoint)
             {
-                amountProjectileAbove = maxAmountProjectileAbove;
-                _canSpawnProjectileAbove = false;
-                StopCoroutine("DelaySpawnRandomPosition");
+                currentIndex = indexSpanwPoint;
+                Transform spawnPoint = spawnPointsProjectileAbove[indexSpanwPoint]; 
+                Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectileAbove();
+                projectile.rbody.velocity = Vector3.zero;
+                projectile.transform.position = spawnPoint.position;
+                projectile.transform.rotation = spawnPoint.rotation;
+                projectile.rbody.AddForce(projectile.transform.up * impulseForceProjectileAbove, ForceMode.Impulse); 
+                amountProjectileAbove--;
+                OnSpawnProjectileAbove?.Invoke();
+
+                if(amountProjectileAbove <= 0)
+                {
+                    amountProjectileAbove = maxAmountProjectileAbove;
+                    _canSpawnProjectileAbove = false;
+                    StopCoroutine("DelaySpawnRandomPosition");
+                }
+                yield return new WaitForSeconds(timeToSpawnRandomPosition);
             }
-            yield return new WaitForSeconds(timeToSpawnRandomPosition);
         }
     }
 
@@ -132,12 +141,26 @@ public class Spawner : MonoBehaviour
 
     public void SpawnRandomPositionThorns()
     {   
-        for (int i = 0; i < amountThorns; i++)
+        int currentIndex = 0;
+        _canSpawnThorns = true;
+
+        while(_canSpawnThorns)
         {
             int indexSpanwPoint = Random.Range(0, spawnPointsThorn.Length);
-            Transform spawnPoint = spawnPointsThorn[indexSpanwPoint]; 
-            BossThorn thorn = GameManager.instance.poolSystem.TryToGetThorn();
-            thorn.transform.position = spawnPoint.position;
+
+            if(currentIndex != indexSpanwPoint)
+            {
+                Transform spawnPoint = spawnPointsThorn[indexSpanwPoint]; 
+                BossThorn thorn = GameManager.instance.poolSystem.TryToGetThorn();
+                thorn.transform.position = spawnPoint.position;
+                amountThorns--;
+
+                if(amountThorns <= 0)
+                {
+                    amountThorns = maxAmountThorns;
+                    _canSpawnThorns = false;
+                }
+            }
         }
         OnSpawnThorn?.Invoke();
     }

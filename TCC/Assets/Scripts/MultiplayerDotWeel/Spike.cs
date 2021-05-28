@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Spike : MonoBehaviour
+public class Spike : MonoBehaviourPun
 {
     public float timeCountdown;
     float time;
@@ -10,16 +11,18 @@ public class Spike : MonoBehaviour
 
     void Update()
     {
-        TimeCountdown();
-        Spikae();
+        photonView.RPC("TimeCountdown", RpcTarget.AllBuffered);
+        photonView.RPC("SpikePUN", RpcTarget.AllBuffered);
     }
 
+    [PunRPC]
     void TimeCountdown()
     {
         time = time + 1 * Time.deltaTime;
     }
 
-    void Spikae()
+    [PunRPC]
+    void SpikePUN()
     {
         if (time > timeCountdown)
         {

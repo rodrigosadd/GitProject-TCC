@@ -29,9 +29,12 @@ public class Projectile : MonoBehaviour
         {
             if(hasShadow)
             {
+                if(_shadow != null)
+                {
+                    _shadow.gameObject.SetActive(false);
+                    _shadow = null;
+                }
                 _canActivateShadow = true;
-                _shadow.gameObject.SetActive(false);
-                _shadow = null;
             }
 
             _countdown = 0;   
@@ -41,9 +44,12 @@ public class Projectile : MonoBehaviour
         }
         else if(other.tag == "Ground" && hasShadow)
         {
+            if(_shadow != null)
+            {
+                _shadow.gameObject.SetActive(false);
+                _shadow = null;           
+            }
             _canActivateShadow = true;
-            _shadow.gameObject.SetActive(false);
-            _shadow = null;           
             _countdown = 0;  
             gameObject.SetActive(false);  
         }
@@ -56,7 +62,7 @@ public class Projectile : MonoBehaviour
         }
         else
         {
-            if(hasShadow)
+            if(hasShadow && _shadow != null)
             {
                 _canActivateShadow = true;
                 _shadow.gameObject.SetActive(false);
