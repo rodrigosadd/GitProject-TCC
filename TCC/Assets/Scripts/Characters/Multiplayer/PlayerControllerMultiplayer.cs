@@ -199,9 +199,7 @@ public class PlayerControllerMultiplayer : Character
                SetDissolveShaderDisappear();
                PlayerConfigsAfterDeath();
                photon.playerNameUI.gameObject.transform.LookAt(movement.cam.transform.position);
-               return;
           }
-          photon.playerNameUI.gameObject.transform.LookAt(movement.cam.transform.position);
      }
 
      void FixedUpdate()
