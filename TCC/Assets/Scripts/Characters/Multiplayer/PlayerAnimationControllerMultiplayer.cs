@@ -27,6 +27,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
     {
         instance = this;
         photonView = GetComponent<PhotonView>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -200,7 +201,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
     [PunRPC]
     public void SetIsGrounded()
     {
-         PlayerControllerMultiplayer.instance.animator.SetBool("IsGrounded", PlayerControllerMultiplayer.instance.movement.isGrounded);
+         animator.SetBool("IsGrounded", PlayerControllerMultiplayer.instance.movement.isGrounded);
     }
     [PunRPC]
     public void SetIdle()
@@ -216,23 +217,23 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                !PlayerControllerMultiplayer.instance.death.dead && 
                !PlayerControllerMultiplayer.instance.levelMechanics.entryTeleport)
           {
-               PlayerControllerMultiplayer.instance.animator.SetBool("Idle", true);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Running", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Single Jump", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Single Jump Running", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Double Jump", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Pushing", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Pushing Idle", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Drop Box", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Dying", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Balance", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Falling Action", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Falling Idle", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Falling Ground", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Falling Running", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Sliding", false);
-               PlayerControllerMultiplayer.instance.animator.SetBool("Interacting", false); 
-               PlayerControllerMultiplayer.instance.animator.SetBool("Power Up", false);
+               animator.SetBool("Idle", true);
+               animator.SetBool("Running", false);
+               animator.SetBool("Single Jump", false);
+               animator.SetBool("Single Jump Running", false);
+               animator.SetBool("Double Jump", false);
+               animator.SetBool("Pushing", false);
+               animator.SetBool("Pushing Idle", false);
+               animator.SetBool("Drop Box", false);
+               animator.SetBool("Dying", false);
+               animator.SetBool("Balance", false);
+               animator.SetBool("Falling Action", false);
+               animator.SetBool("Falling Idle", false);
+               animator.SetBool("Falling Ground", false);
+               animator.SetBool("Falling Running", false);
+               animator.SetBool("Sliding", false);
+               animator.SetBool("Interacting", false); 
+               animator.SetBool("Power Up", false);
                fallingIdle = false;
                alreadyPlayedFallingAction = false;
           }
@@ -255,23 +256,23 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                !PlayerControllerMultiplayer.instance.death.dead && 
                !PlayerControllerMultiplayer.instance.levelMechanics.entryTeleport)
           {
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Idle", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Running", true);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Single Jump", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Single Jump Running", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Double Jump", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Pushing", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Pushing Idle", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Drop Box", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Dying", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Balance", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Falling Action", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Falling Idle", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Falling Ground", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Falling Running", false);
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Sliding", false);   
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Interacting", false);   
-               PlayerControllerMultiplayer.instance.photon.animator.SetBool("Power Up", false);          
+               animator.SetBool("Idle", false);
+               animator.SetBool("Running", true);
+               animator.SetBool("Single Jump", false);
+               animator.SetBool("Single Jump Running", false);
+               animator.SetBool("Double Jump", false);
+               animator.SetBool("Pushing", false);
+               animator.SetBool("Pushing Idle", false);
+               animator.SetBool("Drop Box", false);
+               animator.SetBool("Dying", false);
+               animator.SetBool("Balance", false);
+               animator.SetBool("Falling Action", false);
+               animator.SetBool("Falling Idle", false);
+               animator.SetBool("Falling Ground", false);
+               animator.SetBool("Falling Running", false);
+               animator.SetBool("Sliding", false);   
+               animator.SetBool("Interacting", false);   
+               animator.SetBool("Power Up", false);
                fallingIdle = false;
                alreadyPlayedFallingAction = false; 
           }
