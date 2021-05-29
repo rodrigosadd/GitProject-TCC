@@ -33,12 +33,12 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
      void Update()
      {
         if (photonView.IsMine) {
-            //photonView.RPC("SetIsGrounded", RpcTarget.AllBuffered);
-            //photonView.RPC("SetIdle", RpcTarget.AllBuffered);
-            //photonView.RPC("SetRunning", RpcTarget.AllBuffered);
-            SetIsGrounded();
-            SetIdle();
-            SetRunning();
+            photonView.RPC("SetIsGrounded", RpcTarget.AllBuffered);
+            photonView.RPC("SetIdle", RpcTarget.AllBuffered);
+            photonView.RPC("SetRunning", RpcTarget.AllBuffered);
+            //SetIsGrounded();
+            //SetIdle();
+            //SetRunning();
             SetSingleJump();
             SetSingleJumpRunning();
             SetDoubleJump();
@@ -197,12 +197,12 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Idle
-    //[PunRPC]
+    [PunRPC]
     public void SetIsGrounded()
     {
          PlayerControllerMultiplayer.instance.animator.SetBool("IsGrounded", PlayerControllerMultiplayer.instance.movement.isGrounded);
     }
-    //[PunRPC]
+    [PunRPC]
     public void SetIdle()
      {
           if ((PlayerControllerMultiplayer.instance.movement.horizontal == 0 &&
@@ -240,7 +240,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
     #endregion
 
 #region Running
-    //[PunRPC]
+    [PunRPC]
     public void SetRunning()
      {
           if ((PlayerControllerMultiplayer.instance.movement.horizontal != 0 ||
