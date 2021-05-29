@@ -164,15 +164,16 @@ public class PlayerControllerMultiplayer : Character
 
      void Start()
      {
+          if(photon.m_PhotonView.IsMine) {
           Cursor.visible = false;
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
           movement.fixedGravity = movement.gravity;
           ResetValueDissolveShader();
-
-          if(photon.m_PhotonView.IsMine) {
-               photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
+               
                GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
+               _cam.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
+               Debug.Log(_cam.ToString());
                movement.cam = _cam.transform;
                RandName();
                photon.playerNameUI.text = photon.playerName;
@@ -199,7 +200,6 @@ public class PlayerControllerMultiplayer : Character
                SetDissolveShaderAppear();          
                SetDissolveShaderDisappear();
                PlayerConfigsAfterDeath();
-               photon.playerNameUI.gameObject.transform.LookAt(movement.cam.transform.position);
           }
      }
 
