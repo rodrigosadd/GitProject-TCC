@@ -166,6 +166,7 @@ public class PlayerController : Character
           public bool canSetAppearShader;
           [HideInInspector]
           public bool canSetDisappearShader;
+          public bool isInvincible;
      }
 
 #if UNITY_EDITOR

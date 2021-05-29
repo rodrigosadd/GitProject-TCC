@@ -106,7 +106,7 @@ public class BossController : MonoBehaviour
 
             if(Physics.Raycast(antlersAttackPoint.position, antlersAttackPoint.up, out _hitInfo, rangeAntlersAttack))
             {               
-                if(_hitInfo.transform.tag == "Player")
+                if(_hitInfo.transform.tag == "Player" && !PlayerController.instance.death.isInvincible)
                 {
                     PlayerController.instance.hit.hitCount = PlayerController.instance.hit.maxHitCount;
                     StopCoroutine("DelayDeactivateBoss");
