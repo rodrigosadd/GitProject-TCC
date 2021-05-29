@@ -19,6 +19,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
     public bool attaking;
     public bool canAttack;
     public PlayerControllerMultiplayer multiplayerController;
+    public PlayerAnimationControllerMultiplayer animationController;
     private PhotonView photonView;
     private float _countdownReset;
 
@@ -80,7 +81,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
                if (currentAttack == 1)
                {
-                    PlayerAnimationControllerMultiplayer.instance.SetFirstAttack();
+                    animationController.SetFirstAttack();
                     trails[0].SetActive(true);
                     trails[1].SetActive(true);
                     trails[2].SetActive(true);
@@ -95,14 +96,14 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
           {
                if (currentAttack >= 2)
                {
-                    PlayerAnimationControllerMultiplayer.instance.SetSecondAttack();
+                    animationController.SetSecondAttack();
                     trails[0].SetActive(true);
                     trails[1].SetActive(true);
                     trails[2].SetActive(true);
                }
                else
                {
-                    PlayerAnimationControllerMultiplayer.instance.ResetFirstAttack();
+                    animationController.ResetFirstAttack();
                     trails[0].SetActive(false);
                     trails[1].SetActive(false);
                     trails[2].SetActive(false);
@@ -120,15 +121,15 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
           {
                if (currentAttack >= 3)
                {
-                    PlayerAnimationControllerMultiplayer.instance.SetFinalAttack();
+                    animationController.SetFinalAttack();
                     trails[0].SetActive(true);
                     trails[1].SetActive(true);
                     trails[2].SetActive(true);
                }
                else
                {
-                    PlayerAnimationControllerMultiplayer.instance.ResetFirstAttack();
-                    PlayerAnimationControllerMultiplayer.instance.ResetSecondAttack();
+                    animationController.ResetFirstAttack();
+                    animationController.ResetSecondAttack();
                     trails[0].SetActive(false);
                     trails[1].SetActive(false);
                     trails[2].SetActive(false);
@@ -142,7 +143,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      public void ResetAttack()
      {
-          PlayerAnimationControllerMultiplayer.instance.ResetAttacks();
+          animationController.ResetAttacks();
           trails[0].SetActive(false);
           trails[1].SetActive(false);
           trails[2].SetActive(false);
