@@ -2002,6 +2002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 335635257}
+  - component: {fileID: 335635258}
   m_Layer: 0
   m_Name: PresurePlate
   m_TagString: Untagged
@@ -2024,6 +2025,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &335635258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 335635256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 7
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &337093602
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,6 +3223,7 @@ GameObject:
   - component: {fileID: 444936181}
   - component: {fileID: 444936180}
   - component: {fileID: 444936185}
+  - component: {fileID: 444936184}
   m_Layer: 15
   m_Name: Elevator
   m_TagString: Platform
@@ -3283,6 +3307,28 @@ Transform:
   m_Father: {fileID: 330362412}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &444936184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444936179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!114 &444936185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6206,6 +6252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 932958236}
   - component: {fileID: 932958235}
+  - component: {fileID: 932958237}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Untagged
@@ -6245,6 +6292,28 @@ Transform:
   m_Father: {fileID: 330362412}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &932958237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932958234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 5
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &941508110
 GameObject:
   m_ObjectHideFlags: 0
@@ -6430,6 +6499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941756972}
+  - component: {fileID: 941756973}
   m_Layer: 0
   m_Name: Fan_OneHit
   m_TagString: Untagged
@@ -6452,6 +6522,28 @@ Transform:
   m_Father: {fileID: 330362412}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &941756973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941756971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 3
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &952487342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8254784004995915276, guid: f39cb1bf1c21bfa489d3a51471c443ad, type: 3}
@@ -11279,6 +11371,7 @@ GameObject:
   - component: {fileID: 1921070197}
   - component: {fileID: 1921070199}
   - component: {fileID: 1921070198}
+  - component: {fileID: 1921070200}
   m_Layer: 8
   m_Name: Board
   m_TagString: Ground
@@ -11352,6 +11445,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 1
+--- !u!114 &1921070200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921070196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 2
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1939889989
 GameObject:
   m_ObjectHideFlags: 0
@@ -11361,6 +11476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1939889990}
+  - component: {fileID: 1939889991}
   m_Layer: 0
   m_Name: Fan_TwoHits
   m_TagString: Untagged
@@ -11383,6 +11499,28 @@ Transform:
   m_Father: {fileID: 330362412}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1939889991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939889989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 4
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1953292847
 GameObject:
   m_ObjectHideFlags: 0
@@ -11759,6 +11897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2023644198}
+  - component: {fileID: 2023644199}
   m_Layer: 0
   m_Name: ScalleFloor
   m_TagString: Untagged
@@ -11828,6 +11967,28 @@ Transform:
   m_Father: {fileID: 330362412}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2023644199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2023644197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 6
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2037220394
 GameObject:
   m_ObjectHideFlags: 0

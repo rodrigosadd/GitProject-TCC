@@ -135,7 +135,8 @@ public class PlayerControllerMultiplayer : Character
 
      [Header("Photon variables")]
      public Photon photon;
-     [System.Serializable]
+
+    [System.Serializable]
      public class Photon
      { 
           public PhotonView m_PhotonView;
@@ -173,9 +174,11 @@ public class PlayerControllerMultiplayer : Character
                photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
                GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
                movement.cam = _cam.transform;
-               photon.playerNameUI.text = photon.playerName;
                RandName();
+               photon.playerNameUI.text = photon.playerName;
+               return;
           }
+          photon.playerNameUI.text = photon.playerName;
      }
 
      void Update()
@@ -196,6 +199,7 @@ public class PlayerControllerMultiplayer : Character
                SetDissolveShaderAppear();          
                SetDissolveShaderDisappear();
                PlayerConfigsAfterDeath();
+               photon.playerNameUI.gameObject.transform.LookAt(movement.cam.transform.position);
           }
      }
 
@@ -215,14 +219,29 @@ public class PlayerControllerMultiplayer : Character
      #region Multiplayer
      private void RandName()
      {
-          string[] lastNames = { "Mineiro", "Pedreiro", "Rockeiro", "Funkeiro", "Barbeiro", "Sem Freio" };
+          int randLastName = Random.Range(0, 6);
 
-          int randLast = Random.Range(0, lastNames.Length);
-          
-          if(photon.m_PhotonView.IsMine) {
-               photon.playerName = "Beto" + " " + lastNames[randLast];
-               //PhotonNetwork.player.NickName = photon.playerName;
+          switch(randLastName) {
+               case 0:
+                    photon.playerName = "Beto the Legend";
+                    break;
+               case 1:
+                    photon.playerName = "Beto Crusher";
+                    break;
+               case 2:
+                    photon.playerName = "Beto Smasher";
+                    break;
+               case 3:
+                    photon.playerName = "Beto the Lord";
+                    break;
+               case 4:
+                    photon.playerName = "Beto the Fearless";
+                    break;
+               case 5:
+                    photon.playerName = "Beto the Hero";
+                    break;
           }
+          
      }
      #endregion
 
@@ -249,7 +268,8 @@ public class PlayerControllerMultiplayer : Character
 
                Vector3 _moveDirection = Quaternion.Euler(0f, _targetAngle, 0f) * Vector3.forward;
 
-               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);    
+               movement.controller.Move(_moveDirection.normalized * movement.currentSpeed * Time.fixedDeltaTime);
+
           }
           else
           {
