@@ -14,6 +14,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
     public bool balance;
     public bool alreadyPlayedFallingAction;
     public PlayerControllerMultiplayer multiplayerController;
+    public PlayerAttackControllerMultiplayer playerAttackController;
     private bool _canJumpAfterFalling;
     private bool _inFallingAction;
     private float _countdownAfterFalling;
@@ -213,7 +214,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                multiplayerController.movement.currentSpeed == 0f &&
                multiplayerController.movement.isGrounded &&
                !balance &&
-               PlayerAttackControllerMultiplayer.instance.currentAttack == 0 &&
+               playerAttackController.currentAttack == 0 &&
                !multiplayerController.levelMechanics.interacting &&
                multiplayerController.movement.canMove &&
                !multiplayerController.death.dead && 
@@ -252,8 +253,8 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                multiplayerController.movement.isGrounded &&
                !balance &&
                multiplayerController.movement.controller.velocity.y <= 0 &&
-               PlayerAttackControllerMultiplayer.instance.currentAttack == 0 &&
-               !PlayerAttackControllerMultiplayer.instance.attaking &&
+               playerAttackController.currentAttack == 0 &&
+               !playerAttackController.attaking &&
                multiplayerController.movement.canMove &&
                !multiplayerController.death.dead && 
                !multiplayerController.levelMechanics.entryTeleport)
@@ -289,7 +290,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                multiplayerController.movement.vertical != 0) &&
                multiplayerController.jump.currentJump == 1 &&
                !multiplayerController.movement.isGrounded &&
-               !PlayerAttackControllerMultiplayer.instance.attaking &&
+               !playerAttackController.attaking &&
                !multiplayerController.death.dead && 
                !multiplayerController.levelMechanics.entryTeleport)
           {
@@ -322,7 +323,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
               multiplayerController.movement.vertical == 0) &&
               multiplayerController.jump.currentJump == 1 &&
               !multiplayerController.movement.isGrounded &&
-              !PlayerAttackControllerMultiplayer.instance.attaking &&
+              !playerAttackController.attaking &&
                !multiplayerController.death.dead && 
                !multiplayerController.levelMechanics.entryTeleport)
           {
@@ -353,7 +354,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           if (multiplayerController.movement.controller.velocity.y > 0 &&
                multiplayerController.jump.currentJump >= 2 &&
               !multiplayerController.movement.isGrounded &&
-              !PlayerAttackControllerMultiplayer.instance.attaking &&
+              !playerAttackController.attaking &&
                !multiplayerController.death.dead && 
                !multiplayerController.levelMechanics.entryTeleport)
           {
@@ -396,7 +397,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
      {
           if(multiplayerController.movement.controller.velocity.y <= -0.1 &&
               !multiplayerController.movement.isGrounded &&
-              !PlayerAttackControllerMultiplayer.instance.attaking &&
+              !playerAttackController.attaking &&
               multiplayerController.jump.currentJump >= 2 &&
               !alreadyPlayedFallingAction &&
                !multiplayerController.death.dead && 
@@ -427,7 +428,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
      {
           if (multiplayerController.movement.controller.velocity.y <= -0.1 &&
               !multiplayerController.movement.isGrounded &&
-              !PlayerAttackControllerMultiplayer.instance.attaking &&
+              !playerAttackController.attaking &&
               !alreadyPlayedFallingAction &&
               multiplayerController.jump.currentJump <= 1 &&
               !_inFallingAction &&
@@ -469,7 +470,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
      {
           if (multiplayerController.movement.controller.velocity.y <= -0.1 &&
               !multiplayerController.movement.isGrounded &&
-              !PlayerAttackControllerMultiplayer.instance.attaking &&
+              !playerAttackController.attaking &&
               multiplayerController.jump.currentJump >= 2 &&
               alreadyPlayedFallingAction &&
                !multiplayerController.death.dead && 
@@ -505,7 +506,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           if ((multiplayerController.movement.horizontal == 0 &&
               multiplayerController.movement.vertical == 0) &&
               multiplayerController.movement.isGrounded &&
-              !PlayerAttackControllerMultiplayer.instance.attaking &&
+              !playerAttackController.attaking &&
               multiplayerController.jump.currentJump >= 2 &&
                !multiplayerController.death.dead && 
                !multiplayerController.levelMechanics.entryTeleport)
@@ -539,7 +540,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           if ((multiplayerController.movement.horizontal != 0 ||
                multiplayerController.movement.vertical != 0) &&
                multiplayerController.movement.isGrounded &&
-               !PlayerAttackControllerMultiplayer.instance.attaking &&
+               !playerAttackController.attaking &&
                multiplayerController.jump.currentJump >= 2 &&
                !multiplayerController.death.dead && 
                !multiplayerController.levelMechanics.entryTeleport)
