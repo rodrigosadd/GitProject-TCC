@@ -88,7 +88,6 @@ public class BossController : MonoBehaviour
     public void ActivateAntlersAttack()
     {
         _canActivateAntlersAttack = true;
-        seeRangeantlersAttack = true;
         antlersAttackLaser.SetActive(true);
         OnAntlersAttack?.Invoke();
     }
@@ -96,7 +95,6 @@ public class BossController : MonoBehaviour
     public void DeactivateAntlersAttack()
     {
         _canActivateAntlersAttack = false;
-        seeRangeantlersAttack = false;
         antlersAttackLaser.SetActive(false);
     }
 
