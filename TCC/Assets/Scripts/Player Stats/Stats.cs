@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using System.Collections;
 using FMODUnity;
 
 public class Stats : MonoBehaviour
 {
+    public MeshRenderer meshRenderer;
+    public Collider coll;
     public GameObject itemInformationsPanel;
     public Camera3rdPerson camera3RdPerson;
     public Transform targetCam;
@@ -11,6 +14,7 @@ public class Stats : MonoBehaviour
     public float maxDistancePickedUp;
     public float speedRotate;
     private bool _canCloseSeeObj;
+    private bool _canPickUpObj = true;
 
     [EventRef] public string collectSound;
     public void RotateObject()
@@ -20,8 +24,9 @@ public class Stats : MonoBehaviour
 
     public void SeeObjectDrop()
      {   
-          if(!PlayerController.instance.levelMechanics.pickingUpItem)
+          if(!PlayerController.instance.levelMechanics.pickingUpItem && _canPickUpObj)
           {
+               _canPickUpObj = false;
                camera3RdPerson.targetCamera = targetCam;
                camera3RdPerson.ConfigToShowObject();
                PlayerController.instance.movement.canMove = false;
@@ -40,11 +45,18 @@ public class Stats : MonoBehaviour
                camera3RdPerson.targetCamera = PlayerController.instance.movement.targetCam;
                camera3RdPerson.ResetConfig();
                PlayerController.instance.movement.canMove = true;
-               gameObject.SetActive(false);
                PlayerController.instance.movement.canMove = true;
-               PlayerController.instance.levelMechanics.pickingUpItem = false;
                _canCloseSeeObj = false;
                itemInformationsPanel.SetActive(false);
+               meshRenderer.enabled = false;
+               coll.enabled = false;
+               StartCoroutine(Delay());
           }
+     }
+
+     IEnumerator Delay()
+     {
+          yield return new WaitForSeconds(1f);
+          PlayerController.instance.levelMechanics.pickingUpItem = false;
      }
 }
