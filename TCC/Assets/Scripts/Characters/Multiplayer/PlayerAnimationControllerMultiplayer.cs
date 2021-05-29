@@ -39,25 +39,23 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
             photonView.RPC("SetIsGrounded", RpcTarget.AllBuffered);
             photonView.RPC("SetIdle", RpcTarget.AllBuffered);
             photonView.RPC("SetRunning", RpcTarget.AllBuffered);
+            photonView.RPC("SetSingleJump", RpcTarget.AllBuffered);
+            photonView.RPC("SetSingleJumpRunning", RpcTarget.AllBuffered);
+            photonView.RPC("SetDoubleJump", RpcTarget.AllBuffered);
+            photonView.RPC("SetFallingAction", RpcTarget.AllBuffered);
             photonView.RPC("CheckAttackAnimationIsFinished", RpcTarget.AllBuffered);
-            //SetIsGrounded();
-            //SetIdle();
-            //SetRunning();
-            SetSingleJump();
-            SetSingleJumpRunning();
-            SetDoubleJump();
-            SetFallingAction();
-            InFallingAction();
-            SetFallingIdle();
-            SetFallingIdleDoubleJump();
-            SetFallingGround();
-            SetFallingRunning();
-            CanJumpAfterFalling();
-            SetSliding();
-            SetDead();
-            SetEntryTeleport();
-            SetExitTeleport();
-            SetInteract();
+            photonView.RPC("InFallingAction", RpcTarget.AllBuffered);
+            photonView.RPC("CheckAttackAnimationIsFinished", RpcTarget.AllBuffered);
+            photonView.RPC("SetFallingIdle", RpcTarget.AllBuffered);
+            photonView.RPC("SetFallingIdleDoubleJump", RpcTarget.AllBuffered);
+            photonView.RPC("SetFallingGround", RpcTarget.AllBuffered);
+            photonView.RPC("SetFallingRunning", RpcTarget.AllBuffered);
+            photonView.RPC("CanJumpAfterFalling", RpcTarget.AllBuffered);
+            photonView.RPC("SetSliding", RpcTarget.AllBuffered);
+            photonView.RPC("SetDead", RpcTarget.AllBuffered);
+            photonView.RPC("SetEntryTeleport", RpcTarget.AllBuffered);
+            photonView.RPC("SetExitTeleport", RpcTarget.AllBuffered);
+            photonView.RPC("SetInteract", RpcTarget.AllBuffered);
         }
      }
 
@@ -69,7 +67,6 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           _secondAttack = multiplayerController.photon.animator.GetBool("Second Attack");
           _finalAttack = multiplayerController.photon.animator.GetBool("Final Attack");
      }
-
      public void SetFirstAttack()
      {
           multiplayerController.photon.animator.SetBool("First Attack", true);
@@ -93,7 +90,6 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           fallingIdle = false;
           alreadyPlayedFallingAction = false;
      }
-
      public void ResetFirstAttack()
      {
           multiplayerController.photon.animator.SetBool("First Attack", false);
@@ -283,6 +279,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Jump
+     [PunRPC]
      public void SetSingleJump()
      {
           if (multiplayerController.movement.velocity.y > -2 &&
@@ -315,7 +312,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                alreadyPlayedFallingAction = false;
           }
      }
-
+     [PunRPC]
      public void SetSingleJumpRunning()
      {
           if (multiplayerController.movement.velocity.y > -2 &&
@@ -348,7 +345,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                alreadyPlayedFallingAction = false;
           }
      }
-
+     [PunRPC]
      public void SetDoubleJump()
      {
           if (multiplayerController.movement.controller.velocity.y > 0 &&
@@ -382,6 +379,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Falling
+     [PunRPC]
      public void ResetFallingAnimations()
      {
           multiplayerController.photon.animator.SetBool("Idle", true);
@@ -392,7 +390,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           fallingIdle = false;
           alreadyPlayedFallingAction = false;
      }
-
+     [PunRPC]
      public void SetFallingAction()
      {
           if(multiplayerController.movement.controller.velocity.y <= -0.1 &&
@@ -423,7 +421,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                _inFallingAction = true;                          
           }
      }
-
+     [PunRPC]
      public void SetFallingIdle()
      {
           if (multiplayerController.movement.controller.velocity.y <= -0.1 &&
@@ -465,7 +463,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                }
           }
      }
-
+     [PunRPC]
      public void SetFallingIdleDoubleJump()
      {
           if (multiplayerController.movement.controller.velocity.y <= -0.1 &&
@@ -500,7 +498,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                }
           }
      }
-
+     [PunRPC]
      public void SetFallingGround()
      {
           if ((multiplayerController.movement.horizontal == 0 &&
@@ -534,7 +532,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                multiplayerController.jump.fallingDust.Play();
           }
      }
-
+     [PunRPC]
      public void SetFallingRunning()
      {
           if ((multiplayerController.movement.horizontal != 0 ||
@@ -568,7 +566,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                multiplayerController.jump.fallingDust.Play();
           }
      }
-
+     [PunRPC]
      public void InFallingAction()
      {
           if (_inFallingAction)
@@ -585,7 +583,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                }
           }
      }
-
+     [PunRPC]
      public void CanJumpAfterFalling()
      {
           if (!_canJumpAfterFalling)
@@ -606,6 +604,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Balance
+     [PunRPC]
      public void SetBalance()
      {
           multiplayerController.photon.animator.SetBool("Idle", false);
@@ -636,6 +635,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Sliding
+     [PunRPC]
      public void SetSliding()
      {
           if(multiplayerController.levelMechanics.sliding)
@@ -664,6 +664,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Teleport
+     [PunRPC]
      public void SetEntryTeleport()
      {
           if(multiplayerController.levelMechanics.entryTeleport)
@@ -691,7 +692,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
                alreadyPlayedFallingAction = false;
           }
      }
-
+     [PunRPC]
      public void SetExitTeleport()
      {
           if(multiplayerController.levelMechanics.exitTeleport)
@@ -722,6 +723,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Interact
+     [PunRPC]
      public void SetInteract()
      {
           if(multiplayerController.levelMechanics.interacting)
@@ -763,6 +765,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Power Up
+     [PunRPC]
      public void SetPowerUp()
      {
           multiplayerController.photon.animator.SetBool("Idle", false);
@@ -790,6 +793,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 #endregion
 
 #region Dead
+     [PunRPC]
      public void SetDead()
      {
           if (multiplayerController.death.dead)
