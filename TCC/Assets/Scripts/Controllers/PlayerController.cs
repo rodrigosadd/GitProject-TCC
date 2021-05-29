@@ -86,6 +86,7 @@ public class PlayerController : Character
      [System.Serializable]
      public class Push
      {
+          public LayerMask layer;
           public Slow slowReference;
           public Transform targetDropPush;
           public Transform targetPushLight;
@@ -313,13 +314,14 @@ public class PlayerController : Character
           if (Input.GetButtonDown("Jump") && 
               CanJump() &&
               movement.canMove &&
-              push.pushingObj == false &&
               !levelMechanics.sliding &&
               !PlayerAttackController.instance.attaking &&
               PlayerAttackController.instance.currentAttack == 0 &&
               !GameManager.instance.settingsData.settingsOpen &&
               !PlayerAnimationController.instance.afterFalling &&
-              (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0))
+              (jump.doubleJumpCountdown >= 1 || jump.currentJump == 0) &&
+              !push.pushingObj &&
+              !push.droppingObj)
           {
                movement.velocity.y = Mathf.Sqrt(2f * -2f * movement.gravity);
                PlayerAnimationController.instance.fallingIdle = false;
@@ -462,7 +464,7 @@ public class PlayerController : Character
 
           if (push.currentTargetPush == null)
           {
-               if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush))
+               if (Physics.Raycast(push.middleOfThePlayer.position, push.middleOfThePlayer.forward, out _hit, push.rangePush, push.layer))
                {
                     push.currentTargetPush = _hit.transform;
                     return true;
@@ -679,6 +681,7 @@ public class PlayerController : Character
                {
                     _countdownAfterDropping = 0;
                     push.droppingObj = false;
+                    push.currentTargetPush = null;
                }
           }
      }

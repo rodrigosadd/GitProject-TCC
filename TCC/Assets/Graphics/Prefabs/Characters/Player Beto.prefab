@@ -6070,6 +6070,9 @@ MonoBehaviour:
     handShaderStrength: 0
     groundDetectorRange: 1.13
   push:
+    layer:
+      serializedVersion: 2
+      m_Bits: 12288
     slowReference: {fileID: 0}
     targetDropPush: {fileID: 789239519288306624}
     targetPushLight: {fileID: 207283326217072127}
@@ -6100,6 +6103,8 @@ MonoBehaviour:
     smootnessMissedJump: 90
     canMiss: 1
   death:
+    boss: {fileID: 0}
+    bossTrigger: {fileID: 0}
     head: {fileID: 2100000, guid: 05375b6672610a7418db03e61ca3e004, type: 2}
     body: {fileID: 2100000, guid: c6aba0ff1bf1d3c40afd263872e3a98d, type: 2}
     pickaxe: {fileID: 2100000, guid: a5641b93f4e34a6419d701c8104cc60e, type: 2}
