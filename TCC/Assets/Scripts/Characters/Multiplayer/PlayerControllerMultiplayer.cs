@@ -8,8 +8,6 @@ using TMPro;
 [RequireComponent(typeof(PhotonView))]
 public class PlayerControllerMultiplayer : Character
 {
-    public static PlayerControllerMultiplayer instance;
-
      [Header("Movement variables")]
      public Movement movement;
      private Vector3 _direction;
@@ -25,6 +23,7 @@ public class PlayerControllerMultiplayer : Character
           public LayerMask groundMask;
           public CharacterController controller;
           public Transform cam;
+          public Transform targetCam;
           public Transform groundCheck;
           public float groundDistance;
           public float gravity = -9.81f;
@@ -157,11 +156,6 @@ public class PlayerControllerMultiplayer : Character
      public bool seeRangeFalling = false;
 #endif
 
-    void Awake()
-    {
-        instance = this;   
-    }
-
      void Start()
      {
           if(photon.m_PhotonView.IsMine) {
@@ -172,7 +166,7 @@ public class PlayerControllerMultiplayer : Character
           ResetValueDissolveShader();
                
                GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
-               _cam.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
+               _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
                movement.cam = _cam.transform;
                RandName();
                photon.playerNameUI.text = photon.playerName;
