@@ -69,7 +69,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                FirstAttack();               
           }
      }
-
+     [PunRPC]
      public void FirstAttack()
      {
           if (!multiplayerController.death.dead &&
@@ -89,7 +89,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
           }
      }
-
+     [PunRPC]
      public void SecondAttack()
      {
           if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
@@ -114,7 +114,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                }
           }
      }
-
+     [PunRPC]
      public void FinalAttack()
      {
           if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
@@ -140,7 +140,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                }
           }
      }
-
+     [PunRPC]
      public void ResetAttack()
      {
           animationController.ResetAttacks();
@@ -173,7 +173,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                _countdownReset = 0;
           }
      }
-
+     [PunRPC]
      public void Attacking()
      {
           if (!multiplayerController.death.dead)
@@ -218,7 +218,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                }
           }
      }
-
+     [PunRPC]
      public void AttackDetection()
      {
           Collider[] _hitObject = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerObjs);
