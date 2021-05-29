@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public class PlayerAttackControllerMultiplayer : MonoBehaviour
 {   
-    public static PlayerAttackControllerMultiplayer instance;
     public Transform targetAttack;
     public LayerMask layerObjs;
     public GameObject[] trails;
@@ -33,7 +32,6 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      void Awake()
      {
-          instance = this;
           photonView = GetComponent<PhotonView>();
      }
 
