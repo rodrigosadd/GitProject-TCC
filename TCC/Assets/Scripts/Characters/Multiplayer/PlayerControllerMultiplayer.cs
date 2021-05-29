@@ -172,7 +172,7 @@ public class PlayerControllerMultiplayer : Character
           ResetValueDissolveShader();
                
                GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
-               _cam.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
+               _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.transform;
                movement.cam = _cam.transform;
                RandName();
                photon.playerNameUI.text = photon.playerName;
