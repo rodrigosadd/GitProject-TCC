@@ -38,6 +38,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
             photonView.RPC("SetIsGrounded", RpcTarget.AllBuffered);
             photonView.RPC("SetIdle", RpcTarget.AllBuffered);
             photonView.RPC("SetRunning", RpcTarget.AllBuffered);
+            photonView.RPC("CheckAttackAnimationIsFinished", RpcTarget.AllBuffered);
             //SetIsGrounded();
             //SetIdle();
             //SetRunning();
@@ -56,11 +57,11 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
             SetEntryTeleport();
             SetExitTeleport();
             SetInteract();
-            CheckAttackAnimationIsFinished();
         }
      }
 
 #region Attack
+     [PunRPC]
      public void CheckAttackAnimationIsFinished()
      {
           _firstAttack = multiplayerController.photon.animator.GetBool("First Attack");

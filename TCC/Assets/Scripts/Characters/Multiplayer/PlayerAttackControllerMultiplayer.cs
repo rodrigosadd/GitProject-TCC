@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerAttackControllerMultiplayer : MonoBehaviour
 {   
@@ -17,6 +18,8 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
     public float timeToResetAttack;
     public bool attaking;
     public bool canAttack;
+    public PlayerControllerMultiplayer multiplayerController;
+    private PhotonView photonView;
     private float _countdownReset;
 
 #if UNITY_EDITOR
@@ -30,32 +33,36 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
      void Awake()
      {
           instance = this;
+          photonView = GetComponent<PhotonView>();
      }
 
      void LateUpdate()
      {
-          if(canAttack)
-          {
-               InputsAttack();
-               CanAttack();
-               Impulse();
-               CheckAttaking();
+          if (photonView.IsMine) {
+               if(canAttack)
+               {
+                    photonView.RPC("InputsAttack", RpcTarget.AllBuffered);
+                    photonView.RPC("CanAttack", RpcTarget.AllBuffered);
+                    photonView.RPC("Impulse", RpcTarget.AllBuffered);
+                    photonView.RPC("CheckAttaking", RpcTarget.AllBuffered);
+               }
           }
      }
 
+     [PunRPC]
      public void InputsAttack()
      {
           if (Input.GetButtonDown("Attack") &&
               //!GameManager.instance.settingsData.settingsOpen &&
-              !PlayerControllerMultiplayer.instance.levelMechanics.slowing &&
-              !PlayerControllerMultiplayer.instance.death.dead &&
-              !PlayerControllerMultiplayer.instance.levelMechanics.sliding &&
-              PlayerControllerMultiplayer.instance.movement.isGrounded &&
-              PlayerControllerMultiplayer.instance.movement.canMove)
+              !multiplayerController.levelMechanics.slowing &&
+              !multiplayerController.death.dead &&
+              !multiplayerController.levelMechanics.sliding &&
+              multiplayerController.movement.isGrounded &&
+              multiplayerController.movement.canMove)
           {
                if (!attaking)
                {
-                    _currentMaxSpeed = PlayerControllerMultiplayer.instance.movement.fixedMaxSpeed;
+                    _currentMaxSpeed = multiplayerController.movement.fixedMaxSpeed;
                }
 
                FirstAttack();               
@@ -64,9 +71,9 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      public void FirstAttack()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead &&
+          if (!multiplayerController.death.dead &&
                currentAttack != 3 &&
-               PlayerControllerMultiplayer.instance.movement.isGrounded)
+               multiplayerController.movement.isGrounded)
           {
                _lastAttackTime = Time.time;
                currentAttack++;
@@ -84,7 +91,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      public void SecondAttack()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead && PlayerControllerMultiplayer.instance.movement.canMove)
+          if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
           {
                if (currentAttack >= 2)
                {
@@ -99,7 +106,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                     trails[0].SetActive(false);
                     trails[1].SetActive(false);
                     trails[2].SetActive(false);
-                    PlayerControllerMultiplayer.instance.movement.maxSpeed = _currentMaxSpeed;
+                    multiplayerController.movement.maxSpeed = _currentMaxSpeed;
                     attaking = false;
                     currentAttack = 0;
                     _finalImpulse = Vector3.zero;
@@ -109,7 +116,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      public void FinalAttack()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead && PlayerControllerMultiplayer.instance.movement.canMove)
+          if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
           {
                if (currentAttack >= 3)
                {
@@ -125,7 +132,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                     trails[0].SetActive(false);
                     trails[1].SetActive(false);
                     trails[2].SetActive(false);
-                    PlayerControllerMultiplayer.instance.movement.maxSpeed = _currentMaxSpeed;
+                    multiplayerController.movement.maxSpeed = _currentMaxSpeed;
                     attaking = false;
                     currentAttack = 0;
                     _finalImpulse = Vector3.zero;
@@ -139,12 +146,13 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
           trails[0].SetActive(false);
           trails[1].SetActive(false);
           trails[2].SetActive(false);
-          PlayerControllerMultiplayer.instance.movement.maxSpeed = _currentMaxSpeed;
+          multiplayerController.movement.maxSpeed = _currentMaxSpeed;
           attaking = false;
           currentAttack = 0;
           _finalImpulse = Vector3.zero;
      }
 
+     [PunRPC]
      public void CheckAttaking()
      {
           if (currentAttack != 0)
@@ -167,42 +175,43 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      public void Attacking()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead)
+          if (!multiplayerController.death.dead)
           {
-               if (PlayerControllerMultiplayer.instance.levelMechanics.slowing == false)
+               if (multiplayerController.levelMechanics.slowing == false)
                {
-                    PlayerControllerMultiplayer.instance.movement.maxSpeed = 0f;
+                    multiplayerController.movement.maxSpeed = 0f;
                     attaking = true;
                }
           }
      }
 
+     [PunRPC]
      public void Impulse()
      {
           if (attaking)
           {
                if (_finalImpulse == Vector3.zero)
                {
-                    _finalImpulse = PlayerControllerMultiplayer.instance.transform.position + (PlayerControllerMultiplayer.instance.characterGraphic.forward * distanceImpulse);
+                    _finalImpulse = multiplayerController.transform.position + (multiplayerController.characterGraphic.forward * distanceImpulse);
                }
                else
                {
-                    if (!Physics.Raycast(PlayerControllerMultiplayer.instance.characterGraphic.position, PlayerControllerMultiplayer.instance.characterGraphic.forward, 1.18f))
+                    if (!Physics.Raycast(multiplayerController.characterGraphic.position, multiplayerController.characterGraphic.forward, 1.18f))
                     {
-                         PlayerControllerMultiplayer.instance.movement.velocity.y = 0;
-                         PlayerControllerMultiplayer.instance.SetControllerPosition(Vector3.MoveTowards(PlayerControllerMultiplayer.instance.transform.position, _finalImpulse, attackImpulse * Time.deltaTime));
+                         multiplayerController.movement.velocity.y = 0;
+                         multiplayerController.SetControllerPosition(Vector3.MoveTowards(multiplayerController.transform.position, _finalImpulse, attackImpulse * Time.deltaTime));
 
-                         if (_finalImpulse == PlayerControllerMultiplayer.instance.transform.position)
+                         if (_finalImpulse == multiplayerController.transform.position)
                          {                              
                               _finalImpulse = Vector3.zero;
-                              PlayerControllerMultiplayer.instance.levelMechanics.sliding = false;
+                              multiplayerController.levelMechanics.sliding = false;
                               attaking = false;
                          }
                     }
                     else
                     {
                          _finalImpulse = Vector3.zero;
-                         PlayerControllerMultiplayer.instance.levelMechanics.sliding = false;
+                         multiplayerController.levelMechanics.sliding = false;
                          attaking = false;
                     }
                }
@@ -230,6 +239,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
           }
      }
 
+     [PunRPC]
      public void CanAttack()
      {
           if (Time.time - _lastAttackTime > delayNextAttack)
