@@ -67,6 +67,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           _secondAttack = multiplayerController.photon.animator.GetBool("Second Attack");
           _finalAttack = multiplayerController.photon.animator.GetBool("Final Attack");
      }
+     [PunRPC]
      public void SetFirstAttack()
      {
           multiplayerController.photon.animator.SetBool("First Attack", true);
@@ -90,6 +91,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           fallingIdle = false;
           alreadyPlayedFallingAction = false;
      }
+     [PunRPC]
      public void ResetFirstAttack()
      {
           multiplayerController.photon.animator.SetBool("First Attack", false);
@@ -113,7 +115,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           fallingIdle = false;
           alreadyPlayedFallingAction = false;
      }
-
+     [PunRPC]
      public void SetSecondAttack()
      {
           multiplayerController.photon.animator.SetBool("Second Attack", true);
@@ -137,7 +139,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           fallingIdle = false;
           alreadyPlayedFallingAction = false;
      }
-
+     [PunRPC]
      public void ResetSecondAttack()
      {
           multiplayerController.photon.animator.SetBool("Second Attack", false);
@@ -161,7 +163,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           fallingIdle = false;
           alreadyPlayedFallingAction = false;
      }
-
+     [PunRPC]
      public void SetFinalAttack()
      {
           multiplayerController.photon.animator.SetBool("Final Attack", true);
@@ -185,7 +187,7 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
           fallingIdle = false;
           alreadyPlayedFallingAction = false;
      }
-
+     [PunRPC]
      public void ResetAttacks()
      {
           multiplayerController.photon.animator.SetBool("Final Attack", false);
