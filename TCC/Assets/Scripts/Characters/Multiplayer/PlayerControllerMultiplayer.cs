@@ -164,13 +164,13 @@ public class PlayerControllerMultiplayer : Character
 
      void Start()
      {
+          if(photon.m_PhotonView.IsMine) {
           Cursor.visible = false;
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
           movement.fixedGravity = movement.gravity;
           ResetValueDissolveShader();
 
-          if(photon.m_PhotonView.IsMine) {
                photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
                GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
                movement.cam = _cam.transform;
