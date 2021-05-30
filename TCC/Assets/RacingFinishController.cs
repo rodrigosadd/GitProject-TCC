@@ -44,7 +44,6 @@ public class RacingFinishController : MonoBehaviourPunCallbacks
     public void RaceOver() {
         isRaceOver = true;
         finishPanel.SetActive(isRaceOver);
-        Cursor.visible = true;
         if(m_PhotonView.IsMine) {
             winner = true;
         }
