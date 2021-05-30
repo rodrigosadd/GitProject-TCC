@@ -164,20 +164,21 @@ public class PlayerControllerMultiplayer : Character
      void Start()
      {
           if(photon.m_PhotonView.IsMine) {
-          Cursor.visible = false;
-          Cursor.lockState = CursorLockMode.Locked;
-          movement.fixedMaxSpeed = movement.maxSpeed;
-          movement.fixedGravity = movement.gravity;
-          ResetValueDissolveShader();
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            movement.fixedMaxSpeed = movement.maxSpeed;
+            movement.fixedGravity = movement.gravity;
+            ResetValueDissolveShader();
                
-               GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
-               _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
-               movement.cam = _cam.transform;
-               RandName();
-               playerNameUIHolder = Instantiate(photon.playerNameUI, photon.textSpawnPoint.position, Quaternion.identity);
-               textUI = playerNameUIHolder.GetComponentInChildren<TMP_Text>();
-               PhotonNetwork.NickName = photon.playerName;
-          }
+            GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
+            _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
+            movement.cam = _cam.transform;
+            RandName();
+            playerNameUIHolder = Instantiate(photon.playerNameUI, photon.textSpawnPoint.position, Quaternion.identity);
+            textUI = playerNameUIHolder.GetComponentInChildren<TMP_Text>();
+            PhotonNetwork.NickName = photon.playerName;
+            this.gameObject.name = photon.playerName;
+        }
           textUI.text = PhotonNetwork.NickName;
           photon.m_PhotonView.RPC("ResetCounter", RpcTarget.All);
      }

@@ -9,7 +9,7 @@ public class StartRacingController : MonoBehaviourPunCallbacks
     public List<GameObject> List_Player;
     public float timeCount;
     bool countStart;
-
+    public GameObject blockPlayers;
     public void OnPlayersInScene()
     {
         GameObject playerRef = GameObject.FindGameObjectWithTag("Player");
@@ -44,6 +44,7 @@ public class StartRacingController : MonoBehaviourPunCallbacks
                 for (int x =0; x < List_Player.Count; x++)
                 {
                     Debug.Log("Startar jogo para: " + List_Player[x].name);
+                    blockPlayers.SetActive(false);
                 }
             }
 

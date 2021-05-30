@@ -12,25 +12,47 @@ public class RacingFinishController : MonoBehaviourPunCallbacks
     public GameObject finishPanel;
     public Text finalText;
 
+    public bool WinnerOnOff = true;
+    public GameObject WinnerRef;
     // Update is called once per frame
     void Update()
     {
-        if(isRaceOver) {
-            if (winner)
-            {
-                finalText.text = "You won!";
-            }
-            else {
-                finalText.text = "You lose!";
-            }
-            return;
-        }
+        //if(isRaceOver) {
+        //    if (winner)
+        //    {
+        //        finalText.text = "You won!";
+        //    }
+        //    else {
+        //        finalText.text = "You lose!";
+        //    }
+        //    return;
+        //}
         RotatePrize();
     }
 
+    [PunRPC]
     void OnTriggerEnter(Collider other)
     {
-        if(!isRaceOver) {
+        if (other.CompareTag("Player") && WinnerOnOff && other.gameObject.GetComponent<PhotonView>().IsMine)
+        {
+            WinnerRef = other.gameObject;
+            finalText.text = WinnerRef.name + " You won!";
+            WinnerOnOff = false;
+            Debug.Log("Player chegou ao final: " + WinnerRef.name);
+        }
+
+        if (!WinnerOnOff && other.gameObject.GetComponent<PhotonView>().IsMine)
+        {
+            finalText.text = WinnerRef.name + " Winner!!";
+        }
+
+        if (!WinnerOnOff && other.gameObject.GetComponent<PhotonView>().IsMine && WinnerRef != this.gameObject)
+        {
+            finalText.text = WinnerRef.name + " you lose!!";
+        }
+
+        if(!isRaceOver)
+        {
             m_PhotonView.RPC("RaceOver", RpcTarget.All);
         }
     }
