@@ -141,9 +141,12 @@ public class PlayerControllerMultiplayer : Character
           public PhotonView m_PhotonView;
           public GameObject cameraPrefab;
           public Transform camSpawnPoint;
+          public Transform m_RacingPosition;
           public Animator animator;
           public TMP_Text playerNameUI;
           public string playerName;
+          public GameManager_Demo_ENDM m_Manager;
+          public bool isRacing = true;
      }
      
 #if UNITY_EDITOR
@@ -173,6 +176,7 @@ public class PlayerControllerMultiplayer : Character
                return;
           }
           photon.playerNameUI.text = photon.playerName;
+          photon.m_PhotonView.RPC("ResetCounter", RpcTarget.All);
      }
 
      void Update()
@@ -193,6 +197,7 @@ public class PlayerControllerMultiplayer : Character
                SetDissolveShaderAppear();          
                SetDissolveShaderDisappear();
                PlayerConfigsAfterDeath();
+               SetStart();
           }
      }
 
@@ -235,6 +240,17 @@ public class PlayerControllerMultiplayer : Character
                     break;
           }
           
+     }
+     [PunRPC]
+     public void ResetCounter() {
+          if(photon.m_PhotonView.IsMine)
+               photon.m_Manager.counter = 0;
+     }
+     private void SetStart() {
+          if(photon.m_Manager.isGameReady && photon.isRacing) {
+               SetControllerPosition(photon.m_RacingPosition.position);
+               photon.isRacing = false;
+          }
      }
      #endregion
 
