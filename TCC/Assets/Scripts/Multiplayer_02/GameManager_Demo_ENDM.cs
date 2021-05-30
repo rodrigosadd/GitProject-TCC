@@ -97,6 +97,6 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     }
 
     public void LeaveGame() {
-        PhotonNetwork.LeaveRoom();
+        
     }
 }
