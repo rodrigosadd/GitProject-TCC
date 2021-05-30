@@ -16,6 +16,7 @@ public class BossController : MonoBehaviour
     public int enragedLife;
     public int enragedFinalLife;
     public float timeToDeactivateMesh;
+    public float timeToResetSlowMotion;
     private bool _canActivateAntlersAttack;
     private bool _invunerable;
     private bool _alreadyStartedCoroutine;
@@ -23,6 +24,14 @@ public class BossController : MonoBehaviour
 #if UNITY_EDITOR
     public bool seeRangeantlersAttack;
 #endif
+
+    [Header("See Object variables")]
+    public Transform targetCam;
+    public float timeToReturnPlayerTarget = 2f;
+    public bool seeObject;
+    private float countdownToReturnPlayerTarget;
+    private bool canChangeTargetCam;
+
 
     public UnityEvent OnAntlersAttack;
     public UnityEvent OnTakedamage;
@@ -38,6 +47,7 @@ public class BossController : MonoBehaviour
         CheckCurrentLife();
         Aim();
         AntlersAttack();
+        CountdownToReturnPlayerTarget();
     }
 
     public void TakeDamage()
@@ -62,14 +72,22 @@ public class BossController : MonoBehaviour
             if(!_alreadyStartedCoroutine)
             {
                 _alreadyStartedCoroutine = true;
+                Time.timeScale = 0.5f;
+                StartCoroutine(ResetSlowMotion());
                 StartCoroutine(DelayToFinishAnimation());
             }
         }
     }
 
+    IEnumerator ResetSlowMotion()
+    {
+        yield return new WaitForSeconds(timeToResetSlowMotion);
+        Time.timeScale = 1f;
+    }
     IEnumerator DelayToFinishAnimation()
     {
         yield return new WaitForSeconds(timeToDeactivateMesh);
+        SeeObjectDrop();
         IsDead?.Invoke();
     }
 
@@ -88,7 +106,6 @@ public class BossController : MonoBehaviour
     public void ActivateAntlersAttack()
     {
         _canActivateAntlersAttack = true;
-        seeRangeantlersAttack = true;
         antlersAttackLaser.SetActive(true);
         OnAntlersAttack?.Invoke();
     }
@@ -96,7 +113,6 @@ public class BossController : MonoBehaviour
     public void DeactivateAntlersAttack()
     {
         _canActivateAntlersAttack = false;
-        seeRangeantlersAttack = false;
         antlersAttackLaser.SetActive(false);
     }
 
@@ -108,7 +124,7 @@ public class BossController : MonoBehaviour
 
             if(Physics.Raycast(antlersAttackPoint.position, antlersAttackPoint.up, out _hitInfo, rangeAntlersAttack))
             {               
-                if(_hitInfo.transform.tag == "Player")
+                if(_hitInfo.transform.tag == "Player" && !PlayerController.instance.death.isInvincible)
                 {
                     PlayerController.instance.hit.hitCount = PlayerController.instance.hit.maxHitCount;
                     StopCoroutine("DelayDeactivateBoss");
@@ -121,10 +137,44 @@ public class BossController : MonoBehaviour
     IEnumerator DelayDeactivateBoss()
     {
         yield return new WaitForSeconds(1.8f);
-        PlayerController.instance.death.boss.SetActive(false);
-        PlayerController.instance.death.boss = null;
+        
+        if( PlayerController.instance.death.boss != null)
+        {
+            PlayerController.instance.death.boss.SetActive(false);
+            PlayerController.instance.death.boss = null;
+        }
         PlayerController.instance.death.bossTrigger.SetActive(true);
     }   
+
+    public void SeeObjectDrop()
+     {
+          if(seeObject)
+          {
+               canChangeTargetCam = true;
+               Camera3rdPerson.instance.targetCamera = targetCam;
+               Camera3rdPerson.instance.ConfigToShowObject();
+               PlayerController.instance.movement.canMove = false;
+          }
+     }
+
+     public void CountdownToReturnPlayerTarget()
+     {
+          if(canChangeTargetCam)
+          {
+               if(countdownToReturnPlayerTarget < 1)
+               {
+                    countdownToReturnPlayerTarget += Time.deltaTime / timeToReturnPlayerTarget;
+               }
+               else
+               {
+                    canChangeTargetCam = false;
+                    Camera3rdPerson.instance.targetCamera = PlayerController.instance.movement.targetCam;
+                    Camera3rdPerson.instance.ResetConfig();
+                    PlayerController.instance.movement.canMove = true;
+                    seeObject = false;
+               }
+          }
+     }    
 
 #if UNITY_EDITOR
      void OnDrawGizmos()

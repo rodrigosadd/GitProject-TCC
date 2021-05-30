@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 
+    AppIdRealtime: c15fc11a-4928-4fdc-a2f7-32b4925d631a
     AppIdChat: 
     AppIdVoice: 
     AppVersion: 
@@ -27,7 +27,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: 
+  DevRegion: sa
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -44,13 +44,51 @@ MonoBehaviour:
   - GetReady
   - RespawnSpaceship
   - Rotat
-  - SetIdle
-  - SetIsGrounded
-  - SetRunning
   - SpikePUN
   - StartGame
   - TimeCount
   - TimeCountdown
+  - SetIdle
+  - SetIsGrounded
+  - SetRunning
+  - CanAttack
+  - CheckAttackAnimationIsFinished
+  - CheckAttaking
+  - Impulse
+  - InputsAttack
+  - CanJumpAfterFalling
+  - InFallingAction
+  - ResetFallingAnimations
+  - SetBalance
+  - SetDead
+  - SetDoubleJump
+  - SetEntryTeleport
+  - SetExitTeleport
+  - SetFallingAction
+  - SetFallingGround
+  - SetFallingIdle
+  - SetFallingIdleDoubleJump
+  - SetFallingRunning
+  - SetInteract
+  - SetPowerUp
+  - SetSingleJump
+  - SetSingleJumpRunning
+  - SetSliding
+  - ResetAttacks
+  - ResetFirstAttack
+  - ResetSecondAttack
+  - SetFinalAttack
+  - SetFirstAttack
+  - SetSecondAttack
+  - AttackDetection
+  - Attacking
+  - FinalAttack
+  - FirstAttack
+  - ResetAttack
+  - SecondAttack
+  - DisablePickedPosition
+  - ResetCounter
+  - RaceOver
   DisableAutoOpenWizard: 1
   ShowSettings: 0
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1

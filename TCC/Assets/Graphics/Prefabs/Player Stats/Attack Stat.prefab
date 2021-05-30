@@ -58,6 +58,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffabff2d3aa598243a2ac092ca4343b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 2201723770840415571}
+  coll: {fileID: 4369631474529441101}
+  itemInformationsPanel: {fileID: 0}
   camera3RdPerson: {fileID: 0}
   targetCam: {fileID: 0}
   targetShowItem: {fileID: 0}
@@ -134,5 +137,10 @@ GameObject:
 --- !u!4 &1064314912394053180 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5a7532a71d30d824cb455443e39c226b, type: 3}
+  m_PrefabInstance: {fileID: 670910705491993047}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2201723770840415571 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 5a7532a71d30d824cb455443e39c226b, type: 3}
   m_PrefabInstance: {fileID: 670910705491993047}
   m_PrefabAsset: {fileID: 0}

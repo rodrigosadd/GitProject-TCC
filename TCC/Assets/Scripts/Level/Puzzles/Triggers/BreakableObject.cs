@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using DG.Tweening;
 
 public class BreakableObject : MonoBehaviour
@@ -16,6 +17,8 @@ public class BreakableObject : MonoBehaviour
      public int maxHit;
      public int hit;
      public bool triggerBroken;
+
+     public UnityEvent OnBroken;
 
      void Start()
      {
@@ -35,7 +38,8 @@ public class BreakableObject : MonoBehaviour
           {
                triggerBroken = true;
                col.enabled = false;
-               DropObject();               
+               DropObject();     
+               OnBroken?.Invoke();          
           }
      }
 

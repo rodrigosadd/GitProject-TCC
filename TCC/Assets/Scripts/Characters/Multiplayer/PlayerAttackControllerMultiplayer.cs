@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class PlayerAttackControllerMultiplayer : MonoBehaviour
 {   
-    public static PlayerAttackControllerMultiplayer instance;
     public Transform targetAttack;
     public LayerMask layerObjs;
     public GameObject[] trails;
@@ -17,6 +17,9 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
     public float timeToResetAttack;
     public bool attaking;
     public bool canAttack;
+    public PlayerControllerMultiplayer multiplayerController;
+    public PlayerAnimationControllerMultiplayer animationController;
+    private PhotonView photonView;
     private float _countdownReset;
 
 #if UNITY_EDITOR
@@ -29,122 +32,129 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      void Awake()
      {
-          instance = this;
+          photonView = GetComponent<PhotonView>();
      }
 
      void LateUpdate()
      {
-          if(canAttack)
-          {
-               InputsAttack();
-               CanAttack();
-               Impulse();
-               CheckAttaking();
+          if (photonView.IsMine) {
+               if(canAttack)
+               {
+                    photonView.RPC("InputsAttack", RpcTarget.AllBuffered);
+                    photonView.RPC("CanAttack", RpcTarget.AllBuffered);
+                    photonView.RPC("Impulse", RpcTarget.AllBuffered);
+                    photonView.RPC("CheckAttaking", RpcTarget.AllBuffered);
+               }
           }
      }
 
+     [PunRPC]
      public void InputsAttack()
      {
           if (Input.GetButtonDown("Attack") &&
               //!GameManager.instance.settingsData.settingsOpen &&
-              !PlayerControllerMultiplayer.instance.levelMechanics.slowing &&
-              !PlayerControllerMultiplayer.instance.death.dead &&
-              !PlayerControllerMultiplayer.instance.levelMechanics.sliding &&
-              PlayerControllerMultiplayer.instance.movement.isGrounded &&
-              PlayerControllerMultiplayer.instance.movement.canMove)
+              !multiplayerController.levelMechanics.slowing &&
+              !multiplayerController.death.dead &&
+              !multiplayerController.levelMechanics.sliding &&
+              multiplayerController.movement.isGrounded &&
+              multiplayerController.movement.canMove)
           {
                if (!attaking)
                {
-                    _currentMaxSpeed = PlayerControllerMultiplayer.instance.movement.fixedMaxSpeed;
+                    _currentMaxSpeed = multiplayerController.movement.fixedMaxSpeed;
                }
 
                FirstAttack();               
           }
      }
-
      public void FirstAttack()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead &&
-               currentAttack != 3 &&
-               PlayerControllerMultiplayer.instance.movement.isGrounded)
-          {
-               _lastAttackTime = Time.time;
-               currentAttack++;
-
-               if (currentAttack == 1)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead &&
+                    currentAttack != 3 &&
+                    multiplayerController.movement.isGrounded)
                {
-                    PlayerAnimationControllerMultiplayer.instance.SetFirstAttack();
-                    trails[0].SetActive(true);
-                    trails[1].SetActive(true);
-                    trails[2].SetActive(true);
+                    _lastAttackTime = Time.time;
+                    currentAttack++;
+
+                    if (currentAttack == 1)
+                    {
+                         animationController.SetFirstAttack();
+                         trails[0].SetActive(true);
+                         trails[1].SetActive(true);
+                         trails[2].SetActive(true);
+                    }
+                    currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
                }
-               currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
           }
      }
-
      public void SecondAttack()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead && PlayerControllerMultiplayer.instance.movement.canMove)
-          {
-               if (currentAttack >= 2)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
                {
-                    PlayerAnimationControllerMultiplayer.instance.SetSecondAttack();
-                    trails[0].SetActive(true);
-                    trails[1].SetActive(true);
-                    trails[2].SetActive(true);
-               }
-               else
-               {
-                    PlayerAnimationControllerMultiplayer.instance.ResetFirstAttack();
-                    trails[0].SetActive(false);
-                    trails[1].SetActive(false);
-                    trails[2].SetActive(false);
-                    PlayerControllerMultiplayer.instance.movement.maxSpeed = _currentMaxSpeed;
-                    attaking = false;
-                    currentAttack = 0;
-                    _finalImpulse = Vector3.zero;
+                    if (currentAttack >= 2)
+                    {
+                         animationController.SetSecondAttack();
+                         trails[0].SetActive(true);
+                         trails[1].SetActive(true);
+                         trails[2].SetActive(true);
+                    }
+                    else
+                    {
+                         animationController.ResetFirstAttack();
+                         trails[0].SetActive(false);
+                         trails[1].SetActive(false);
+                         trails[2].SetActive(false);
+                         multiplayerController.movement.maxSpeed = _currentMaxSpeed;
+                         attaking = false;
+                         currentAttack = 0;
+                         _finalImpulse = Vector3.zero;
+                    }
                }
           }
      }
-
      public void FinalAttack()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead && PlayerControllerMultiplayer.instance.movement.canMove)
-          {
-               if (currentAttack >= 3)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
                {
-                    PlayerAnimationControllerMultiplayer.instance.SetFinalAttack();
-                    trails[0].SetActive(true);
-                    trails[1].SetActive(true);
-                    trails[2].SetActive(true);
-               }
-               else
-               {
-                    PlayerAnimationControllerMultiplayer.instance.ResetFirstAttack();
-                    PlayerAnimationControllerMultiplayer.instance.ResetSecondAttack();
-                    trails[0].SetActive(false);
-                    trails[1].SetActive(false);
-                    trails[2].SetActive(false);
-                    PlayerControllerMultiplayer.instance.movement.maxSpeed = _currentMaxSpeed;
-                    attaking = false;
-                    currentAttack = 0;
-                    _finalImpulse = Vector3.zero;
+                    if (currentAttack >= 3)
+                    {
+                         animationController.SetFinalAttack();
+                         trails[0].SetActive(true);
+                         trails[1].SetActive(true);
+                         trails[2].SetActive(true);
+                    }
+                    else
+                    {
+                         animationController.ResetFirstAttack();
+                         animationController.ResetSecondAttack();
+                         trails[0].SetActive(false);
+                         trails[1].SetActive(false);
+                         trails[2].SetActive(false);
+                         multiplayerController.movement.maxSpeed = _currentMaxSpeed;
+                         attaking = false;
+                         currentAttack = 0;
+                         _finalImpulse = Vector3.zero;
+                    }
                }
           }
      }
-
      public void ResetAttack()
      {
-          PlayerAnimationControllerMultiplayer.instance.ResetAttacks();
-          trails[0].SetActive(false);
-          trails[1].SetActive(false);
-          trails[2].SetActive(false);
-          PlayerControllerMultiplayer.instance.movement.maxSpeed = _currentMaxSpeed;
-          attaking = false;
-          currentAttack = 0;
-          _finalImpulse = Vector3.zero;
+          if(photonView.IsMine) {
+               animationController.ResetAttacks();
+               trails[0].SetActive(false);
+               trails[1].SetActive(false);
+               trails[2].SetActive(false);
+               multiplayerController.movement.maxSpeed = _currentMaxSpeed;
+               attaking = false;
+               currentAttack = 0;
+               _finalImpulse = Vector3.zero;
+          }
      }
-
+     [PunRPC]
      public void CheckAttaking()
      {
           if (currentAttack != 0)
@@ -167,48 +177,50 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
 
      public void Attacking()
      {
-          if (!PlayerControllerMultiplayer.instance.death.dead)
-          {
-               if (PlayerControllerMultiplayer.instance.levelMechanics.slowing == false)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead)
                {
-                    PlayerControllerMultiplayer.instance.movement.maxSpeed = 0f;
-                    attaking = true;
+                    if (multiplayerController.levelMechanics.slowing == false)
+                    {
+                         multiplayerController.movement.maxSpeed = 0f;
+                         attaking = true;
+                    }
                }
           }
      }
 
+     [PunRPC]
      public void Impulse()
      {
           if (attaking)
           {
                if (_finalImpulse == Vector3.zero)
                {
-                    _finalImpulse = PlayerControllerMultiplayer.instance.transform.position + (PlayerControllerMultiplayer.instance.characterGraphic.forward * distanceImpulse);
+                    _finalImpulse = multiplayerController.transform.position + (multiplayerController.characterGraphic.forward * distanceImpulse);
                }
                else
                {
-                    if (!Physics.Raycast(PlayerControllerMultiplayer.instance.characterGraphic.position, PlayerControllerMultiplayer.instance.characterGraphic.forward, 1.18f))
+                    if (!Physics.Raycast(multiplayerController.characterGraphic.position, multiplayerController.characterGraphic.forward, 1.18f))
                     {
-                         PlayerControllerMultiplayer.instance.movement.velocity.y = 0;
-                         PlayerControllerMultiplayer.instance.SetControllerPosition(Vector3.MoveTowards(PlayerControllerMultiplayer.instance.transform.position, _finalImpulse, attackImpulse * Time.deltaTime));
+                         multiplayerController.movement.velocity.y = 0;
+                         multiplayerController.SetControllerPosition(Vector3.MoveTowards(multiplayerController.transform.position, _finalImpulse, attackImpulse * Time.deltaTime));
 
-                         if (_finalImpulse == PlayerControllerMultiplayer.instance.transform.position)
+                         if (_finalImpulse == multiplayerController.transform.position)
                          {                              
                               _finalImpulse = Vector3.zero;
-                              PlayerControllerMultiplayer.instance.levelMechanics.sliding = false;
+                              multiplayerController.levelMechanics.sliding = false;
                               attaking = false;
                          }
                     }
                     else
                     {
                          _finalImpulse = Vector3.zero;
-                         PlayerControllerMultiplayer.instance.levelMechanics.sliding = false;
+                         multiplayerController.levelMechanics.sliding = false;
                          attaking = false;
                     }
                }
           }
      }
-
      public void AttackDetection()
      {
           Collider[] _hitObject = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerObjs);
@@ -230,6 +242,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
           }
      }
 
+     [PunRPC]
      public void CanAttack()
      {
           if (Time.time - _lastAttackTime > delayNextAttack)

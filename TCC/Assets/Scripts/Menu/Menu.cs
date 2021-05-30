@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class Menu : MonoBehaviour
 {
      public GameObject[] firstButtons;
-     public GameObject settingsPanel, creditsPanel, quitPanel;
+     public GameObject settingsPanel, multiplayerPanel, creditsPanel, quitPanel;
 
      public void OpenSettings()
      {
@@ -46,6 +46,20 @@ public class Menu : MonoBehaviour
           {
                EventSystem.current.SetSelectedGameObject(null);
                EventSystem.current.SetSelectedGameObject(firstButtons[5]);
+          }
+     }
+
+      public void OpenMultiplayer()
+     {
+          if (multiplayerPanel.activeSelf)
+          {
+               EventSystem.current.SetSelectedGameObject(null);
+               EventSystem.current.SetSelectedGameObject(firstButtons[6]);
+          }
+          else
+          {
+               EventSystem.current.SetSelectedGameObject(null);
+               EventSystem.current.SetSelectedGameObject(firstButtons[7]);
           }
      }
 }

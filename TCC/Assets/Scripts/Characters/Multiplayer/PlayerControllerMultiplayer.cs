@@ -8,8 +8,6 @@ using TMPro;
 [RequireComponent(typeof(PhotonView))]
 public class PlayerControllerMultiplayer : Character
 {
-    public static PlayerControllerMultiplayer instance;
-
      [Header("Movement variables")]
      public Movement movement;
      private Vector3 _direction;
@@ -25,6 +23,7 @@ public class PlayerControllerMultiplayer : Character
           public LayerMask groundMask;
           public CharacterController controller;
           public Transform cam;
+          public Transform targetCam;
           public Transform groundCheck;
           public float groundDistance;
           public float gravity = -9.81f;
@@ -135,16 +134,21 @@ public class PlayerControllerMultiplayer : Character
 
      [Header("Photon variables")]
      public Photon photon;
-
+     private TMP_Text textUI;
+     private GameObject playerNameUIHolder;
     [System.Serializable]
      public class Photon
      { 
           public PhotonView m_PhotonView;
           public GameObject cameraPrefab;
           public Transform camSpawnPoint;
+          public Transform m_RacingPosition;
+          public Transform textSpawnPoint;
           public Animator animator;
-          public TMP_Text playerNameUI;
+          public GameObject playerNameUI;
           public string playerName;
+          public GameManager_Demo_ENDM m_Manager;
+          public bool isRacing = true;
      }
      
 #if UNITY_EDITOR
@@ -157,28 +161,25 @@ public class PlayerControllerMultiplayer : Character
      public bool seeRangeFalling = false;
 #endif
 
-    void Awake()
-    {
-        instance = this;   
-    }
-
      void Start()
      {
+          if(photon.m_PhotonView.IsMine) {
           Cursor.visible = false;
           Cursor.lockState = CursorLockMode.Locked;
           movement.fixedMaxSpeed = movement.maxSpeed;
           movement.fixedGravity = movement.gravity;
           ResetValueDissolveShader();
-
-          if(photon.m_PhotonView.IsMine) {
-               photon.cameraPrefab.GetComponent<Camera3rdPerson>().targetCamera = this.transform;
+               
                GameObject _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
+               _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
                movement.cam = _cam.transform;
                RandName();
-               photon.playerNameUI.text = photon.playerName;
-               return;
+               playerNameUIHolder = Instantiate(photon.playerNameUI, photon.textSpawnPoint.position, Quaternion.identity);
+               textUI = playerNameUIHolder.GetComponentInChildren<TMP_Text>();
+               PhotonNetwork.NickName = photon.playerName;
           }
-          photon.playerNameUI.text = photon.playerName;
+          textUI.text = PhotonNetwork.NickName;
+          photon.m_PhotonView.RPC("ResetCounter", RpcTarget.All);
      }
 
      void Update()
@@ -199,8 +200,10 @@ public class PlayerControllerMultiplayer : Character
                SetDissolveShaderAppear();          
                SetDissolveShaderDisappear();
                PlayerConfigsAfterDeath();
-               photon.playerNameUI.gameObject.transform.LookAt(movement.cam.transform.position);
+               SetStart();
           }
+          playerNameUIHolder.transform.LookAt(Camera.main.transform);
+          playerNameUIHolder.transform.position = photon.textSpawnPoint.position;
      }
 
      void FixedUpdate()
@@ -242,6 +245,17 @@ public class PlayerControllerMultiplayer : Character
                     break;
           }
           
+     }
+     [PunRPC]
+     public void ResetCounter() {
+          if(photon.m_PhotonView.IsMine)
+               photon.m_Manager.counter = 0;
+     }
+     private void SetStart() {
+          if(photon.m_Manager.isGameReady && photon.isRacing) {
+               SetControllerPosition(photon.m_RacingPosition.position);
+               photon.isRacing = false;
+          }
      }
      #endregion
 
