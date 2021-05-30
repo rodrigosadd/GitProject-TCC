@@ -176,7 +176,7 @@ public class PlayerControllerMultiplayer : Character
                return;
           }
           photon.playerNameUI.text = photon.playerName;
-          photon.RPC("ResetCounter", RpcTarget.All);
+          photon.m_PhotonView.RPC("ResetCounter", RpcTarget.All);
      }
 
      void Update()
