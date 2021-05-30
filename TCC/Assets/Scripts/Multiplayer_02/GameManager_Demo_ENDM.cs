@@ -89,8 +89,8 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     }
 
     public void PanelSlideAnimation() {
-        if(panelToAnimate.localPosition.x > panelLimit) {
-            panelToAnimate.localPosition -= new Vector3(Time.deltaTime, 0, 0);
+        if(panelToAnimate.position.x > panelLimit) {
+            panelToAnimate.position -= new Vector3(Time.deltaTime * 85, 0, 0);
         }
     }
 
