@@ -134,7 +134,8 @@ public class PlayerControllerMultiplayer : Character
 
      [Header("Photon variables")]
      public Photon photon;
-
+     private TMP_Text textUI;
+     private GameObject playerNameUIHolder;
     [System.Serializable]
      public class Photon
      { 
@@ -142,8 +143,9 @@ public class PlayerControllerMultiplayer : Character
           public GameObject cameraPrefab;
           public Transform camSpawnPoint;
           public Transform m_RacingPosition;
+          public Transform textSpawnPoint;
           public Animator animator;
-          public TMP_Text playerNameUI;
+          public GameObject playerNameUI;
           public string playerName;
           public GameManager_Demo_ENDM m_Manager;
           public bool isRacing = true;
@@ -172,10 +174,11 @@ public class PlayerControllerMultiplayer : Character
                _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
                movement.cam = _cam.transform;
                RandName();
-               photon.playerNameUI.text = photon.playerName;
-               return;
+               playerNameUIHolder = Instantiate(photon.playerNameUI, photon.textSpawnPoint.position, Quaternion.identity);
+               textUI = playerNameUIHolder.GetComponentInChildren<TMP_Text>();
+               PhotonNetwork.NickName = photon.playerName;
           }
-          photon.playerNameUI.text = photon.playerName;
+          textUI.text = PhotonNetwork.NickName;
           photon.m_PhotonView.RPC("ResetCounter", RpcTarget.All);
      }
 
@@ -199,6 +202,8 @@ public class PlayerControllerMultiplayer : Character
                PlayerConfigsAfterDeath();
                SetStart();
           }
+          playerNameUIHolder.transform.LookAt(Camera.main.transform);
+          playerNameUIHolder.transform.position = photon.textSpawnPoint.position;
      }
 
      void FixedUpdate()
