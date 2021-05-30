@@ -166,6 +166,7 @@ public class PlayerController : Character
           public bool canSetAppearShader;
           [HideInInspector]
           public bool canSetDisappearShader;
+          public bool isInvincible;
      }
 
 #if UNITY_EDITOR
@@ -773,7 +774,13 @@ public class PlayerController : Character
                     death.dead = true;      
                     PlayerController.instance.movement.gravity = 0;
                     PlayerController.instance.movement.velocity = Vector3.zero;
-                    PlayerController.instance.movement.maxSpeed = 0;               
+                    PlayerController.instance.movement.maxSpeed = 0;       
+
+                    if(push.currentTargetPush != null)
+                    {
+                         DropObjectAfterFalling();
+                    }
+                            
                     StartCoroutine("AfterDeath");
                }
           }

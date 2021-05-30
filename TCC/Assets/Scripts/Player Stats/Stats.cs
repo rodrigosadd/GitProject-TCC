@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using FMODUnity;
+using UnityEngine.Events;
 
 public class Stats : MonoBehaviour
 {
@@ -16,13 +17,15 @@ public class Stats : MonoBehaviour
     private bool _canCloseSeeObj;
     private bool _canPickUpObj = true;
 
+     public UnityEvent OnPickingUpItem;
+
     [EventRef] public string collectSound;
     public void RotateObject()
     {
         transform.Rotate(0f, speedRotate, 0f);
     }
 
-    public void SeeObjectDrop()
+    public void PickingUpItem()
      {   
           if(!PlayerController.instance.levelMechanics.pickingUpItem && _canPickUpObj)
           {
@@ -35,6 +38,7 @@ public class Stats : MonoBehaviour
                PlayerController.instance.levelMechanics.pickingUpItem = true;
                _canCloseSeeObj = true;
                itemInformationsPanel.SetActive(true);
+               OnPickingUpItem?.Invoke();
           }
      }
 
