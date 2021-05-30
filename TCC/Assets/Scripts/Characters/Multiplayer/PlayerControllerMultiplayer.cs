@@ -176,6 +176,7 @@ public class PlayerControllerMultiplayer : Character
                return;
           }
           photon.playerNameUI.text = photon.playerName;
+          photon.RPC("ResetCounter", RpcTarget.All);
      }
 
      void Update()
@@ -238,6 +239,10 @@ public class PlayerControllerMultiplayer : Character
                     break;
           }
           
+     }
+     [PunRPC]
+     public void ResetCounter() {
+          photon.m_Manager.counter = 0;
      }
      private void SetStart() {
           if(photon.m_Manager.isGameReady && photon.isRacing) {

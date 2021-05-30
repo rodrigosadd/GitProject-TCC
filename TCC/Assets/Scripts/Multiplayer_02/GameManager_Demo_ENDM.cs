@@ -21,7 +21,7 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     void Start()
     {
         photon = GetComponent<PhotonView>();
-        if (PhotonNetwork.IsConnectedAndReady && photon.IsMine)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
             if (playerPrefab_Generic != null)
             {
@@ -78,7 +78,6 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     [PunRPC]
     public void GetReady() {
         readyToCount = true;
-        counter = 0;
     }
 
     [PunRPC]
