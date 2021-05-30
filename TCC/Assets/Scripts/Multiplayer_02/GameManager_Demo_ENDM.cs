@@ -13,7 +13,8 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     public Text counterText;
     public GameObject counterPanel;
     public bool isGameReady = false; //Controls when the game is ready for everyone in the room.
-    private int playersNumber = 0;
+    [Header("Racing Config:")]
+    public Stack<Transform> startPoints;
     private bool readyToCount = false;
     private float counter = 0;
     private PhotonView photon;
@@ -22,13 +23,20 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
         photon = GetComponent<PhotonView>();
         if (PhotonNetwork.IsConnectedAndReady && photon.IsMine)
         {
+            for (int i = 0; i < spawnPoints.Count; i++)
+            {
+                startPoints.Enqueue(spawnPoints[i]);
+            }
             if (playerPrefab_Generic != null)
             {
-                float x = Random.Range(-2,2);
-                float z = Random.Range(-2, 2);
-                GameObject gameRef = PhotonNetwork.Instantiate(playerPrefab_Generic.name, new Vector3(x,1,z), Quaternion.identity);
+                int _spawn = Random.Range(0, spawnPoints.Count);
+                GameObject gameRef = PhotonNetwork.Instantiate(playerPrefab_Generic.name, spawnPoints[_spawn].position, Quaternion.identity);
                 string randomName = RandName();
                 gameRef.GetComponentInChildren<Text>().text = randomName;
+                PlayerControllerMultiplayer _controller = gameRef.GetComponent<PlayerControllerMultiplayer>();
+                _controller.photon.m_Manager = this;
+                _controller.photon.m_RacingPosition = spawnPoints[_spawn];
+                photon.RPC("DisablePickedPosition", RpcTarget.All, _spawn);
                 //Destroy(this.gameObject);
                 Debug.Log("Instanciado " + randomName);
             }
@@ -71,14 +79,21 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
             counterText.text = "Waiting for players to join...";
         }
     }
+
     [PunRPC]
     public void GetReady() {
         readyToCount = true;
         counter = 0;
     }
+
     [PunRPC]
     public void StartGame() { //Start the racing.
         isGameReady = true;
+    }
+
+    [PunRPC]
+    public void DisablePickedPosition(int index) {
+        spawnPoints.Remove(index);
     }
 
     public void PanelSlideAnimation(string mode) {

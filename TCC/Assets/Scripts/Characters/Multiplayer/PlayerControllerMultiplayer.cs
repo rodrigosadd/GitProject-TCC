@@ -141,9 +141,12 @@ public class PlayerControllerMultiplayer : Character
           public PhotonView m_PhotonView;
           public GameObject cameraPrefab;
           public Transform camSpawnPoint;
+          public Transform m_RacingPosition;
           public Animator animator;
           public TMP_Text playerNameUI;
           public string playerName;
+          public GameManager_Demo_ENDM m_Manager;
+          private bool isRacing = true;
      }
      
 #if UNITY_EDITOR
@@ -235,6 +238,11 @@ public class PlayerControllerMultiplayer : Character
                     break;
           }
           
+     }
+     private void SetStart() {
+          if(m_Manager.isGameReady && isRacing) {
+               SetControllerPosition(m_RacingPosition.position);
+          }
      }
      #endregion
 
