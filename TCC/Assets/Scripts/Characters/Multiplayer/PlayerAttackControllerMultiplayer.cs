@@ -67,7 +67,6 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                FirstAttack();               
           }
      }
-     [PunRPC]
      public void FirstAttack()
      {
           if(photonView.IsMine) {
@@ -89,7 +88,6 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                }
           }
      }
-     [PunRPC]
      public void SecondAttack()
      {
           if(photonView.IsMine) {
@@ -116,7 +114,6 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                }
           }
      }
-     [PunRPC]
      public void FinalAttack()
      {
           if(photonView.IsMine) {
@@ -144,7 +141,6 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                }
           }
      }
-     [PunRPC]
      public void ResetAttack()
      {
           if(photonView.IsMine) {
@@ -159,7 +155,6 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
           }
      }
 
-     [PunRPC]
      public void CheckAttaking()
      {
           if (currentAttack != 0)
@@ -179,7 +174,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                _countdownReset = 0;
           }
      }
-     [PunRPC]
+
      public void Attacking()
      {
           if(photonView.IsMine) {
@@ -226,7 +221,6 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                }
           }
      }
-     [PunRPC]
      public void AttackDetection()
      {
           Collider[] _hitObject = Physics.OverlapSphere(targetAttack.position, maxDistanceAttack, layerObjs);
