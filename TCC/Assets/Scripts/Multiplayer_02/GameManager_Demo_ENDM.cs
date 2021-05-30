@@ -29,13 +29,9 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
             {
                 int _spawn = Random.Range(0, spawnPoints.Count);
                 GameObject gameRef = PhotonNetwork.Instantiate(playerPrefab_Generic.name, spawnPoints[_spawn].position, Quaternion.identity);
-                string randomName = RandName();
-                gameRef.GetComponentInChildren<Text>().text = randomName;
                 PlayerControllerMultiplayer _controller = gameRef.GetComponent<PlayerControllerMultiplayer>();
                 _controller.photon.m_Manager = this;
                 _controller.photon.m_RacingPosition = spawnPoints[_spawn];
-                //Destroy(this.gameObject);
-                Debug.Log("Instanciado " + randomName);
             }
 
             else
@@ -94,33 +90,6 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
         if(panelToAnimate.position.x > panelLimit) {
             panelToAnimate.position -= new Vector3(Time.deltaTime * 85, 0, 0);
         }
-    }
-
-    private string RandName()
-    {
-        int randLastName = Random.Range(0, 6);
-        string playerName = "";
-        switch(randLastName) {
-            case 0:
-                playerName = "Beto the Legend";
-                break;
-            case 1:
-                playerName = "Beto Crusher";
-                break;
-            case 2:
-                playerName = "Beto Smasher";
-                break;
-            case 3:
-                playerName = "Beto the Lord";
-                break;
-            case 4:
-                playerName = "Beto the Fearless";
-                break;
-            case 5:
-                playerName = "Beto the Hero";
-                break;
-        }
-        return playerName;
     }
 
     public void LeaveGame() {
