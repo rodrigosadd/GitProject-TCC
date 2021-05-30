@@ -32,7 +32,7 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
                 PlayerControllerMultiplayer _controller = gameRef.GetComponent<PlayerControllerMultiplayer>();
                 _controller.photon.m_Manager = this;
                 _controller.photon.m_RacingPosition = spawnPoints[_spawn];
-                photon.RPC("DisablePickedPosition", RpcTarget.All, _spawn);
+                photon.RPC("DisablePickedPosition", RpcTarget.All, spawnPoints[_spawn]);
                 //Destroy(this.gameObject);
                 Debug.Log("Instanciado " + randomName);
             }
