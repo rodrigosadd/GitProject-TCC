@@ -28,7 +28,6 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
     {
         photonView = GetComponent<PhotonView>();
         animator = GetComponent<Animator>();
-
     }
 
      void Update()
