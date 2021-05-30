@@ -240,8 +240,8 @@ public class PlayerControllerMultiplayer : Character
           
      }
      private void SetStart() {
-          if(m_Manager.isGameReady && isRacing) {
-               SetControllerPosition(m_RacingPosition.position);
+          if(m_Manager.isGameReady && photon.isRacing) {
+               SetControllerPosition(photon.m_RacingPosition.position);
           }
      }
      #endregion

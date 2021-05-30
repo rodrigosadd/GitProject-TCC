@@ -23,10 +23,6 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
         photon = GetComponent<PhotonView>();
         if (PhotonNetwork.IsConnectedAndReady && photon.IsMine)
         {
-            for (int i = 0; i < spawnPoints.Count; i++)
-            {
-                startPoints.Enqueue(spawnPoints[i]);
-            }
             if (playerPrefab_Generic != null)
             {
                 int _spawn = Random.Range(0, spawnPoints.Count);
@@ -92,8 +88,8 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void DisablePickedPosition(int index) {
-        spawnPoints.Remove(index);
+    public void DisablePickedPosition(Transform obj) {
+        spawnPoints.Remove(obj);
     }
 
     public void PanelSlideAnimation(string mode) {
