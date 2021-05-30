@@ -12,13 +12,14 @@ public class Spawner : MonoBehaviour
     public float impulseForceProjectileForwardLeft;
     public UnityEvent OnSpawnProjectileForward;
 
-    [Header("Projectile Above variables")]
-    public Transform [] spawnPointsProjectileAbove;
-    public float impulseForceProjectileAbove;
+    [Header("Projectile Random variables")]
+    public Transform [] spawnPointsProjectileRandom;
+    public float impulseForceProjectileRandom;
     public float timeToSpawnRandomPosition;
-    public int maxAmountProjectileAbove;
-    public int amountProjectileAbove;
-    public UnityEvent OnSpawnProjectileAbove;
+    public float timeToDeactivateProjectileRandom;
+    public int maxAmountProjectileRandom;
+    public int amountProjectileRandom;
+    public UnityEvent OnSpawnProjectileRandom;
 
     [Header("Projectile Throw variables")]
     public Transform [] spawnPointsProjectileThrow;
@@ -87,7 +88,7 @@ public class Spawner : MonoBehaviour
         OnSpawnProjectileThrow?.Invoke();
     }
 
-    void SpawnRandomPositionAbove()
+    void SpawnRandomPosition()
     {   
         _canSpawnProjectileAbove = true;
         StartCoroutine("DelaySpawnRandomPosition");
@@ -98,23 +99,24 @@ public class Spawner : MonoBehaviour
         int currentIndex = 0;
         while(_canSpawnProjectileAbove)
         {
-            int indexSpanwPoint = Random.Range(0, spawnPointsProjectileAbove.Length);
+            int indexSpanwPoint = Random.Range(0, spawnPointsProjectileRandom.Length);
 
             if(currentIndex != indexSpanwPoint)
             {
                 currentIndex = indexSpanwPoint;
-                Transform spawnPoint = spawnPointsProjectileAbove[indexSpanwPoint]; 
-                Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectileAbove();
+                Transform spawnPoint = spawnPointsProjectileRandom[indexSpanwPoint]; 
+                Projectile projectile = GameManager.instance.poolSystem.TryToGetProjectile();
                 projectile.rbody.velocity = Vector3.zero;
+                projectile.delayDeactivateObject = timeToDeactivateProjectileRandom;
                 projectile.transform.position = spawnPoint.position;
                 projectile.transform.rotation = spawnPoint.rotation;
-                projectile.rbody.AddForce(projectile.transform.up * impulseForceProjectileAbove, ForceMode.Impulse); 
-                amountProjectileAbove--;
-                OnSpawnProjectileAbove?.Invoke();
+                projectile.rbody.AddForce(projectile.transform.up * impulseForceProjectileRandom, ForceMode.Impulse); 
+                amountProjectileRandom--;
+                OnSpawnProjectileRandom?.Invoke();
 
-                if(amountProjectileAbove <= 0)
+                if(amountProjectileRandom <= 0)
                 {
-                    amountProjectileAbove = maxAmountProjectileAbove;
+                    amountProjectileRandom = maxAmountProjectileRandom;
                     _canSpawnProjectileAbove = false;
                     StopCoroutine("DelaySpawnRandomPosition");
                 }

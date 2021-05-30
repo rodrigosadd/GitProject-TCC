@@ -10,12 +10,6 @@ public class PoolSystem : MonoBehaviour
     public int initialAmountProjectiles;
     private GameObject _projectilesHolder;
 
-    [Header("Projectile Above Pool variables")]
-    public List<Projectile> listProjectileAbovePool;
-    public Projectile projectileAbovePrefab;
-    public int initialAmountProjectilesAbove;
-    private GameObject _projectilesAboveHolder;
-
     [Header("Projectile Throw Pool variables")]
     public List<Projectile> listProjectileThrowPool;
     public Projectile projectileThrowPrefab;
@@ -34,12 +28,6 @@ public class PoolSystem : MonoBehaviour
     public int initialAmountThorns;
     private GameObject _thornsHolder;
 
-    [Header("Shadow Pool variables")]
-    public List<GameObject> listShadowPool;
-    public GameObject shadowPrefab;
-    public int initialAmountShadows;
-    private GameObject _shadowsHolder;
-
     void Awake()
     {
         InitializePool();
@@ -50,11 +38,6 @@ public class PoolSystem : MonoBehaviour
         for (int index = 0; index <= initialAmountProjectiles; index++)
         {
             listProjectilePool[index].transform.gameObject.SetActive(false);
-        }
-
-         for (int index = 0; index <= initialAmountProjectilesAbove; index++)
-        {
-            listProjectileAbovePool[index].transform.gameObject.SetActive(false);
         }
 
         for (int index = 0; index <= initialAmountProjectilesThrow; index++)
@@ -71,11 +54,6 @@ public class PoolSystem : MonoBehaviour
         {
             listThornPool[index].transform.gameObject.SetActive(false);
         }
-
-        for (int index = 0; index <= initialAmountShadows; index++)
-        {
-            listShadowPool[index].transform.gameObject.SetActive(false);
-        }
     }
 
     void InitializePool()
@@ -88,16 +66,6 @@ public class PoolSystem : MonoBehaviour
             _projectile.transform.SetParent(_projectilesHolder.transform);
             _projectile.gameObject.SetActive(false);
             listProjectilePool.Add(_projectile);
-        }
-
-        _projectilesAboveHolder = new GameObject("--- Projectiles Above Pool");
-        _projectilesAboveHolder.transform.position = Vector2.zero;
-        for (int index = 0; index <= initialAmountProjectilesAbove; index++)
-        {
-            Projectile _projectileAbove = Instantiate(projectileAbovePrefab);
-            _projectileAbove.transform.SetParent(_projectilesAboveHolder.transform);
-            _projectileAbove.gameObject.SetActive(false);
-            listProjectileAbovePool.Add(_projectileAbove);
         }
 
         _projectileThrowHolder = new GameObject("--- Projectile Throw Pool");
@@ -129,16 +97,6 @@ public class PoolSystem : MonoBehaviour
             _thorns.gameObject.SetActive(false);
             listThornPool.Add(_thorns);
         }
-
-        _shadowsHolder = new GameObject("--- Shadows Pool");
-        _shadowsHolder.transform.position = Vector2.zero;
-        for (int index = 0; index <= initialAmountShadows; index++)
-        {
-            GameObject _shadows = Instantiate(shadowPrefab);
-            _shadows.transform.SetParent(_shadowsHolder.transform);
-            _shadows.gameObject.SetActive(false);
-            listShadowPool.Add(_shadows);
-        }
     }
 
     public Projectile TryToGetProjectile()
@@ -160,32 +118,6 @@ public class PoolSystem : MonoBehaviour
             _toReturn = Instantiate(projectilePrefab);
             _toReturn.transform.SetParent(_projectilesHolder.transform);
             listProjectilePool.Add(_toReturn);
-        }
-
-        _toReturn.gameObject.SetActive(true);
-
-        return _toReturn;
-    }
-
-    public Projectile TryToGetProjectileAbove()
-    {
-        Projectile _toReturn = null;
-
-        for (int index = 0; index < listProjectileAbovePool.Count; index++)
-        {
-            Projectile _possibleProjectileAbove = listProjectileAbovePool[index];
-            if (!_possibleProjectileAbove.gameObject.activeSelf)
-            {
-                _toReturn = _possibleProjectileAbove;
-                break;
-            }
-        }
-
-        if (_toReturn == null)
-        {
-            _toReturn = Instantiate(projectileAbovePrefab);
-            _toReturn.transform.SetParent(_projectilesAboveHolder.transform);
-            listProjectileAbovePool.Add(_toReturn);
         }
 
         _toReturn.gameObject.SetActive(true);
@@ -264,32 +196,6 @@ public class PoolSystem : MonoBehaviour
             _toReturn = Instantiate(thornPrefab);
             _toReturn.transform.SetParent(_thornsHolder.transform);
             listThornPool.Add(_toReturn);
-        }
-
-        _toReturn.gameObject.SetActive(true);
-
-        return _toReturn;
-    }
-
-    public GameObject TryToGetShadow()
-    {
-        GameObject _toReturn = null;
-
-        for (int index = 0; index < listShadowPool.Count; index++)
-        {
-            GameObject _possibleShadow = listShadowPool[index];
-            if (!_possibleShadow.gameObject.activeSelf)
-            {
-                _toReturn = _possibleShadow;
-                break;
-            }
-        }
-
-        if (_toReturn == null)
-        {
-            _toReturn = Instantiate(shadowPrefab);
-            _toReturn.transform.SetParent(_shadowsHolder.transform);
-            listShadowPool.Add(_toReturn);
         }
 
         _toReturn.gameObject.SetActive(true);
