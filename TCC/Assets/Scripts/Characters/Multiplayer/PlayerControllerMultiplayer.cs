@@ -146,7 +146,7 @@ public class PlayerControllerMultiplayer : Character
           public TMP_Text playerNameUI;
           public string playerName;
           public GameManager_Demo_ENDM m_Manager;
-          private bool isRacing = true;
+          public bool isRacing = true;
      }
      
 #if UNITY_EDITOR
@@ -240,7 +240,7 @@ public class PlayerControllerMultiplayer : Character
           
      }
      private void SetStart() {
-          if(m_Manager.isGameReady && photon.isRacing) {
+          if(photon.m_Manager.isGameReady && photon.isRacing) {
                SetControllerPosition(photon.m_RacingPosition.position);
           }
      }
