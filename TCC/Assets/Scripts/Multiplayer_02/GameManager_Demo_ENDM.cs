@@ -19,9 +19,9 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     private PhotonView photon;
     void Start()
     {
+        photon = GetComponent<PhotonView>();
         if (PhotonNetwork.IsConnectedAndReady && photon.IsMine)
         {
-            photon = GetComponent<PhotonView>();
             if (playerPrefab_Generic != null)
             {
                 float x = Random.Range(-2,2);
