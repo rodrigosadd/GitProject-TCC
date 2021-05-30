@@ -14,9 +14,8 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     public GameObject counterPanel;
     public bool isGameReady = false; //Controls when the game is ready for everyone in the room.
     [Header("Racing Config:")]
-    public Stack<Transform> startPoints;
+    public float counter = 0;
     private bool readyToCount = false;
-    private float counter = 0;
     private PhotonView photon;
     void Start()
     {
