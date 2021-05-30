@@ -19,7 +19,7 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     private PhotonView photon;
     void Start()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.IsConnectedAndReady && photon.IsMine)
         {
             photon = GetComponent<PhotonView>();
             if (playerPrefab_Generic != null)
@@ -29,7 +29,7 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
                 GameObject gameRef = PhotonNetwork.Instantiate(playerPrefab_Generic.name, new Vector3(x,1,z), Quaternion.identity);
                 string randomName = RandName();
                 gameRef.GetComponentInChildren<Text>().text = randomName;
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
                 Debug.Log("Instanciado " + randomName);
             }
 
@@ -42,12 +42,14 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        photon.RPC("CountBeforeStart", RpcTarget.AllBuffered);
-        if(PhotonNetwork.PlayerList.Length > 1) {
-            photon.RPC("GetReady", RpcTarget.All);
-        }
-        if (isGameReady) { //Call game functions inside here.
-            //TODO
+        if(photon.IsMine) {
+            photon.RPC("CountBeforeStart", RpcTarget.AllBuffered);
+            if(PhotonNetwork.PlayerList.Length > 1) {
+                photon.RPC("GetReady", RpcTarget.All);
+            }
+            if (isGameReady) { //Call game functions inside here.
+                //TODO
+            }
         }
     }
 
