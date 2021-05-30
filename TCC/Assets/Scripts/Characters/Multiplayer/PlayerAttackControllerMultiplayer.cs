@@ -154,7 +154,7 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
                _finalImpulse = Vector3.zero;
           }
      }
-
+     [PunRPC]
      public void CheckAttaking()
      {
           if (currentAttack != 0)
