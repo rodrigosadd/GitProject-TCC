@@ -27,7 +27,7 @@ public class TeleportStat : Stats
             GameManager.instance.playerStatsData.canSeeTeleport = 1;
             GameManager.instance.playerStatsData.ApplySettings();
             GameManager.instance.savePlayerStats.Save();
-            SeeObjectDrop();
+            PickingUpItem();
         }
     } 
 

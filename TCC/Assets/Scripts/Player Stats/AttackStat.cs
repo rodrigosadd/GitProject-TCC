@@ -28,7 +28,7 @@ public class AttackStat : Stats
             GameManager.instance.playerStatsData.canAttack = 1;
             GameManager.instance.playerStatsData.ApplySettings();
             GameManager.instance.savePlayerStats.Save();
-            SeeObjectDrop();
+            PickingUpItem();
         }
     } 
 

@@ -27,7 +27,7 @@ public class DoubleJumpStat : Stats
             GameManager.instance.playerStatsData.maxJump = 2;
             GameManager.instance.playerStatsData.ApplySettings();
             GameManager.instance.savePlayerStats.Save();
-            SeeObjectDrop();
+            PickingUpItem();
         }
     } 
 
