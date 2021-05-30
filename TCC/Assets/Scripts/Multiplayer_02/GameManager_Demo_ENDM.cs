@@ -12,13 +12,16 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     public float initTimer = 30.0f;
     public Text counterText;
     public GameObject counterPanel;
+    public RectTransform panelToAnimate;
     public bool isGameReady = false; //Controls when the game is ready for everyone in the room.
     [Header("Racing Config:")]
     public float counter = 0;
+    public float panelLimit;
     private bool readyToCount = false;
     private PhotonView photon;
     void Start()
     {
+        panelToAnimate = counterPanel.GetComponent<RectTransform>();
         photon = GetComponent<PhotonView>();
         if (PhotonNetwork.IsConnectedAndReady)
         {
@@ -84,10 +87,9 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
         isGameReady = true;
     }
 
-    public void PanelSlideAnimation(string mode) {
-        switch (mode)
-        {
-            // default:
+    public void PanelSlideAnimation() {
+        if(panelToAnimate.localPosition.x > panelLimit) {
+            panelToAnimate.localPosition -= new Vector3(Time.deltaTime, 0, 0);
         }
     }
 
