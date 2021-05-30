@@ -53,6 +53,8 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
                 photon.RPC("GetReady", RpcTarget.All);
             }
             if (isGameReady) { //Call game functions inside here.
+                PanelSlideAnimation(); //Only first frame.
+                counterText.text = "Start!";
                 //TODO
             }
         }
@@ -67,7 +69,6 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
             }
             else {
                 if(!isGameReady) {
-                    counterText.text = "Start!";
                     photon.RPC("StartGame", RpcTarget.AllBuffered);
                 }
             }
