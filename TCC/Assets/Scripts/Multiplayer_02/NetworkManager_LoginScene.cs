@@ -63,4 +63,9 @@ public class NetworkManager_LoginScene : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.CurrentRoom.Name + " is joined.");
     }
+
+    public override void OnLeftRoom()
+    {
+        PhotonNetwork.LoadLevel(0);
+    }
 }
