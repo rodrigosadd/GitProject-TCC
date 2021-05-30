@@ -70,85 +70,93 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
      [PunRPC]
      public void FirstAttack()
      {
-          if (!multiplayerController.death.dead &&
-               currentAttack != 3 &&
-               multiplayerController.movement.isGrounded)
-          {
-               _lastAttackTime = Time.time;
-               currentAttack++;
-
-               if (currentAttack == 1)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead &&
+                    currentAttack != 3 &&
+                    multiplayerController.movement.isGrounded)
                {
-                    animationController.SetFirstAttack();
-                    trails[0].SetActive(true);
-                    trails[1].SetActive(true);
-                    trails[2].SetActive(true);
+                    _lastAttackTime = Time.time;
+                    currentAttack++;
+
+                    if (currentAttack == 1)
+                    {
+                         animationController.SetFirstAttack();
+                         trails[0].SetActive(true);
+                         trails[1].SetActive(true);
+                         trails[2].SetActive(true);
+                    }
+                    currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
                }
-               currentAttack = Mathf.Clamp(currentAttack, 0, maxCombo);
           }
      }
      [PunRPC]
      public void SecondAttack()
      {
-          if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
-          {
-               if (currentAttack >= 2)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
                {
-                    animationController.SetSecondAttack();
-                    trails[0].SetActive(true);
-                    trails[1].SetActive(true);
-                    trails[2].SetActive(true);
-               }
-               else
-               {
-                    animationController.ResetFirstAttack();
-                    trails[0].SetActive(false);
-                    trails[1].SetActive(false);
-                    trails[2].SetActive(false);
-                    multiplayerController.movement.maxSpeed = _currentMaxSpeed;
-                    attaking = false;
-                    currentAttack = 0;
-                    _finalImpulse = Vector3.zero;
+                    if (currentAttack >= 2)
+                    {
+                         animationController.SetSecondAttack();
+                         trails[0].SetActive(true);
+                         trails[1].SetActive(true);
+                         trails[2].SetActive(true);
+                    }
+                    else
+                    {
+                         animationController.ResetFirstAttack();
+                         trails[0].SetActive(false);
+                         trails[1].SetActive(false);
+                         trails[2].SetActive(false);
+                         multiplayerController.movement.maxSpeed = _currentMaxSpeed;
+                         attaking = false;
+                         currentAttack = 0;
+                         _finalImpulse = Vector3.zero;
+                    }
                }
           }
      }
      [PunRPC]
      public void FinalAttack()
      {
-          if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
-          {
-               if (currentAttack >= 3)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead && multiplayerController.movement.canMove)
                {
-                    animationController.SetFinalAttack();
-                    trails[0].SetActive(true);
-                    trails[1].SetActive(true);
-                    trails[2].SetActive(true);
-               }
-               else
-               {
-                    animationController.ResetFirstAttack();
-                    animationController.ResetSecondAttack();
-                    trails[0].SetActive(false);
-                    trails[1].SetActive(false);
-                    trails[2].SetActive(false);
-                    multiplayerController.movement.maxSpeed = _currentMaxSpeed;
-                    attaking = false;
-                    currentAttack = 0;
-                    _finalImpulse = Vector3.zero;
+                    if (currentAttack >= 3)
+                    {
+                         animationController.SetFinalAttack();
+                         trails[0].SetActive(true);
+                         trails[1].SetActive(true);
+                         trails[2].SetActive(true);
+                    }
+                    else
+                    {
+                         animationController.ResetFirstAttack();
+                         animationController.ResetSecondAttack();
+                         trails[0].SetActive(false);
+                         trails[1].SetActive(false);
+                         trails[2].SetActive(false);
+                         multiplayerController.movement.maxSpeed = _currentMaxSpeed;
+                         attaking = false;
+                         currentAttack = 0;
+                         _finalImpulse = Vector3.zero;
+                    }
                }
           }
      }
      [PunRPC]
      public void ResetAttack()
      {
-          animationController.ResetAttacks();
-          trails[0].SetActive(false);
-          trails[1].SetActive(false);
-          trails[2].SetActive(false);
-          multiplayerController.movement.maxSpeed = _currentMaxSpeed;
-          attaking = false;
-          currentAttack = 0;
-          _finalImpulse = Vector3.zero;
+          if(photonView.IsMine) {
+               animationController.ResetAttacks();
+               trails[0].SetActive(false);
+               trails[1].SetActive(false);
+               trails[2].SetActive(false);
+               multiplayerController.movement.maxSpeed = _currentMaxSpeed;
+               attaking = false;
+               currentAttack = 0;
+               _finalImpulse = Vector3.zero;
+          }
      }
 
      [PunRPC]
@@ -174,12 +182,14 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
      [PunRPC]
      public void Attacking()
      {
-          if (!multiplayerController.death.dead)
-          {
-               if (multiplayerController.levelMechanics.slowing == false)
+          if(photonView.IsMine) {
+               if (!multiplayerController.death.dead)
                {
-                    multiplayerController.movement.maxSpeed = 0f;
-                    attaking = true;
+                    if (multiplayerController.levelMechanics.slowing == false)
+                    {
+                         multiplayerController.movement.maxSpeed = 0f;
+                         attaking = true;
+                    }
                }
           }
      }

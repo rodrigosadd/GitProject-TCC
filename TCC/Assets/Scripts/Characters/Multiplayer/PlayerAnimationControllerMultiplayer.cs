@@ -5,7 +5,6 @@ using Photon.Pun;
 
 public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 {   
-    public static PlayerAnimationControllerMultiplayer instance;
     public ParticleSystem oil;
     public ParticleSystem dust;
     public float timeToJump;
@@ -27,7 +26,6 @@ public class PlayerAnimationControllerMultiplayer : MonoBehaviourPun
 
     void Awake()
     {
-        instance = this;
         photonView = GetComponent<PhotonView>();
         animator = GetComponent<Animator>();
 
