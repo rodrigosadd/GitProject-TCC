@@ -13,6 +13,9 @@ ModelImporter:
       74: 8685785561495304066
     second: Boss_Stun_Idle
   - first:
+      74: -2412780982673092763
+    second: Boss_Atack_BackHand
+  - first:
       74: 963917420611336028
     second: Boss_Idle
   - first:
@@ -58,11 +61,14 @@ ModelImporter:
       74: -8006874071000579493
     second: Armature_Ro Ber Thor|Boss_Antlers_Atack
   - first:
+      74: 654114618500976819
+    second: Armature_Ro Ber Thor|Boss_Atack_BackHand
+  - first:
       74: 5962982772018523531
     second: Armature_Ro Ber Thor|Boss_Dying
   - first:
       74: -5300775768805116693
-    second: Armature_Ro Ber Thor|Boss_Fire_Forward
+    second: Armature_Ro Ber Thor|Boss_Fie_Foward
   - first:
       74: 1594468739923435748
     second: Armature_Ro Ber Thor|Boss_Hit
@@ -100,8 +106,8 @@ ModelImporter:
       74: 8637129451964145315
     second: Armature_Ro Ber Thor|Boss_Throw_Stones
   - first:
-      74: -2831876085783077833
-    second: Armature_Ro Ber Thor|Delete
+      74: -2094421268799906603
+    second: Armature_Ro Ber Thor|Boss_Fire_Foward
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -184,22 +190,65 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.20370372
+      - time: 0.19240506
         functionName: ActivateAntlersAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.6666667
+      - time: 0.6708861
         functionName: DeactivateAntlersAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.86253434
+      - time: 0.8556962
         functionName: SetStunIdle
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Armature_Ro Ber Thor|Boss_Atack_BackHand
+      takeName: Armature_Ro Ber Thor|Boss_Atack_BackHand
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 176
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 1
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0
+        functionName: TimeToSecondAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.3721519
+        functionName: SpawnRandomPosition
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
@@ -239,7 +288,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature_Ro Ber Thor|Boss_Fire_Forward
+      name: Armature_Ro Ber Thor|Boss_Fire_Foward
       takeName: Armature_Ro Ber Thor|Boss_Fie_Foward
       internalID: 0
       firstFrame: 0
@@ -263,14 +312,14 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.018779343
+      - time: 0.02278481
         functionName: TimeToSecondAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.44810125
+      - time: 0.4607595
         functionName: SpawnProjectileInDirection
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -349,7 +398,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.5331808
+      - time: 0.51898736
         functionName: SpawnProjectileForwardRight
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -392,14 +441,14 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.402746
+      - time: 0.39746836
         functionName: SpawnProjectileForwardRight
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.7963387
+      - time: 0.792405
         functionName: SpawnProjectileForwardLeft
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -451,8 +500,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -493,7 +542,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.99864364
+      - time: 0.9986425
         functionName: TimeToSecondAttack
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -529,7 +578,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.24843659
+      - time: 0.2506329
         functionName: SetCameraShake
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -552,8 +601,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -581,8 +630,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 1
+      loopTime: 0
+      loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -593,21 +642,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: TimeToSecondAttack
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.49873418
-        functionName: SpawnRandomPosition
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -644,7 +679,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.46296296
+      - time: 0.46835443
         functionName: SpawnRandomPositionThorns
         data: 
         objectReferenceParameter: {instanceID: 0}
@@ -723,7 +758,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.47530866
+      - time: 0.48607597
         functionName: SpawnProjectileThrow
         data: 
         objectReferenceParameter: {instanceID: 0}
