@@ -25,21 +25,21 @@ public class NetworkManager_LoginScene : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
     }
 
-    public void OnCreateRoomOrJoin()
+    public void OnJoinRandomRoom()
     {
-        
-        string roomName = "Room: " + 1;
-        if (!string.IsNullOrEmpty(playerName))
-        {
-            PhotonNetwork.LocalPlayer.NickName = playerName;
-            PhotonNetwork.JoinOrCreateRoom(roomName,new RoomOptions { MaxPlayers = 6 }, null);
-        }
-        
+        PhotonNetwork.JoinRandomRoom();  
     }
 
-    public override void OnJoinRoomFailed(short returnCode, string message)
+    public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log("Return code: " + returnCode + ". Menssage: " + message);
+        Debug.Log(message);
+
+        string roomName = "Room " + Random.Range(1000, 10000);
+
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 6;
+
+        PhotonNetwork.CreateRoom(roomName, roomOptions);
     }
 
 
@@ -57,6 +57,11 @@ public class NetworkManager_LoginScene : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.CurrentRoom.Name + " is created.");
         PhotonNetwork.LoadLevel(7);
+    }
+
+    public void OnJoinRandomRoomButtonClicked()
+    {
+        PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinedRoom()
