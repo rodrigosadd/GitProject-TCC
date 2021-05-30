@@ -197,6 +197,7 @@ public class PlayerControllerMultiplayer : Character
                SetDissolveShaderAppear();          
                SetDissolveShaderDisappear();
                PlayerConfigsAfterDeath();
+               SetStart();
           }
      }
 
@@ -242,11 +243,13 @@ public class PlayerControllerMultiplayer : Character
      }
      [PunRPC]
      public void ResetCounter() {
-          photon.m_Manager.counter = 0;
+          if(photon.m_PhotonView.IsMine)
+               photon.m_Manager.counter = 0;
      }
      private void SetStart() {
           if(photon.m_Manager.isGameReady && photon.isRacing) {
                SetControllerPosition(photon.m_RacingPosition.position);
+               photon.isRacing = false;
           }
      }
      #endregion
