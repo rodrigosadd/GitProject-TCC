@@ -19,6 +19,9 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
     public float panelLimit;
     private bool readyToCount = false;
     private PhotonView photon;
+
+    public GameObject gameBlock;
+
     void Start()
     {
         panelToAnimate = counterPanel.GetComponent<RectTransform>();
@@ -55,6 +58,7 @@ public class GameManager_Demo_ENDM : MonoBehaviourPunCallbacks
         if (isGameReady) {
             PanelSlideAnimation(); //Only first frame.
             counterText.text = "Start!";
+            gameBlock.SetActive(false);
         }
     }
 
