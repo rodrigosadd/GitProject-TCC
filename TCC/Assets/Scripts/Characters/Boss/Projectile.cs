@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && !PlayerController.instance.death.isInvincible)
         {
             if(hasShadow)
             {
