@@ -25461,6 +25461,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpawnAttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpeech
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   spawnPointsProjectileRandom:
   - {fileID: 5437983217356062444}
   - {fileID: 7900162088778841238}
@@ -25617,7 +25641,19 @@ MonoBehaviour:
   amountProjectileRandom: 10
   OnSpawnProjectileRandom:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpawnAttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   spawnPointsProjectileThrow:
   - {fileID: 182929448559790816}
   - {fileID: 182929448655192983}
@@ -25640,7 +25676,19 @@ MonoBehaviour:
   impulseForceProjectileThrow: 40
   OnSpawnProjectileThrow:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpawnAttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   spawnPointsThorn:
   - {fileID: 182929449010654331}
   - {fileID: 182929447759937330}
@@ -25757,12 +25805,48 @@ MonoBehaviour:
   maxAmountThorns: 110
   OnSpawnThorn:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpawnThornSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpeech
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   spawnPointProjectileInDir: {fileID: 182929447941508439}
   impulseForceInDirection: 120
   OnSpawnProjectileInDir:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpawnAttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3972380472555730554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25810,13 +25894,24 @@ MonoBehaviour:
   enragedFinalLife: 2
   timeToDeactivateMesh: 8
   timeToResetSlowMotion: 3
-  seeRangeantlersAttack: 1
   targetCam: {fileID: 870654381}
   timeToReturnPlayerTarget: 2
   seeObject: 1
   OnAntlersAttack:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlayAntlersAttackSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnTakedamage:
     m_PersistentCalls:
       m_Calls:
@@ -25832,6 +25927,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlayHurt
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   IsDead:
     m_PersistentCalls:
       m_Calls:
@@ -25839,6 +25946,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlayDeathSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -25896,10 +26015,34 @@ MonoBehaviour:
         m_CallState: 2
   OnEnraged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpeech
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnEnragedFinal:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3972380472555730554}
+        m_TargetAssemblyTypeName: BossAudio, Assembly-CSharp
+        m_MethodName: PlaySpeech
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1198611237818066162
 GameObject:
   m_ObjectHideFlags: 0

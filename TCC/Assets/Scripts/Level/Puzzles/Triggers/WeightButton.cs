@@ -73,11 +73,11 @@ public class WeightButton : MonoBehaviour
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireSphere(transform.position, maxDistanceCheck);
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           Gizmos.color = Color.blue;
+//           Gizmos.DrawWireSphere(transform.position, maxDistanceCheck);
+//      }
+// #endif
 }

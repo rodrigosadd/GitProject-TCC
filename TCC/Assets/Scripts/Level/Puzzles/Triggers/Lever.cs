@@ -88,11 +88,11 @@ public class Lever : MonoBehaviour
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireSphere(transform.position, maxDistancePushLever);
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           Gizmos.color = Color.blue;
+//           Gizmos.DrawWireSphere(transform.position, maxDistancePushLever);
+//      }
+// #endif
 }

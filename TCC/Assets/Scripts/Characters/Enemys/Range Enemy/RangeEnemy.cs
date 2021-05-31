@@ -20,10 +20,10 @@ public class RangeEnemy : Enemy
           public float startTimeBtwAttack;
      }
 
-#if UNITY_EDITOR
-     [Header("See Range variables")]
-     public bool seeRangeFind;
-#endif
+// #if UNITY_EDITOR
+//      [Header("See Range variables")]
+//      public bool seeRangeFind;
+// #endif
 
      void Start()
      {
@@ -88,14 +88,14 @@ public class RangeEnemy : Enemy
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeRangeFind)
-          {
-               Gizmos.color = Color.red;
-               Gizmos.DrawWireSphere(transform.position, followPlayer.rangeFind);
-          }
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeRangeFind)
+//           {
+//                Gizmos.color = Color.red;
+//                Gizmos.DrawWireSphere(transform.position, followPlayer.rangeFind);
+//           }
+//      }
+// #endif
 }

@@ -32,11 +32,11 @@ public class AttackStat : Stats
         }
     } 
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          Gizmos.color = Color.yellow;
-          Gizmos.DrawWireSphere(transform.position, maxDistancePickedUp);
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           Gizmos.color = Color.yellow;
+//           Gizmos.DrawWireSphere(transform.position, maxDistancePickedUp);
+//      }
+// #endif
 }

@@ -21,9 +21,9 @@ public class BossController : MonoBehaviour
     private bool _invunerable;
     private bool _alreadyStartedCoroutine;
 
-#if UNITY_EDITOR
-    public bool seeRangeantlersAttack;
-#endif
+// #if UNITY_EDITOR
+//     public bool seeRangeantlersAttack;
+// #endif
 
     [Header("See Object variables")]
     public Transform targetCam;
@@ -174,16 +174,16 @@ public class BossController : MonoBehaviour
                     seeObject = false;
                }
           }
-     }    
-
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeRangeantlersAttack)
-          {
-               Gizmos.color = Color.red;
-               Gizmos.DrawLine(antlersAttackPoint.position, antlersAttackPoint.position + antlersAttackPoint.up * rangeAntlersAttack);
-          }
      }
-#endif
+
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeRangeantlersAttack)
+//           {
+//                Gizmos.color = Color.red;
+//                Gizmos.DrawLine(antlersAttackPoint.position, antlersAttackPoint.position + antlersAttackPoint.up * rangeAntlersAttack);
+//           }
+//      }
+// #endif
 }
