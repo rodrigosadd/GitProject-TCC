@@ -24,9 +24,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5600598599843188409}
   - component: {fileID: 5600598599843188405}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Weight Button Heavy
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,6 +153,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f358200dce8e631468d44c4ba8e0c27d, type: 3}
       propertyPath: m_Name
       value: Box_Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f358200dce8e631468d44c4ba8e0c27d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f358200dce8e631468d44c4ba8e0c27d, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f358200dce8e631468d44c4ba8e0c27d, type: 3}
