@@ -12,9 +12,9 @@ public class ScaleFloor_DoWeel : MonoBehaviourPun
 
     private void Start()
     {
-        photonView.RPC("Mecanica",RpcTarget.AllBuffered);
+        Mecanica();
     }
-    [PunRPC]
+    
     public void Mecanica()
     {
         cube = this.gameObject.transform;

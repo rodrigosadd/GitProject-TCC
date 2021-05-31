@@ -13,10 +13,10 @@ public class Obstaculo_Dotweel_Rotate : MonoBehaviourPun
 
     void Start()
     {
-        photonView.RPC("Rotat", RpcTarget.AllBuffered);
+        Rotat();
     }
 
-    [PunRPC]
+    
     public void Rotat()
     {
         for (int x = 0; x < walls.Length; x++)
