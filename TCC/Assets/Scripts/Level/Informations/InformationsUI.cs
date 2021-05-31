@@ -29,7 +29,7 @@ public class InformationsUI : MonoBehaviour
 
      public void CloseInformations()
      {
-          if (Input.GetButtonDown("Fire3") && trigged)
+          if (Input.GetKeyDown(KeyCode.Space) && trigged)
           {
                informationsObj.SetActive(false);
                gameObject.SetActive(false);
