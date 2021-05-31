@@ -34,6 +34,9 @@ MonoBehaviour:
   StartInOfflineMode: 0
   RpcList:
   - ActiveObject
+  - BackMenu
+  - CanAttack
+  - CheckAttaking
   - ClickRpc
   - CountBeforeStart
   - CreatePlayer
@@ -42,54 +45,20 @@ MonoBehaviour:
   - ElevatorMethod
   - Fire
   - GetReady
+  - Impulse
+  - InputsAttack
+  - Mecanica
+  - OnTriggerEnter
+  - RaceOver
+  - ResetCounter
   - RespawnSpaceship
   - Rotat
+  - SetIdle
+  - SetIsGrounded
   - SpikePUN
   - StartGame
   - TimeCount
   - TimeCountdown
-  - SetIdle
-  - SetIsGrounded
-  - SetRunning
-  - CanAttack
-  - CheckAttackAnimationIsFinished
-  - CheckAttaking
-  - Impulse
-  - InputsAttack
-  - CanJumpAfterFalling
-  - InFallingAction
-  - ResetFallingAnimations
-  - SetBalance
-  - SetDead
-  - SetDoubleJump
-  - SetEntryTeleport
-  - SetExitTeleport
-  - SetFallingAction
-  - SetFallingGround
-  - SetFallingIdle
-  - SetFallingIdleDoubleJump
-  - SetFallingRunning
-  - SetInteract
-  - SetPowerUp
-  - SetSingleJump
-  - SetSingleJumpRunning
-  - SetSliding
-  - ResetAttacks
-  - ResetFirstAttack
-  - ResetSecondAttack
-  - SetFinalAttack
-  - SetFirstAttack
-  - SetSecondAttack
-  - AttackDetection
-  - Attacking
-  - FinalAttack
-  - FirstAttack
-  - ResetAttack
-  - SecondAttack
-  - DisablePickedPosition
-  - ResetCounter
-  - RaceOver
-  - OnTriggerEnter
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

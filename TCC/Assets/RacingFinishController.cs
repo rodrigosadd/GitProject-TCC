@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class RacingFinishController : MonoBehaviourPunCallbacks
 {
@@ -35,6 +36,8 @@ public class RacingFinishController : MonoBehaviourPunCallbacks
     {
         if (other.CompareTag("Player") && WinnerOnOff && other.gameObject.GetComponent<PhotonView>().IsMine)
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
             WinnerRef = other.gameObject;
             finalText.text = WinnerRef.name + " You won!";
             WinnerOnOff = false;
@@ -44,11 +47,6 @@ public class RacingFinishController : MonoBehaviourPunCallbacks
         if (!WinnerOnOff && other.gameObject.GetComponent<PhotonView>().IsMine)
         {
             finalText.text = WinnerRef.name + " Winner!!";
-        }
-
-        if (!WinnerOnOff && other.gameObject.GetComponent<PhotonView>().IsMine && WinnerRef != this.gameObject)
-        {
-            finalText.text = WinnerRef.name + " you lose!!";
         }
 
         if(!isRaceOver)
@@ -69,5 +67,13 @@ public class RacingFinishController : MonoBehaviourPunCallbacks
         if(m_PhotonView.IsMine) {
             winner = true;
         }
+    }
+
+    [PunRPC]
+    public void BackMenu()
+    {
+        PhotonNetwork.LeaveRoom();
+        SceneManager.LoadScene(0);
+
     }
 }

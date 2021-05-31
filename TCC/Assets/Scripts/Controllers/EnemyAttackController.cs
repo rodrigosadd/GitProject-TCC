@@ -22,14 +22,14 @@ public class EnemyAttackController : MonoBehaviour
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeAttackRange)
-          {
-               Gizmos.color = Color.magenta;
-               Gizmos.DrawWireSphere(targetAttack.position, maxDistanceAttack);
-          }
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeAttackRange)
+//           {
+//                Gizmos.color = Color.magenta;
+//                Gizmos.DrawWireSphere(targetAttack.position, maxDistanceAttack);
+//           }
+//      }
+// #endif
 }
