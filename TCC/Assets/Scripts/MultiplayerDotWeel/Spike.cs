@@ -11,17 +11,15 @@ public class Spike : MonoBehaviourPun
 
     void Update()
     {
-       photonView.RPC("TimeCountdown", RpcTarget.AllBuffered);
-       photonView.RPC("SpikePUN", RpcTarget.AllBuffered);
+        TimeCountdown();
+        SpikePUN();
     }
 
-    [PunRPC]
     void TimeCountdown()
     {
         time = time + 1 * Time.deltaTime;
     }
 
-    [PunRPC]
     void SpikePUN()
     {
         if (time > timeCountdown)
