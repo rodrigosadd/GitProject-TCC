@@ -136,7 +136,7 @@ public class PlayerControllerMultiplayer : Character
     public Photon photon;
     private TMP_Text textUI;
     private GameObject playerNameUIHolder;
-    private GameObject _cam;
+    private Transform _cam;
     [System.Serializable]
     public class Photon
     {
@@ -174,9 +174,10 @@ public class PlayerControllerMultiplayer : Character
 
             death.currentPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
 
-            _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
-            _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
-            movement.cam = _cam.transform;
+            GameObject _Tempcam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
+            _Tempcam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
+            movement.cam = _Tempcam.transform;
+            _cam = _Tempcam.GetComponentInChildren<Camera>().transform;
             RandName();
             playerNameUIHolder = Instantiate(photon.playerNameUI, photon.textSpawnPoint.position, Quaternion.identity);
             textUI = playerNameUIHolder.GetComponentInChildren<TMP_Text>();
