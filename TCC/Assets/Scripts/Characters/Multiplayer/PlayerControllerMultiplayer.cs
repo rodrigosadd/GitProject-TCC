@@ -151,15 +151,15 @@ public class PlayerControllerMultiplayer : Character
           public bool isRacing = true;
      }
      
-#if UNITY_EDITOR
-     [Header("See Range variables")]
-     public bool seeRangePush = false;
-     public bool seeRangeCliff = false;
-     public bool seeRangeGroundDetector = false;
-     public bool seeRangeMissedJump = false;
-     public bool seeRangePositionDead = false;
-     public bool seeRangeFalling = false;
-#endif
+// #if UNITY_EDITOR
+//      [Header("See Range variables")]
+//      public bool seeRangePush = false;
+//      public bool seeRangeCliff = false;
+//      public bool seeRangeGroundDetector = false;
+//      public bool seeRangeMissedJump = false;
+//      public bool seeRangePositionDead = false;
+//      public bool seeRangeFalling = false;
+// #endif
 
      void Start()
      {
@@ -621,41 +621,41 @@ public class PlayerControllerMultiplayer : Character
      }
      #endregion
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeRangeCliff)
-          {
-               Gizmos.color = Color.red;
-               Gizmos.DrawSphere(transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist, 0.3f);
-               Gizmos.color = Color.green;
-               Gizmos.DrawRay(transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist, Vector3.up * -1 * cliff.cliffDetectorHeightDist);
-          }
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeRangeCliff)
+//           {
+//                Gizmos.color = Color.red;
+//                Gizmos.DrawSphere(transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist, 0.3f);
+//                Gizmos.color = Color.green;
+//                Gizmos.DrawRay(transform.position + characterGraphic.forward * cliff.cliffDetectorFwrdDist, Vector3.up * -1 * cliff.cliffDetectorHeightDist);
+//           }
 
-          if (seeRangeGroundDetector)
-          {
-               Gizmos.color = Color.green;
-               Gizmos.DrawSphere(movement.groundCheck.position, movement.groundDistance);               
-          }
+//           if (seeRangeGroundDetector)
+//           {
+//                Gizmos.color = Color.green;
+//                Gizmos.DrawSphere(movement.groundCheck.position, movement.groundDistance);               
+//           }
 
-          if (seeRangeMissedJump)
-          {
-               Gizmos.color = Color.red;
-               Gizmos.DrawSphere(missedJump.targetMissedJump.position, 0.1f);
-               Debug.DrawRay(missedJump.targetMissedJump.position, Vector3.down * missedJump.rangeRayMissedJump, Color.green);
-          }
+//           if (seeRangeMissedJump)
+//           {
+//                Gizmos.color = Color.red;
+//                Gizmos.DrawSphere(missedJump.targetMissedJump.position, 0.1f);
+//                Debug.DrawRay(missedJump.targetMissedJump.position, Vector3.down * missedJump.rangeRayMissedJump, Color.green);
+//           }
 
-          if (seeRangePositionDead)
-          {
-               Gizmos.color = Color.cyan;
-               Gizmos.DrawRay(transform.position, Vector3.down * 10f);
-          }
+//           if (seeRangePositionDead)
+//           {
+//                Gizmos.color = Color.cyan;
+//                Gizmos.DrawRay(transform.position, Vector3.down * 10f);
+//           }
 
-          if (seeRangeFalling)
-          {
-               Gizmos.color = Color.magenta;
-               Gizmos.DrawRay(transform.position, Vector3.down * jump.rangeFallingGround);
-          }
-     }
-#endif
+//           if (seeRangeFalling)
+//           {
+//                Gizmos.color = Color.magenta;
+//                Gizmos.DrawRay(transform.position, Vector3.down * jump.rangeFallingGround);
+//           }
+//      }
+// #endif
 }

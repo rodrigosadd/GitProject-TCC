@@ -124,11 +124,11 @@ public class Button : MonoBehaviour
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireSphere(transform.position, maxDistancePressButton);
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           Gizmos.color = Color.blue;
+//           Gizmos.DrawWireSphere(transform.position, maxDistancePressButton);
+//      }
+// #endif
 }

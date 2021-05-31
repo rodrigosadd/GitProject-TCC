@@ -55,11 +55,11 @@ public class StayButton : MonoBehaviour
           button.position = Vector3.MoveTowards(button.position, _startPositionButton, 1f * Time.deltaTime);
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          Gizmos.color = Color.blue;
-          Gizmos.DrawWireSphere(transform.position + transform.up, maxDistanceStayOnButton);
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           Gizmos.color = Color.blue;
+//           Gizmos.DrawWireSphere(transform.position + transform.up, maxDistanceStayOnButton);
+//      }
+// #endif
 }

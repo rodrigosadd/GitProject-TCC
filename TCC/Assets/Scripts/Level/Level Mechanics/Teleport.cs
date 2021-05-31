@@ -199,14 +199,14 @@ public class Teleport : MonoBehaviour
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeRangeTeleport)
-          {
-               Gizmos.color = Color.magenta;
-               Gizmos.DrawWireSphere(entrancePortal.position, rangeTeleport);
-          }
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeRangeTeleport)
+//           {
+//                Gizmos.color = Color.magenta;
+//                Gizmos.DrawWireSphere(entrancePortal.position, rangeTeleport);
+//           }
+//      }
+// #endif
 }
