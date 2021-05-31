@@ -217,6 +217,7 @@ public class PlayerController : Character
           SetDissolveShaderAppear();          
           SetDissolveShaderDisappear();
           PlayerConfigsAfterDeath();
+          SetInvincible();
      }
 
      void FixedUpdate()
@@ -764,6 +765,21 @@ public class PlayerController : Character
      #endregion
 
      #region Death
+     public void SetInvincible()
+     {
+          if(Input.GetKeyDown(KeyCode.I))
+          {
+               if(death.isInvincible == true)
+               {
+                    
+                    death.isInvincible = false;
+               }
+               else
+               {
+                     death.isInvincible = true;
+               }
+          }
+     }
      public void CheckDeath()
      {
           if (hit.hitCount >= hit.maxHitCount)
