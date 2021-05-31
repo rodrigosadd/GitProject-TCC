@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +11,10 @@ public class MeleeEnemy : Enemy
 
      private float _distanceBetween = 0f;
 
-#if UNITY_EDITOR
-     [Header("See Range variables")]
-     public bool seeRangeFind;
-#endif
+// #if UNITY_EDITOR
+//      [Header("See Range variables")]
+//      public bool seeRangeFind;
+// #endif
 
      void Start()
      {
@@ -99,14 +99,14 @@ public class MeleeEnemy : Enemy
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeRangeFind)
-          {
-               Gizmos.color = Color.red;
-               Gizmos.DrawWireSphere(transform.position, followPlayer.rangeFind);
-          }
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeRangeFind)
+//           {
+//                Gizmos.color = Color.red;
+//                Gizmos.DrawWireSphere(transform.position, followPlayer.rangeFind);
+//           }
+//      }
+// #endif
 }

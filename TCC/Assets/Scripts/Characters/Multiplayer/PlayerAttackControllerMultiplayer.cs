@@ -22,9 +22,9 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
     private PhotonView photonView;
     private float _countdownReset;
 
-#if UNITY_EDITOR
-     public bool seeAttackRange;
-#endif
+// #if UNITY_EDITOR
+//      public bool seeAttackRange;
+// #endif
 
      private float _currentMaxSpeed;
      private float _lastAttackTime;
@@ -251,14 +251,14 @@ public class PlayerAttackControllerMultiplayer : MonoBehaviour
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeAttackRange)
-          {
-               Gizmos.color = Color.blue;
-               Gizmos.DrawWireSphere(targetAttack.position, maxDistanceAttack);
-          }
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeAttackRange)
+//           {
+//                Gizmos.color = Color.blue;
+//                Gizmos.DrawWireSphere(targetAttack.position, maxDistanceAttack);
+//           }
+//      }
+// #endif
 }
