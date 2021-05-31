@@ -172,6 +172,8 @@ public class PlayerControllerMultiplayer : Character
             movement.fixedGravity = movement.gravity;
             ResetValueDissolveShader();
 
+            death.currentPoint = GameObject.FindGameObjectWithTag("Respawn").transform;
+
             _cam = Instantiate(photon.cameraPrefab, photon.camSpawnPoint.position, Quaternion.identity);
             _cam.GetComponent<Camera3rdPersonMultiplayer>().targetCamera = this.movement.targetCam;
             movement.cam = _cam.transform;
@@ -214,6 +216,14 @@ public class PlayerControllerMultiplayer : Character
     {
         if (photon.m_PhotonView.IsMine)
             UpdateMovementPlayer();
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("MechanicKill"))
+        {
+            this.transform.position = death.currentPoint.transform.position;
+        }
     }
 
     public void SetControllerPosition(Vector3 toPosition)
@@ -627,9 +637,9 @@ public class PlayerControllerMultiplayer : Character
     #region falling
     void ResetPosition()
     {
-        if (this.transform.position.y <= -10)
+        if (this.transform.position.y <= -30)
         {
-            this.transform.position = new Vector3(12.33f, 2, -188);
+            this.transform.position = death.currentPoint.transform.position;
         }
     }
     #endregion

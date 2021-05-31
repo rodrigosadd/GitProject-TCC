@@ -12,9 +12,9 @@ public class PlatformActor : MonoBehaviour
      private Rigidbody _rbody;
      private bool _isOnThePlatform;
 
-#if UNITY_EDITOR
-     public bool seeRangeDistanceRay;
-#endif
+// #if UNITY_EDITOR
+//      public bool seeRangeDistanceRay;
+// #endif
 
      void Start()
      {
@@ -77,14 +77,14 @@ public class PlatformActor : MonoBehaviour
           }
      }
 
-#if UNITY_EDITOR
-     void OnDrawGizmos()
-     {
-          if (seeRangeDistanceRay)
-          {
-               Gizmos.color = Color.blue;
-               Gizmos.DrawRay(origin.position, (transform.up * -1) * maxDistanceRay);
-          }
-     }
-#endif
+// #if UNITY_EDITOR
+//      void OnDrawGizmos()
+//      {
+//           if (seeRangeDistanceRay)
+//           {
+//                Gizmos.color = Color.blue;
+//                Gizmos.DrawRay(origin.position, (transform.up * -1) * maxDistanceRay);
+//           }
+//      }
+// #endif
 }
